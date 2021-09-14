@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Event Aggregator - ksqlDB Recipes</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Event Aggregator";
+    var mkdocs_page_input_path = "stream-processing/event-aggregator.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> ksqlDB Recipes</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Event Streaming Patterns</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Compositional patterns</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../compositional-patterns/command-query-responsibility-segregation/">Command Query Responsibility Segregation (CQRS)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../compositional-patterns/event-collaboration/">Event Collaboration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../compositional-patterns/geo-replication/">Geo Replication</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../compositional-patterns/pipeline/">Pipeline</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../compositional-patterns/strangler-fig/">Strangler Fig</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Event</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event/command-event/">Command Event</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event/correlation-identifier/">Correlation Identifier</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event/data-contract/">Data Contract</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event/event-deserializer/">Event Deserializer</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event/event-envelope/">Event Envelope</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event/event-serializer/">Event Serializer</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event/event-standardizer/">Event Standardizer</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event/event/">Event</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event/schema-on-read/">Schema-on-Read</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Event processing</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-processing/claim-check/">Claim Check</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-processing/content-filter/">Content Filter</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-processing/dead-letter-stream/">Dead Letter Stream</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-processing/event-chunking/">Event Chunking</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-processing/event-filter/">Event Filter</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-processing/event-mapper/">Event Mapper</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-processing/event-processing-application/">Event Processing Application</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-processing/event-processor/">Event Processor</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-processing/event-router/">Event Router</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-processing/event-splitter/">Event Splitter</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-processing/event-streaming-api/">Event Streaming API</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-processing/event-translator/">Event Translator</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-processing/idempotent-reader/">Idempotent Reader</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-processing/idempotent-writer/">Idempotent Writer</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Event sink</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-sink/event-sink-connector/">Event Sink Connector</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-sink/event-sink/">Event Sink</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Event source</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-source/database-write-aside/">Database Write Aside</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-source/database-write-through/">Database Write Through</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-source/event-gateway/">Event Gateway</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-source/event-source-connector/">Event Source Connector</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-source/event-source/">Event Source</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-source/schema-validator/">Schema Validator</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Event storage</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-storage/compacted-event-stream/">Compacted Event Stream</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-storage/event-store/">Event Store</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-storage/infinite-retention-event-stream/">Infinite Retention Event Stream</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-storage/limited-retention-event-stream/">Limited Retention Event Stream</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Event stream</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/event-broker/">Event Broker</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/event-stream/">Event Stream</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/event-streaming-platform/">Event Streaming Platform</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/partitioned-parallelism/">Partitioned Parallelism</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/schema-compatibility/">Schema Compatibility</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/schema-evolution/">Schema Evolution</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Stream processing</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Event Aggregator</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#problem">Problem</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#solution">Solution</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#implementation">Implementation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#considerations">Considerations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#references">References</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#footnotes">Footnotes</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../event-grouper/">Event Grouper</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../event-joiner/">Event Joiner</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../event-stream-merger/">Event Stream Merger</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../event-time-processing/">Event-Time Processing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../logical-and/">Logical AND</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../suppressed-event-aggregator/">Suppressed Event Aggregator</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../wait-for-n-events/">Wait For N Events</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../wallclock-time/">Wall-Clock-Time Processing</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Table</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../table/projection-table/">Projection Table</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../table/state-table/">State Table</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">ksqlDB Recipes</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Stream processing &raquo;</li>
+        
+      
+    
+    <li>Event Aggregator</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="event-aggregator">Event Aggregator</h1>
+<p>Combining multiple events into a single encompassing event—e.g., to compute totals, averages, etc.—is a common task in event streaming and streaming analytics.</p>
+<h2 id="problem">Problem</h2>
+<p>How can multiple related events be aggregated to produce a new event?</p>
+<h2 id="solution">Solution</h2>
+<p>We use an <a href="../event-grouper/">Event Grouper</a> followed by an event aggregator. The grouper prepares the input events as needed for the subsequent aggregation step, e.g. by grouping the events based on the data field by which the aggregation is computed (such as a customer ID) and/or by grouping the events into time windows (such as 5-minute windows). The aggregator then computes the desired aggregation for each group of events, e.g., by computing the average or sum of each 5-minute window.</p>
+<h2 id="implementation">Implementation</h2>
+<p><img alt="event-aggregator" src="../../img/event-aggregator.svg" /></p>
+<p>For example, we can use the streaming database <a href="https://ksqldb.io/">ksqlDB</a> and Apache Kafka® to perform an aggregation.</p>
+<p>We'll start by creating a stream in ksqlDB called <code>orders</code>, based on an existing Kafka topic of the same name:</p>
+<pre><code class="sql">CREATE STREAM orders (order_id INT, item_id INT, total_units DOUBLE)
+  WITH (KAFKA_TOPIC='orders', VALUE_FORMAT='AVRO');
+</code></pre>
+
+<p>Then we'll create a table containing the aggregated events from that stream:</p>
+<pre><code class="sql">CREATE TABLE item_stats AS 
+  SELECT item_id, COUNT(*) AS total_orders, AVG(total_units) AS avg_units
+  FROM orders
+  WINDOW TUMBLING (SIZE 1 HOUR)
+  GROUP BY item_id 
+  EMIT CHANGES;  
+</code></pre>
+
+<p>This table will be continuously updated whenever new events arrive in the <code>orders</code> stream.</p>
+<h2 id="considerations">Considerations</h2>
+<ul>
+<li>In event streaming, a key technical challenge is that—with few exceptions—it is generally not possible to tell whether the input data is "complete" at a given point in time. For this reason, stream processing technologies such as the streaming database <a href="https://ksqldb.io/">ksqlDB</a> and the Kafka Streams client library of Apache Kafka employ techniques such as <em>slack time</em><sup>1</sup> and <em>grace periods</em> (see <a href="https://docs.ksqldb.io/en/latest/concepts/time-and-windows-in-ksqldb-queries/"><code>GRACE PERIOD</code></a> clause in ksqlDB) or watermarks to define cutoff points after which an <a href="../../event-processing/event-processor/">Event Processor</a> will discard any late-arriving input events from its processing. See the <a href="../suppressed-event-aggregator/">Suppressed Event Aggregator</a> pattern for additional information.</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li>Related patterns: <a href="../suppressed-event-aggregator/">Suppressed Event Aggregator</a></li>
+<li>More detailed examples of event aggregation can be seen in the following tutorials:
+  <a href="https://kafka-tutorials.confluent.io/create-stateful-aggregation-sum/ksql.html">How to sum a stream of events</a> and
+  <a href="https://kafka-tutorials.confluent.io/create-stateful-aggregation-count/ksql.html">How to count a stream of events</a>.</li>
+</ul>
+<h2 id="footnotes">Footnotes</h2>
+<p><sup>1</sup>Slack time: <a href="https://dl.acm.org/doi/abs/10.1145/3318464.3383131">Beyond Analytics: The Evolution of Stream Processing Systems (SIGMOD 2020)</a>, <a href="https://dl.acm.org/doi/10.1007/s00778-003-0095-z">Aurora: a new model and architecture for data stream management (VLDB Journal 2003)</a></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../event-grouper/" class="btn btn-neutral float-right" title="Event Grouper">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../event-stream/schema-evolution/" class="btn btn-neutral" title="Schema Evolution"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../event-stream/schema-evolution/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../event-grouper/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
