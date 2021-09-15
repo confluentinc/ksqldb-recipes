@@ -98,6 +98,12 @@
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../../retail/">Description</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Inventory</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../retail/inventory/">Real-time Inventory</a>
+                </li>
+    </ul>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Security</span></p>
                 <ul>
@@ -152,8 +158,14 @@
               
                 <h1 id="clickstream-data-analysis">Clickstream Data Analysis</h1>
 <h2 id="what-is-it">What is it?</h2>
-<p>It's like this and like that and like this and uh.</p>
-<p><img alt="foobar" src="../../img/foobar.svg" /></p>
+<p>Analyzing clickstream data enables businesses to understand the behavior of its online users, for example:</p>
+<ul>
+<li>User activity over a given time frame: how many webpages are users viewing</li>
+<li>Requests that end in error, over a given threshold (e.g., 404 HTTP codes)</li>
+<li>Where the requests are coming from geographically in a given window of time</li>
+<li>How long users are interacting with the site (user sessions)</li>
+</ul>
+<p><img alt="grafana" src="../../img/clickstream.png" /></p>
 <h2 id="cut-to-the-code">Cut to the code</h2>
 <p><img alt="launch" src="../../img/launch.png" /></p>
 <pre><code class="language-sql">-- Stream of HTTP codes
@@ -378,8 +390,7 @@ CREATE SINK CONNECTOR analyzed_clickstream WITH (
 </li>
 </ol>
 <h3 id="read-the-data-in">Read the data in</h3>
-<p>This recipe uses blah blah connector.
-It assumes you have setup foobar.</p>
+<p>This recipe creates simulated data with the <code>Datagen</code> connector.</p>
 <pre><code class="language-sql">-- Stream of HTTP codes
 CREATE SOURCE CONNECTOR datagen_clickstream_codes WITH (
   'connector.class'          = 'DatagenSource',
@@ -406,8 +417,9 @@ CREATE SOURCE CONNECTOR datagen_clickstream WITH (
   'maxInterval'              = '30',
   'format'                   = 'json');
 </code></pre>
+<p>Optional: to simulate a real-world scenario where user sessions aren't just always open but do close after some time, you can pause and resume the <code>DATAGEN_CLICKSTREAM</code> connector.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
-<p>Translate and filter all the things.</p>
+<p>Now you can process the data in a variety of ways, by enriching the clickstream data with user information, analyze errors, aggregate data into windows of time, etc.</p>
 <pre><code class="language-sql">---------------------------------------------------------------------------------------------------
 -- Register sources:
 ---------------------------------------------------------------------------------------------------
@@ -572,7 +584,7 @@ CREATE TABLE USER_IP_ACTIVITY WITH (key_format='json') AS
     HAVING COUNT(*) &gt; 1;
 </code></pre>
 <h3 id="write-the-data-out">Write the data out</h3>
-<p>Post-processing, send the data to this DB.</p>
+<p>After processing the data, send it to Elasticsearch.</p>
 <pre><code class="language-sql">-- Send data to Elasticsearch
 CREATE SINK CONNECTOR analyzed_clickstream WITH (
   'connector.class'          = 'ElasticsearchSink',

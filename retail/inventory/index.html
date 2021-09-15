@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Ccloud setup - ksqlDB Recipes</title>
+  <title>Real-time Inventory - ksqlDB Recipes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Ccloud setup";
-    var mkdocs_page_input_path = "shared/ccloud_setup.md";
+    var mkdocs_page_name = "Real-time Inventory";
+    var mkdocs_page_input_path = "retail/inventory/index.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -77,12 +77,28 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Retail</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../retail/">Description</a>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../">Description</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="#">Inventory</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../retail/inventory/">Real-time Inventory</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Inventory</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Real-time Inventory</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-it">What is it?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cut-to-the-code">Cut to the code</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#launch-step-by-step">Launch Step-by-Step</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#setup-your-environment">Setup your Environment</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#read-the-data-in">Read the data in</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#run-stream-processing-app">Run stream processing app</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
     </ul>
                     </li>
@@ -93,8 +109,8 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Shared</span></p>
-                <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Ccloud setup</a>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../shared/ccloud_setup/">Ccloud setup</a>
                     </li>
                 </ul>
       </div>
@@ -118,11 +134,15 @@
     
       
         
-          <li>Shared &raquo;</li>
+          <li>Retail &raquo;</li>
+        
+      
+        
+          <li>Inventory &raquo;</li>
         
       
     
-    <li>Ccloud setup</li>
+    <li>Real-time Inventory</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -134,7 +154,49 @@
           <div role="main">
             <div class="section">
               
-                <ol>
+                <h1 id="real-time-inventory">Real-time Inventory</h1>
+<h2 id="what-is-it">What is it?</h2>
+<p>TODO</p>
+<h2 id="cut-to-the-code">Cut to the code</h2>
+<p><img alt="launch" src="../../img/launch.png" /></p>
+<pre><code class="language-sql">-- Create stream of inventory
+CREATE STREAM inventory_stream (
+            id STRING key,
+            item STRING,
+            qty INTEGER,
+            price DOUBLE,
+            balance INTEGER)
+        with (VALUE_FORMAT='json',
+              KAFKA_TOPIC='inventory');
+
+-- add some mock data
+insert into inventory_stream (id, item, qty, price) values ('1', 'Apple Magic Mouse 2', 10, 99);
+insert into inventory_stream (id, item, qty, price) values ('2', 'iPhoneX', 25, 999);
+insert into inventory_stream (id, item, qty, price) values ('3', 'MacBookPro13', 100, 1799);
+insert into inventory_stream (id, item, qty, price) values ('4', 'iPad4', 20, 340);
+insert into inventory_stream (id, item, qty, price) values ('5', 'Apple Pencil', 10, 79);
+insert into inventory_stream (id, item, qty, price) values ('5', 'PhoneX', 10, 899);
+insert into inventory_stream (id, item, qty, price) values ('4', 'iPad4', -20, 399);
+insert into inventory_stream (id, item, qty, price) values ('3', 'MacBookPro13', 10, 1899);
+insert into inventory_stream (id, item, qty, price) values ('4', 'iPad4', 20, 399);
+
+---------------------------------------------------------------------------------------------------
+-- Create stateful table with up-to-date information of inventory availability
+---------------------------------------------------------------------------------------------------
+CREATE TABLE inventory_stream_table
+    WITH (kafka_topic='inventory_table') AS
+    SELECT
+        item,
+        SUM(qty) AS item_qty
+    FROM
+        inventory_stream
+    GROUP BY
+        item
+        EMIT CHANGES;
+</code></pre>
+<h2 id="launch-step-by-step">Launch Step-by-Step</h2>
+<h3 id="setup-your-environment">Setup your Environment</h3>
+<ol>
 <li>
 <p>Sign up for <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service.</p>
 </li>
@@ -148,6 +210,45 @@
 <p>Click on <a href="https://confluent.cloud/learn">LEARN</a> and follow the instructions to launch a Kafka cluster and to enable Schema Registry.</p>
 </li>
 </ol>
+<h3 id="read-the-data-in">Read the data in</h3>
+<p>TODO</p>
+<pre><code class="language-sql">-- Create stream of inventory
+CREATE STREAM inventory_stream (
+            id STRING key,
+            item STRING,
+            qty INTEGER,
+            price DOUBLE,
+            balance INTEGER)
+        with (VALUE_FORMAT='json',
+              KAFKA_TOPIC='inventory');
+
+-- add some mock data
+insert into inventory_stream (id, item, qty, price) values ('1', 'Apple Magic Mouse 2', 10, 99);
+insert into inventory_stream (id, item, qty, price) values ('2', 'iPhoneX', 25, 999);
+insert into inventory_stream (id, item, qty, price) values ('3', 'MacBookPro13', 100, 1799);
+insert into inventory_stream (id, item, qty, price) values ('4', 'iPad4', 20, 340);
+insert into inventory_stream (id, item, qty, price) values ('5', 'Apple Pencil', 10, 79);
+insert into inventory_stream (id, item, qty, price) values ('5', 'PhoneX', 10, 899);
+insert into inventory_stream (id, item, qty, price) values ('4', 'iPad4', -20, 399);
+insert into inventory_stream (id, item, qty, price) values ('3', 'MacBookPro13', 10, 1899);
+insert into inventory_stream (id, item, qty, price) values ('4', 'iPad4', 20, 399);
+</code></pre>
+<h3 id="run-stream-processing-app">Run stream processing app</h3>
+<p>TODO</p>
+<pre><code class="language-sql">---------------------------------------------------------------------------------------------------
+-- Create stateful table with up-to-date information of inventory availability
+---------------------------------------------------------------------------------------------------
+CREATE TABLE inventory_stream_table
+    WITH (kafka_topic='inventory_table') AS
+    SELECT
+        item,
+        SUM(qty) AS item_qty
+    FROM
+        inventory_stream
+    GROUP BY
+        item
+        EMIT CHANGES;
+</code></pre>
               
             </div>
           </div>
@@ -155,8 +256,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../../security/" class="btn btn-neutral float-right" title="Description">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-        <a href="../../security/" class="btn btn-neutral" title="Description"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+        <a href="../" class="btn btn-neutral" title="Description"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -182,8 +285,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../security/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
     
+    
+      <span><a href="../../security/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

@@ -6,3 +6,6 @@ toc:
   - title: Customer 360
     items:
       - customer-360/clickstream
+  - title: Retail
+    items:
+      - retail/inventory
