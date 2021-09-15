@@ -3,6 +3,6 @@ layout: recipe
 toc:
   - items:
       - index
-  - title: Security
+  - title: Customer 360
     items:
-      - security/recipe1
+      - customer-360/clickstream

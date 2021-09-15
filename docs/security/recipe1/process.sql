@@ -1,2 +1,0 @@
---Setup
-CREATE STREAM FOOBAR WITH ....;
