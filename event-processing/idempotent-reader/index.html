@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="../../css/theme.css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -41,7 +40,7 @@
         <a href="../.." class="icon icon-home"> ksqlDB Recipes</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -175,6 +174,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../event-stream/schema-evolution/">Schema Evolution</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/test/">Test</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Stream processing</span></p>
                 <ul>
@@ -237,6 +238,7 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -264,12 +266,10 @@ EOS allows <a href="../event-processing-application/">Event Streaming Applicatio
 <p>To configure an Idempotent Reader to read only committed transactions, set the following parameter:</p>
 <pre><code>isolation.level=&quot;read_committed&quot;
 </code></pre>
-
 <p>In your Kafka Streams application, to handle operational failures, you can <a href="https://docs.confluent.io/platform/current/streams/developer-guide/config-streams.html#processing-guarantee">enable EOS</a>. Within a single transaction, a Kafka Streams application using EOS will atomically update its consumer offsets, its state stores including their changelog topics, its repartition topics, and its output topics.
 To enable EOS, configure your application with the following parameter:</p>
 <pre><code>processing.guarantee=&quot;exactly_once&quot;
 </code></pre>
-
 <p>In the streaming database <a href="https://ksqldb.io">ksqlDB</a>, you can also <a href="https://docs.ksqldb.io/en/latest/operate-and-deploy/exactly-once-semantics/#exactly-once-semantics">enable EOS</a> by configuring the same parameter as shown above.</p>
 <p>To handle incorrect application logic, again, first try to eliminate the source of duplication from the code. If that is not an option, you can assign a tracking ID to each event based off of the contents of the event, enabling consumers to detect duplicates for themselves. This requires that each consumer application maintain an internal state store for tracking the events' unique IDs, and this store will vary in size depending on the event count and the period for which the consumer must guard against duplicates. This option requires both additional disk usage and processing power for inserting and validating events.</p>
 <p>For a subset of business cases, it may also be possible to design the consumer processing logic to be idempotent. For example, in a simple ETL where a database is the <a href="../../event-sink/event-sink/">Event Sink</a>, the duplicate events can be deduplicated by the database during an <code>upsert</code> on the event ID as primary key. Idempotent business logic also enables your application to read from <a href="../../event-stream/event-stream/">Event Streams</a> that aren't strictly free of duplicates, or from historic streams that may not have had EOS available when they were created.</p>
@@ -314,17 +314,18 @@ To enable EOS, configure your application with the following parameter:</p>
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../event-translator/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../idempotent-writer/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../event-translator/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../idempotent-writer/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
     <script defer>

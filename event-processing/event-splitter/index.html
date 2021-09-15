@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="../../css/theme.css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -41,7 +40,7 @@
         <a href="../.." class="icon icon-home"> ksqlDB Recipes</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -175,6 +174,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../event-stream/schema-evolution/">Schema Evolution</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/test/">Test</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Stream processing</span></p>
                 <ul>
@@ -237,6 +238,7 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -257,10 +259,9 @@ The example below processes each input Event, un-nesting the array and generatin
              EXPLODE(TOTAL)-&gt;ID AS CUSTOMER_ID
         FROM my_stream EMIT CHANGES;
 </code></pre>
-
 <p>The Apache Kafka&reg; client library <a href="https://kafka.apache.org/documentation/streams/">Kafka Streams</a> has an analogous method, called <code>flatMap()</code>.
 The example below processes each input Event and generates new Events, with new keys and values.</p>
-<pre><code class="java">KStream&lt;Long, String&gt; myStream = ...;
+<pre><code class="language-java">KStream&lt;Long, String&gt; myStream = ...;
 KStream&lt;String, Integer&gt; splitStream = myStream.flatMap(
     (eventKey, eventValue) -&gt; {
       List&lt;KeyValue&lt;String, Integer&gt;&gt; result = new LinkedList&lt;&gt;();
@@ -270,7 +271,6 @@ KStream&lt;String, Integer&gt; splitStream = myStream.flatMap(
     }
   );
 </code></pre>
-
 <p>Or, as my grandmother used to say:</p>
 <blockquote>
 <p><em>There once was a man from Manhattan,</em><br />
@@ -322,17 +322,18 @@ KStream&lt;String, Integer&gt; splitStream = myStream.flatMap(
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../event-router/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../event-streaming-api/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../event-router/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../event-streaming-api/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
     <script defer>

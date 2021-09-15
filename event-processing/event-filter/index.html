@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="../../css/theme.css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -41,7 +40,7 @@
         <a href="../.." class="icon icon-home"> ksqlDB Recipes</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -173,6 +172,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../event-stream/schema-evolution/">Schema Evolution</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/test/">Test</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Stream processing</span></p>
                 <ul>
@@ -235,6 +236,7 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -246,19 +248,17 @@
 <p><img alt="event-filter" src="../../img/event-filter.svg" /></p>
 <h2 id="implementation">Implementation</h2>
 <p>As an example, the streaming database <a href="https://ksqldb.io">ksqlDB</a> lets us create a filtered Event Stream using familiar SQL syntax:</p>
-<pre><code class="sql">CREATE STREAM payments_only WITH (kafka_topic = 'transactions-topic') AS
+<pre><code class="language-sql">CREATE STREAM payments_only WITH (kafka_topic = 'transactions-topic') AS
     SELECT *
       FROM all_transactions
       WHERE type = 'purchase';
 </code></pre>
-
 <p>The <a href="https://docs.confluent.io/platform/current/streams/index.html">Kafka Streams</a> client library of Apache Kafka® provides a <code>filter</code> operator in its DSL. This operator filters out events that do not match a given predicate:</p>
-<pre><code class="java">builder
+<pre><code class="language-java">builder
   .stream(&quot;transactions-topic&quot;)
   .filter((key, transaction) -&gt; transaction.type == &quot;purchase&quot;)
   .to(&quot;payments-topic&quot;);
 </code></pre>
-
 <h2 id="references">References</h2>
 <ul>
 <li>This pattern is derived from <a href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/Filter.html">Message Filter</a> in <em>Enterprise Integration Patterns</em>, by Gregor Hohpe and Bobby Woolf.</li>
@@ -297,17 +297,18 @@
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../event-chunking/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../event-mapper/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../event-chunking/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../event-mapper/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
     <script defer>

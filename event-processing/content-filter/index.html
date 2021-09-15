@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="../../css/theme.css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -41,7 +40,7 @@
         <a href="../.." class="icon icon-home"> ksqlDB Recipes</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -175,6 +174,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../event-stream/schema-evolution/">Schema Evolution</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/test/">Test</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Stream processing</span></p>
                 <ul>
@@ -237,6 +238,7 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -279,7 +281,7 @@ stream into a stream of simpler events.</p>
 each event contains a huge number of fields. We are only interested
 in four fields: <code>producer_id</code>, <code>category</code>, <code>sku</code>, and <code>price</code>. We can
 prune down the events to just those fields with the following query:</p>
-<pre><code class="sql">CREATE OR REPLACE STREAM product_summaries AS
+<pre><code class="language-sql">CREATE OR REPLACE STREAM product_summaries AS
   SELECT
     product_id,
     category,
@@ -287,11 +289,10 @@ prune down the events to just those fields with the following query:</p>
     price
   FROM products;
 </code></pre>
-
 <p>Or we can perform an equivalent transformation using the Apache Kafka®
 client library <a href="https://docs.confluent.io/platform/current/streams/index.html">Kafka Streams</a>,
 perhaps as part of a larger processing pipeline:</p>
-<pre><code class="java">builder.stream(&quot;products&quot;, Consumed.with(Serdes.Long(), productSerde))
+<pre><code class="language-java">builder.stream(&quot;products&quot;, Consumed.with(Serdes.Long(), productSerde))
     .mapValues(
         (product) -&gt; {
           ProductSummary summary = new ProductSummary();
@@ -304,7 +305,6 @@ perhaps as part of a larger processing pipeline:</p>
         })
     .to(&quot;product_summaries&quot;, Produced.with(Serdes.Long(), productSummarySerde));
 </code></pre>
-
 <h2 id="considerations">Considerations</h2>
 <p>Since filtering the content creates a new stream, it's worth
 considering how the new stream will be partitioned, as discussed in the
@@ -359,17 +359,18 @@ for details.</p>
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../claim-check/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../dead-letter-stream/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../claim-check/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../dead-letter-stream/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
     <script defer>

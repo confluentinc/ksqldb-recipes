@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="../../css/theme.css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -41,7 +40,7 @@
         <a href="../.." class="icon icon-home"> ksqlDB Recipes</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -175,6 +174,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../event-stream/schema-evolution/">Schema Evolution</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/test/">Test</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Stream processing</span></p>
                 <ul>
@@ -237,6 +238,7 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -253,12 +255,10 @@ This means that a writer may try to produce an Event more than once, but the Eve
 <p>To make an Apache Kafka® producer idempotent, configure your producer with the following setting:</p>
 <pre><code>enable.idempotence=true
 </code></pre>
-
 <p>The Kafka producer tags each batch of Events that it sends to the Kafka cluster with a sequence number. Brokers in the cluster use this sequence number to enforce deduplication of Events sent from this specific producer. Each batch's sequence number is persisted so that even if the <a href="https://www.confluent.io/blog/apache-kafka-intro-how-kafka-works/#replication">leader broker</a> fails, the new leader broker will also know if a given batch is a duplicate.</p>
 <p>To enable <a href="https://docs.ksqldb.io/en/latest/operate-and-deploy/exactly-once-semantics/">exactly-once processing guarantees</a> in ksqlDB or Kafka Streams, configure the application with the following setting, which includes enabling idempotence in the embedded producer:</p>
 <pre><code>processing.guarantee=exactly_once
 </code></pre>
-
 <h2 id="considerations">Considerations</h2>
 <p>Enabling idempotency for a Kafka producer not only ensures that duplicate Events are fenced out from the topic, it also ensures that they are written in order. This is because the brokers accept a batch of Events only if its sequence number is exactly one greater than that of the last committed batch; otherwise, it results in an out-of-sequence error.</p>
 <p>Exactly-once semantics (EOS) allow <a href="../event-processing-application/">Event Streaming Applications</a> to process data without loss or duplication. This ensures that computed results are always consistent and accurate, even for stateful computations such as joins, <a href="../../stream-processing/event-aggregator/">aggregations</a>, and <a href="../../stream-processing/event-grouper/">windowing</a>. Any solution that requires EOS guarantees must enable EOS at all stages of the pipeline, not just on the writer. An Idempotent Writer is therefore typically combined with an <a href="../idempotent-reader/">Idempotent Reader</a> and transactional processing.</p>
@@ -300,17 +300,18 @@ This means that a writer may try to produce an Event more than once, but the Eve
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../idempotent-reader/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../../event-sink/event-sink-connector/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../idempotent-reader/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../event-sink/event-sink-connector/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
     <script defer>
