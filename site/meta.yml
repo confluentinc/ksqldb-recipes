@@ -1,0 +1,8 @@
+basePath: /recipes
+layout: recipe
+toc:
+  - items:
+      - index
+  - title: Security
+    items:
+      - security/recipe1
