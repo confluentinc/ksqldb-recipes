@@ -6,6 +6,10 @@ seo:
 
 ## Solution
 
+create your CCloud cluster
+
+--8<-- "docs/shared/ccloud_setup.md"
+
 connector_source
 
 ```json
