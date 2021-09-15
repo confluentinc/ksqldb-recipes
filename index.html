@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Event Streaming Patterns";
+    var mkdocs_page_name = "ksqlDB Recipes";
     var mkdocs_page_input_path = "index.md";
     var mkdocs_page_url = null;
   </script>
@@ -47,152 +47,16 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href=".">Event Streaming Patterns</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href=".">ksqlDB Recipes</a>
     <ul class="current">
     </ul>
                     </li>
                 </ul>
-                <p class="caption"><span class="caption-text">Compositional patterns</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="compositional-patterns/command-query-responsibility-segregation/">Command Query Responsibility Segregation (CQRS)</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="compositional-patterns/event-collaboration/">Event Collaboration</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="compositional-patterns/geo-replication/">Geo Replication</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="compositional-patterns/pipeline/">Pipeline</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="compositional-patterns/strangler-fig/">Strangler Fig</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Event</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="event/command-event/">Command Event</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event/correlation-identifier/">Correlation Identifier</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event/data-contract/">Data Contract</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event/event-deserializer/">Event Deserializer</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event/event-envelope/">Event Envelope</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event/event-serializer/">Event Serializer</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event/event-standardizer/">Event Standardizer</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event/event/">Event</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event/schema-on-read/">Schema-on-Read</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Event processing</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="event-processing/claim-check/">Claim Check</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-processing/content-filter/">Content Filter</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-processing/dead-letter-stream/">Dead Letter Stream</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-processing/event-chunking/">Event Chunking</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-processing/event-filter/">Event Filter</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-processing/event-mapper/">Event Mapper</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-processing/event-processing-application/">Event Processing Application</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-processing/event-processor/">Event Processor</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-processing/event-router/">Event Router</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-processing/event-splitter/">Event Splitter</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-processing/event-streaming-api/">Event Streaming API</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-processing/event-translator/">Event Translator</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-processing/idempotent-reader/">Idempotent Reader</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-processing/idempotent-writer/">Idempotent Writer</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Event sink</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="event-sink/event-sink-connector/">Event Sink Connector</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-sink/event-sink/">Event Sink</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Event source</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="event-source/database-write-aside/">Database Write Aside</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-source/database-write-through/">Database Write Through</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-source/event-gateway/">Event Gateway</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-source/event-source-connector/">Event Source Connector</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-source/event-source/">Event Source</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-source/schema-validator/">Schema Validator</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Event storage</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="event-storage/compacted-event-stream/">Compacted Event Stream</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-storage/event-store/">Event Store</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-storage/infinite-retention-event-stream/">Infinite Retention Event Stream</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-storage/limited-retention-event-stream/">Limited Retention Event Stream</a>
-                    </li>
-                </ul>
                 <p class="caption"><span class="caption-text">Event stream</span></p>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="event-stream/event-broker/">Event Broker</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-stream/event-stream/">Event Stream</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-stream/event-streaming-platform/">Event Streaming Platform</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-stream/partitioned-parallelism/">Partitioned Parallelism</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-stream/schema-compatibility/">Schema Compatibility</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="event-stream/schema-evolution/">Schema Evolution</a>
+                    <li class="toctree-l1"><a class="reference internal" href="event-stream/event-stream/">Event stream</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="event-stream/test/">Test</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Stream processing</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="stream-processing/event-aggregator/">Event Aggregator</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="stream-processing/event-grouper/">Event Grouper</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="stream-processing/event-joiner/">Event Joiner</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="stream-processing/event-stream-merger/">Event Stream Merger</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="stream-processing/event-time-processing/">Event-Time Processing</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="stream-processing/logical-and/">Logical AND</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="stream-processing/suppressed-event-aggregator/">Suppressed Event Aggregator</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="stream-processing/wait-for-n-events/">Wait For N Events</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="stream-processing/wallclock-time/">Wall-Clock-Time Processing</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Table</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="table/projection-table/">Projection Table</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="table/state-table/">State Table</a>
                     </li>
                 </ul>
       </div>
@@ -216,7 +80,7 @@
     
       
     
-    <li>Event Streaming Patterns</li>
+    <li>ksqlDB Recipes</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -228,9 +92,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="welcome-to-event-streaming-patterns">Welcome to Event Streaming Patterns</h1>
-<p>Event Streaming Platforms provide an architecture that enables software to react and operate as events occur. These platforms allow for software components to work together in a real-time, decoupled, and scalable fashion. When software is modeled as streams of events, new capabilities surface along with new unique technical challenges.</p>
-<p>This catalog contains simple and reusable architectural patterns that can be applied over event streaming systems. When composed together, these patterns can help meet the design demands of modern real-time distributed systems. The following patterns are categorized by their function in the event streaming system, including sourcing data, processing events as streams, to integrations with external systems.</p>
+                <h1 id="welcome-to-ksqldb-recipes">Welcome to ksqlDB Recipes</h1>
               
             </div>
           </div>
@@ -238,7 +100,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="compositional-patterns/command-query-responsibility-segregation/" class="btn btn-neutral float-right" title="Command Query Responsibility Segregation (CQRS)">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="event-stream/event-stream/" class="btn btn-neutral float-right" title="Event stream">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
     </div>
@@ -266,7 +128,7 @@
     
     
     
-      <span><a href="compositional-patterns/command-query-responsibility-segregation/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="event-stream/event-stream/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -285,5 +147,5 @@
 
 <!--
 MkDocs version : 1.2.2
-Build Date UTC : 2021-09-15 02:28:30.373880+00:00
+Build Date UTC : 2021-09-15 02:33:30.747404+00:00
 -->
