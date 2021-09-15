@@ -8,9 +8,14 @@ seo:
 
 ## What is it?
 
-It's like this and like that and like this and uh.
+Analyzing clickstream data enables businesses to understand the behavior of its online users, for example:
 
-![foobar](../../img/foobar.svg)
+- User activity over a given time frame: how many webpages are users viewing
+- Requests that end in error, over a given threshold (e.g., 404 HTTP codes)
+- Where the requests are coming from geographically in a given window of time
+- How long users are interacting with the site (user sessions)
+
+![grafana](../../img/clickstream.png)
 
 ## Cut to the code
 
@@ -32,16 +37,17 @@ It's like this and like that and like this and uh.
 
 ### Read the data in
 
-This recipe uses blah blah connector.
-It assumes you have setup foobar.
+This recipe creates simulated data with the `Datagen` connector.
 
 ```sql
 --8<-- "docs/customer-360/clickstream/source.sql"
 ```
 
+Optional: to simulate a real-world scenario where user sessions aren't just always open but do close after some time, you can pause and resume the `DATAGEN_CLICKSTREAM` connector.
+
 ### Run stream processing app
 
-Translate and filter all the things.
+Now you can process the data in a variety of ways, by enriching the clickstream data with user information, analyze errors, aggregate data into windows of time, etc.
 
 ```sql
 --8<-- "docs/customer-360/clickstream/process.sql"
@@ -49,7 +55,7 @@ Translate and filter all the things.
 
 ### Write the data out
 
-Post-processing, send the data to this DB.
+After processing the data, send it to Elasticsearch.
 
 ```sql
 --8<-- "docs/customer-360/clickstream/sink.sql"
