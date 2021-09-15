@@ -1,0 +1,6 @@
+site_name: ksqlDB Recipes
+
+theme: readthedocs
+
+markdown_extensions:
+  - pymdownx.snippets
