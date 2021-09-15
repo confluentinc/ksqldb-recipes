@@ -167,7 +167,8 @@ This recipe tracks Syslog data and streams out pairs of usernames and IPs of bad
 <p><img alt="ssh-attack" src="../../img/ssh-attack.png" /></p>
 <h2 id="cut-to-the-code">Cut to the code</h2>
 <p><img alt="launch" src="../../img/launch.png" /></p>
-<p>Run the Syslog source connector to push syslog data into Confluent Cloud into a Kafka topic called <code>syslog</code>.</p>
+<p>(This recipe also is a great demonstration on how to run a self-managed connector)
+Run the Syslog source connector locally to push syslog data into Confluent Cloud into a Kafka topic called <code>syslog</code>.</p>
 <p>Then proceed with ksqlDB to process the Syslog messages.</p>
 <pre><code class="language-sql">-- Define Kafka parameters
 DEFINE topic = 'syslog';
