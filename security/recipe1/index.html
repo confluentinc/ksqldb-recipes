@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Index - ksqlDB Recipes</title>
+  <title>Recipe 1 - ksqlDB Recipes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Index";
+    var mkdocs_page_name = "Recipe 1";
     var mkdocs_page_input_path = "security/recipe1/README.md";
     var mkdocs_page_url = null;
   </script>
@@ -54,11 +54,32 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="#">Recipe1</a>
     <ul class="current">
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">Index</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Recipe 1</a>
     <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cut-to-the-code">Cut to the code</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#launch-the-recipe">Launch the Recipe</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#setup-your-environment">Setup your Environment</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#read-the-data-in">Read the data in</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#run-stream-processing-app">Run stream processing app</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#write-the-data-out">Write the data out</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                 </li>
     </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Shared</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../shared/ccloud_setup/">Ccloud setup</a>
                     </li>
                 </ul>
       </div>
@@ -90,7 +111,7 @@
         
       
     
-    <li>Index</li>
+    <li>Recipe 1</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -102,61 +123,50 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="solution">Solution</h2>
-<p>connector_source</p>
-<pre><code class="language-json">create connector foobar;
+                <h1 id="recipe-1">Recipe 1</h1>
+<h2 id="overview">Overview</h2>
+<p>The use case is...</p>
+<h2 id="cut-to-the-code">Cut to the code</h2>
+<pre><code class="language-sql">-- Create source connector
+CREATE SOURCE CONNECTOR source_conn WITH ... ;
 
-{
-  &quot;name&quot;: &quot;elasticsearch-ksqldb&quot;,
-  &quot;config&quot;: {
-    &quot;connector.class&quot;: &quot;io.confluent.connect.elasticsearch.ElasticsearchSinkConnector&quot;,
-    &quot;consumer.interceptor.classes&quot;: &quot;io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor&quot;,
-    &quot;topics&quot;: &quot;WIKIPEDIABOT&quot;,
-    &quot;topic.index.map&quot;: &quot;WIKIPEDIABOT:wikipediabot&quot;,
-    &quot;connection.url&quot;: &quot;http://elasticsearch:9200&quot;,
-    &quot;type.name&quot;: &quot;_doc&quot;,
-    &quot;key.ignore&quot;: true,
-    &quot;key.converter.schema.registry.url&quot;: &quot;https://schemaregistry:8085&quot;,
-    &quot;value.converter&quot;: &quot;io.confluent.connect.avro.AvroConverter&quot;,
-    &quot;value.converter.schema.registry.url&quot;: &quot;https://schemaregistry:8085&quot;,
-    &quot;value.converter.schema.registry.ssl.truststore.location&quot;: &quot;/etc/kafka/secrets/kafka.client.truststore.jks&quot;,
-    &quot;value.converter.schema.registry.ssl.truststore.password&quot;: &quot;confluent&quot;,
-    &quot;value.converter.basic.auth.credentials.source&quot;: &quot;USER_INFO&quot;,
-    &quot;value.converter.basic.auth.user.info&quot;: &quot;connectorSA:connectorSA&quot;,
-    &quot;consumer.override.sasl.jaas.config&quot;: &quot;org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required username=\&quot;connectorSA\&quot; password=\&quot;connectorSA\&quot; metadataServerUrls=\&quot;https://kafka1:8091,https://kafka2:8092\&quot;;&quot;,
-    &quot;schema.ignore&quot;: true
+--Setup
+CREATE STREAM FOOBAR WITH ....;
 
-  }
-}
+-- Create sink connector
+CREATE SINK CONNECTOR sink_conn WITH ... ;
 </code></pre>
-<p>ksqldb_statements</p>
-<pre><code class="language-sql">create stream foobar;
+<h2 id="launch-the-recipe">Launch the Recipe</h2>
+<h3 id="setup-your-environment">Setup your Environment</h3>
+<ol>
+<li>
+<p>Sign up for <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service.</p>
+</li>
+<li>
+<p>After you log in to Confluent Cloud, click on <code>Add cloud environment</code> and name the environment <code>learn-kafka</code>. Using a new environment keeps your learning resources separate from your other Confluent Cloud resources.</p>
+</li>
+<li>
+<p>From the <code>Billing &amp; payment</code> section in the Menu, apply the promo code <code>C50INTEG</code> to receive an additional $50 free usage on Confluent Cloud (<a href="https://www.confluent.io/confluent-cloud-promo-disclaimer">details</a>).</p>
+</li>
+<li>
+<p>Click on <a href="https://confluent.cloud/learn">LEARN</a> and follow the instructions to launch a Kafka cluster and to enable Schema Registry.</p>
+</li>
+</ol>
+<h3 id="read-the-data-in">Read the data in</h3>
+<p>This recipe uses blah blah connector.
+It assumes you have setup foobar.</p>
+<pre><code class="language-sql">-- Create source connector
+CREATE SOURCE CONNECTOR source_conn WITH ... ;
 </code></pre>
-<p>connector_sink</p>
-<pre><code class="language-json">create connector foobar;
-
-{
-  &quot;name&quot;: &quot;elasticsearch-ksqldb&quot;,
-  &quot;config&quot;: {
-    &quot;connector.class&quot;: &quot;io.confluent.connect.elasticsearch.ElasticsearchSinkConnector&quot;,
-    &quot;consumer.interceptor.classes&quot;: &quot;io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor&quot;,
-    &quot;topics&quot;: &quot;WIKIPEDIABOT&quot;,
-    &quot;topic.index.map&quot;: &quot;WIKIPEDIABOT:wikipediabot&quot;,
-    &quot;connection.url&quot;: &quot;http://elasticsearch:9200&quot;,
-    &quot;type.name&quot;: &quot;_doc&quot;,
-    &quot;key.ignore&quot;: true,
-    &quot;key.converter.schema.registry.url&quot;: &quot;https://schemaregistry:8085&quot;,
-    &quot;value.converter&quot;: &quot;io.confluent.connect.avro.AvroConverter&quot;,
-    &quot;value.converter.schema.registry.url&quot;: &quot;https://schemaregistry:8085&quot;,
-    &quot;value.converter.schema.registry.ssl.truststore.location&quot;: &quot;/etc/kafka/secrets/kafka.client.truststore.jks&quot;,
-    &quot;value.converter.schema.registry.ssl.truststore.password&quot;: &quot;confluent&quot;,
-    &quot;value.converter.basic.auth.credentials.source&quot;: &quot;USER_INFO&quot;,
-    &quot;value.converter.basic.auth.user.info&quot;: &quot;connectorSA:connectorSA&quot;,
-    &quot;consumer.override.sasl.jaas.config&quot;: &quot;org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required username=\&quot;connectorSA\&quot; password=\&quot;connectorSA\&quot; metadataServerUrls=\&quot;https://kafka1:8091,https://kafka2:8092\&quot;;&quot;,
-    &quot;schema.ignore&quot;: true
-
-  }
-}
+<h3 id="run-stream-processing-app">Run stream processing app</h3>
+<p>Translate and filter all the things.</p>
+<pre><code class="language-sql">--Setup
+CREATE STREAM FOOBAR WITH ....;
+</code></pre>
+<h3 id="write-the-data-out">Write the data out</h3>
+<p>Post-processing, send the data to this DB.</p>
+<pre><code class="language-sql">-- Create sink connector
+CREATE SINK CONNECTOR sink_conn WITH ... ;
 </code></pre>
               
             </div>
@@ -164,6 +174,8 @@
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../shared/ccloud_setup/" class="btn btn-neutral float-right" title="Ccloud setup">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../.." class="btn btn-neutral" title="ksqlDB Recipes"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -194,6 +206,8 @@
     
       <span><a href="../.." style="color: #fcfcfc">&laquo; Previous</a></span>
     
+    
+      <span><a href="../../shared/ccloud_setup/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
