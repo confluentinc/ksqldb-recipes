@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="../../css/theme.css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -41,7 +40,7 @@
         <a href="../.." class="icon icon-home"> ksqlDB Recipes</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -173,6 +172,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../event-stream/schema-evolution/">Schema Evolution</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/test/">Test</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Stream processing</span></p>
                 <ul>
@@ -235,6 +236,7 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -247,14 +249,13 @@
 <p>Use an Event Envelope to wrap the event data using a standard format agreed on by all participants of the <a href="../../event-stream/event-streaming-platform/">Event Streaming Platform</a>, or more broadly. <a href="https://cloudevents.io/">Cloud Events</a>—which standardize access to ID, Schema, Key, and other common event attributes—are an industry-standard example of the Event Envelope pattern.</p>
 <h2 id="example-implementation">Example Implementation</h2>
 <p>Using basic Java consumers and producers, you can use a helper function to wrap an application's immutable payload into an envelope which conforms to the expected format of the <a href="../../event-stream/event-streaming-platform/">Event Streaming Platform</a>:</p>
-<pre><code class="java">static &lt;T&gt; Envelope&lt;T&gt; wrap(T payload, Iterable&lt;Header&gt; headers) {
+<pre><code class="language-java">static &lt;T&gt; Envelope&lt;T&gt; wrap(T payload, Iterable&lt;Header&gt; headers) {
     return new Envelope(serializer(payload), headers);
 }
 static &lt;T&gt; T unwrap(Envelope&lt;T&gt; envelope) {
     return envelope.payload;
 }
 </code></pre>
-
 <h2 id="references">References</h2>
 <ul>
 <li>This pattern is derived from <a href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/EnvelopeWrapper.html">Envelope Wrapper</a> in <em>Enterprise Integration Patterns</em>, by Gregor Hohpe and Bobby Woolf.</li>
@@ -294,17 +295,18 @@ static &lt;T&gt; T unwrap(Envelope&lt;T&gt; envelope) {
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../event-deserializer/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../event-serializer/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../event-deserializer/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../event-serializer/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
     <script defer>

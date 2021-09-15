@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="../../css/theme.css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -41,7 +40,7 @@
         <a href="../.." class="icon icon-home"> ksqlDB Recipes</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -173,6 +172,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../schema-evolution/">Schema Evolution</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../test/">Test</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Stream processing</span></p>
                 <ul>
@@ -235,6 +236,7 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -243,33 +245,52 @@
 <h2 id="problem">Problem</h2>
 <p>How can <a href="../../event-processing/event-processor/">Event Processors</a> and applications communicate with each other using event streaming?</p>
 <h2 id="solution">Solution</h2>
-<p><img alt="event-stream" src="../../img/event-stream.svg" /></p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;elasticsearch-ksqldb&quot;,
+  &quot;config&quot;: {
+    &quot;connector.class&quot;: &quot;io.confluent.connect.elasticsearch.ElasticsearchSinkConnector&quot;,
+    &quot;consumer.interceptor.classes&quot;: &quot;io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor&quot;,
+    &quot;topics&quot;: &quot;WIKIPEDIABOT&quot;,
+    &quot;topic.index.map&quot;: &quot;WIKIPEDIABOT:wikipediabot&quot;,
+    &quot;connection.url&quot;: &quot;http://elasticsearch:9200&quot;,
+    &quot;type.name&quot;: &quot;_doc&quot;,
+    &quot;key.ignore&quot;: true,
+    &quot;key.converter.schema.registry.url&quot;: &quot;https://schemaregistry:8085&quot;,
+    &quot;value.converter&quot;: &quot;io.confluent.connect.avro.AvroConverter&quot;,
+    &quot;value.converter.schema.registry.url&quot;: &quot;https://schemaregistry:8085&quot;,
+    &quot;value.converter.schema.registry.ssl.truststore.location&quot;: &quot;/etc/kafka/secrets/kafka.client.truststore.jks&quot;,
+    &quot;value.converter.schema.registry.ssl.truststore.password&quot;: &quot;confluent&quot;,
+    &quot;value.converter.basic.auth.credentials.source&quot;: &quot;USER_INFO&quot;,
+    &quot;value.converter.basic.auth.user.info&quot;: &quot;connectorSA:connectorSA&quot;,
+    &quot;consumer.override.sasl.jaas.config&quot;: &quot;org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required username=\&quot;connectorSA\&quot; password=\&quot;connectorSA\&quot; metadataServerUrls=\&quot;https://kafka1:8091,https://kafka2:8092\&quot;;&quot;,
+    &quot;schema.ignore&quot;: true
+
+  }
+}
+</code></pre>
 <p>Connect the Event Processing Applications with an Event Stream. <a href="../../event-source/event-source/">Event Sources</a> produce events to the Event Stream, and Event Processors and <a href="../../event-sink/event-sink/">Event Sinks</a> consume them. Event Streams are named, allowing communication over a specific stream of events. Notice how Event Streams decouple the source and sink applications, which communicate indirectly and asynchronously with each other through events. Additionally, event data formats are often validated, in order to govern the communication between applications.</p>
 <p>Generally speaking, an Event Stream records the history of what has happened in the world as a sequence of events (think: a sequence of facts). Examples of streams would be a sales ledger or the sequence of moves in a chess match. This history is an ordered sequence or chain of events, so we know which event happened before another event and can infer causality (for example, “White moved the e2 pawn to e4; then Black moved the e7 pawn to e5”). A stream thus represents both the past and the present: as we go from today to tomorrow -- or from one millisecond to the next -- new events are constantly being appended to the history.</p>
 <p>Conceptually, a stream provides <em>immutable</em> data. It supports only inserting (appending) new events, and existing events cannot be changed. Streams are persistent, durable, and fault-tolerant. Unlike traditional message queues, events stored in streams can be read as often as needed by Event Sinks and Event Processing Applications, and they are not deleted after consumption. Instead, retention policies control how events are retained. Events in a stream can be <em>keyed</em>, and we can have many events for one key. For a stream of payments of all customers, the customer ID might be the key (cf. related patterns such as <a href="../partitioned-parallelism/">Partitioned Parallelism</a>).</p>
 <h2 id="implementation">Implementation</h2>
 <p>In <a href="/learn-kafka/apache-kafka/events/">Apache Kafka®</a>, Event Streams are called <em>topics</em>. Kafka allows you to define policies which dictate how events are retained, using <a href="../../event-storage/limited-retention-event-stream/">time or size limitations</a> or <a href="../../event-storage/infinite-retention-event-stream/">retaining events forever</a>. Kafka consumers (Event Sinks and Event Processing Applications) are able to decide where in an event stream to begin reading. They can choose to begin reading from the oldest or newest event, or seek to a specific location in the topic, using the event's timestamp or position (called the <em>offset</em>).</p>
 <p>The streaming database <a href="https://ksqldb.io/">ksqlDB</a> supports Event Streams using a familiar SQL syntax. The following example creates a stream of events named <code>riderLocations</code>, representing locations of riders in a car-sharing service. The data format is JSON.</p>
-<pre><code class="sql">CREATE STREAM riderLocations (profileId VARCHAR, latitude DOUBLE, longitude DOUBLE)
+<pre><code class="language-sql">CREATE STREAM riderLocations (profileId VARCHAR, latitude DOUBLE, longitude DOUBLE)
   WITH (kafka_topic='locations', value_format='json');
 </code></pre>
-
 <p>New events can be written to the <code>riderLocations</code> stream using the <code>INSERT</code> syntax:</p>
-<pre><code class="sql">INSERT INTO riderLocations (profileId, latitude, longitude) VALUES ('c2309eec', 37.7877, -122.4205);
+<pre><code class="language-sql">INSERT INTO riderLocations (profileId, latitude, longitude) VALUES ('c2309eec', 37.7877, -122.4205);
 INSERT INTO riderLocations (profileId, latitude, longitude) VALUES ('18f4ea86', 37.3903, -122.0643);
 INSERT INTO riderLocations (profileId, latitude, longitude) VALUES ('4ab5cbad', 37.3952, -122.0813);
 INSERT INTO riderLocations (profileId, latitude, longitude) VALUES ('8b6eae59', 37.3944, -122.0813);
 INSERT INTO riderLocations (profileId, latitude, longitude) VALUES ('4a7c7b41', 37.4049, -122.0822);
 INSERT INTO riderLocations (profileId, latitude, longitude) VALUES ('4ddad000', 37.7857, -122.4011);
 </code></pre>
-
 <p>A <a href="https://docs.ksqldb.io/en/latest/concepts/queries/#push">push query</a>, also known as a streaming query, can be run continuously over the stream using a <code>SELECT</code> command with the <code>EMIT CHANGES</code> clause. As new events arrive, this query will emit new results that match the <code>WHERE</code> conditionals. The following query looks for riders in close proximity to Mountain View, California, in the United States.</p>
-<pre><code class="sql">-- Mountain View lat, long: 37.4133, -122.1162
+<pre><code class="language-sql">-- Mountain View lat, long: 37.4133, -122.1162
 SELECT * FROM riderLocations
   WHERE GEO_DISTANCE(latitude, longitude, 37.4133, -122.1162) &lt;= 5
   EMIT CHANGES;
 </code></pre>
-
 <h2 id="references">References</h2>
 <ul>
 <li>This pattern is derived from <a href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/MessageChannel.html">Message Channel</a> in <em>Enterprise Integration Patterns</em>, by Gregor Hohpe and Bobby Woolf.</li>
@@ -308,17 +329,18 @@ SELECT * FROM riderLocations
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../event-broker/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../event-streaming-platform/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../event-broker/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../event-streaming-platform/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
     <script defer>

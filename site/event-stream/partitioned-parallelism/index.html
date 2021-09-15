@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="../../css/theme.css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -41,7 +40,7 @@
         <a href="../.." class="icon icon-home"> ksqlDB Recipes</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -175,6 +174,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../schema-evolution/">Schema Evolution</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../test/">Test</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Stream processing</span></p>
                 <ul>
@@ -237,6 +238,7 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -257,7 +259,6 @@ Distributing and concurrently processing events enables an application to scale.
 <p>With Apache Kafka®, streams (called <em>topics</em>) are created either by an administrator or by a streaming application such as the streaming database <a href="https://ksqldb.io">ksqlDB</a>. The number of partitions is specified at the time the topic is created. For example:</p>
 <pre><code>ccloud kafka topic create myTopic --partitions 30
 </code></pre>
-
 <p><a href="../../event/event/">Events</a> are placed into a specific partition according to the partitioning algorithm of the <a href="../../event-source/event-source/">Event Source</a>, such as an <a href="../../event-processing/event-processing-application/">Event Processing Application</a>.
 All events assigned to a given partition have strong ordering guarantees.</p>
 <p>The common partitioning schemes are:</p>
@@ -276,7 +277,6 @@ If an event stream's key content changes because of how the query is processing 
   PARTITION BY new_key_expr [, ...]
   EMIT CHANGES;
 </code></pre>
-
 <h2 id="considerations">Considerations</h2>
 <p>In general, a higher number of stream partitions results in higher throughput. To maximize throughput, you need enough partitions to utilize all distributed instances of an <a href="../../event-processing/event-processor/">Event Processor</a> (for example, servers in a ksqlDB cluster).
 Be sure to choose the partition count carefully based on the throughput of <a href="../../event-source/event-source/">Event Sources</a> (such as Kafka producers, including connectors), <a href="../../event-processing/event-processor/">Event Processors</a> (such as ksqlDB or Kafka Streams applications), and <a href="../../event-sink/event-sink/">Event Sinks</a> (such as Kafka consumers, including connectors). Also be sure to benchmark performance in the environment.
@@ -320,17 +320,18 @@ This will prevent certain stream partitions from being overloaded relative to ot
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../event-streaming-platform/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../schema-compatibility/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../event-streaming-platform/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../schema-compatibility/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
     <script defer>

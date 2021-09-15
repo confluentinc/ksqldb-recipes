@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="../../css/theme.css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -41,7 +40,7 @@
         <a href="../.." class="icon icon-home"> ksqlDB Recipes</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -183,6 +182,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../event-stream/schema-evolution/">Schema Evolution</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/test/">Test</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Stream processing</span></p>
                 <ul>
@@ -245,6 +246,7 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -260,15 +262,13 @@
 <h3 id="time-based-retention">Time-Based Retention</h3>
 <p>With time-based retention, events will be removed from the topic after the event timestamp indicates an event is older than the configured log retention time. On Kafka this is configured with the <code>log.retention.hours</code> setting, which can be set as a default to apply to all topics or on a per-topic basis. Additionally, Kafka respects a <code>log.retention.minutes</code> and <code>log.retention.ms</code> settings to define shorter retention periods.</p>
 <p>The following example sets the retention period of a topic to one year: </p>
-<pre><code class="bash">log.retention.hours=8760
+<pre><code class="language-bash">log.retention.hours=8760
 </code></pre>
-
 <p>For more guidance and configuring time-based data retention, see the <a href="https://docs.confluent.io/platform/current/installation/configuration/broker-configs.html">Kafka Broker Configurations documentation</a> for default settings, or the <a href="https://docs.confluent.io/platform/current/kafka/post-deployment.html#modifying-topics">Modifying Topics</a> section for modifying existing topics.</p>
 <h3 id="size-based-retention">Size-Based Retention</h3>
 <p>With size-based retention, events will begin to be removed from the topic once the total size of the topic violates the configured maximum size. Kafka supports a <code>log.retention.bytes</code> configure. For example, to configure the maximum size of a topic to 100GB you could set the configuration as follows: </p>
-<pre><code class="bash">log.retention.bytes=107374127424
+<pre><code class="language-bash">log.retention.bytes=107374127424
 </code></pre>
-
 <p>For more guidance and configuring size-based data retention, see the <a href="https://docs.confluent.io/platform/current/installation/configuration/broker-configs.html">Kafka Broker Configurations documentation</a> for default settings, or the <a href="https://docs.confluent.io/platform/current/kafka/post-deployment.html#modifying-topics">Modifying Topics</a> section for modifying existing topics.</p>
 <h3 id="how-events-are-being-removed-from-an-event-stream">How Events Are Being Removed From an Event Stream</h3>
 <p>For either method of configuring retention, Kafka <em>does not immediately</em> remove events one by one when they violate the configured retention settings. To understand how they are removed, we first need to explain that Kafka topics are further broken down into <em>topic partitions</em> (see <a href="../../event-stream/partitioned-parallelism/">Partitioned Placement</a>). Partitions themselves are further divided into files called <em>segments</em>. Segments represent a sequence of the events in a particular partition, and these segments are what is being removed once a violation of the retention policy has occurred. We can further fine-tune the removal algorithm with additional settings such as <code>log.retention.check.interval.ms</code> and segment configuration, such as <code>log.segment.bytes</code>. </p>
@@ -316,17 +316,18 @@
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../infinite-retention-event-stream/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../../event-stream/event-broker/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../infinite-retention-event-stream/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../event-stream/event-broker/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
     <script defer>

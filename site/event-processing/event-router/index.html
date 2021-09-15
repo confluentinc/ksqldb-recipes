@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="../../css/theme.css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -41,7 +40,7 @@
         <a href="../.." class="icon icon-home"> ksqlDB Recipes</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -175,6 +174,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../event-stream/schema-evolution/">Schema Evolution</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/test/">Test</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Stream processing</span></p>
                 <ul>
@@ -237,6 +238,7 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -256,7 +258,6 @@ CREATE STREAM payments_france AS
 CREATE STREAM payments_spain AS
     SELECT * FROM payments WHERE country = 'spain';
 </code></pre>
-
 <p>With the Apache Kafka&reg; client library <a href="https://kafka.apache.org/documentation/streams/">Kafka Streams</a>, use a <a href="https://kafka.apache.org/28/javadoc/org/apache/kafka/streams/processor/TopicNameExtractor.html"><code>TopicNameExtractor</code></a> to route Events to different Event Streams (called "topics" in Kafka).  The <code>TopicNameExtractor</code> has one method to implement, <code>extract()</code>, which accepts three parameters:</p>
 <ul>
 <li>The event key</li>
@@ -264,7 +265,7 @@ CREATE STREAM payments_spain AS
 <li>The <a href="https://kafka.apache.org/28/javadoc/org/apache/kafka/streams/processor/RecordContext.html"><code>RecordContext</code></a>, which provides access to headers, partitions, and other contextual information about the event</li>
 </ul>
 <p>We can use any of the given parameters to generate and return the desired destination topic name for the given Event. Kafka Streams will complete the routing. </p>
-<pre><code class="java">CountryTopicExtractor implements TopicNameExtractor&lt;String, String&gt; {
+<pre><code class="language-java">CountryTopicExtractor implements TopicNameExtractor&lt;String, String&gt; {
    String extract(String key, String value, RecordContext recordContext) {
       switch (value.country) {
         case &quot;france&quot;:
@@ -278,7 +279,6 @@ CREATE STREAM payments_spain AS
 KStream&lt;String, String&gt; myStream = builder.stream(...);
 myStream.mapValues(..).to(new CountryTopicExtractor());
 </code></pre>
-
 <h2 id="considerations">Considerations</h2>
 <ul>
 <li>Event Routers should not modify the Event itself, and instead should provide only proper routing to the desired destinations.</li>
@@ -322,17 +322,18 @@ myStream.mapValues(..).to(new CountryTopicExtractor());
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../event-processor/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../event-splitter/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../event-processor/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../event-splitter/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
     <script defer>

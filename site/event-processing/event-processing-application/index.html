@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="../../css/theme.css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -41,7 +40,7 @@
         <a href="../.." class="icon icon-home"> ksqlDB Recipes</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -181,6 +180,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../event-stream/schema-evolution/">Schema Evolution</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/test/">Test</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Stream processing</span></p>
                 <ul>
@@ -243,6 +244,7 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -259,34 +261,30 @@
 <h3 id="ksqldb">ksqlDB</h3>
 <p><a href="https://ksqldb.io">ksqlDB</a> is a streaming database with which we can build Event Processing Applications using SQL syntax. It has first-class support for <a href="../../event-stream/event-stream/">Streams</a> and <a href="../../table/state-table/">Tables</a>.</p>
 <p>When we create <a href="../../table/state-table/">Tables</a> and <a href="../../event-stream/event-stream/">Streams</a> in ksqlDB, Kafka topics are used as the storage layer behind the scenes. In the example below, the ksqlDB table <code>movies</code> is backed by a Kafka topic of the same name.</p>
-<pre><code class="sql">CREATE TABLE movies (ID INT PRIMARY KEY, title VARCHAR, release_year INT)
+<pre><code class="language-sql">CREATE TABLE movies (ID INT PRIMARY KEY, title VARCHAR, release_year INT)
     WITH (kafka_topic='movies', partitions=1, value_format='avro');
 CREATE STREAM ratings (MOVIE_ID INT KEY, rating DOUBLE)
     WITH (kafka_topic='ratings', partitions=1, value_format='avro');
 </code></pre>
-
 <p>As we would expect, we can add new <a href="../../event/event/">Events</a> using <code>INSERT</code>:</p>
-<pre><code class="sql">INSERT INTO movies (id, title, release_year) VALUES (294, 'Die Hard', 1998);
+<pre><code class="language-sql">INSERT INTO movies (id, title, release_year) VALUES (294, 'Die Hard', 1998);
 INSERT INTO ratings (movie_id, rating) VALUES (294, 8.2);
 </code></pre>
-
 <p>We can also perform stream processing using ksqlDB's SQL syntax. In the following example, the command <code>CREATE STREAM .. AS SELECT ..</code> continuously joins the <code>ratings</code> stream and the <code>movies</code> table to create a new stream of enriched ratings.</p>
-<pre><code class="sql">CREATE STREAM rated_movies
+<pre><code class="language-sql">CREATE STREAM rated_movies
     WITH (kafka_topic='rated_movies',
           value_format='avro') AS
     SELECT ratings.movie_id as id, title, rating
     FROM ratings
     LEFT JOIN movies ON ratings.movie_id = movies.id;
 </code></pre>
-
 <h3 id="kafka-streams">Kafka Streams</h3>
 <p>With the <a href="https://docs.confluent.io/platform/current/streams/index.html">Kafka Streams client library</a> of Apache Kafka, we can implement an event processing application in Java, Scala, or other JVM languages. Here is a Kafka Streams example similar to the ksqlDB example above:</p>
-<pre><code class="java">KStream&lt;Integer, Rating&gt; ratings = builder.table(&lt;blabla&gt;);
+<pre><code class="language-java">KStream&lt;Integer, Rating&gt; ratings = builder.table(&lt;blabla&gt;);
 KTable&lt;Integer, Movie&gt; movies = builder.stream(&lt;blabla&gt;);
 MovieRatingJoiner joiner = new MovieRatingJoiner();
 KStream &lt;Integer, EnrichedRating&gt; enrichedRatings = ratings.join(movies, joiner);
 </code></pre>
-
 <p>See the tutorial <a href="https://kafka-tutorials.confluent.io/join-a-stream-to-a-table/kstreams.html">How to join a stream and a lookup table</a> for a full example of using Kafka Streams to build an Event Processing Application.</p>
 <h2 id="considerations">Considerations</h2>
 <ul>
@@ -332,17 +330,18 @@ KStream &lt;Integer, EnrichedRating&gt; enrichedRatings = ratings.join(movies, j
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../event-mapper/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../event-processor/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../event-mapper/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../event-processor/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
     <script defer>

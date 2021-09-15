@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="../../css/theme.css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -41,7 +40,7 @@
         <a href="../.." class="icon icon-home"> ksqlDB Recipes</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -177,6 +176,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../event-stream/schema-evolution/">Schema Evolution</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../event-stream/test/">Test</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Stream processing</span></p>
                 <ul>
@@ -239,6 +240,7 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -273,7 +275,7 @@ consumption vastly simpler.</p>
 <h2 id="implementation">Implementation</h2>
 <p>For example, we can use Avro to define a structure for Foreign Exchange
 trade deals as:</p>
-<pre><code class="json">{&quot;namespace&quot;: &quot;io.confluent.developer&quot;,
+<pre><code class="language-json">{&quot;namespace&quot;: &quot;io.confluent.developer&quot;,
  &quot;type&quot;: &quot;record&quot;,
  &quot;name&quot;: &quot;FxTrade&quot;,
  &quot;fields&quot;: [
@@ -284,21 +286,19 @@ trade deals as:</p>
  ]
 }
 </code></pre>
-
 <p>...and then use our language's Avro libraries to take care of serialization for us:</p>
-<pre><code class="java">  FxTrade fxTrade = new FxTrade( ... );
+<pre><code class="language-java">  FxTrade fxTrade = new FxTrade( ... );
 
   ProducerRecord&lt;long, FxTrade&gt; producerRecord =
     new ProducerRecord&lt;&gt;(&quot;fx_trade&quot;, fxTrade.getTradeId(), fxTrade);
 
   producer.send(producerRecord);
 </code></pre>
-
 <p>Alternatively, with the streaming database
 <a href="https://ksqldb.io/">ksqlDB</a>, we can define an <a href="../../event-stream/event-stream/">Event Stream</a> in a way that enforces that
 format and records the Avro definition using Confluent’s 
 <a href="https://docs.confluent.io/platform/current/schema-registry/index.html">Schema Registry</a>:</p>
-<pre><code class="sql">CREATE OR REPLACE STREAM fx_trade (
+<pre><code class="language-sql">CREATE OR REPLACE STREAM fx_trade (
   trade_id BIGINT KEY,
   from_currency VARCHAR(3),
   to_currency VARCHAR(3),
@@ -310,7 +310,6 @@ format and records the Avro definition using Confluent’s
   PARTITIONS = 3
 );
 </code></pre>
-
 <p>With this setup, both serialization and deserialization of data is
 performed automatically by ksqlDB behind the scenes.</p>
 <h2 id="considerations">Considerations</h2>
@@ -410,17 +409,18 @@ meaning of "Field 78" by cross-referencing "Encoding Subformat 22".</em></p>
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
-        <span><a href="../event-envelope/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../event-standardizer/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../event-envelope/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../event-standardizer/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
     <script defer>
