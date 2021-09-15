@@ -4,43 +4,50 @@ seo:
   description: Recipe 1
 ---
 
-# Cut to the code
+# Recipe 1
+
+## Overview
+
+The use case is...
+
+## Cut to the code
 
 ```sql
---8<-- "docs/security/recipe1/connector_source.cfg"
---8<-- "docs/security/recipe1/ksqldb_statements.sql"
---8<-- "docs/security/recipe1/connector_sink.cfg"
+--8<-- "docs/security/recipe1/source.sql"
+
+--8<-- "docs/security/recipe1/process.sql"
+
+--8<-- "docs/security/recipe1/sink.sql"
 ```
 
-# Solution
+## Launch the Recipe
 
-## Setup your Environment
-
-create your CCloud cluster
+### Setup your Environment
 
 --8<-- "docs/shared/ccloud_setup.md"
 
-## Read the data in
+### Read the data in
 
-connector_source
-
-```json
---8<-- "docs/security/recipe1/connector_source.cfg"
-```
-
-## Run stream processing app
-
-ksqldb_statements
+This recipe uses blah blah connector.
+It assumes you have setup foobar.
 
 ```sql
---8<-- "docs/security/recipe1/ksqldb_statements.sql"
+--8<-- "docs/security/recipe1/source.sql"
 ```
 
-## Write the data out
+### Run stream processing app
 
-connector_sink
+Translate and filter all the things.
 
-```json
---8<-- "docs/security/recipe1/connector_sink.cfg"
+```sql
+--8<-- "docs/security/recipe1/process.sql"
+```
+
+### Write the data out
+
+Post-processing, send the data to this DB.
+
+```sql
+--8<-- "docs/security/recipe1/sink.sql"
 ```
 
