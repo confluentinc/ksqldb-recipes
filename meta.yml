@@ -3,6 +3,6 @@ layout: recipe
 toc:
   - items:
       - index
-  - title: Event Stream
+  - title: Security
     items:
-      - event-stream/event-stream
+      - security/recipe1
