@@ -24,7 +24,7 @@ Click below to launch this recipe in Confluent Cloud.
 --8<-- "docs/retail/inventory/process.sql"
 ```
 
-## Launch Step-by-Step
+## Step-by-Step
 
 ### Setup your Environment
 

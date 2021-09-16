@@ -28,7 +28,7 @@ Then proceed with ksqlDB to process the Syslog messages.
 --8<-- "docs/security/ssh-attack/process.sql"
 ```
 
-## Launch Step-by-Step
+## Step-by-Step
 
 ### Setup your Environment
 
