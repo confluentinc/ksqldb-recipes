@@ -10,9 +10,13 @@ seo:
 
 TODO
 
-## Cut to the code
+## Run Now
+
+Click below to launch this recipe in Confluent Cloud.
 
 ![launch](../../img/launch.png)
+
+## Code Summary
 
 ```sql
 --8<-- "docs/retail/inventory/source.sql"

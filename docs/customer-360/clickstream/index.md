@@ -17,9 +17,13 @@ Analyzing clickstream data enables businesses to understand the behavior of its 
 
 ![grafana](../../img/clickstream.png)
 
-## Cut to the code
+## Run Now
+
+Click below to launch this recipe in Confluent Cloud.
 
 ![launch](../../img/launch.png)
+
+## Code Summary
 
 ```sql
 --8<-- "docs/customer-360/clickstream/source.sql"
@@ -29,7 +33,7 @@ Analyzing clickstream data enables businesses to understand the behavior of its 
 --8<-- "docs/customer-360/clickstream/sink.sql"
 ```
 
-## Launch Step-by-Step
+## Step-by-step
 
 ### Setup your Environment
 
