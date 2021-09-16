@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Detecting Unusual Credit Card Activity - ksqlDB Recipes</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Detecting Unusual Credit Card Activity";
+    var mkdocs_page_input_path = "fin-serv/credit-card-activity/index.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> ksqlDB Recipes</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">ksqlDB Recipes</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Ai ml</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../ai-ml/">Description</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Customer 360</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../customer-360/">Description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Clickstream</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../customer-360/clickstream/">Clickstream Data Analysis</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Fin serv</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../">Description</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Credit card activity</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Detecting Unusual Credit Card Activity</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-it">What is it?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#run-now">Run Now</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#code-summary">Code Summary</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-by-step">Step-by-step</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#setup-your-environment">Setup your Environment</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#read-the-data-in">Read the data in</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#run-stream-processing-app">Run stream processing app</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Healthcare</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../healthcare/">Description</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Retail</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../retail/">Description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Inventory</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../retail/inventory/">Real-time Inventory</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Security</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../security/">Description</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Ssh attack</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../security/ssh-attack/">Detecting and Analyzing SSH Attacks</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Shared</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../shared/ccloud_setup/">Ccloud setup</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">ksqlDB Recipes</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Fin serv &raquo;</li>
+        
+      
+        
+          <li>Credit card activity &raquo;</li>
+        
+      
+    
+    <li>Detecting Unusual Credit Card Activity</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="detecting-unusual-credit-card-activity">Detecting Unusual Credit Card Activity</h1>
+<h2 id="what-is-it">What is it?</h2>
+<p>In banking, fraud can involve using stolen credit cards, forging checks, misleading accounting practices, etc.
+In this recipe, we show you how to analyze total credit card spend.
+If it's more than the average credit card usage of a customer, the account will be flagged as a possible case of credit card theft.</p>
+<p><img alt="grafana" src="../../img/credit-card-activity.jpg" /></p>
+<h2 id="run-now">Run Now</h2>
+<p>Click below to launch this recipe in Confluent Cloud.</p>
+<p><img alt="launch" src="../../img/launch.png" /></p>
+<h2 id="code-summary">Code Summary</h2>
+<pre><code class="language-sql">-- Stream of transactions
+CREATE SOURCE CONNECTOR transactions WITH (
+  'connector.class'          = 'OracleDatabaseSource',
+  'name'                     = 'confluent-oracle-source',
+  'connector.class'          = 'OracleDatabaseSource',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'topic.prefix'             = 'oracle_',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '1521',
+  'connection.user'          = '&lt;database-username&gt;',
+  'connection.password'      = '&lt;database-password&gt;',
+  'db.name'                  = '&lt;db-name&gt;',
+  'table.whitelist'          = 'TRANSACTIONS',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UCT',
+  'tasks.max'                = '1');
+
+-- Stream of customers
+CREATE SOURCE CONNECTOR customers WITH (
+  'connector.class'          = 'OracleDatabaseSource',
+  'name'                     = 'confluent-oracle-source',
+  'connector.class'          = 'OracleDatabaseSource',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'topic.prefix'             = 'oracle_',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '1521',
+  'connection.user'          = '&lt;database-username&gt;',
+  'connection.password'      = '&lt;database-password&gt;',
+  'db.name'                  = '&lt;db-name&gt;',
+  'table.whitelist'          = 'CUSTOMERS',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UCT',
+  'tasks.max'                = '1');
+
+-- Register the stream of transactions
+CREATE STREAM TRANSACTIONS_RAW (ACCOUNT_ID VARCHAR, 
+                                TIMESTAMP VARCHAR, 
+                                CARD_TYPE VARCHAR, 
+                                AMOUNT DOUBLE, 
+                                IP_ADDRESS VARCHAR, 
+                                TRANSACTION_ID VARCHAR) 
+                           WITH (KAFKA_TOPIC='transactions',
+                                 VALUE_FORMAT='JSON');
+
+-- Repartition the stream on account_id in order to .... TODO
+CREATE STREAM TRANSACTIONS_SOURCE 
+    WITH (VALUE_FORMAT='AVRO') AS 
+          SELECT * 
+            FROM TRANSACTIONS_RAW 
+    PARTITION BY ACCOUNT_ID;
+
+-- Register the existing stream of customer data
+CREATE STREAM CUST_RAW_STREAM (ID BIGINT, 
+                               FIRST_NAME VARCHAR, 
+                               LAST_NAME VARCHAR, 
+                               EMAIL VARCHAR, 
+                               AVG_CREDIT_SPEND DOUBLE) 
+              WITH (KAFKA_TOPIC='customers', 
+                    VALUE_FORMAT='JSON');
+
+-- Repartition the customer data stream by account_id to prepare for the join
+CREATE STREAM CUSTOMER_REKEYED 
+    WITH (VALUE_FORMAT='AVRO') AS 
+            SELECT * 
+              FROM CUST_RAW_STREAM 
+      PARTITION BY ID;
+
+-- Register the partitioned customer data topic as a table used for the join with the incoming stream of transactions:
+CREATE TABLE customer 
+WITH (KAFKA_TOPIC='CUSTOMER_REKEYED', 
+      VALUE_FORMAT='AVRO', 
+      KEY='ID');
+
+-- Join the transactions to customer information:
+CREATE STREAM TRANSACTIONS_ENRICHED AS 
+SELECT   T.ACCOUNT_ID, T.CARD_TYPE, T.AMOUNT, 
+          C.FIRST_NAME + ' ' + C.LAST_NAME AS FULL_NAME, 
+          C.AVG_CREDIT_SPEND 
+FROM     TRANSACTIONS_SOURCE T 
+          INNER JOIN CUSTOMER C 
+          ON T.ACCOUNT_ID = C.ID;
+
+-- Aggregate the stream of transactions for each account ID using a two-hour tumbling window, and filter for accounts in which the total spend in a two-hour period is greater than the customer’s average:
+CREATE TABLE POSSIBLE_STOLEN_CARD AS 
+SELECT   TIMESTAMPTOSTRING(WindowStart(), 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_START, 
+           T.ACCOUNT_ID, T.CARD_TYPE, SUM(T.AMOUNT) AS TOTAL_CREDIT_SPEND, 
+           T.FULL_NAME, MAX(T.AVG_CREDIT_SPEND) AS AVG_CREDIT_SPEND 
+  FROM     TRANSACTIONS_ENRICHED T 
+           WINDOW TUMBLING (SIZE 2 HOURS) 
+  GROUP BY T.ACCOUNT_ID, T.CARD_TYPE, T.FULL_NAME 
+  HAVING   SUM(T.AMOUNT) &gt; MAX(T.AVG_CREDIT_SPEND) ;
+
+</code></pre>
+<h2 id="step-by-step">Step-by-step</h2>
+<h3 id="setup-your-environment">Setup your Environment</h3>
+<ol>
+<li>
+<p>Sign up for <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service.</p>
+</li>
+<li>
+<p>After you log in to Confluent Cloud, click on <code>Add cloud environment</code> and name the environment <code>learn-kafka</code>. Using a new environment keeps your learning resources separate from your other Confluent Cloud resources.</p>
+</li>
+<li>
+<p>From the <code>Billing &amp; payment</code> section in the Menu, apply the promo code <code>C50INTEG</code> to receive an additional $50 free usage on Confluent Cloud (<a href="https://www.confluent.io/confluent-cloud-promo-disclaimer">details</a>).</p>
+</li>
+<li>
+<p>Click on <a href="https://confluent.cloud/learn">LEARN</a> and follow the instructions to launch a Kafka cluster and to enable Schema Registry.</p>
+</li>
+</ol>
+<h3 id="read-the-data-in">Read the data in</h3>
+<p>This recipe creates simulated data with the <code>Datagen</code> connector.</p>
+<pre><code class="language-sql">-- Stream of transactions
+CREATE SOURCE CONNECTOR transactions WITH (
+  'connector.class'          = 'OracleDatabaseSource',
+  'name'                     = 'confluent-oracle-source',
+  'connector.class'          = 'OracleDatabaseSource',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'topic.prefix'             = 'oracle_',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '1521',
+  'connection.user'          = '&lt;database-username&gt;',
+  'connection.password'      = '&lt;database-password&gt;',
+  'db.name'                  = '&lt;db-name&gt;',
+  'table.whitelist'          = 'TRANSACTIONS',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UCT',
+  'tasks.max'                = '1');
+
+-- Stream of customers
+CREATE SOURCE CONNECTOR customers WITH (
+  'connector.class'          = 'OracleDatabaseSource',
+  'name'                     = 'confluent-oracle-source',
+  'connector.class'          = 'OracleDatabaseSource',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'topic.prefix'             = 'oracle_',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '1521',
+  'connection.user'          = '&lt;database-username&gt;',
+  'connection.password'      = '&lt;database-password&gt;',
+  'db.name'                  = '&lt;db-name&gt;',
+  'table.whitelist'          = 'CUSTOMERS',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UCT',
+  'tasks.max'                = '1');
+</code></pre>
+<h3 id="run-stream-processing-app">Run stream processing app</h3>
+<p>Now you can process the data in a variety of ways.</p>
+<pre><code class="language-sql">-- Register the stream of transactions
+CREATE STREAM TRANSACTIONS_RAW (ACCOUNT_ID VARCHAR, 
+                                TIMESTAMP VARCHAR, 
+                                CARD_TYPE VARCHAR, 
+                                AMOUNT DOUBLE, 
+                                IP_ADDRESS VARCHAR, 
+                                TRANSACTION_ID VARCHAR) 
+                           WITH (KAFKA_TOPIC='transactions',
+                                 VALUE_FORMAT='JSON');
+
+-- Repartition the stream on account_id in order to .... TODO
+CREATE STREAM TRANSACTIONS_SOURCE 
+    WITH (VALUE_FORMAT='AVRO') AS 
+          SELECT * 
+            FROM TRANSACTIONS_RAW 
+    PARTITION BY ACCOUNT_ID;
+
+-- Register the existing stream of customer data
+CREATE STREAM CUST_RAW_STREAM (ID BIGINT, 
+                               FIRST_NAME VARCHAR, 
+                               LAST_NAME VARCHAR, 
+                               EMAIL VARCHAR, 
+                               AVG_CREDIT_SPEND DOUBLE) 
+              WITH (KAFKA_TOPIC='customers', 
+                    VALUE_FORMAT='JSON');
+
+-- Repartition the customer data stream by account_id to prepare for the join
+CREATE STREAM CUSTOMER_REKEYED 
+    WITH (VALUE_FORMAT='AVRO') AS 
+            SELECT * 
+              FROM CUST_RAW_STREAM 
+      PARTITION BY ID;
+
+-- Register the partitioned customer data topic as a table used for the join with the incoming stream of transactions:
+CREATE TABLE customer 
+WITH (KAFKA_TOPIC='CUSTOMER_REKEYED', 
+      VALUE_FORMAT='AVRO', 
+      KEY='ID');
+
+-- Join the transactions to customer information:
+CREATE STREAM TRANSACTIONS_ENRICHED AS 
+SELECT   T.ACCOUNT_ID, T.CARD_TYPE, T.AMOUNT, 
+          C.FIRST_NAME + ' ' + C.LAST_NAME AS FULL_NAME, 
+          C.AVG_CREDIT_SPEND 
+FROM     TRANSACTIONS_SOURCE T 
+          INNER JOIN CUSTOMER C 
+          ON T.ACCOUNT_ID = C.ID;
+
+-- Aggregate the stream of transactions for each account ID using a two-hour tumbling window, and filter for accounts in which the total spend in a two-hour period is greater than the customer’s average:
+CREATE TABLE POSSIBLE_STOLEN_CARD AS 
+SELECT   TIMESTAMPTOSTRING(WindowStart(), 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_START, 
+           T.ACCOUNT_ID, T.CARD_TYPE, SUM(T.AMOUNT) AS TOTAL_CREDIT_SPEND, 
+           T.FULL_NAME, MAX(T.AVG_CREDIT_SPEND) AS AVG_CREDIT_SPEND 
+  FROM     TRANSACTIONS_ENRICHED T 
+           WINDOW TUMBLING (SIZE 2 HOURS) 
+  GROUP BY T.ACCOUNT_ID, T.CARD_TYPE, T.FULL_NAME 
+  HAVING   SUM(T.AMOUNT) &gt; MAX(T.AVG_CREDIT_SPEND) ;
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../healthcare/" class="btn btn-neutral float-right" title="Description">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../" class="btn btn-neutral" title="Description"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../healthcare/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
