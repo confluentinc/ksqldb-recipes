@@ -16,15 +16,6 @@ CREATE STREAM clickstream (
         value_format = 'json'
     );
 
--- error code lookup table:
-CREATE TABLE clickstream_codes (
-        code int primary key,
-        definition varchar
-    ) with (
-        kafka_topic = 'clickstream_codes',
-        value_format = 'json'
-    );
-
 -- users lookup table:
 CREATE TABLE WEB_USERS (
         user_id int primary key,
@@ -55,14 +46,6 @@ CREATE STREAM USER_CLICKSTREAM AS
         bytes
     FROM clickstream c
         LEFT JOIN web_users u ON c.userid = u.user_id;
-
--- Enrich click-stream with more information about error codes:
-CREATE STREAM ENRICHED_ERROR_CODES AS
-    SELECT
-        code,
-        definition
-    FROM clickstream
-        LEFT JOIN clickstream_codes ON clickstream.status = clickstream_codes.code;
 
 ---------------------------------------------------------------------------------------------------
 -- Build materialized table views:
@@ -117,33 +100,6 @@ CREATE TABLE ERRORS_PER_MIN_ALERT AS
     WHERE status > 400
     GROUP BY status
     HAVING count(*) > 5 AND count(*) is not NULL;
-
--- number of errors per min
-CREATE TABLE ERRORS_PER_MIN AS
-    SELECT
-        status as k1,
-        AS_VALUE(status) as status,
-        WINDOWSTART as EVENT_TS,
-        count(*) AS errors
-    FROM clickstream window HOPPING (size 60 second, advance by 5  second)
-    WHERE status > 400
-    GROUP BY status;
-
--- Per-error code tables --------------------------------------------------------------------------
-
--- Enriched error codes table:
--- Aggregate (count&groupBy) using a TABLE-Window
-CREATE TABLE ENRICHED_ERROR_CODES_COUNT WITH (key_format='json') AS
-    SELECT
-        code as k1,
-        definition as K2,
-        AS_VALUE(code) as code,
-        WINDOWSTART as EVENT_TS,
-        AS_VALUE(definition) as definition,
-        COUNT(*) AS count
-    FROM ENRICHED_ERROR_CODES WINDOW TUMBLING (size 30 second)
-    GROUP BY code, definition
-    HAVING COUNT(*) > 1;
 
 -- Enriched user details table:
 -- Aggregate (count&groupBy) using a TABLE-Window

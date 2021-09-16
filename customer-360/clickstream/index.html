@@ -65,9 +65,11 @@
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#what-is-it">What is it?</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#cut-to-the-code">Cut to the code</a>
+    <li class="toctree-l3"><a class="reference internal" href="#run-now">Run Now</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#launch-step-by-step">Launch Step-by-Step</a>
+    <li class="toctree-l3"><a class="reference internal" href="#code-summary">Code Summary</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-by-step">Step-by-step</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#setup-your-environment">Setup your Environment</a>
     </li>
@@ -172,18 +174,11 @@
 <li>How long users are interacting with the site (user sessions)</li>
 </ul>
 <p><img alt="grafana" src="../../img/clickstream.png" /></p>
-<h2 id="cut-to-the-code">Cut to the code</h2>
+<h2 id="run-now">Run Now</h2>
+<p>Click below to launch this recipe in Confluent Cloud.</p>
 <p><img alt="launch" src="../../img/launch.png" /></p>
-<pre><code class="language-sql">-- Stream of HTTP codes
-CREATE SOURCE CONNECTOR datagen_clickstream_codes WITH (
-  'connector.class'          = 'DatagenSource',
-  'kafka.topic'              = 'clickstream_codes',
-  'quickstart'               = 'clickstream_codes',
-  'maxInterval'              = '20',
-  'format'                   = 'json',
-  'key.converter'            = 'org.apache.kafka.connect.converters.IntegerConverter');
-
--- Stream of users
+<h2 id="code-summary">Code Summary</h2>
+<pre><code class="language-sql">-- Stream of users
 CREATE SOURCE CONNECTOR datagen_clickstream_users WITH (
   'connector.class'          = 'DatagenSource',
   'kafka.topic'              = 'clickstream_users',
@@ -218,15 +213,6 @@ CREATE STREAM clickstream (
         value_format = 'json'
     );
 
--- error code lookup table:
-CREATE TABLE clickstream_codes (
-        code int primary key,
-        definition varchar
-    ) with (
-        kafka_topic = 'clickstream_codes',
-        value_format = 'json'
-    );
-
 -- users lookup table:
 CREATE TABLE WEB_USERS (
         user_id int primary key,
@@ -257,14 +243,6 @@ CREATE STREAM USER_CLICKSTREAM AS
         bytes
     FROM clickstream c
         LEFT JOIN web_users u ON c.userid = u.user_id;
-
--- Enrich click-stream with more information about error codes:
-CREATE STREAM ENRICHED_ERROR_CODES AS
-    SELECT
-        code,
-        definition
-    FROM clickstream
-        LEFT JOIN clickstream_codes ON clickstream.status = clickstream_codes.code;
 
 ---------------------------------------------------------------------------------------------------
 -- Build materialized table views:
@@ -320,33 +298,6 @@ CREATE TABLE ERRORS_PER_MIN_ALERT AS
     GROUP BY status
     HAVING count(*) &gt; 5 AND count(*) is not NULL;
 
--- number of errors per min
-CREATE TABLE ERRORS_PER_MIN AS
-    SELECT
-        status as k1,
-        AS_VALUE(status) as status,
-        WINDOWSTART as EVENT_TS,
-        count(*) AS errors
-    FROM clickstream window HOPPING (size 60 second, advance by 5  second)
-    WHERE status &gt; 400
-    GROUP BY status;
-
--- Per-error code tables --------------------------------------------------------------------------
-
--- Enriched error codes table:
--- Aggregate (count&amp;groupBy) using a TABLE-Window
-CREATE TABLE ENRICHED_ERROR_CODES_COUNT WITH (key_format='json') AS
-    SELECT
-        code as k1,
-        definition as K2,
-        AS_VALUE(code) as code,
-        WINDOWSTART as EVENT_TS,
-        AS_VALUE(definition) as definition,
-        COUNT(*) AS count
-    FROM ENRICHED_ERROR_CODES WINDOW TUMBLING (size 30 second)
-    GROUP BY code, definition
-    HAVING COUNT(*) &gt; 1;
-
 -- Enriched user details table:
 -- Aggregate (count&amp;groupBy) using a TABLE-Window
 CREATE TABLE USER_IP_ACTIVITY WITH (key_format='json') AS
@@ -379,7 +330,7 @@ CREATE SINK CONNECTOR analyzed_clickstream WITH (
   'schema.ignore'            = 'true'
 );
 </code></pre>
-<h2 id="launch-step-by-step">Launch Step-by-Step</h2>
+<h2 id="step-by-step">Step-by-step</h2>
 <h3 id="setup-your-environment">Setup your Environment</h3>
 <ol>
 <li>
@@ -397,16 +348,7 @@ CREATE SINK CONNECTOR analyzed_clickstream WITH (
 </ol>
 <h3 id="read-the-data-in">Read the data in</h3>
 <p>This recipe creates simulated data with the <code>Datagen</code> connector.</p>
-<pre><code class="language-sql">-- Stream of HTTP codes
-CREATE SOURCE CONNECTOR datagen_clickstream_codes WITH (
-  'connector.class'          = 'DatagenSource',
-  'kafka.topic'              = 'clickstream_codes',
-  'quickstart'               = 'clickstream_codes',
-  'maxInterval'              = '20',
-  'format'                   = 'json',
-  'key.converter'            = 'org.apache.kafka.connect.converters.IntegerConverter');
-
--- Stream of users
+<pre><code class="language-sql">-- Stream of users
 CREATE SOURCE CONNECTOR datagen_clickstream_users WITH (
   'connector.class'          = 'DatagenSource',
   'kafka.topic'              = 'clickstream_users',
@@ -444,15 +386,6 @@ CREATE STREAM clickstream (
         value_format = 'json'
     );
 
--- error code lookup table:
-CREATE TABLE clickstream_codes (
-        code int primary key,
-        definition varchar
-    ) with (
-        kafka_topic = 'clickstream_codes',
-        value_format = 'json'
-    );
-
 -- users lookup table:
 CREATE TABLE WEB_USERS (
         user_id int primary key,
@@ -483,14 +416,6 @@ CREATE STREAM USER_CLICKSTREAM AS
         bytes
     FROM clickstream c
         LEFT JOIN web_users u ON c.userid = u.user_id;
-
--- Enrich click-stream with more information about error codes:
-CREATE STREAM ENRICHED_ERROR_CODES AS
-    SELECT
-        code,
-        definition
-    FROM clickstream
-        LEFT JOIN clickstream_codes ON clickstream.status = clickstream_codes.code;
 
 ---------------------------------------------------------------------------------------------------
 -- Build materialized table views:
@@ -545,33 +470,6 @@ CREATE TABLE ERRORS_PER_MIN_ALERT AS
     WHERE status &gt; 400
     GROUP BY status
     HAVING count(*) &gt; 5 AND count(*) is not NULL;
-
--- number of errors per min
-CREATE TABLE ERRORS_PER_MIN AS
-    SELECT
-        status as k1,
-        AS_VALUE(status) as status,
-        WINDOWSTART as EVENT_TS,
-        count(*) AS errors
-    FROM clickstream window HOPPING (size 60 second, advance by 5  second)
-    WHERE status &gt; 400
-    GROUP BY status;
-
--- Per-error code tables --------------------------------------------------------------------------
-
--- Enriched error codes table:
--- Aggregate (count&amp;groupBy) using a TABLE-Window
-CREATE TABLE ENRICHED_ERROR_CODES_COUNT WITH (key_format='json') AS
-    SELECT
-        code as k1,
-        definition as K2,
-        AS_VALUE(code) as code,
-        WINDOWSTART as EVENT_TS,
-        AS_VALUE(definition) as definition,
-        COUNT(*) AS count
-    FROM ENRICHED_ERROR_CODES WINDOW TUMBLING (size 30 second)
-    GROUP BY code, definition
-    HAVING COUNT(*) &gt; 1;
 
 -- Enriched user details table:
 -- Aggregate (count&amp;groupBy) using a TABLE-Window
