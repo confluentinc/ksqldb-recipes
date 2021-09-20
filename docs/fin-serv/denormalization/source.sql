@@ -1,4 +1,4 @@
--- Stream of transactions
+-- Stream of orders
 CREATE SOURCE CONNECTOR orders WITH (
   'connector.class'          = 'SqlServerCdcSource',
   'name'                     = 'SqlServerCdcSourceConnector_0',
@@ -11,9 +11,9 @@ CREATE SOURCE CONNECTOR orders WITH (
   'database.dbname'          = 'database-name',
   'database.server.name'     = 'sql',
   'table.include.list'       ='<table_name>',
-  'snapshot.mode'= 'initial',
-  'output.data.format'= 'JSON',
-  'tasks.max'= '1');
+  'snapshot.mode'            = 'initial',
+  'output.data.format'       = 'JSON',
+  'tasks.max'                = '1');
 
 -- Stream of customers
 CREATE SOURCE CONNECTOR customers WITH (

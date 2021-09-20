@@ -1,10 +1,10 @@
 ---
 seo:
-  title: Transactional CDC
+  title: Change Data Capture (CDC) for Orders
   description: TODO
 ---
 
-# Transactional CDC
+# Change Data Capture (CDC) for Orders
 
 ## What is it?
 
@@ -41,7 +41,7 @@ Click below to launch this recipe in Confluent Cloud.
 
 --8<-- "docs/shared/connect.md"
 
-Transactional CDC data is being written to a SQL Server database, and there is an Oracle database with customer data.
+Change Data Capture (CDC) for orders is being written to a SQL Server database, and there is an Oracle database with customer data.
 
 ```sql
 --8<-- "docs/fin-serv/denormalization/source.sql"

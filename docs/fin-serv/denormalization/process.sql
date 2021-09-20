@@ -1,8 +1,28 @@
---
-CREATE STREAM...
+-- stream of user orders:
+CREATE STREAM orders (
+        ...
+    ) with (
+        kafka_topic = 'orders',
+        value_format = 'json'
+    );
 
---
-CREATE TABLE...
+-- Register the existing stream of customer data
+CREATE STREAM CUST_RAW_STREAM (ID BIGINT,
+                               FIRST_NAME VARCHAR,
+                               LAST_NAME VARCHAR,
+                               EMAIL VARCHAR,
+                               COMPANY VARCHAR,
+                               STREET_ADDRESS VARCHAR,
+                               CITY VARCHAR,
+                               COUNTRY VARCHAR)
+              WITH (KAFKA_TOPIC='customers',
+                    VALUE_FORMAT='JSON');
+
+-- Register the customer data topic as a table
+CREATE TABLE customer
+WITH (KAFKA_TOPIC='CUST_RAW_STREAM',
+      VALUE_FORMAT='JSON',
+      KEY='ID');
 
 -- Denormalize data: joining facts (orders) with the dimension (customer)
 CREATE STREAM ORDERS_ENRICHED AS
