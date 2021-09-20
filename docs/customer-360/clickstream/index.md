@@ -25,6 +25,8 @@ Click below to launch this recipe in Confluent Cloud.
 
 ## Code Summary
 
+--8<-- "docs/shared/code_summary.md"
+
 ```sql
 --8<-- "docs/customer-360/clickstream/source.sql"
 

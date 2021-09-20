@@ -21,6 +21,8 @@ Click below to launch this recipe in Confluent Cloud.
 
 ## Code Summary
 
+--8<-- "docs/shared/code_summary.md"
+
 Run the Syslog source connector locally, then proceed with ksqlDB to process the Syslog messages.
 
 ```sql
