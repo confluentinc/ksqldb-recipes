@@ -10,7 +10,7 @@ seo:
 
 TODO
 
-## Run Now
+## Get Started
 
 Click below to launch this recipe in Confluent Cloud.
 
@@ -31,6 +31,8 @@ Click below to launch this recipe in Confluent Cloud.
 --8<-- "docs/shared/ccloud_setup.md"
 
 ### Read the data in
+
+--8<-- "docs/shared/connect.md"
 
 TODO
 

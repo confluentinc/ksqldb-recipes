@@ -13,7 +13,7 @@ This recipe tracks Syslog data and streams out pairs of usernames and IPs of bad
 
 ![ssh-attack](../../img/ssh-attack.png)
 
-## Run Now
+## Get Started
 
 Click below to launch this recipe in Confluent Cloud.
 
@@ -21,8 +21,7 @@ Click below to launch this recipe in Confluent Cloud.
 
 ## Code Summary
 
-Run the Syslog source connector locally (this recipe also is a great demonstration on how to run a self-managed connector) to push syslog data into Confluent Cloud into a Kafka topic called `syslog`.
-Then proceed with ksqlDB to process the Syslog messages.
+Run the Syslog source connector locally, then proceed with ksqlDB to process the Syslog messages.
 
 ```sql
 --8<-- "docs/security/ssh-attack/process.sql"
@@ -35,6 +34,8 @@ Then proceed with ksqlDB to process the Syslog messages.
 --8<-- "docs/shared/ccloud_setup.md"
 
 ### Read the data in
+
+This recipe is a great demonstration on how to run a self-managed connector, to push syslog data into Confluent Cloud into a Kafka topic called `syslog`.
 
 Create a file called `Dockerfile` to bundle a connect worker with `kafka-connect-syslog`:
 

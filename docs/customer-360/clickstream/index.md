@@ -17,7 +17,7 @@ Analyzing clickstream data enables businesses to understand the behavior of its 
 
 ![grafana](../../img/clickstream.png)
 
-## Run Now
+## Get Started
 
 Click below to launch this recipe in Confluent Cloud.
 
@@ -40,6 +40,8 @@ Click below to launch this recipe in Confluent Cloud.
 --8<-- "docs/shared/ccloud_setup.md"
 
 ### Read the data in
+
+--8<-- "docs/shared/connect.md"
 
 This recipe creates simulated data with the `Datagen` connector.
 
