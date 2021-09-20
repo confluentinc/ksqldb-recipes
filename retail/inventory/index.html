@@ -92,7 +92,7 @@
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#what-is-it">What is it?</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#run-now">Run Now</a>
+    <li class="toctree-l3"><a class="reference internal" href="#get-started">Get Started</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#code-summary">Code Summary</a>
     </li>
@@ -125,6 +125,8 @@
                 <p class="caption"><span class="caption-text">Shared</span></p>
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../../shared/ccloud_setup/">Ccloud setup</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../shared/connect/">Connect</a>
                     </li>
                 </ul>
       </div>
@@ -171,7 +173,7 @@
                 <h1 id="real-time-inventory">Real-time Inventory</h1>
 <h2 id="what-is-it">What is it?</h2>
 <p>TODO</p>
-<h2 id="run-now">Run Now</h2>
+<h2 id="get-started">Get Started</h2>
 <p>Click below to launch this recipe in Confluent Cloud.</p>
 <p><img alt="launch" src="../../img/launch.png" /></p>
 <h2 id="code-summary">Code Summary</h2>
@@ -212,21 +214,10 @@ CREATE TABLE inventory_stream_table
 </code></pre>
 <h2 id="step-by-step">Step-by-Step</h2>
 <h3 id="setup-your-environment">Setup your Environment</h3>
-<ol>
-<li>
-<p>Sign up for <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service.</p>
-</li>
-<li>
-<p>After you log in to Confluent Cloud, click on <code>Add cloud environment</code> and name the environment <code>learn-kafka</code>. Using a new environment keeps your learning resources separate from your other Confluent Cloud resources.</p>
-</li>
-<li>
-<p>From the <code>Billing &amp; payment</code> section in the Menu, apply the promo code <code>C50INTEG</code> to receive an additional $50 free usage on Confluent Cloud (<a href="https://www.confluent.io/confluent-cloud-promo-disclaimer">details</a>).</p>
-</li>
-<li>
-<p>Click on <a href="https://confluent.cloud/learn">LEARN</a> and follow the instructions to launch a Kafka cluster and to enable Schema Registry.</p>
-</li>
-</ol>
+<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service, then proceed with the recipe.</p>
 <h3 id="read-the-data-in">Read the data in</h3>
+<p>Confluent Cloud offers pre-built, fully managed, Apache Kafka® Connectors that make it easy to instantly connect to popular data sources in the cloud.
+Modify the connector configuration to get data into Confluent Cloud from your own data source, see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a> for details.</p>
 <p>TODO</p>
 <pre><code class="language-sql">-- Create stream of inventory
 CREATE STREAM inventory_stream (

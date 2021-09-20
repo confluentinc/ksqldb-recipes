@@ -103,7 +103,7 @@
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#what-is-it">What is it?</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#run-now">Run Now</a>
+    <li class="toctree-l3"><a class="reference internal" href="#get-started">Get Started</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#code-summary">Code Summary</a>
     </li>
@@ -125,6 +125,8 @@
                 <p class="caption"><span class="caption-text">Shared</span></p>
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../../shared/ccloud_setup/">Ccloud setup</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../shared/connect/">Connect</a>
                     </li>
                 </ul>
       </div>
@@ -173,12 +175,11 @@
 <p>There are lots of ways SSH can be abused but one of the most straightforward ways to detect a problem is to monitor for rejected logins.
 This recipe tracks Syslog data and streams out pairs of usernames and IPs of bad logins.</p>
 <p><img alt="ssh-attack" src="../../img/ssh-attack.png" /></p>
-<h2 id="run-now">Run Now</h2>
+<h2 id="get-started">Get Started</h2>
 <p>Click below to launch this recipe in Confluent Cloud.</p>
 <p><img alt="launch" src="../../img/launch.png" /></p>
 <h2 id="code-summary">Code Summary</h2>
-<p>Run the Syslog source connector locally (this recipe also is a great demonstration on how to run a self-managed connector) to push syslog data into Confluent Cloud into a Kafka topic called <code>syslog</code>.
-Then proceed with ksqlDB to process the Syslog messages.</p>
+<p>Run the Syslog source connector locally, then proceed with ksqlDB to process the Syslog messages.</p>
 <pre><code class="language-sql">-- Define Kafka parameters
 DEFINE topic = 'syslog';
 
@@ -231,38 +232,11 @@ CREATE STREAM `ssh_attacks` AS
 </code></pre>
 <h2 id="step-by-step">Step-by-Step</h2>
 <h3 id="setup-your-environment">Setup your Environment</h3>
-<ol>
-<li>
-<p>Sign up for <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service.</p>
-</li>
-<li>
-<p>After you log in to Confluent Cloud, click on <code>Add cloud environment</code> and name the environment <code>learn-kafka</code>. Using a new environment keeps your learning resources separate from your other Confluent Cloud resources.</p>
-</li>
-<li>
-<p>From the <code>Billing &amp; payment</code> section in the Menu, apply the promo code <code>C50INTEG</code> to receive an additional $50 free usage on Confluent Cloud (<a href="https://www.confluent.io/confluent-cloud-promo-disclaimer">details</a>).</p>
-</li>
-<li>
-<p>Click on <a href="https://confluent.cloud/learn">LEARN</a> and follow the instructions to launch a Kafka cluster and to enable Schema Registry.</p>
-</li>
-</ol>
+<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service, then proceed with the recipe.</p>
 <h3 id="read-the-data-in">Read the data in</h3>
+<p>This recipe is a great demonstration on how to run a self-managed connector, to push syslog data into Confluent Cloud into a Kafka topic called <code>syslog</code>.</p>
 <p>Create a file called <code>Dockerfile</code> to bundle a connect worker with <code>kafka-connect-syslog</code>:</p>
-<pre><code class="language-text">#
-# Copyright 2020 Confluent Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-FROM confluentinc/cp-server-connect-base:6.2.0
+<pre><code class="language-text">FROM confluentinc/cp-server-connect-base:6.2.0
 
 ENV CONNECT_PLUGIN_PATH=&quot;/usr/share/java,/usr/share/confluent-hub-components&quot;
 
@@ -297,9 +271,9 @@ services:
       CONNECT_BOOTSTRAP_SERVERS: $BOOTSTRAP_SERVERS
       CONNECT_REST_PORT: 8083
       CONNECT_GROUP_ID: &quot;connect&quot;
-      CONNECT_CONFIG_STORAGE_TOPIC: demo-connect-configs
-      CONNECT_OFFSET_STORAGE_TOPIC: demo-connect-offsets
-      CONNECT_STATUS_STORAGE_TOPIC: demo-connect-status
+      CONNECT_CONFIG_STORAGE_TOPIC: recipe-connect-configs
+      CONNECT_OFFSET_STORAGE_TOPIC: recipe-connect-offsets
+      CONNECT_STATUS_STORAGE_TOPIC: recipe-connect-status
       CONNECT_REPLICATION_FACTOR: 3
       CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 3
       CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 3
@@ -314,7 +288,6 @@ services:
       CONNECT_PLUGIN_PATH: &quot;/usr/share/java,/usr/share/confluent-hub-components&quot;
       CONNECT_LOG4J_ROOT_LOGLEVEL: INFO
       CONNECT_LOG4J_LOGGERS: org.reflections=ERROR
-      # CLASSPATH required due to CC-2422
       CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-6.2.0.jar
       # Connect worker
       CONNECT_SECURITY_PROTOCOL: SASL_SSL
@@ -324,18 +297,10 @@ services:
       CONNECT_PRODUCER_SECURITY_PROTOCOL: SASL_SSL
       CONNECT_PRODUCER_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
       CONNECT_PRODUCER_SASL_MECHANISM: PLAIN
-      CONNECT_PRODUCER_INTERCEPTOR_CLASSES: &quot;io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor&quot;
-      CONNECT_PRODUCER_CONFLUENT_MONITORING_INTERCEPTOR_SECURITY_PROTOCOL: SASL_SSL
-      CONNECT_PRODUCER_CONFLUENT_MONITORING_INTERCEPTOR_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
-      CONNECT_PRODUCER_CONFLUENT_MONITORING_INTERCEPTOR_SASL_MECHANISM: PLAIN
       # Connect consumer
       CONNECT_CONSUMER_SECURITY_PROTOCOL: SASL_SSL
       CONNECT_CONSUMER_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
       CONNECT_CONSUMER_SASL_MECHANISM: PLAIN
-      CONNECT_CONSUMER_INTERCEPTOR_CLASSES: &quot;io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor&quot;
-      CONNECT_CONSUMER_CONFLUENT_MONITORING_INTERCEPTOR_SECURITY_PROTOCOL: SASL_SSL
-      CONNECT_CONSUMER_CONFLUENT_MONITORING_INTERCEPTOR_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
-      CONNECT_CONSUMER_CONFLUENT_MONITORING_INTERCEPTOR_SASL_MECHANISM: PLAIN
 </code></pre>
 <p>Run the container with:</p>
 <pre><code>docker-compose up -d
