@@ -96,6 +96,12 @@
                 </li>
     </ul>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Denormalization</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../fin-serv/denormalization/">Change Data Capture (CDC) for Orders</a>
+                </li>
+    </ul>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Healthcare</span></p>
                 <ul>
@@ -127,6 +133,8 @@
                 <p class="caption"><span class="caption-text">Shared</span></p>
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../../shared/ccloud_setup/">Ccloud setup</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../shared/code_summary/">Code summary</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../shared/connect/">Connect</a>
                     </li>
@@ -186,6 +194,8 @@
 <p>Click below to launch this recipe in Confluent Cloud.</p>
 <p><img alt="launch" src="../../img/launch.png" /></p>
 <h2 id="code-summary">Code Summary</h2>
+<p>You can execute this recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for enriching the data.
+Here is a summary of all those steps (explained in more detail in the sections afterwards).</p>
 <pre><code class="language-sql">-- Stream of users
 CREATE SOURCE CONNECTOR datagen_clickstream_users WITH (
   'connector.class'          = 'DatagenSource',
@@ -343,7 +353,8 @@ CREATE SINK CONNECTOR analyzed_clickstream WITH (
 <p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service, then proceed with the recipe.</p>
 <h3 id="read-the-data-in">Read the data in</h3>
 <p>Confluent Cloud offers pre-built, fully managed, Apache Kafka® Connectors that make it easy to instantly connect to popular data sources in the cloud.
-Modify the connector configuration to get data into Confluent Cloud from your own data source, see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a> for details.</p>
+You can use any connector, substitute your own preferred one for getting data into Confluent Cloud.
+The principles are the same, just modify the connector configuration shown below to fit your data source, see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a> for details.</p>
 <p>This recipe creates simulated data with the <code>Datagen</code> connector.</p>
 <pre><code class="language-sql">-- Stream of users
 CREATE SOURCE CONNECTOR datagen_clickstream_users WITH (

@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Detecting Unusual Credit Card Activity - ksqlDB Recipes</title>
+  <title>Change Data Capture (CDC) for Orders - ksqlDB Recipes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Detecting Unusual Credit Card Activity";
-    var mkdocs_page_input_path = "fin-serv/credit-card-activity/index.md";
+    var mkdocs_page_name = "Change Data Capture (CDC) for Orders";
+    var mkdocs_page_input_path = "fin-serv/denormalization/index.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -70,9 +70,15 @@
                 <ul class="current">
                     <li class="toctree-l1"><a class="reference internal" href="../">Description</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Credit card activity</a>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Credit card activity</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../credit-card-activity/">Detecting Unusual Credit Card Activity</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Denormalization</a>
     <ul class="current">
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">Detecting Unusual Credit Card Activity</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Change Data Capture (CDC) for Orders</a>
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#what-is-it">What is it?</a>
     </li>
@@ -88,15 +94,11 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#run-stream-processing-app">Run stream processing app</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#write-the-data-out">Write the data out</a>
+    </li>
         </ul>
     </li>
     </ul>
-                </li>
-    </ul>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="#">Denormalization</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../denormalization/">Change Data Capture (CDC) for Orders</a>
                 </li>
     </ul>
                     </li>
@@ -162,11 +164,11 @@
         
       
         
-          <li>Credit card activity &raquo;</li>
+          <li>Denormalization &raquo;</li>
         
       
     
-    <li>Detecting Unusual Credit Card Activity</li>
+    <li>Change Data Capture (CDC) for Orders</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -178,35 +180,33 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="detecting-unusual-credit-card-activity">Detecting Unusual Credit Card Activity</h1>
+                <h1 id="change-data-capture-cdc-for-orders">Change Data Capture (CDC) for Orders</h1>
 <h2 id="what-is-it">What is it?</h2>
-<p>In banking, fraud can involve using stolen credit cards, forging checks, misleading accounting practices, etc.
-In this recipe, we show you how to analyze total credit card spend.
-If it's more than the average credit card usage of a customer, the account will be flagged as a possible case of credit card theft.</p>
-<p><img alt="grafana" src="../../img/credit-card-activity.jpg" /></p>
+<p>TODO -- ...Transactional...Debezium to Snowflake...</p>
+<p>Denormalising data in advance of querying is a well-established pattern for performance.
+This is because most times querying a single table of data will perform better than querying across multiple at runtime.</p>
+<p><img alt="denormalized" src="../../img/denormalized-data.png" /></p>
 <h2 id="get-started">Get Started</h2>
 <p>Click below to launch this recipe in Confluent Cloud.</p>
 <p><img alt="launch" src="../../img/launch.png" /></p>
 <h2 id="code-summary">Code Summary</h2>
 <p>You can execute this recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for enriching the data.
 Here is a summary of all those steps (explained in more detail in the sections afterwards).</p>
-<pre><code class="language-sql">-- Stream of transactions
-CREATE SOURCE CONNECTOR transactions WITH (
-  'connector.class'          = 'OracleDatabaseSource',
-  'name'                     = 'confluent-oracle-source',
-  'connector.class'          = 'OracleDatabaseSource',
+<pre><code class="language-sql">-- Stream of orders
+CREATE SOURCE CONNECTOR orders WITH (
+  'connector.class'          = 'SqlServerCdcSource',
+  'name'                     = 'SqlServerCdcSourceConnector_0',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topic.prefix'             = 'oracle_',
-  'connection.host'          = '&lt;my-database-endpoint&gt;',
-  'connection.port'          = '1521',
-  'connection.user'          = '&lt;database-username&gt;',
-  'connection.password'      = '&lt;database-password&gt;',
-  'db.name'                  = '&lt;db-name&gt;',
-  'table.whitelist'          = 'TRANSACTIONS',
-  'timestamp.column.name'    = 'created_at',
+  'database.hostname'        = '&lt;db-name&gt;',
+  'database.port'            = '1433',
+  'database.user'            = '&lt;database-username&gt;',
+  'database.password'        = '&lt;database-password&gt;',
+  'database.dbname'          = 'database-name',
+  'database.server.name'     = 'sql',
+  'table.include.list'       ='&lt;table_name&gt;',
+  'snapshot.mode'            = 'initial',
   'output.data.format'       = 'JSON',
-  'db.timezone'              = 'UCT',
   'tasks.max'                = '1');
 
 -- Stream of customers
@@ -228,64 +228,62 @@ CREATE SOURCE CONNECTOR customers WITH (
   'db.timezone'              = 'UCT',
   'tasks.max'                = '1');
 
--- Register the stream of transactions
-CREATE STREAM TRANSACTIONS_RAW (ACCOUNT_ID VARCHAR, 
-                                TIMESTAMP VARCHAR, 
-                                CARD_TYPE VARCHAR, 
-                                AMOUNT DOUBLE, 
-                                IP_ADDRESS VARCHAR, 
-                                TRANSACTION_ID VARCHAR) 
-                           WITH (KAFKA_TOPIC='transactions',
-                                 VALUE_FORMAT='JSON');
-
--- Repartition the stream on account_id in order to .... TODO
-CREATE STREAM TRANSACTIONS_SOURCE 
-    WITH (VALUE_FORMAT='AVRO') AS 
-          SELECT * 
-            FROM TRANSACTIONS_RAW 
-    PARTITION BY ACCOUNT_ID;
+-- stream of user orders:
+CREATE STREAM orders (
+        ...
+    ) with (
+        kafka_topic = 'orders',
+        value_format = 'json'
+    );
 
 -- Register the existing stream of customer data
-CREATE STREAM CUST_RAW_STREAM (ID BIGINT, 
-                               FIRST_NAME VARCHAR, 
-                               LAST_NAME VARCHAR, 
-                               EMAIL VARCHAR, 
-                               AVG_CREDIT_SPEND DOUBLE) 
-              WITH (KAFKA_TOPIC='customers', 
+CREATE STREAM CUST_RAW_STREAM (ID BIGINT,
+                               FIRST_NAME VARCHAR,
+                               LAST_NAME VARCHAR,
+                               EMAIL VARCHAR,
+                               COMPANY VARCHAR,
+                               STREET_ADDRESS VARCHAR,
+                               CITY VARCHAR,
+                               COUNTRY VARCHAR)
+              WITH (KAFKA_TOPIC='customers',
                     VALUE_FORMAT='JSON');
 
--- Repartition the customer data stream by account_id to prepare for the join
-CREATE STREAM CUSTOMER_REKEYED 
-    WITH (VALUE_FORMAT='AVRO') AS 
-            SELECT * 
-              FROM CUST_RAW_STREAM 
-      PARTITION BY ID;
-
--- Register the partitioned customer data topic as a table used for the join with the incoming stream of transactions:
-CREATE TABLE customer 
-WITH (KAFKA_TOPIC='CUSTOMER_REKEYED', 
-      VALUE_FORMAT='AVRO', 
+-- Register the customer data topic as a table
+CREATE TABLE customer
+WITH (KAFKA_TOPIC='CUST_RAW_STREAM',
+      VALUE_FORMAT='JSON',
       KEY='ID');
 
--- Join the transactions to customer information:
-CREATE STREAM TRANSACTIONS_ENRICHED AS 
-SELECT   T.ACCOUNT_ID, T.CARD_TYPE, T.AMOUNT, 
-          C.FIRST_NAME + ' ' + C.LAST_NAME AS FULL_NAME, 
-          C.AVG_CREDIT_SPEND 
-FROM     TRANSACTIONS_SOURCE T 
-          INNER JOIN CUSTOMER C 
-          ON T.ACCOUNT_ID = C.ID;
+-- Denormalize data: joining facts (orders) with the dimension (customer)
+CREATE STREAM ORDERS_ENRICHED AS
+    SELECT  O.order_id AS order_id,
+            O.item AS item,
+            O.order_total_usd AS order_total_usd,
+            C.first_name || ' ' || C.last_name AS full_name,
+            C.email AS email,
+            C.company AS company,
+            C.street_address AS street_address,
+            C.city AS city,
+            C.country AS country
+    FROM    ORDERS O
+            LEFT JOIN
+            CUSTOMERS C
+            ON O.customer_id = C.id;
 
--- Aggregate the stream of transactions for each account ID using a two-hour tumbling window, and filter for accounts in which the total spend in a two-hour period is greater than the customer’s average:
-CREATE TABLE POSSIBLE_STOLEN_CARD AS 
-SELECT   TIMESTAMPTOSTRING(WindowStart(), 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_START, 
-           T.ACCOUNT_ID, T.CARD_TYPE, SUM(T.AMOUNT) AS TOTAL_CREDIT_SPEND, 
-           T.FULL_NAME, MAX(T.AVG_CREDIT_SPEND) AS AVG_CREDIT_SPEND 
-  FROM     TRANSACTIONS_ENRICHED T 
-           WINDOW TUMBLING (SIZE 2 HOURS) 
-  GROUP BY T.ACCOUNT_ID, T.CARD_TYPE, T.FULL_NAME 
-  HAVING   SUM(T.AMOUNT) &gt; MAX(T.AVG_CREDIT_SPEND) ;
-
+-- Send data to Snowflake
+CREATE SINK CONNECTOR analyzed_clickstream WITH (
+  'connector.class'          = 'SnowflakeSink',
+  'name'                     = 'snowflake-connector',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'topics'                   = '&lt;topic1&gt;, &lt;topic2&gt;',
+  'input.data.format'        = 'JSON',
+  'snowflake.url.name'       = 'https=//wm83168.us-central1.gcp.snowflakecomputing.com=443',
+  'snowflake.user.name'      = '&lt;login-username&gt;',
+  'snowflake.private.key'    = '&lt;private-key&gt;',
+  'snowflake.database.name'  = '&lt;database-name&gt;',
+  'snowflake.schema.name'    = '&lt;schema-name&gt;',
+  'tasks.max'                = '1');
 </code></pre>
 <h2 id="step-by-step">Step-by-step</h2>
 <h3 id="setup-your-environment">Setup your Environment</h3>
@@ -294,24 +292,22 @@ SELECT   TIMESTAMPTOSTRING(WindowStart(), 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_STA
 <p>Confluent Cloud offers pre-built, fully managed, Apache Kafka® Connectors that make it easy to instantly connect to popular data sources in the cloud.
 You can use any connector, substitute your own preferred one for getting data into Confluent Cloud.
 The principles are the same, just modify the connector configuration shown below to fit your data source, see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a> for details.</p>
-<p>This recipe creates simulated data with the <code>Datagen</code> connector.</p>
-<pre><code class="language-sql">-- Stream of transactions
-CREATE SOURCE CONNECTOR transactions WITH (
-  'connector.class'          = 'OracleDatabaseSource',
-  'name'                     = 'confluent-oracle-source',
-  'connector.class'          = 'OracleDatabaseSource',
+<p>Change Data Capture (CDC) for orders is being written to a SQL Server database, and there is an Oracle database with customer data.</p>
+<pre><code class="language-sql">-- Stream of orders
+CREATE SOURCE CONNECTOR orders WITH (
+  'connector.class'          = 'SqlServerCdcSource',
+  'name'                     = 'SqlServerCdcSourceConnector_0',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topic.prefix'             = 'oracle_',
-  'connection.host'          = '&lt;my-database-endpoint&gt;',
-  'connection.port'          = '1521',
-  'connection.user'          = '&lt;database-username&gt;',
-  'connection.password'      = '&lt;database-password&gt;',
-  'db.name'                  = '&lt;db-name&gt;',
-  'table.whitelist'          = 'TRANSACTIONS',
-  'timestamp.column.name'    = 'created_at',
+  'database.hostname'        = '&lt;db-name&gt;',
+  'database.port'            = '1433',
+  'database.user'            = '&lt;database-username&gt;',
+  'database.password'        = '&lt;database-password&gt;',
+  'database.dbname'          = 'database-name',
+  'database.server.name'     = 'sql',
+  'table.include.list'       ='&lt;table_name&gt;',
+  'snapshot.mode'            = 'initial',
   'output.data.format'       = 'JSON',
-  'db.timezone'              = 'UCT',
   'tasks.max'                = '1');
 
 -- Stream of customers
@@ -334,64 +330,65 @@ CREATE SOURCE CONNECTOR customers WITH (
   'tasks.max'                = '1');
 </code></pre>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
-<p>Now you can process the data in a variety of ways.</p>
-<pre><code class="language-sql">-- Register the stream of transactions
-CREATE STREAM TRANSACTIONS_RAW (ACCOUNT_ID VARCHAR, 
-                                TIMESTAMP VARCHAR, 
-                                CARD_TYPE VARCHAR, 
-                                AMOUNT DOUBLE, 
-                                IP_ADDRESS VARCHAR, 
-                                TRANSACTION_ID VARCHAR) 
-                           WITH (KAFKA_TOPIC='transactions',
-                                 VALUE_FORMAT='JSON');
-
--- Repartition the stream on account_id in order to .... TODO
-CREATE STREAM TRANSACTIONS_SOURCE 
-    WITH (VALUE_FORMAT='AVRO') AS 
-          SELECT * 
-            FROM TRANSACTIONS_RAW 
-    PARTITION BY ACCOUNT_ID;
+<p>TODO</p>
+<pre><code class="language-sql">-- stream of user orders:
+CREATE STREAM orders (
+        ...
+    ) with (
+        kafka_topic = 'orders',
+        value_format = 'json'
+    );
 
 -- Register the existing stream of customer data
-CREATE STREAM CUST_RAW_STREAM (ID BIGINT, 
-                               FIRST_NAME VARCHAR, 
-                               LAST_NAME VARCHAR, 
-                               EMAIL VARCHAR, 
-                               AVG_CREDIT_SPEND DOUBLE) 
-              WITH (KAFKA_TOPIC='customers', 
+CREATE STREAM CUST_RAW_STREAM (ID BIGINT,
+                               FIRST_NAME VARCHAR,
+                               LAST_NAME VARCHAR,
+                               EMAIL VARCHAR,
+                               COMPANY VARCHAR,
+                               STREET_ADDRESS VARCHAR,
+                               CITY VARCHAR,
+                               COUNTRY VARCHAR)
+              WITH (KAFKA_TOPIC='customers',
                     VALUE_FORMAT='JSON');
 
--- Repartition the customer data stream by account_id to prepare for the join
-CREATE STREAM CUSTOMER_REKEYED 
-    WITH (VALUE_FORMAT='AVRO') AS 
-            SELECT * 
-              FROM CUST_RAW_STREAM 
-      PARTITION BY ID;
-
--- Register the partitioned customer data topic as a table used for the join with the incoming stream of transactions:
-CREATE TABLE customer 
-WITH (KAFKA_TOPIC='CUSTOMER_REKEYED', 
-      VALUE_FORMAT='AVRO', 
+-- Register the customer data topic as a table
+CREATE TABLE customer
+WITH (KAFKA_TOPIC='CUST_RAW_STREAM',
+      VALUE_FORMAT='JSON',
       KEY='ID');
 
--- Join the transactions to customer information:
-CREATE STREAM TRANSACTIONS_ENRICHED AS 
-SELECT   T.ACCOUNT_ID, T.CARD_TYPE, T.AMOUNT, 
-          C.FIRST_NAME + ' ' + C.LAST_NAME AS FULL_NAME, 
-          C.AVG_CREDIT_SPEND 
-FROM     TRANSACTIONS_SOURCE T 
-          INNER JOIN CUSTOMER C 
-          ON T.ACCOUNT_ID = C.ID;
-
--- Aggregate the stream of transactions for each account ID using a two-hour tumbling window, and filter for accounts in which the total spend in a two-hour period is greater than the customer’s average:
-CREATE TABLE POSSIBLE_STOLEN_CARD AS 
-SELECT   TIMESTAMPTOSTRING(WindowStart(), 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_START, 
-           T.ACCOUNT_ID, T.CARD_TYPE, SUM(T.AMOUNT) AS TOTAL_CREDIT_SPEND, 
-           T.FULL_NAME, MAX(T.AVG_CREDIT_SPEND) AS AVG_CREDIT_SPEND 
-  FROM     TRANSACTIONS_ENRICHED T 
-           WINDOW TUMBLING (SIZE 2 HOURS) 
-  GROUP BY T.ACCOUNT_ID, T.CARD_TYPE, T.FULL_NAME 
-  HAVING   SUM(T.AMOUNT) &gt; MAX(T.AVG_CREDIT_SPEND) ;
+-- Denormalize data: joining facts (orders) with the dimension (customer)
+CREATE STREAM ORDERS_ENRICHED AS
+    SELECT  O.order_id AS order_id,
+            O.item AS item,
+            O.order_total_usd AS order_total_usd,
+            C.first_name || ' ' || C.last_name AS full_name,
+            C.email AS email,
+            C.company AS company,
+            C.street_address AS street_address,
+            C.city AS city,
+            C.country AS country
+    FROM    ORDERS O
+            LEFT JOIN
+            CUSTOMERS C
+            ON O.customer_id = C.id;
+</code></pre>
+<h3 id="write-the-data-out">Write the data out</h3>
+<p>TODO</p>
+<pre><code class="language-sql">-- Send data to Snowflake
+CREATE SINK CONNECTOR analyzed_clickstream WITH (
+  'connector.class'          = 'SnowflakeSink',
+  'name'                     = 'snowflake-connector',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'topics'                   = '&lt;topic1&gt;, &lt;topic2&gt;',
+  'input.data.format'        = 'JSON',
+  'snowflake.url.name'       = 'https=//wm83168.us-central1.gcp.snowflakecomputing.com=443',
+  'snowflake.user.name'      = '&lt;login-username&gt;',
+  'snowflake.private.key'    = '&lt;private-key&gt;',
+  'snowflake.database.name'  = '&lt;database-name&gt;',
+  'snowflake.schema.name'    = '&lt;schema-name&gt;',
+  'tasks.max'                = '1');
 </code></pre>
               
             </div>
@@ -400,10 +397,10 @@ SELECT   TIMESTAMPTOSTRING(WindowStart(), 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_STA
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../denormalization/" class="btn btn-neutral float-right" title="Change Data Capture (CDC) for Orders">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../healthcare/" class="btn btn-neutral float-right" title="Description">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../" class="btn btn-neutral" title="Description"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../credit-card-activity/" class="btn btn-neutral" title="Detecting Unusual Credit Card Activity"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -429,10 +426,10 @@ SELECT   TIMESTAMPTOSTRING(WindowStart(), 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_STA
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../credit-card-activity/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../denormalization/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../healthcare/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
