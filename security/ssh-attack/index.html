@@ -50,15 +50,8 @@
                     <li class="toctree-l1"><a class="reference internal" href="../..">ksqlDB Recipes</a>
                     </li>
                 </ul>
-                <p class="caption"><span class="caption-text">Ai ml</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../ai-ml/">Description</a>
-                    </li>
-                </ul>
                 <p class="caption"><span class="caption-text">Customer 360</span></p>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../customer-360/">Description</a>
-                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Clickstream</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../../customer-360/clickstream/">Clickstream Data Analysis</a>
@@ -68,8 +61,6 @@
                 </ul>
                 <p class="caption"><span class="caption-text">Fin serv</span></p>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../fin-serv/">Description</a>
-                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Credit card activity</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../../fin-serv/credit-card-activity/">Detecting Unusual Credit Card Activity</a>
@@ -83,15 +74,8 @@
     </ul>
                     </li>
                 </ul>
-                <p class="caption"><span class="caption-text">Healthcare</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../healthcare/">Description</a>
-                    </li>
-                </ul>
                 <p class="caption"><span class="caption-text">Retail</span></p>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../retail/">Description</a>
-                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Inventory</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../../retail/inventory/">Real-time Inventory</a>
@@ -101,8 +85,6 @@
                 </ul>
                 <p class="caption"><span class="caption-text">Security</span></p>
                 <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="../">Description</a>
-                    </li>
                     <li class="toctree-l1 current"><a class="reference internal current" href="#">Ssh attack</a>
     <ul class="current">
                 <li class="toctree-l2 current"><a class="reference internal current" href="./">Detecting and Analyzing SSH Attacks</a>
@@ -181,7 +163,8 @@
                 <h1 id="detecting-and-analyzing-ssh-attacks">Detecting and Analyzing SSH Attacks</h1>
 <h2 id="what-is-it">What is it?</h2>
 <p>There are lots of ways SSH can be abused but one of the most straightforward ways to detect a problem is to monitor for rejected logins.
-This recipe tracks Syslog data and streams out pairs of usernames and IPs of bad logins.</p>
+This recipe processes Syslog data to detect bad logins and streams out those pairs of usernames and IP addresses.
+With ksqlDB, you can filter and react to events in real time rather than performing historical analysis of Syslog data from cold storage.</p>
 <p><img alt="ssh-attack" src="../../img/ssh-attack.png" /></p>
 <h2 id="get-started">Get Started</h2>
 <p>Click below to launch this recipe in Confluent Cloud.</p>
@@ -232,7 +215,6 @@ CREATE STREAM `invalid_users` AS
 -- Create actionable stream of SSH attacks, enriched with user and IP
 CREATE STREAM `ssh_attacks` AS 
   SELECT SYSLOG_TIMESTAMP,
-         FACILITY,
          HOST,
          FACILITY_DESCRIPTION,
          SPLIT(REPLACE(MESSAGE,'Invalid user ',''),' from ')[1] AS ATTACK_USER, 
@@ -317,7 +299,8 @@ services:
 </code></pre>
 <p>Now you should have Syslog messages being written to the topic <code>syslog</code> in Confluent Cloud.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
-<p>TODO</p>
+<p>Process the syslog events by flagging events with invalid users, stripping out all the other unnecessary fields, and creating just a stream of relevant information.
+There are many ways to customize the resulting stream to fit the business needs: this example also demonstrates how to enrich the stream with a new field <code>FACILITY_DESCRIPTION</code> with human-readable content.</p>
 <pre><code class="language-sql">-- Define Kafka parameters
 DEFINE topic = 'syslog';
 
@@ -360,7 +343,6 @@ CREATE STREAM `invalid_users` AS
 -- Create actionable stream of SSH attacks, enriched with user and IP
 CREATE STREAM `ssh_attacks` AS 
   SELECT SYSLOG_TIMESTAMP,
-         FACILITY,
          HOST,
          FACILITY_DESCRIPTION,
          SPLIT(REPLACE(MESSAGE,'Invalid user ',''),' from ')[1] AS ATTACK_USER, 
@@ -378,7 +360,7 @@ CREATE STREAM `ssh_attacks` AS
         <a href="../../shared/ccloud_setup/" class="btn btn-neutral float-right" title="Ccloud setup">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../" class="btn btn-neutral" title="Description"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../retail/inventory/" class="btn btn-neutral" title="Real-time Inventory"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -404,7 +386,7 @@ CREATE STREAM `ssh_attacks` AS
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../retail/inventory/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../../shared/ccloud_setup/" style="color: #fcfcfc">Next &raquo;</a></span>

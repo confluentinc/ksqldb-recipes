@@ -8,7 +8,7 @@ CREATE STREAM TRANSACTIONS_RAW (ACCOUNT_ID VARCHAR,
                            WITH (KAFKA_TOPIC='transactions',
                                  VALUE_FORMAT='JSON');
 
--- Repartition the stream on account_id in order to .... TODO
+-- Repartition the stream on account_id in order to ensure that all the streams and tables are co-partitioned, which means that input records on both sides of the join have the same configuration settings for partitions.
 CREATE STREAM TRANSACTIONS_SOURCE 
     WITH (VALUE_FORMAT='AVRO') AS 
           SELECT * 

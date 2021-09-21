@@ -40,7 +40,6 @@ CREATE STREAM `invalid_users` AS
 -- Create actionable stream of SSH attacks, enriched with user and IP
 CREATE STREAM `ssh_attacks` AS 
   SELECT SYSLOG_TIMESTAMP,
-         FACILITY,
          HOST,
          FACILITY_DESCRIPTION,
          SPLIT(REPLACE(MESSAGE,'Invalid user ',''),' from ')[1] AS ATTACK_USER, 

@@ -50,15 +50,8 @@
                     <li class="toctree-l1"><a class="reference internal" href="../..">ksqlDB Recipes</a>
                     </li>
                 </ul>
-                <p class="caption"><span class="caption-text">Ai ml</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../ai-ml/">Description</a>
-                    </li>
-                </ul>
                 <p class="caption"><span class="caption-text">Customer 360</span></p>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../customer-360/">Description</a>
-                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Clickstream</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../../customer-360/clickstream/">Clickstream Data Analysis</a>
@@ -68,8 +61,6 @@
                 </ul>
                 <p class="caption"><span class="caption-text">Fin serv</span></p>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../fin-serv/">Description</a>
-                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Credit card activity</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../../fin-serv/credit-card-activity/">Detecting Unusual Credit Card Activity</a>
@@ -83,15 +74,8 @@
     </ul>
                     </li>
                 </ul>
-                <p class="caption"><span class="caption-text">Healthcare</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../healthcare/">Description</a>
-                    </li>
-                </ul>
                 <p class="caption"><span class="caption-text">Retail</span></p>
                 <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="../">Description</a>
-                    </li>
                     <li class="toctree-l1 current"><a class="reference internal current" href="#">Inventory</a>
     <ul class="current">
                 <li class="toctree-l2 current"><a class="reference internal current" href="./">Real-time Inventory</a>
@@ -119,8 +103,6 @@
                 </ul>
                 <p class="caption"><span class="caption-text">Security</span></p>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../security/">Description</a>
-                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Ssh attack</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../../security/ssh-attack/">Detecting and Analyzing SSH Attacks</a>
@@ -180,7 +162,8 @@
               
                 <h1 id="real-time-inventory">Real-time Inventory</h1>
 <h2 id="what-is-it">What is it?</h2>
-<p>TODO</p>
+<p>Having an up to date view of inventory on every item is essential in today's online marketplaces.
+This recipe demonstrates how to use ksqlDB to always have an up-to-date snapshot of your inventory.</p>
 <h2 id="get-started">Get Started</h2>
 <p>Click below to launch this recipe in Confluent Cloud.</p>
 <p><img alt="launch" src="../../img/launch.png" /></p>
@@ -189,24 +172,23 @@
 Here is a summary of all those steps (explained in more detail in the sections afterwards).</p>
 <pre><code class="language-sql">-- Create stream of inventory
 CREATE STREAM inventory_stream (
-            id STRING key,
-            item STRING,
-            qty INTEGER,
-            price DOUBLE,
-            balance INTEGER)
-        with (VALUE_FORMAT='json',
-              KAFKA_TOPIC='inventory');
+    id STRING key,
+    item STRING,
+    quantity INTEGER,
+    price DOUBLE)
+   with (VALUE_FORMAT='json',
+         KAFKA_TOPIC='inventory');
 
 -- add some mock data
-insert into inventory_stream (id, item, qty, price) values ('1', 'Apple Magic Mouse 2', 10, 99);
-insert into inventory_stream (id, item, qty, price) values ('2', 'iPhoneX', 25, 999);
-insert into inventory_stream (id, item, qty, price) values ('3', 'MacBookPro13', 100, 1799);
-insert into inventory_stream (id, item, qty, price) values ('4', 'iPad4', 20, 340);
-insert into inventory_stream (id, item, qty, price) values ('5', 'Apple Pencil', 10, 79);
-insert into inventory_stream (id, item, qty, price) values ('5', 'PhoneX', 10, 899);
-insert into inventory_stream (id, item, qty, price) values ('4', 'iPad4', -20, 399);
-insert into inventory_stream (id, item, qty, price) values ('3', 'MacBookPro13', 10, 1899);
-insert into inventory_stream (id, item, qty, price) values ('4', 'iPad4', 20, 399);
+insert into inventory_stream (id, item, quantity, price) values ('1', 'Apple Magic Mouse 2', 10, 99);
+insert into inventory_stream (id, item, quantity, price) values ('2', 'iPhoneX', 25, 999);
+insert into inventory_stream (id, item, quantity, price) values ('3', 'MacBookPro13', 100, 1799);
+insert into inventory_stream (id, item, quantity, price) values ('4', 'iPad4', 20, 340);
+insert into inventory_stream (id, item, quantity, price) values ('5', 'Apple Pencil', 10, 79);
+insert into inventory_stream (id, item, quantity, price) values ('5', 'PhoneX', 10, 899);
+insert into inventory_stream (id, item, quantity, price) values ('4', 'iPad4', -20, 399);
+insert into inventory_stream (id, item, quantity, price) values ('3', 'MacBookPro13', 10, 1899);
+insert into inventory_stream (id, item, quantity, price) values ('4', 'iPad4', 20, 399);
 
 ---------------------------------------------------------------------------------------------------
 -- Create stateful table with up-to-date information of inventory availability
@@ -215,7 +197,7 @@ CREATE TABLE inventory_stream_table
     WITH (kafka_topic='inventory_table') AS
     SELECT
         item,
-        SUM(qty) AS item_qty
+        SUM(quantity) AS item_quantity
     FROM
         inventory_stream
     GROUP BY
@@ -229,30 +211,30 @@ CREATE TABLE inventory_stream_table
 <p>Confluent Cloud offers pre-built, fully managed, Apache Kafka® Connectors that make it easy to instantly connect to popular data sources in the cloud.
 You can use any connector, substitute your own preferred one for getting data into Confluent Cloud.
 The principles are the same, just modify the connector configuration shown below to fit your data source, see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a> for details.</p>
-<p>TODO</p>
+<p>For this recipe, we are interested in knowing each event for an item that affects its quantity.
+This creates a stream of events, where each event results in the addition or removal of inventory.</p>
 <pre><code class="language-sql">-- Create stream of inventory
 CREATE STREAM inventory_stream (
-            id STRING key,
-            item STRING,
-            qty INTEGER,
-            price DOUBLE,
-            balance INTEGER)
-        with (VALUE_FORMAT='json',
-              KAFKA_TOPIC='inventory');
+    id STRING key,
+    item STRING,
+    quantity INTEGER,
+    price DOUBLE)
+   with (VALUE_FORMAT='json',
+         KAFKA_TOPIC='inventory');
 
 -- add some mock data
-insert into inventory_stream (id, item, qty, price) values ('1', 'Apple Magic Mouse 2', 10, 99);
-insert into inventory_stream (id, item, qty, price) values ('2', 'iPhoneX', 25, 999);
-insert into inventory_stream (id, item, qty, price) values ('3', 'MacBookPro13', 100, 1799);
-insert into inventory_stream (id, item, qty, price) values ('4', 'iPad4', 20, 340);
-insert into inventory_stream (id, item, qty, price) values ('5', 'Apple Pencil', 10, 79);
-insert into inventory_stream (id, item, qty, price) values ('5', 'PhoneX', 10, 899);
-insert into inventory_stream (id, item, qty, price) values ('4', 'iPad4', -20, 399);
-insert into inventory_stream (id, item, qty, price) values ('3', 'MacBookPro13', 10, 1899);
-insert into inventory_stream (id, item, qty, price) values ('4', 'iPad4', 20, 399);
+insert into inventory_stream (id, item, quantity, price) values ('1', 'Apple Magic Mouse 2', 10, 99);
+insert into inventory_stream (id, item, quantity, price) values ('2', 'iPhoneX', 25, 999);
+insert into inventory_stream (id, item, quantity, price) values ('3', 'MacBookPro13', 100, 1799);
+insert into inventory_stream (id, item, quantity, price) values ('4', 'iPad4', 20, 340);
+insert into inventory_stream (id, item, quantity, price) values ('5', 'Apple Pencil', 10, 79);
+insert into inventory_stream (id, item, quantity, price) values ('5', 'PhoneX', 10, 899);
+insert into inventory_stream (id, item, quantity, price) values ('4', 'iPad4', -20, 399);
+insert into inventory_stream (id, item, quantity, price) values ('3', 'MacBookPro13', 10, 1899);
+insert into inventory_stream (id, item, quantity, price) values ('4', 'iPad4', 20, 399);
 </code></pre>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
-<p>TODO</p>
+<p>Create a ksqlDB <code>TABLE</code>, which is a mutable, partitioned collection that models change over time that represents what is true as of "now".</p>
 <pre><code class="language-sql">---------------------------------------------------------------------------------------------------
 -- Create stateful table with up-to-date information of inventory availability
 ---------------------------------------------------------------------------------------------------
@@ -260,7 +242,7 @@ CREATE TABLE inventory_stream_table
     WITH (kafka_topic='inventory_table') AS
     SELECT
         item,
-        SUM(qty) AS item_qty
+        SUM(quantity) AS item_quantity
     FROM
         inventory_stream
     GROUP BY
@@ -274,10 +256,10 @@ CREATE TABLE inventory_stream_table
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../security/" class="btn btn-neutral float-right" title="Description">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../security/ssh-attack/" class="btn btn-neutral float-right" title="Detecting and Analyzing SSH Attacks">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../" class="btn btn-neutral" title="Description"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../fin-serv/denormalization/" class="btn btn-neutral" title="Change Data Capture (CDC) for Orders"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -303,10 +285,10 @@ CREATE TABLE inventory_stream_table
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../fin-serv/denormalization/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../security/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../security/ssh-attack/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

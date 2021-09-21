@@ -5,7 +5,7 @@ CREATE TABLE inventory_stream_table
 	WITH (kafka_topic='inventory_table') AS
 	SELECT
 		item,
-		SUM(qty) AS item_qty
+		SUM(quantity) AS item_quantity
 	FROM
 		inventory_stream
 	GROUP BY
