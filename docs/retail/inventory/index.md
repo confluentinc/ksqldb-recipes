@@ -15,7 +15,7 @@ This recipe demonstrates how to use ksqlDB to always have an up-to-date snapshot
 
 Click below to launch this recipe in Confluent Cloud.
 
-![launch](../../img/launch.png)
+<a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
 
 ## Code Summary
 
@@ -42,6 +42,12 @@ This creates a stream of events, where each event results in the addition or rem
 
 ```sql
 --8<-- "docs/retail/inventory/source.sql"
+```
+
+--8<-- "docs/shared/manual_insert.md"
+
+```sql
+--8<-- "docs/retail/inventory/manual.sql"
 ```
 
 ### Run stream processing app

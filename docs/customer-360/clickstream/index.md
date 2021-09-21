@@ -21,7 +21,7 @@ Analyzing clickstream data enables businesses to understand the behavior of its 
 
 Click below to launch this recipe in Confluent Cloud.
 
-![launch](../../img/launch.png)
+<a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
 
 ## Code Summary
 

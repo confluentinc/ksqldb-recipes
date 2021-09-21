@@ -19,7 +19,7 @@ This recipe demonstrates this principle by streaming from a SQL Server, denormal
 
 Click below to launch this recipe in Confluent Cloud.
 
-![launch](../../img/launch.png)
+<a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
 
 ## Code Summary
 
