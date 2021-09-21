@@ -1,7 +1,7 @@
 ---
 seo:
   title: Detecting and Analyzing SSH Attacks
-  description: TODO
+  description: This recipe processes Syslog data to detect bad logins and streams out those pairs of usernames and IP addresses.
 ---
 
 # Detecting and Analyzing SSH Attacks
@@ -9,7 +9,8 @@ seo:
 ## What is it?
 
 There are lots of ways SSH can be abused but one of the most straightforward ways to detect a problem is to monitor for rejected logins.
-This recipe tracks Syslog data and streams out pairs of usernames and IPs of bad logins.
+This recipe processes Syslog data to detect bad logins and streams out those pairs of usernames and IP addresses.
+With ksqlDB, you can filter and react to events in real time rather than performing historical analysis of Syslog data from cold storage.
 
 ![ssh-attack](../../img/ssh-attack.png)
 
@@ -69,7 +70,8 @@ Now you should have Syslog messages being written to the topic `syslog` in Confl
 
 ### Run stream processing app
 
-TODO
+Process the syslog events by flagging events with invalid users, stripping out all the other unnecessary fields, and creating just a stream of relevant information.
+There are many ways to customize the resulting stream to fit the business needs: this example also demonstrates how to enrich the stream with a new field `FACILITY_DESCRIPTION` with human-readable content.
 
 ```sql
 --8<-- "docs/security/ssh-attack/process.sql"

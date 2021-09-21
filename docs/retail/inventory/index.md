@@ -1,14 +1,15 @@
 ---
 seo:
   title: Real-time Inventory
-  description: TODO
+  description: This recipe demonstrates how to use ksqlDB to always have an up-to-date snapshot of your inventory.
 ---
 
 # Real-time Inventory
 
 ## What is it?
 
-TODO
+Having an up to date view of inventory on every item is essential in today's online marketplaces.
+This recipe demonstrates how to use ksqlDB to always have an up-to-date snapshot of your inventory.
 
 ## Get Started
 
@@ -36,7 +37,8 @@ Click below to launch this recipe in Confluent Cloud.
 
 --8<-- "docs/shared/connect.md"
 
-TODO
+For this recipe, we are interested in knowing each event for an item that affects its quantity.
+This creates a stream of events, where each event results in the addition or removal of inventory.
 
 ```sql
 --8<-- "docs/retail/inventory/source.sql"
@@ -44,7 +46,7 @@ TODO
 
 ### Run stream processing app
 
-TODO
+Create a ksqlDB `TABLE`, which is a mutable, partitioned collection that models change over time that represents what is true as of "now".
 
 ```sql
 --8<-- "docs/retail/inventory/process.sql"

@@ -1,7 +1,7 @@
 ---
 seo:
   title: Clickstream Data Analysis
-  description: TODO
+  description: This recipe processes clickstream data to understand the behavior of its online users
 ---
 
 # Clickstream Data Analysis

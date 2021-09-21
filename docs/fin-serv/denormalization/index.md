@@ -1,17 +1,17 @@
 ---
 seo:
   title: Change Data Capture (CDC) for Orders
-  description: TODO
+  description: This recipe demonstrates this principle by streaming from a SQL Server, denormalizing the data, and writing to Snowflake.
 ---
 
 # Change Data Capture (CDC) for Orders
 
 ## What is it?
 
-TODO -- ...Transactional...Debezium to Snowflake...
-
-Denormalising data in advance of querying is a well-established pattern for performance.
-This is because most times querying a single table of data will perform better than querying across multiple at runtime.
+If you have transactional events for orders in a marketplace, you can stream the Change Data Capture (CDC) and denormalize it.
+Denormalization is a well-established pattern for performance, because most times querying a single table of data will perform better than querying across multiple at runtime.
+Then open it up to be consumed by downstream applications in your business, or stream it out to another destination.
+This recipe demonstrates this principle by streaming from a SQL Server, denormalizing the data, and writing to Snowflake. 
 
 ![denormalized](../../img/denormalized-data.png)
 
@@ -51,7 +51,7 @@ Change Data Capture (CDC) for orders is being written to a SQL Server database, 
 
 ### Run stream processing app
 
-TODO
+This streams the user orders and denormalizes the data by joining facts (orders) with the dimension (customer).
 
 ```sql
 --8<-- "docs/fin-serv/denormalization/process.sql"
@@ -59,7 +59,7 @@ TODO
 
 ### Write the data out
 
-TODO
+Any downstream application or database can receive the denormalized data.
 
 ```sql
 --8<-- "docs/fin-serv/denormalization/sink.sql"
