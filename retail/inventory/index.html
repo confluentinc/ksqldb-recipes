@@ -118,6 +118,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../shared/connect/">Connect</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../shared/manual_insert/">Manual insert</a>
+                    </li>
                 </ul>
       </div>
     </div>
@@ -166,29 +168,37 @@
 This recipe demonstrates how to use ksqlDB to always have an up-to-date snapshot of your inventory.</p>
 <h2 id="get-started">Get Started</h2>
 <p>Click below to launch this recipe in Confluent Cloud.</p>
-<p><img alt="launch" src="../../img/launch.png" /></p>
+<p><a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a></p>
 <h2 id="code-summary">Code Summary</h2>
 <p>You can execute this recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for enriching the data.
 Here is a summary of all those steps (explained in more detail in the sections afterwards).</p>
-<pre><code class="language-sql">-- Create stream of inventory
+<pre><code class="language-sql">CREATE SOURCE CONNECTOR inventory WITH (
+  'connector.class'          = 'PostgresSource',
+  'name'                     = 'confluent-postgresql-source',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'topic.prefix'             = 'postgresql_',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '5432',
+  'connection.user'          = 'postgres',
+  'connection.password'      = '&lt;my-database-password&gt;',
+  'db.name'                  = 'postgres',
+  'table.whitelist'          = 'passengers',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UTC',
+  'tasks.max'                = '1');
+
+---------------------------------------------------------------------------------------------------
+-- Create stream of inventory
+---------------------------------------------------------------------------------------------------
 CREATE STREAM inventory_stream (
-    id STRING key,
-    item STRING,
-    quantity INTEGER,
-    price DOUBLE)
+        id STRING key,
+        item STRING,
+        quantity INTEGER,
+        price DOUBLE)
    with (VALUE_FORMAT='json',
          KAFKA_TOPIC='inventory');
-
--- add some mock data
-insert into inventory_stream (id, item, quantity, price) values ('1', 'Apple Magic Mouse 2', 10, 99);
-insert into inventory_stream (id, item, quantity, price) values ('2', 'iPhoneX', 25, 999);
-insert into inventory_stream (id, item, quantity, price) values ('3', 'MacBookPro13', 100, 1799);
-insert into inventory_stream (id, item, quantity, price) values ('4', 'iPad4', 20, 340);
-insert into inventory_stream (id, item, quantity, price) values ('5', 'Apple Pencil', 10, 79);
-insert into inventory_stream (id, item, quantity, price) values ('5', 'PhoneX', 10, 899);
-insert into inventory_stream (id, item, quantity, price) values ('4', 'iPad4', -20, 399);
-insert into inventory_stream (id, item, quantity, price) values ('3', 'MacBookPro13', 10, 1899);
-insert into inventory_stream (id, item, quantity, price) values ('4', 'iPad4', 20, 399);
 
 ---------------------------------------------------------------------------------------------------
 -- Create stateful table with up-to-date information of inventory availability
@@ -213,29 +223,49 @@ You can use any connector, substitute your own preferred one for getting data in
 The principles are the same, just modify the connector configuration shown below to fit your data source, see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a> for details.</p>
 <p>For this recipe, we are interested in knowing each event for an item that affects its quantity.
 This creates a stream of events, where each event results in the addition or removal of inventory.</p>
-<pre><code class="language-sql">-- Create stream of inventory
-CREATE STREAM inventory_stream (
-    id STRING key,
-    item STRING,
-    quantity INTEGER,
-    price DOUBLE)
-   with (VALUE_FORMAT='json',
-         KAFKA_TOPIC='inventory');
-
--- add some mock data
-insert into inventory_stream (id, item, quantity, price) values ('1', 'Apple Magic Mouse 2', 10, 99);
-insert into inventory_stream (id, item, quantity, price) values ('2', 'iPhoneX', 25, 999);
-insert into inventory_stream (id, item, quantity, price) values ('3', 'MacBookPro13', 100, 1799);
-insert into inventory_stream (id, item, quantity, price) values ('4', 'iPad4', 20, 340);
-insert into inventory_stream (id, item, quantity, price) values ('5', 'Apple Pencil', 10, 79);
-insert into inventory_stream (id, item, quantity, price) values ('5', 'PhoneX', 10, 899);
-insert into inventory_stream (id, item, quantity, price) values ('4', 'iPad4', -20, 399);
-insert into inventory_stream (id, item, quantity, price) values ('3', 'MacBookPro13', 10, 1899);
-insert into inventory_stream (id, item, quantity, price) values ('4', 'iPad4', 20, 399);
+<pre><code class="language-sql">CREATE SOURCE CONNECTOR inventory WITH (
+  'connector.class'          = 'PostgresSource',
+  'name'                     = 'confluent-postgresql-source',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'topic.prefix'             = 'postgresql_',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '5432',
+  'connection.user'          = 'postgres',
+  'connection.password'      = '&lt;my-database-password&gt;',
+  'db.name'                  = 'postgres',
+  'table.whitelist'          = 'passengers',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UTC',
+  'tasks.max'                = '1');
+</code></pre>
+<p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, you can manually insert values into the source streams.
+After you create the ksqlDB streams in the next section, insert values into source topics with the following statements.</p>
+<pre><code class="language-sql">INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('1', 'Apple Magic Mouse 2', 10, 99.00);
+INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('2', 'iPhoneX', 25, 999.00);
+INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('3', 'MacBookPro13', 100, 1799.00);
+INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('4', 'iPad4', 20, 340.00);
+INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('5', 'Apple Pencil', 10, 79.00);
+INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('5', 'PhoneX', 10, 899.00);
+INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('4', 'iPad4', -20, 399.00);
+INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('3', 'MacBookPro13', 10, 1899.00);
+INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('4', 'iPad4', 20, 399.00);
 </code></pre>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
 <p>Create a ksqlDB <code>TABLE</code>, which is a mutable, partitioned collection that models change over time that represents what is true as of "now".</p>
 <pre><code class="language-sql">---------------------------------------------------------------------------------------------------
+-- Create stream of inventory
+---------------------------------------------------------------------------------------------------
+CREATE STREAM inventory_stream (
+        id STRING key,
+        item STRING,
+        quantity INTEGER,
+        price DOUBLE)
+   with (VALUE_FORMAT='json',
+         KAFKA_TOPIC='inventory');
+
+---------------------------------------------------------------------------------------------------
 -- Create stateful table with up-to-date information of inventory availability
 ---------------------------------------------------------------------------------------------------
 CREATE TABLE inventory_stream_table
