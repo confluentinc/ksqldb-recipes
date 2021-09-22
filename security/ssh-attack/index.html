@@ -93,8 +93,6 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#get-started">Get Started</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#code-summary">Code Summary</a>
-    </li>
     <li class="toctree-l3"><a class="reference internal" href="#step-by-step">Step-by-Step</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#setup-your-environment">Setup your Environment</a>
@@ -104,6 +102,8 @@
     <li class="toctree-l4"><a class="reference internal" href="#run-stream-processing-app">Run stream processing app</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#code-summary">Code Summary</a>
     </li>
     </ul>
                 </li>
@@ -171,59 +171,6 @@ With ksqlDB, you can filter and react to events in real time rather than perform
 <h2 id="get-started">Get Started</h2>
 <p>Click below to launch this recipe in Confluent Cloud.</p>
 <p><a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a></p>
-<h2 id="code-summary">Code Summary</h2>
-<p>You can execute this recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for enriching the data.
-Here is a summary of all those steps (explained in more detail in the sections afterwards).</p>
-<p>Run the Syslog source connector locally, then proceed with ksqlDB to process the Syslog messages.</p>
-<pre><code class="language-sql">-- Define Kafka parameters
-DEFINE topic = 'syslog';
-
--- Extract relevant fields from log messages
-CREATE OR REPLACE STREAM `syslog` WITH (
-  KAFKA_TOPIC = '${topic}',
-  VALUE_FORMAT = 'avro'
-);
-
-CREATE STREAM `by_facility` AS
-  SELECT TIMESTAMPTOSTRING(TIMESTAMP, 'yyyy-MM-dd HH:mm:ss') AS SYSLOG_TIMESTAMP,
-         HOST,
-         FACILITY,
-         MESSAGE,
-         REMOTEADDRESS         
-  FROM `syslog`
-  PARTITION BY FACILITY
-  EMIT CHANGES;
-
--- Flag events with invalid users, and enrich with a new field 'FACILITY_DESCRIPTION'
-CREATE STREAM `invalid_users` AS
-  SELECT SYSLOG_TIMESTAMP,
-         HOST,
-         FACILITY,
-         MESSAGE, 
-         REMOTEADDRESS,
-         CASE WHEN FACILITY = 0 THEN 'kernel messages'
-              WHEN FACILITY = 1 THEN 'user-level messages'
-              WHEN FACILITY = 2 THEN 'mail system'
-              WHEN FACILITY = 3 THEN 'system daemons'
-              WHEN FACILITY = 4 THEN 'security/authorization messages'
-              WHEN FACILITY = 5 THEN 'messages generated internally by syslogd'
-              WHEN FACILITY = 6 THEN 'line printer subsystem'
-              ELSE '&lt;unknown&gt;'
-         END AS FACILITY_DESCRIPTION
-  FROM `by_facility`
-  WHERE MESSAGE LIKE 'Invalid user%'
-  EMIT CHANGES;
-
--- Create actionable stream of SSH attacks, enriched with user and IP
-CREATE STREAM `ssh_attacks` AS 
-  SELECT SYSLOG_TIMESTAMP,
-         HOST,
-         FACILITY_DESCRIPTION,
-         SPLIT(REPLACE(MESSAGE,'Invalid user ',''),' from ')[1] AS ATTACK_USER, 
-         SPLIT(REPLACE(MESSAGE,'Invalid user ',''),' from ')[2] AS ATTACK_IP 
-  FROM `invalid_users`
-  EMIT CHANGES;
-</code></pre>
 <h2 id="step-by-step">Step-by-Step</h2>
 <h3 id="setup-your-environment">Setup your Environment</h3>
 <p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service, then proceed with the recipe.</p>
@@ -303,6 +250,59 @@ services:
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
 <p>Process the syslog events by flagging events with invalid users, stripping out all the other unnecessary fields, and creating just a stream of relevant information.
 There are many ways to customize the resulting stream to fit the business needs: this example also demonstrates how to enrich the stream with a new field <code>FACILITY_DESCRIPTION</code> with human-readable content.</p>
+<pre><code class="language-sql">-- Define Kafka parameters
+DEFINE topic = 'syslog';
+
+-- Extract relevant fields from log messages
+CREATE OR REPLACE STREAM `syslog` WITH (
+  KAFKA_TOPIC = '${topic}',
+  VALUE_FORMAT = 'avro'
+);
+
+CREATE STREAM `by_facility` AS
+  SELECT TIMESTAMPTOSTRING(TIMESTAMP, 'yyyy-MM-dd HH:mm:ss') AS SYSLOG_TIMESTAMP,
+         HOST,
+         FACILITY,
+         MESSAGE,
+         REMOTEADDRESS         
+  FROM `syslog`
+  PARTITION BY FACILITY
+  EMIT CHANGES;
+
+-- Flag events with invalid users, and enrich with a new field 'FACILITY_DESCRIPTION'
+CREATE STREAM `invalid_users` AS
+  SELECT SYSLOG_TIMESTAMP,
+         HOST,
+         FACILITY,
+         MESSAGE, 
+         REMOTEADDRESS,
+         CASE WHEN FACILITY = 0 THEN 'kernel messages'
+              WHEN FACILITY = 1 THEN 'user-level messages'
+              WHEN FACILITY = 2 THEN 'mail system'
+              WHEN FACILITY = 3 THEN 'system daemons'
+              WHEN FACILITY = 4 THEN 'security/authorization messages'
+              WHEN FACILITY = 5 THEN 'messages generated internally by syslogd'
+              WHEN FACILITY = 6 THEN 'line printer subsystem'
+              ELSE '&lt;unknown&gt;'
+         END AS FACILITY_DESCRIPTION
+  FROM `by_facility`
+  WHERE MESSAGE LIKE 'Invalid user%'
+  EMIT CHANGES;
+
+-- Create actionable stream of SSH attacks, enriched with user and IP
+CREATE STREAM `ssh_attacks` AS 
+  SELECT SYSLOG_TIMESTAMP,
+         HOST,
+         FACILITY_DESCRIPTION,
+         SPLIT(REPLACE(MESSAGE,'Invalid user ',''),' from ')[1] AS ATTACK_USER, 
+         SPLIT(REPLACE(MESSAGE,'Invalid user ',''),' from ')[2] AS ATTACK_IP 
+  FROM `invalid_users`
+  EMIT CHANGES;
+</code></pre>
+<h2 id="code-summary">Code Summary</h2>
+<p>You can execute this recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for enriching the data.
+Here is a summary of all those steps (explained in more detail in the sections afterwards).</p>
+<p>Run the Syslog source connector locally, then proceed with ksqlDB to process the Syslog messages.</p>
 <pre><code class="language-sql">-- Define Kafka parameters
 DEFINE topic = 'syslog';
 

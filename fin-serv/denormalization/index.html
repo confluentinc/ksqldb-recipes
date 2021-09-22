@@ -75,8 +75,6 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#get-started">Get Started</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#code-summary">Code Summary</a>
-    </li>
     <li class="toctree-l3"><a class="reference internal" href="#step-by-step">Step-by-step</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#setup-your-environment">Setup your Environment</a>
@@ -88,6 +86,8 @@
     <li class="toctree-l4"><a class="reference internal" href="#write-the-data-out">Write the data out</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#code-summary">Code Summary</a>
     </li>
     </ul>
                 </li>
@@ -174,102 +174,6 @@ This recipe demonstrates this principle by streaming from a SQL Server, denormal
 <h2 id="get-started">Get Started</h2>
 <p>Click below to launch this recipe in Confluent Cloud.</p>
 <p><a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a></p>
-<h2 id="code-summary">Code Summary</h2>
-<p>You can execute this recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for enriching the data.
-Here is a summary of all those steps (explained in more detail in the sections afterwards).</p>
-<pre><code class="language-sql">-- Stream of orders
-CREATE SOURCE CONNECTOR orders WITH (
-  'connector.class'          = 'SqlServerCdcSource',
-  'name'                     = 'SqlServerCdcSourceConnector_0',
-  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
-  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'database.hostname'        = '&lt;db-name&gt;',
-  'database.port'            = '1433',
-  'database.user'            = '&lt;database-username&gt;',
-  'database.password'        = '&lt;database-password&gt;',
-  'database.dbname'          = 'database-name',
-  'database.server.name'     = 'sql',
-  'table.include.list'       ='&lt;table_name&gt;',
-  'snapshot.mode'            = 'initial',
-  'output.data.format'       = 'JSON',
-  'tasks.max'                = '1');
-
--- Stream of customers
-CREATE SOURCE CONNECTOR customers WITH (
-  'connector.class'          = 'OracleDatabaseSource',
-  'name'                     = 'confluent-oracle-source',
-  'connector.class'          = 'OracleDatabaseSource',
-  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
-  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topic.prefix'             = 'oracle_',
-  'connection.host'          = '&lt;my-database-endpoint&gt;',
-  'connection.port'          = '1521',
-  'connection.user'          = '&lt;database-username&gt;',
-  'connection.password'      = '&lt;database-password&gt;',
-  'db.name'                  = '&lt;db-name&gt;',
-  'table.whitelist'          = 'CUSTOMERS',
-  'timestamp.column.name'    = 'created_at',
-  'output.data.format'       = 'JSON',
-  'db.timezone'              = 'UCT',
-  'tasks.max'                = '1');
-
--- stream of user orders:
-CREATE STREAM orders (
-        ...
-    ) with (
-        kafka_topic = 'orders',
-        value_format = 'json'
-    );
-
--- Register the existing stream of customer data
-CREATE STREAM CUST_RAW_STREAM (ID BIGINT,
-                               FIRST_NAME VARCHAR,
-                               LAST_NAME VARCHAR,
-                               EMAIL VARCHAR,
-                               COMPANY VARCHAR,
-                               STREET_ADDRESS VARCHAR,
-                               CITY VARCHAR,
-                               COUNTRY VARCHAR)
-              WITH (KAFKA_TOPIC='customers',
-                    VALUE_FORMAT='JSON');
-
--- Register the customer data topic as a table
-CREATE TABLE customer
-WITH (KAFKA_TOPIC='CUST_RAW_STREAM',
-      VALUE_FORMAT='JSON',
-      KEY='ID');
-
--- Denormalize data: joining facts (orders) with the dimension (customer)
-CREATE STREAM ORDERS_ENRICHED AS
-    SELECT  O.order_id AS order_id,
-            O.item AS item,
-            O.order_total_usd AS order_total_usd,
-            C.first_name || ' ' || C.last_name AS full_name,
-            C.email AS email,
-            C.company AS company,
-            C.street_address AS street_address,
-            C.city AS city,
-            C.country AS country
-    FROM    ORDERS O
-            LEFT JOIN
-            CUSTOMERS C
-            ON O.customer_id = C.id;
-
--- Send data to Snowflake
-CREATE SINK CONNECTOR analyzed_clickstream WITH (
-  'connector.class'          = 'SnowflakeSink',
-  'name'                     = 'snowflake-connector',
-  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
-  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topics'                   = '&lt;topic1&gt;, &lt;topic2&gt;',
-  'input.data.format'        = 'JSON',
-  'snowflake.url.name'       = 'https=//wm83168.us-central1.gcp.snowflakecomputing.com=443',
-  'snowflake.user.name'      = '&lt;login-username&gt;',
-  'snowflake.private.key'    = '&lt;private-key&gt;',
-  'snowflake.database.name'  = '&lt;database-name&gt;',
-  'snowflake.schema.name'    = '&lt;schema-name&gt;',
-  'tasks.max'                = '1');
-</code></pre>
 <h2 id="step-by-step">Step-by-step</h2>
 <h3 id="setup-your-environment">Setup your Environment</h3>
 <p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service, then proceed with the recipe.</p>
@@ -361,6 +265,102 @@ CREATE STREAM ORDERS_ENRICHED AS
 <h3 id="write-the-data-out">Write the data out</h3>
 <p>Any downstream application or database can receive the denormalized data.</p>
 <pre><code class="language-sql">-- Send data to Snowflake
+CREATE SINK CONNECTOR analyzed_clickstream WITH (
+  'connector.class'          = 'SnowflakeSink',
+  'name'                     = 'snowflake-connector',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'topics'                   = '&lt;topic1&gt;, &lt;topic2&gt;',
+  'input.data.format'        = 'JSON',
+  'snowflake.url.name'       = 'https=//wm83168.us-central1.gcp.snowflakecomputing.com=443',
+  'snowflake.user.name'      = '&lt;login-username&gt;',
+  'snowflake.private.key'    = '&lt;private-key&gt;',
+  'snowflake.database.name'  = '&lt;database-name&gt;',
+  'snowflake.schema.name'    = '&lt;schema-name&gt;',
+  'tasks.max'                = '1');
+</code></pre>
+<h2 id="code-summary">Code Summary</h2>
+<p>You can execute this recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for enriching the data.
+Here is a summary of all those steps (explained in more detail in the sections afterwards).</p>
+<pre><code class="language-sql">-- Stream of orders
+CREATE SOURCE CONNECTOR orders WITH (
+  'connector.class'          = 'SqlServerCdcSource',
+  'name'                     = 'SqlServerCdcSourceConnector_0',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'database.hostname'        = '&lt;db-name&gt;',
+  'database.port'            = '1433',
+  'database.user'            = '&lt;database-username&gt;',
+  'database.password'        = '&lt;database-password&gt;',
+  'database.dbname'          = 'database-name',
+  'database.server.name'     = 'sql',
+  'table.include.list'       ='&lt;table_name&gt;',
+  'snapshot.mode'            = 'initial',
+  'output.data.format'       = 'JSON',
+  'tasks.max'                = '1');
+
+-- Stream of customers
+CREATE SOURCE CONNECTOR customers WITH (
+  'connector.class'          = 'OracleDatabaseSource',
+  'name'                     = 'confluent-oracle-source',
+  'connector.class'          = 'OracleDatabaseSource',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'topic.prefix'             = 'oracle_',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '1521',
+  'connection.user'          = '&lt;database-username&gt;',
+  'connection.password'      = '&lt;database-password&gt;',
+  'db.name'                  = '&lt;db-name&gt;',
+  'table.whitelist'          = 'CUSTOMERS',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UCT',
+  'tasks.max'                = '1');
+
+-- stream of user orders:
+CREATE STREAM orders (
+        ...
+    ) with (
+        kafka_topic = 'orders',
+        value_format = 'json'
+    );
+
+-- Register the existing stream of customer data
+CREATE STREAM CUST_RAW_STREAM (ID BIGINT,
+                               FIRST_NAME VARCHAR,
+                               LAST_NAME VARCHAR,
+                               EMAIL VARCHAR,
+                               COMPANY VARCHAR,
+                               STREET_ADDRESS VARCHAR,
+                               CITY VARCHAR,
+                               COUNTRY VARCHAR)
+              WITH (KAFKA_TOPIC='customers',
+                    VALUE_FORMAT='JSON');
+
+-- Register the customer data topic as a table
+CREATE TABLE customer
+WITH (KAFKA_TOPIC='CUST_RAW_STREAM',
+      VALUE_FORMAT='JSON',
+      KEY='ID');
+
+-- Denormalize data: joining facts (orders) with the dimension (customer)
+CREATE STREAM ORDERS_ENRICHED AS
+    SELECT  O.order_id AS order_id,
+            O.item AS item,
+            O.order_total_usd AS order_total_usd,
+            C.first_name || ' ' || C.last_name AS full_name,
+            C.email AS email,
+            C.company AS company,
+            C.street_address AS street_address,
+            C.city AS city,
+            C.country AS country
+    FROM    ORDERS O
+            LEFT JOIN
+            CUSTOMERS C
+            ON O.customer_id = C.id;
+
+-- Send data to Snowflake
 CREATE SINK CONNECTOR analyzed_clickstream WITH (
   'connector.class'          = 'SnowflakeSink',
   'name'                     = 'snowflake-connector',

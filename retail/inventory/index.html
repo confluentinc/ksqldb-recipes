@@ -84,8 +84,6 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#get-started">Get Started</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#code-summary">Code Summary</a>
-    </li>
     <li class="toctree-l3"><a class="reference internal" href="#step-by-step">Step-by-Step</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#setup-your-environment">Setup your Environment</a>
@@ -95,6 +93,8 @@
     <li class="toctree-l4"><a class="reference internal" href="#run-stream-processing-app">Run stream processing app</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#code-summary">Code Summary</a>
     </li>
     </ul>
                 </li>
@@ -169,51 +169,6 @@ This recipe demonstrates how to use ksqlDB to always have an up-to-date snapshot
 <h2 id="get-started">Get Started</h2>
 <p>Click below to launch this recipe in Confluent Cloud.</p>
 <p><a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a></p>
-<h2 id="code-summary">Code Summary</h2>
-<p>You can execute this recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for enriching the data.
-Here is a summary of all those steps (explained in more detail in the sections afterwards).</p>
-<pre><code class="language-sql">CREATE SOURCE CONNECTOR inventory WITH (
-  'connector.class'          = 'PostgresSource',
-  'name'                     = 'confluent-postgresql-source',
-  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
-  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topic.prefix'             = 'postgresql_',
-  'connection.host'          = '&lt;my-database-endpoint&gt;',
-  'connection.port'          = '5432',
-  'connection.user'          = 'postgres',
-  'connection.password'      = '&lt;my-database-password&gt;',
-  'db.name'                  = 'postgres',
-  'table.whitelist'          = 'passengers',
-  'timestamp.column.name'    = 'created_at',
-  'output.data.format'       = 'JSON',
-  'db.timezone'              = 'UTC',
-  'tasks.max'                = '1');
-
----------------------------------------------------------------------------------------------------
--- Create stream of inventory
----------------------------------------------------------------------------------------------------
-CREATE STREAM inventory_stream (
-        id STRING key,
-        item STRING,
-        quantity INTEGER,
-        price DOUBLE)
-   with (VALUE_FORMAT='json',
-         KAFKA_TOPIC='inventory');
-
----------------------------------------------------------------------------------------------------
--- Create stateful table with up-to-date information of inventory availability
----------------------------------------------------------------------------------------------------
-CREATE TABLE inventory_stream_table
-    WITH (kafka_topic='inventory_table') AS
-    SELECT
-        item,
-        SUM(quantity) AS item_quantity
-    FROM
-        inventory_stream
-    GROUP BY
-        item
-        EMIT CHANGES;
-</code></pre>
 <h2 id="step-by-step">Step-by-Step</h2>
 <h3 id="setup-your-environment">Setup your Environment</h3>
 <p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service, then proceed with the recipe.</p>
@@ -255,6 +210,51 @@ INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('4', 'iPad4', 2
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
 <p>Create a ksqlDB <code>TABLE</code>, which is a mutable, partitioned collection that models change over time that represents what is true as of "now".</p>
 <pre><code class="language-sql">---------------------------------------------------------------------------------------------------
+-- Create stream of inventory
+---------------------------------------------------------------------------------------------------
+CREATE STREAM inventory_stream (
+        id STRING key,
+        item STRING,
+        quantity INTEGER,
+        price DOUBLE)
+   with (VALUE_FORMAT='json',
+         KAFKA_TOPIC='inventory');
+
+---------------------------------------------------------------------------------------------------
+-- Create stateful table with up-to-date information of inventory availability
+---------------------------------------------------------------------------------------------------
+CREATE TABLE inventory_stream_table
+    WITH (kafka_topic='inventory_table') AS
+    SELECT
+        item,
+        SUM(quantity) AS item_quantity
+    FROM
+        inventory_stream
+    GROUP BY
+        item
+        EMIT CHANGES;
+</code></pre>
+<h2 id="code-summary">Code Summary</h2>
+<p>You can execute this recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for enriching the data.
+Here is a summary of all those steps (explained in more detail in the sections afterwards).</p>
+<pre><code class="language-sql">CREATE SOURCE CONNECTOR inventory WITH (
+  'connector.class'          = 'PostgresSource',
+  'name'                     = 'confluent-postgresql-source',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'topic.prefix'             = 'postgresql_',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '5432',
+  'connection.user'          = 'postgres',
+  'connection.password'      = '&lt;my-database-password&gt;',
+  'db.name'                  = 'postgres',
+  'table.whitelist'          = 'passengers',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UTC',
+  'tasks.max'                = '1');
+
+---------------------------------------------------------------------------------------------------
 -- Create stream of inventory
 ---------------------------------------------------------------------------------------------------
 CREATE STREAM inventory_stream (

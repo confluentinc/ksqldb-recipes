@@ -60,8 +60,6 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#get-started">Get Started</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#code-summary">Code Summary</a>
-    </li>
     <li class="toctree-l3"><a class="reference internal" href="#step-by-step">Step-by-step</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#setup-your-environment">Setup your Environment</a>
@@ -73,6 +71,8 @@
     <li class="toctree-l4"><a class="reference internal" href="#write-the-data-out">Write the data out</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#code-summary">Code Summary</a>
     </li>
     </ul>
                 </li>
@@ -177,161 +177,6 @@
 <h2 id="get-started">Get Started</h2>
 <p>Click below to launch this recipe in Confluent Cloud.</p>
 <p><a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a></p>
-<h2 id="code-summary">Code Summary</h2>
-<p>You can execute this recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for enriching the data.
-Here is a summary of all those steps (explained in more detail in the sections afterwards).</p>
-<pre><code class="language-sql">-- Stream of users
-CREATE SOURCE CONNECTOR datagen_clickstream_users WITH (
-  'connector.class'          = 'DatagenSource',
-  'kafka.topic'              = 'clickstream_users',
-  'quickstart'               = 'clickstream_users',
-  'maxInterval'              = '10',
-  'format'                   = 'json',
-  'key.converter'            = 'org.apache.kafka.connect.converters.IntegerConverter');
-
--- Stream of per-user session information
-CREATE SOURCE CONNECTOR datagen_clickstream WITH (
-  'connector.class'          = 'DatagenSource',
-  'kafka.topic'              = 'clickstream',
-  'quickstart'               = 'clickstream',
-  'maxInterval'              = '30',
-  'format'                   = 'json');
-
----------------------------------------------------------------------------------------------------
--- Register sources:
----------------------------------------------------------------------------------------------------
--- stream of user clicks:
-CREATE STREAM clickstream (
-        _time bigint,
-        time varchar,
-        ip varchar,
-        request varchar,
-        status int,
-        userid int,
-        bytes bigint,
-        agent varchar
-    ) with (
-        kafka_topic = 'clickstream',
-        value_format = 'json'
-    );
-
--- users lookup table:
-CREATE TABLE WEB_USERS (
-        user_id int primary key,
-        registered_At BIGINT,
-        username varchar,
-        first_name varchar,
-        last_name varchar,
-        city varchar,
-        level varchar
-    ) with (
-        kafka_topic = 'clickstream_users',
-        value_format = 'json'
-    );
-
----------------------------------------------------------------------------------------------------
--- Build materialized stream views:
----------------------------------------------------------------------------------------------------
-
--- enrich click-stream with more user information:
-CREATE STREAM USER_CLICKSTREAM AS
-    SELECT
-        userid,
-        u.username,
-        ip,
-        u.city,
-        request,
-        status,
-        bytes
-    FROM clickstream c
-        LEFT JOIN web_users u ON c.userid = u.user_id;
-
----------------------------------------------------------------------------------------------------
--- Build materialized table views:
----------------------------------------------------------------------------------------------------
-
--- Per-userId tables -----------------------------------------------------------------------------
-
--- Table of events per minute for each user:
-CREATE table events_per_min AS
-    SELECT
-        userid as k1,
-        AS_VALUE(userid) as userid,
-        WINDOWSTART as EVENT_TS,
-        count(*) AS events
-    FROM clickstream window TUMBLING (size 60 second)
-    GROUP BY userid;
-
--- Table of html pages per minute for each user:
-CREATE TABLE pages_per_min AS
-    SELECT
-        userid as k1,
-        AS_VALUE(userid) as userid,
-        WINDOWSTART as EVENT_TS,
-        count(*) AS pages
-    FROM clickstream WINDOW HOPPING (size 60 second, advance by 5 second)
-    WHERE request like '%html%'
-    GROUP BY userid;
-
--- Per-username tables ----------------------------------------------------------------------------
-
--- User sessions table - 30 seconds of inactivity expires the session
--- Table counts number of events within the session
-CREATE TABLE CLICK_USER_SESSIONS AS
-    SELECT
-        username as K,
-        AS_VALUE(username) as username,
-        WINDOWEND as EVENT_TS,
-        count(*) AS events
-    FROM USER_CLICKSTREAM window SESSION (30 second)
-    GROUP BY username;
-
--- Per-status tables ------------------------------------------------------------------------------
-
--- number of errors per min, using 'HAVING' Filter to show ERROR codes &gt; 400 where count &gt; 5
-CREATE TABLE ERRORS_PER_MIN_ALERT AS
-    SELECT
-        status as k1,
-        AS_VALUE(status) as status,
-        WINDOWSTART as EVENT_TS,
-        count(*) AS errors
-    FROM clickstream window HOPPING (size 60 second, advance by 20 second)
-    WHERE status &gt; 400
-    GROUP BY status
-    HAVING count(*) &gt; 5 AND count(*) is not NULL;
-
--- Enriched user details table:
--- Aggregate (count&amp;groupBy) using a TABLE-Window
-CREATE TABLE USER_IP_ACTIVITY WITH (key_format='json') AS
-    SELECT
-        username as k1,
-        ip as k2,
-        city as k3,
-        AS_VALUE(username) as username,
-        WINDOWSTART as EVENT_TS,
-        AS_VALUE(ip) as ip,
-        AS_VALUE(city) as city,
-        COUNT(*) AS count
-    FROM USER_CLICKSTREAM WINDOW TUMBLING (size 60 second)
-    GROUP BY username, ip, city
-    HAVING COUNT(*) &gt; 1;
-
--- Send data to Elasticsearch
-CREATE SINK CONNECTOR analyzed_clickstream WITH (
-  'connector.class'          = 'ElasticsearchSink',
-  'name'                     = 'elasticsearch-connector',
-  'input.data.format'        = 'JSON',
-  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
-  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topics'                   = 'USER_IP_ACTIVITY, ENRICHED_ERROR_CODES_COUNT',
-  'connection.url'           = '&lt;elasticsearch-URI&gt;',
-  'connection.user'          = '&lt;elasticsearch-username&gt;',
-  'connection.password'      = '&lt;elasticsearch-password&gt;',
-  'type.name'                = 'type.name=kafkaconnect',
-  'key.ignore'               = 'true',
-  'schema.ignore'            = 'true'
-);
-</code></pre>
 <h2 id="step-by-step">Step-by-step</h2>
 <h3 id="setup-your-environment">Setup your Environment</h3>
 <p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service, then proceed with the recipe.</p>
@@ -482,6 +327,161 @@ CREATE TABLE USER_IP_ACTIVITY WITH (key_format='json') AS
 <h3 id="write-the-data-out">Write the data out</h3>
 <p>After processing the data, send it to Elasticsearch.</p>
 <pre><code class="language-sql">-- Send data to Elasticsearch
+CREATE SINK CONNECTOR analyzed_clickstream WITH (
+  'connector.class'          = 'ElasticsearchSink',
+  'name'                     = 'elasticsearch-connector',
+  'input.data.format'        = 'JSON',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'topics'                   = 'USER_IP_ACTIVITY, ENRICHED_ERROR_CODES_COUNT',
+  'connection.url'           = '&lt;elasticsearch-URI&gt;',
+  'connection.user'          = '&lt;elasticsearch-username&gt;',
+  'connection.password'      = '&lt;elasticsearch-password&gt;',
+  'type.name'                = 'type.name=kafkaconnect',
+  'key.ignore'               = 'true',
+  'schema.ignore'            = 'true'
+);
+</code></pre>
+<h2 id="code-summary">Code Summary</h2>
+<p>You can execute this recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for enriching the data.
+Here is a summary of all those steps (explained in more detail in the sections afterwards).</p>
+<pre><code class="language-sql">-- Stream of users
+CREATE SOURCE CONNECTOR datagen_clickstream_users WITH (
+  'connector.class'          = 'DatagenSource',
+  'kafka.topic'              = 'clickstream_users',
+  'quickstart'               = 'clickstream_users',
+  'maxInterval'              = '10',
+  'format'                   = 'json',
+  'key.converter'            = 'org.apache.kafka.connect.converters.IntegerConverter');
+
+-- Stream of per-user session information
+CREATE SOURCE CONNECTOR datagen_clickstream WITH (
+  'connector.class'          = 'DatagenSource',
+  'kafka.topic'              = 'clickstream',
+  'quickstart'               = 'clickstream',
+  'maxInterval'              = '30',
+  'format'                   = 'json');
+
+---------------------------------------------------------------------------------------------------
+-- Register sources:
+---------------------------------------------------------------------------------------------------
+-- stream of user clicks:
+CREATE STREAM clickstream (
+        _time bigint,
+        time varchar,
+        ip varchar,
+        request varchar,
+        status int,
+        userid int,
+        bytes bigint,
+        agent varchar
+    ) with (
+        kafka_topic = 'clickstream',
+        value_format = 'json'
+    );
+
+-- users lookup table:
+CREATE TABLE WEB_USERS (
+        user_id int primary key,
+        registered_At BIGINT,
+        username varchar,
+        first_name varchar,
+        last_name varchar,
+        city varchar,
+        level varchar
+    ) with (
+        kafka_topic = 'clickstream_users',
+        value_format = 'json'
+    );
+
+---------------------------------------------------------------------------------------------------
+-- Build materialized stream views:
+---------------------------------------------------------------------------------------------------
+
+-- enrich click-stream with more user information:
+CREATE STREAM USER_CLICKSTREAM AS
+    SELECT
+        userid,
+        u.username,
+        ip,
+        u.city,
+        request,
+        status,
+        bytes
+    FROM clickstream c
+        LEFT JOIN web_users u ON c.userid = u.user_id;
+
+---------------------------------------------------------------------------------------------------
+-- Build materialized table views:
+---------------------------------------------------------------------------------------------------
+
+-- Per-userId tables -----------------------------------------------------------------------------
+
+-- Table of events per minute for each user:
+CREATE table events_per_min AS
+    SELECT
+        userid as k1,
+        AS_VALUE(userid) as userid,
+        WINDOWSTART as EVENT_TS,
+        count(*) AS events
+    FROM clickstream window TUMBLING (size 60 second)
+    GROUP BY userid;
+
+-- Table of html pages per minute for each user:
+CREATE TABLE pages_per_min AS
+    SELECT
+        userid as k1,
+        AS_VALUE(userid) as userid,
+        WINDOWSTART as EVENT_TS,
+        count(*) AS pages
+    FROM clickstream WINDOW HOPPING (size 60 second, advance by 5 second)
+    WHERE request like '%html%'
+    GROUP BY userid;
+
+-- Per-username tables ----------------------------------------------------------------------------
+
+-- User sessions table - 30 seconds of inactivity expires the session
+-- Table counts number of events within the session
+CREATE TABLE CLICK_USER_SESSIONS AS
+    SELECT
+        username as K,
+        AS_VALUE(username) as username,
+        WINDOWEND as EVENT_TS,
+        count(*) AS events
+    FROM USER_CLICKSTREAM window SESSION (30 second)
+    GROUP BY username;
+
+-- Per-status tables ------------------------------------------------------------------------------
+
+-- number of errors per min, using 'HAVING' Filter to show ERROR codes &gt; 400 where count &gt; 5
+CREATE TABLE ERRORS_PER_MIN_ALERT AS
+    SELECT
+        status as k1,
+        AS_VALUE(status) as status,
+        WINDOWSTART as EVENT_TS,
+        count(*) AS errors
+    FROM clickstream window HOPPING (size 60 second, advance by 20 second)
+    WHERE status &gt; 400
+    GROUP BY status
+    HAVING count(*) &gt; 5 AND count(*) is not NULL;
+
+-- Enriched user details table:
+-- Aggregate (count&amp;groupBy) using a TABLE-Window
+CREATE TABLE USER_IP_ACTIVITY WITH (key_format='json') AS
+    SELECT
+        username as k1,
+        ip as k2,
+        city as k3,
+        AS_VALUE(username) as username,
+        WINDOWSTART as EVENT_TS,
+        AS_VALUE(ip) as ip,
+        AS_VALUE(city) as city,
+        COUNT(*) AS count
+    FROM USER_CLICKSTREAM WINDOW TUMBLING (size 60 second)
+    GROUP BY username, ip, city
+    HAVING COUNT(*) &gt; 1;
+
+-- Send data to Elasticsearch
 CREATE SINK CONNECTOR analyzed_clickstream WITH (
   'connector.class'          = 'ElasticsearchSink',
   'name'                     = 'elasticsearch-connector',
