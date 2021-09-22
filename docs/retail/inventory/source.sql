@@ -1,6 +1,6 @@
 CREATE SOURCE CONNECTOR inventory WITH (
   'connector.class'          = 'PostgresSource',
-  'name'                     = 'confluent-postgresql-source',
+  'name'                     = 'recipe-postgres-inventory',
   'kafka.api.key'            = '<my-kafka-api-key>',
   'kafka.api.secret'         = '<my-kafka-api-secret>',
   'connection.host'          = '<my-database-endpoint>',
