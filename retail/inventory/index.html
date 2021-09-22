@@ -192,7 +192,7 @@ The principles are the same, just modify the connector configuration shown below
 This creates a stream of events, where each event results in the addition or removal of inventory.</p>
 <pre><code class="language-sql">CREATE SOURCE CONNECTOR inventory WITH (
   'connector.class'          = 'PostgresSource',
-  'name'                     = 'confluent-postgresql-source',
+  'name'                     = 'recipe-postgres-inventory',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
   'connection.host'          = '&lt;my-database-endpoint&gt;',
@@ -249,7 +249,7 @@ INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('4', 'iPad4', 2
 <p>Here is a complete view of all the recipe steps explained above.</p>
 <pre><code class="language-sql">CREATE SOURCE CONNECTOR inventory WITH (
   'connector.class'          = 'PostgresSource',
-  'name'                     = 'confluent-postgresql-source',
+  'name'                     = 'recipe-postgres-inventory',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
   'connection.host'          = '&lt;my-database-endpoint&gt;',

@@ -196,7 +196,7 @@ The principles are the same, just modify the connector configuration shown below
 <pre><code class="language-sql">-- Stream of orders
 CREATE SOURCE CONNECTOR orders WITH (
   'connector.class'          = 'SqlServerCdcSource',
-  'name'                     = 'SqlServerCdcSourceConnector_0',
+  'name'                     = 'recipe-sqlservercdc-orders',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
   'database.hostname'        = '&lt;db-name&gt;',
@@ -213,7 +213,7 @@ CREATE SOURCE CONNECTOR orders WITH (
 -- Stream of customers
 CREATE SOURCE CONNECTOR customers WITH (
   'connector.class'          = 'OracleDatabaseSource',
-  'name'                     = 'confluent-oracle-source',
+  'name'                     = 'recipe-oracle-customers',
   'connector.class'          = 'OracleDatabaseSource',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
@@ -276,12 +276,12 @@ CREATE STREAM ORDERS_ENRICHED AS
 <h3 id="write-the-data-out">Write the data out</h3>
 <p>Any downstream application or database can receive the denormalized data.</p>
 <pre><code class="language-sql">-- Send data to Snowflake
-CREATE SINK CONNECTOR analyzed_clickstream WITH (
+CREATE SINK CONNECTOR orders_enriched WITH (
   'connector.class'          = 'SnowflakeSink',
-  'name'                     = 'snowflake-connector',
+  'name'                     = 'recipe-snowflake-analyzed_clickstream',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topics'                   = '&lt;topic1&gt;, &lt;topic2&gt;',
+  'topics'                   = 'ORDERS_ENRICHED',
   'input.data.format'        = 'JSON',
   'snowflake.url.name'       = 'https=//wm83168.us-central1.gcp.snowflakecomputing.com=443',
   'snowflake.user.name'      = '&lt;login-username&gt;',
@@ -295,7 +295,7 @@ CREATE SINK CONNECTOR analyzed_clickstream WITH (
 <pre><code class="language-sql">-- Stream of orders
 CREATE SOURCE CONNECTOR orders WITH (
   'connector.class'          = 'SqlServerCdcSource',
-  'name'                     = 'SqlServerCdcSourceConnector_0',
+  'name'                     = 'recipe-sqlservercdc-orders',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
   'database.hostname'        = '&lt;db-name&gt;',
@@ -312,7 +312,7 @@ CREATE SOURCE CONNECTOR orders WITH (
 -- Stream of customers
 CREATE SOURCE CONNECTOR customers WITH (
   'connector.class'          = 'OracleDatabaseSource',
-  'name'                     = 'confluent-oracle-source',
+  'name'                     = 'recipe-oracle-customers',
   'connector.class'          = 'OracleDatabaseSource',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
@@ -371,12 +371,12 @@ CREATE STREAM ORDERS_ENRICHED AS
             ON O.customer_id = C.id;
 
 -- Send data to Snowflake
-CREATE SINK CONNECTOR analyzed_clickstream WITH (
+CREATE SINK CONNECTOR orders_enriched WITH (
   'connector.class'          = 'SnowflakeSink',
-  'name'                     = 'snowflake-connector',
+  'name'                     = 'recipe-snowflake-analyzed_clickstream',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topics'                   = '&lt;topic1&gt;, &lt;topic2&gt;',
+  'topics'                   = 'ORDERS_ENRICHED',
   'input.data.format'        = 'JSON',
   'snowflake.url.name'       = 'https=//wm83168.us-central1.gcp.snowflakecomputing.com=443',
   'snowflake.user.name'      = '&lt;login-username&gt;',

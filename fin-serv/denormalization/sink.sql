@@ -1,10 +1,10 @@
 -- Send data to Snowflake
-CREATE SINK CONNECTOR analyzed_clickstream WITH (
+CREATE SINK CONNECTOR orders_enriched WITH (
   'connector.class'          = 'SnowflakeSink',
-  'name'                     = 'snowflake-connector',
+  'name'                     = 'recipe-snowflake-analyzed_clickstream',
   'kafka.api.key'            = '<my-kafka-api-key>',
   'kafka.api.secret'         = '<my-kafka-api-secret>',
-  'topics'                   = '<topic1>, <topic2>',
+  'topics'                   = 'ORDERS_ENRICHED',
   'input.data.format'        = 'JSON',
   'snowflake.url.name'       = 'https=//wm83168.us-central1.gcp.snowflakecomputing.com=443',
   'snowflake.user.name'      = '<login-username>',

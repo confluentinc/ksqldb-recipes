@@ -340,7 +340,7 @@ CREATE TABLE USER_IP_ACTIVITY WITH (key_format='json') AS
 <pre><code class="language-sql">-- Send data to Elasticsearch
 CREATE SINK CONNECTOR analyzed_clickstream WITH (
   'connector.class'          = 'ElasticsearchSink',
-  'name'                     = 'elasticsearch-connector',
+  'name'                     = 'recipe-elasticsearch-analyzed_clickstream',
   'input.data.format'        = 'JSON',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
@@ -494,7 +494,7 @@ CREATE TABLE USER_IP_ACTIVITY WITH (key_format='json') AS
 -- Send data to Elasticsearch
 CREATE SINK CONNECTOR analyzed_clickstream WITH (
   'connector.class'          = 'ElasticsearchSink',
-  'name'                     = 'elasticsearch-connector',
+  'name'                     = 'recipe-elasticsearch-analyzed_clickstream',
   'input.data.format'        = 'JSON',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',

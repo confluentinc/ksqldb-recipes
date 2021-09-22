@@ -192,7 +192,7 @@ The principles are the same, just modify the connector configuration shown below
 <pre><code class="language-sql">-- Stream of fleet descriptions
 CREATE SOURCE CONNECTOR fleet_description WITH (
   'connector.class'          = 'MongoDbAtlasSource',
-  'name'                     = '&lt;my-connector-name&gt;',
+  'name'                     = 'recipe-mongodb-fleet_description',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
   'connection.host'          = '&lt;database-host-address&gt;',
@@ -209,7 +209,7 @@ CREATE SOURCE CONNECTOR fleet_description WITH (
 -- Stream of current location of each vehicle in the fleet
 CREATE SOURCE CONNECTOR fleet_location WITH (
   'connector.class'          = 'PostgresSource',
-  'name'                     = 'confluent-postgresql-source',
+  'name'                     = 'recipe-postgres-fleet_location',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
   'connection.host'          = '&lt;my-database-endpoint&gt;',
@@ -276,7 +276,7 @@ INSERT INTO description (vehicle_id, driver_id, license_plate) VALUES (5403, 435
 <pre><code class="language-sql">-- Stream of fleet descriptions
 CREATE SOURCE CONNECTOR fleet_description WITH (
   'connector.class'          = 'MongoDbAtlasSource',
-  'name'                     = '&lt;my-connector-name&gt;',
+  'name'                     = 'recipe-mongodb-fleet_description',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
   'connection.host'          = '&lt;database-host-address&gt;',
@@ -293,7 +293,7 @@ CREATE SOURCE CONNECTOR fleet_description WITH (
 -- Stream of current location of each vehicle in the fleet
 CREATE SOURCE CONNECTOR fleet_location WITH (
   'connector.class'          = 'PostgresSource',
-  'name'                     = 'confluent-postgresql-source',
+  'name'                     = 'recipe-postgres-fleet_location',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
   'connection.host'          = '&lt;my-database-endpoint&gt;',

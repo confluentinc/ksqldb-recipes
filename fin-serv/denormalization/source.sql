@@ -1,7 +1,7 @@
 -- Stream of orders
 CREATE SOURCE CONNECTOR orders WITH (
   'connector.class'          = 'SqlServerCdcSource',
-  'name'                     = 'SqlServerCdcSourceConnector_0',
+  'name'                     = 'recipe-sqlservercdc-orders',
   'kafka.api.key'            = '<my-kafka-api-key>',
   'kafka.api.secret'         = '<my-kafka-api-secret>',
   'database.hostname'        = '<db-name>',
@@ -18,7 +18,7 @@ CREATE SOURCE CONNECTOR orders WITH (
 -- Stream of customers
 CREATE SOURCE CONNECTOR customers WITH (
   'connector.class'          = 'OracleDatabaseSource',
-  'name'                     = 'confluent-oracle-source',
+  'name'                     = 'recipe-oracle-customers',
   'connector.class'          = 'OracleDatabaseSource',
   'kafka.api.key'            = '<my-kafka-api-key>',
   'kafka.api.secret'         = '<my-kafka-api-secret>',
