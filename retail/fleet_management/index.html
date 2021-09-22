@@ -190,20 +190,19 @@ The principles are the same, just modify the connector configuration shown below
 <p>TODO</p>
 <pre><code class="language-sql">-- Stream of fleet descriptions
 CREATE SOURCE CONNECTOR fleet_description WITH (
-  'connector.class'          = 'PostgresSource',
-  'name'                     = 'confluent-postgresql-source',
+  'connector.class'          = 'MongoDbAtlasSource',
+  'name'                     = '&lt;my-connector-name&gt;',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topic.prefix'             = 'postgresql_',
-  'connection.host'          = '&lt;my-database-endpoint&gt;',
-  'connection.port'          = '5432',
-  'connection.user'          = 'postgres',
-  'connection.password'      = '&lt;my-database-password&gt;',
-  'db.name'                  = 'postgres',
-  'table.whitelist'          = 'fleet_description',
-  'timestamp.column.name'    = 'created_at',
-  'output.data.format'       = 'JSON',
-  'db.timezone'              = 'UTC',
+  'connection.host'          = '&lt;database-host-address&gt;',
+  'connection.user'          = '&lt;database-username&gt;',
+  'connection.password'      = '&lt;database-password&gt;',
+  'database'                 = '&lt;database-name&gt;',
+  'collection'               = '&lt;database-collection-name&gt;',
+  'poll.await.time.ms'       = '5000',
+  'poll.max.batch.size'      = '1000',
+  'copy.existing'            = 'true',
+  'output.data.format'       = 'JSON'
   'tasks.max'                = '1');
 
 -- Stream of current location of each vehicle in the fleet
@@ -212,12 +211,11 @@ CREATE SOURCE CONNECTOR fleet_location WITH (
   'name'                     = 'confluent-postgresql-source',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topic.prefix'             = 'postgresql_',
   'connection.host'          = '&lt;my-database-endpoint&gt;',
   'connection.port'          = '5432',
   'connection.user'          = 'postgres',
   'connection.password'      = '&lt;my-database-password&gt;',
-  'db.name'                  = 'postgres',
+  'db.name'                  = '&lt;db-name&gt;',
   'table.whitelist'          = 'fleet_location',
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
@@ -244,8 +242,8 @@ CREATE STREAM locations (
 -- fleet lookup table:
 CREATE TABLE fleet (
         vehicle_id int,
-        driver_last_name varchar,
-        license_plate varchar
+        driver_id int,
+        license bigint
     ) with (
         kafka_topic = 'descriptions',
         value_format = 'json'
@@ -258,8 +256,8 @@ CREATE STREAM fleet_location_enhanced AS
         latitude,
         longitude,
         timestamp,
-        f.driver_laste_name,
-        f.license_plate
+        f.driver_id,
+        f.license
     FROM locations l
         LEFT JOIN fleet f ON l.vehicle_id = f.vehicle_id;
 </code></pre>
@@ -268,28 +266,27 @@ CREATE STREAM fleet_location_enhanced AS
 INSERT INTO location (vehicle_id, latitude, longitude, timestamp) VALUES (5401, 16.004175, 120.7806412, '2021-09-27T06:39:00.000Z');
 INSERT INTO location (vehicle_id, latitude, longitude, timestamp) VALUES (5402, 32.755613, 22.6377432, '2021-09-25T20:22:00.000Z');
 
-INSERT INTO description (vehicle_id, driver_last_name, license_plate) VALUES (5401, 'Smith', 'D873UUX');
-INSERT INTO description (vehicle_id, driver_last_name, license_plate) VALUES (5402, 'Roe', 'E333YAD');
-INSERT INTO description (vehicle_id, driver_last_name, license_plate) VALUES (5403, 'Panther', 'R192BLP');
+INSERT INTO description (vehicle_id, driver_id, license_plate) VALUES (5401, 847383, 8852693196);
+INSERT INTO description (vehicle_id, driver_id, license_plate) VALUES (5402, 922947, 1255144201);
+INSERT INTO description (vehicle_id, driver_id, license_plate) VALUES (5403, 435309, 2132311746);
 </code></pre>
 <h2 id="full-ksqldb-statements">Full ksqlDB Statements</h2>
 <p>Here is a complete view of all the recipe steps explained above.</p>
 <pre><code class="language-sql">-- Stream of fleet descriptions
 CREATE SOURCE CONNECTOR fleet_description WITH (
-  'connector.class'          = 'PostgresSource',
-  'name'                     = 'confluent-postgresql-source',
+  'connector.class'          = 'MongoDbAtlasSource',
+  'name'                     = '&lt;my-connector-name&gt;',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topic.prefix'             = 'postgresql_',
-  'connection.host'          = '&lt;my-database-endpoint&gt;',
-  'connection.port'          = '5432',
-  'connection.user'          = 'postgres',
-  'connection.password'      = '&lt;my-database-password&gt;',
-  'db.name'                  = 'postgres',
-  'table.whitelist'          = 'fleet_description',
-  'timestamp.column.name'    = 'created_at',
-  'output.data.format'       = 'JSON',
-  'db.timezone'              = 'UTC',
+  'connection.host'          = '&lt;database-host-address&gt;',
+  'connection.user'          = '&lt;database-username&gt;',
+  'connection.password'      = '&lt;database-password&gt;',
+  'database'                 = '&lt;database-name&gt;',
+  'collection'               = '&lt;database-collection-name&gt;',
+  'poll.await.time.ms'       = '5000',
+  'poll.max.batch.size'      = '1000',
+  'copy.existing'            = 'true',
+  'output.data.format'       = 'JSON'
   'tasks.max'                = '1');
 
 -- Stream of current location of each vehicle in the fleet
@@ -298,12 +295,11 @@ CREATE SOURCE CONNECTOR fleet_location WITH (
   'name'                     = 'confluent-postgresql-source',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topic.prefix'             = 'postgresql_',
   'connection.host'          = '&lt;my-database-endpoint&gt;',
   'connection.port'          = '5432',
   'connection.user'          = 'postgres',
   'connection.password'      = '&lt;my-database-password&gt;',
-  'db.name'                  = 'postgres',
+  'db.name'                  = '&lt;db-name&gt;',
   'table.whitelist'          = 'fleet_location',
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
@@ -327,8 +323,8 @@ CREATE STREAM locations (
 -- fleet lookup table:
 CREATE TABLE fleet (
         vehicle_id int,
-        driver_last_name varchar,
-        license_plate varchar
+        driver_id int,
+        license bigint
     ) with (
         kafka_topic = 'descriptions',
         value_format = 'json'
@@ -341,8 +337,8 @@ CREATE STREAM fleet_location_enhanced AS
         latitude,
         longitude,
         timestamp,
-        f.driver_laste_name,
-        f.license_plate
+        f.driver_id,
+        f.license
     FROM locations l
         LEFT JOIN fleet f ON l.vehicle_id = f.vehicle_id;
 </code></pre>
