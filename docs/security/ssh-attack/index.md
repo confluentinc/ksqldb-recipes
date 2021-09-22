@@ -16,7 +16,7 @@ With ksqlDB, you can filter and react to events in real time rather than perform
 
 ## Get Started
 
-Click below to launch this recipe in Confluent Cloud.
+--8<-- "docs/shared/ccloud_launch.md"
 
 <a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
 

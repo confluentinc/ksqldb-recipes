@@ -15,7 +15,7 @@ This recipe analyzes total credit card spend, and if it's more than the average 
 
 ## Get Started
 
-Click below to launch this recipe in Confluent Cloud.
+--8<-- "docs/shared/ccloud_launch.md"
 
 <a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
 

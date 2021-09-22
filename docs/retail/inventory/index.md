@@ -13,7 +13,7 @@ This recipe demonstrates how to use ksqlDB to always have an up-to-date snapshot
 
 ## Get Started
 
-Click below to launch this recipe in Confluent Cloud.
+--8<-- "docs/shared/ccloud_launch.md"
 
 <a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
 
