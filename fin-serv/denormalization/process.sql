@@ -1,6 +1,6 @@
 -- stream of user orders:
 CREATE STREAM orders (
-        ...
+        ...TODO...
     ) with (
         kafka_topic = 'orders',
         value_format = 'json'

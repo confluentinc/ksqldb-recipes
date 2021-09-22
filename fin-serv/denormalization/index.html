@@ -233,7 +233,7 @@ CREATE SOURCE CONNECTOR customers WITH (
 <p>This streams the user orders and denormalizes the data by joining facts (orders) with the dimension (customer).</p>
 <pre><code class="language-sql">-- stream of user orders:
 CREATE STREAM orders (
-        ...
+        ...TODO...
     ) with (
         kafka_topic = 'orders',
         value_format = 'json'
@@ -330,7 +330,7 @@ CREATE SOURCE CONNECTOR customers WITH (
 
 -- stream of user orders:
 CREATE STREAM orders (
-        ...
+        ...TODO...
     ) with (
         kafka_topic = 'orders',
         value_format = 'json'
