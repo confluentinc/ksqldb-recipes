@@ -53,7 +53,7 @@ Any downstream application or database can receive the denormalized data.
 --8<-- "docs/fin-serv/denormalization/sink.sql"
 ```
 
-## Code Summary
+## Full ksqlDB Statements
 
 --8<-- "docs/shared/code_summary.md"
 

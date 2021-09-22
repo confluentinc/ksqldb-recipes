@@ -67,7 +67,7 @@ There are many ways to customize the resulting stream to fit the business needs:
 --8<-- "docs/security/ssh-attack/process.sql"
 ```
 
-## Code Summary
+## Full ksqlDB Statements
 
 --8<-- "docs/shared/code_summary.md"
 

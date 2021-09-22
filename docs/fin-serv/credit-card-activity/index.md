@@ -43,7 +43,7 @@ Now you can process the data in a variety of ways.
 --8<-- "docs/fin-serv/credit-card-activity/process.sql"
 ```
 
-## Code Summary
+## Full ksqlDB Statements
 
 --8<-- "docs/shared/code_summary.md"
 

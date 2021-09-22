@@ -9,6 +9,7 @@ toc:
   - title: Retail
     items:
       - retail/inventory
+      - retail/fleet_management
   - title: Security
     items:
       - security/ssh-attack
