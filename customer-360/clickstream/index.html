@@ -72,7 +72,7 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#code-summary">Code Summary</a>
+    <li class="toctree-l3"><a class="reference internal" href="#full-ksqldb-statements">Full ksqlDB Statements</a>
     </li>
     </ul>
                 </li>
@@ -96,6 +96,12 @@
                 </ul>
                 <p class="caption"><span class="caption-text">Retail</span></p>
                 <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Fleet management</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../retail/fleet_management/">Fleet Management</a>
+                </li>
+    </ul>
+                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Inventory</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../../retail/inventory/">Real-time Inventory</a>
@@ -121,6 +127,8 @@
                     <li class="toctree-l1"><a class="reference internal" href="../../shared/code_summary/">Code summary</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../shared/connect/">Connect</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../shared/manual_cue/">Manual cue</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../shared/manual_insert/">Manual insert</a>
                     </li>
@@ -345,8 +353,8 @@ CREATE SINK CONNECTOR analyzed_clickstream WITH (
   'schema.ignore'            = 'true'
 );
 </code></pre>
-<h2 id="code-summary">Code Summary</h2>
-<p>Here is a summary of all the recipe steps explained above.</p>
+<h2 id="full-ksqldb-statements">Full ksqlDB Statements</h2>
+<p>Here is a complete view of all the recipe steps explained above.</p>
 <pre><code class="language-sql">-- Stream of users
 CREATE SOURCE CONNECTOR datagen_clickstream_users WITH (
   'connector.class'          = 'DatagenSource',

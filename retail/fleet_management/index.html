@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Real-time Inventory - ksqlDB Recipes</title>
+  <title>Fleet Management - ksqlDB Recipes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Real-time Inventory";
-    var mkdocs_page_input_path = "retail/inventory/index.md";
+    var mkdocs_page_name = "Fleet Management";
+    var mkdocs_page_input_path = "retail/fleet_management/index.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -76,21 +76,15 @@
                 </ul>
                 <p class="caption"><span class="caption-text">Retail</span></p>
                 <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="#">Fleet management</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../fleet_management/">Fleet Management</a>
-                </li>
-    </ul>
-                    </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Inventory</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Fleet management</a>
     <ul class="current">
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">Real-time Inventory</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Fleet Management</a>
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#what-is-it">What is it?</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#get-started">Get Started</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#step-by-step">Step-by-Step</a>
+    <li class="toctree-l3"><a class="reference internal" href="#step-by-step">Step-by-step</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#setup-your-environment">Setup your Environment</a>
     </li>
@@ -103,6 +97,12 @@
     <li class="toctree-l3"><a class="reference internal" href="#full-ksqldb-statements">Full ksqlDB Statements</a>
     </li>
     </ul>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Inventory</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../inventory/">Real-time Inventory</a>
                 </li>
     </ul>
                     </li>
@@ -156,11 +156,11 @@
         
       
         
-          <li>Inventory &raquo;</li>
+          <li>Fleet management &raquo;</li>
         
       
     
-    <li>Real-time Inventory</li>
+    <li>Fleet Management</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -172,15 +172,14 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="real-time-inventory">Real-time Inventory</h1>
+                <h1 id="fleet-management">Fleet Management</h1>
 <h2 id="what-is-it">What is it?</h2>
-<p>Having an up-to-date view of inventory on every item is essential in today's online marketplaces.
-This helps businesses maintain the right amount of inventory—not too much and not too little—so that they can meet demand while minimizing costs.
-This recipe demonstrates how to update inventory in real time and always have an up-to-date snapshot of your stock.</p>
+<p>More and more fleet management relies on knowing real-time information on vehicles, their locations, and vehicle telemetry.
+This enables businesses to improve route efficiency, fuel efficiency, automate service schedules, etc.</p>
 <h2 id="get-started">Get Started</h2>
 <p>Click below to automatically launch this recipe in Confluent Cloud (alternatively: follow the step-by-step instructions that follow).</p>
 <p><a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a></p>
-<h2 id="step-by-step">Step-by-Step</h2>
+<h2 id="step-by-step">Step-by-step</h2>
 <h3 id="setup-your-environment">Setup your Environment</h3>
 <p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service.</p>
 <p>Then proceed with the recipe, which can be executed with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for processing the data.</p>
@@ -188,9 +187,9 @@ This recipe demonstrates how to update inventory in real time and always have an
 <p>Confluent Cloud offers pre-built, fully managed, Apache Kafka® Connectors that make it easy to instantly connect to popular data sources in the cloud.
 You can use any connector, substitute your own preferred one for getting data into Confluent Cloud.
 The principles are the same, just modify the connector configuration shown below to fit your data source, see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a> for details.</p>
-<p>For this recipe, we are interested in knowing each event for an item that affects its quantity.
-This creates a stream of events, where each event results in the addition or removal of inventory.</p>
-<pre><code class="language-sql">CREATE SOURCE CONNECTOR inventory WITH (
+<p>TODO</p>
+<pre><code class="language-sql">-- Stream of fleet descriptions
+CREATE SOURCE CONNECTOR fleet_description WITH (
   'connector.class'          = 'PostgresSource',
   'name'                     = 'confluent-postgresql-source',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
@@ -201,7 +200,25 @@ This creates a stream of events, where each event results in the addition or rem
   'connection.user'          = 'postgres',
   'connection.password'      = '&lt;my-database-password&gt;',
   'db.name'                  = 'postgres',
-  'table.whitelist'          = 'passengers',
+  'table.whitelist'          = 'fleet_description',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UTC',
+  'tasks.max'                = '1');
+
+-- Stream of current location of each vehicle in the fleet
+CREATE SOURCE CONNECTOR fleet_location WITH (
+  'connector.class'          = 'PostgresSource',
+  'name'                     = 'confluent-postgresql-source',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'topic.prefix'             = 'postgresql_',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '5432',
+  'connection.user'          = 'postgres',
+  'connection.password'      = '&lt;my-database-password&gt;',
+  'db.name'                  = 'postgres',
+  'table.whitelist'          = 'fleet_location',
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UTC',
@@ -209,46 +226,56 @@ This creates a stream of events, where each event results in the addition or rem
 </code></pre>
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  You can manually insert values into the source streams in the next section.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
-<p>Create a ksqlDB <code>TABLE</code>, which is a mutable, partitioned collection that models change over time that represents what is true as of "now".</p>
+<p>TODO</p>
 <pre><code class="language-sql">---------------------------------------------------------------------------------------------------
--- Create stream of inventory
+-- Register sources:
 ---------------------------------------------------------------------------------------------------
-CREATE STREAM inventory_stream (
-        id STRING key,
-        item STRING,
-        quantity INTEGER,
-        price DOUBLE)
-   with (VALUE_FORMAT='json',
-         KAFKA_TOPIC='inventory');
+-- stream of locations:
+CREATE STREAM locations (
+        vehicle_id int,
+        latitude float,
+        longitude float,
+        timestamp varchar
+    ) with (
+        kafka_topic = 'locations',
+        value_format = 'json'
+    );
 
----------------------------------------------------------------------------------------------------
--- Create stateful table with up-to-date information of inventory availability
----------------------------------------------------------------------------------------------------
-CREATE TABLE inventory_stream_table
-    WITH (kafka_topic='inventory_table') AS
+-- fleet lookup table:
+CREATE TABLE fleet (
+        vehicle_id int,
+        driver_last_name varchar,
+        license_plate varchar
+    ) with (
+        kafka_topic = 'descriptions',
+        value_format = 'json'
+    );
+
+-- enrich fleet location stream with more fleet information:
+CREATE STREAM fleet_location_enhanced AS
     SELECT
-        item,
-        SUM(quantity) AS item_quantity
-    FROM
-        inventory_stream
-    GROUP BY
-        item
-        EMIT CHANGES;
+        vehicle_id,
+        latitude,
+        longitude,
+        timestamp,
+        f.driver_laste_name,
+        f.license_plate
+    FROM locations l
+        LEFT JOIN fleet f ON l.vehicle_id = f.vehicle_id;
 </code></pre>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
-<pre><code class="language-sql">INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('1', 'Apple Magic Mouse 2', 10, 99.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('2', 'iPhoneX', 25, 999.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('3', 'MacBookPro13', 100, 1799.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('4', 'iPad4', 20, 340.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('5', 'Apple Pencil', 10, 79.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('5', 'PhoneX', 10, 899.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('4', 'iPad4', -20, 399.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('3', 'MacBookPro13', 10, 1899.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('4', 'iPad4', 20, 399.00);
+<pre><code class="language-sql">INSERT INTO location (vehicle_id, latitude, longitude, timestamp) VALUES (5401, 16.7587537, 96.2482149, '2021-09-23T10:50:00.000Z');
+INSERT INTO location (vehicle_id, latitude, longitude, timestamp) VALUES (5401, 16.004175, 120.7806412, '2021-09-27T06:39:00.000Z');
+INSERT INTO location (vehicle_id, latitude, longitude, timestamp) VALUES (5402, 32.755613, 22.6377432, '2021-09-25T20:22:00.000Z');
+
+INSERT INTO description (vehicle_id, driver_last_name, license_plate) VALUES (5401, 'Smith', 'D873UUX');
+INSERT INTO description (vehicle_id, driver_last_name, license_plate) VALUES (5402, 'Roe', 'E333YAD');
+INSERT INTO description (vehicle_id, driver_last_name, license_plate) VALUES (5403, 'Panther', 'R192BLP');
 </code></pre>
 <h2 id="full-ksqldb-statements">Full ksqlDB Statements</h2>
 <p>Here is a complete view of all the recipe steps explained above.</p>
-<pre><code class="language-sql">CREATE SOURCE CONNECTOR inventory WITH (
+<pre><code class="language-sql">-- Stream of fleet descriptions
+CREATE SOURCE CONNECTOR fleet_description WITH (
   'connector.class'          = 'PostgresSource',
   'name'                     = 'confluent-postgresql-source',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
@@ -259,36 +286,65 @@ INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('4', 'iPad4', 2
   'connection.user'          = 'postgres',
   'connection.password'      = '&lt;my-database-password&gt;',
   'db.name'                  = 'postgres',
-  'table.whitelist'          = 'passengers',
+  'table.whitelist'          = 'fleet_description',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UTC',
+  'tasks.max'                = '1');
+
+-- Stream of current location of each vehicle in the fleet
+CREATE SOURCE CONNECTOR fleet_location WITH (
+  'connector.class'          = 'PostgresSource',
+  'name'                     = 'confluent-postgresql-source',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'topic.prefix'             = 'postgresql_',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '5432',
+  'connection.user'          = 'postgres',
+  'connection.password'      = '&lt;my-database-password&gt;',
+  'db.name'                  = 'postgres',
+  'table.whitelist'          = 'fleet_location',
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UTC',
   'tasks.max'                = '1');
 
 ---------------------------------------------------------------------------------------------------
--- Create stream of inventory
+-- Register sources:
 ---------------------------------------------------------------------------------------------------
-CREATE STREAM inventory_stream (
-        id STRING key,
-        item STRING,
-        quantity INTEGER,
-        price DOUBLE)
-   with (VALUE_FORMAT='json',
-         KAFKA_TOPIC='inventory');
+-- stream of locations:
+CREATE STREAM locations (
+        vehicle_id int,
+        latitude float,
+        longitude float,
+        timestamp varchar
+    ) with (
+        kafka_topic = 'locations',
+        value_format = 'json'
+    );
 
----------------------------------------------------------------------------------------------------
--- Create stateful table with up-to-date information of inventory availability
----------------------------------------------------------------------------------------------------
-CREATE TABLE inventory_stream_table
-    WITH (kafka_topic='inventory_table') AS
+-- fleet lookup table:
+CREATE TABLE fleet (
+        vehicle_id int,
+        driver_last_name varchar,
+        license_plate varchar
+    ) with (
+        kafka_topic = 'descriptions',
+        value_format = 'json'
+    );
+
+-- enrich fleet location stream with more fleet information:
+CREATE STREAM fleet_location_enhanced AS
     SELECT
-        item,
-        SUM(quantity) AS item_quantity
-    FROM
-        inventory_stream
-    GROUP BY
-        item
-        EMIT CHANGES;
+        vehicle_id,
+        latitude,
+        longitude,
+        timestamp,
+        f.driver_laste_name,
+        f.license_plate
+    FROM locations l
+        LEFT JOIN fleet f ON l.vehicle_id = f.vehicle_id;
 </code></pre>
               
             </div>
@@ -297,10 +353,10 @@ CREATE TABLE inventory_stream_table
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../security/ssh-attack/" class="btn btn-neutral float-right" title="Detecting and Analyzing SSH Attacks">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../inventory/" class="btn btn-neutral float-right" title="Real-time Inventory">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../fleet_management/" class="btn btn-neutral" title="Fleet Management"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../fin-serv/denormalization/" class="btn btn-neutral" title="Change Data Capture (CDC) for Orders"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -326,10 +382,10 @@ CREATE TABLE inventory_stream_table
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../fleet_management/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../fin-serv/denormalization/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../security/ssh-attack/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../inventory/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
