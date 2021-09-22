@@ -11,6 +11,8 @@ seo:
 More and more fleet management relies on knowing real-time information on vehicles, their locations, and vehicle telemetry.
 This enables businesses to improve route efficiency, fuel efficiency, automate service schedules, etc.
 
+TODO--add diagram
+
 ## Get Started
 
 --8<-- "docs/shared/ccloud_launch.md"
