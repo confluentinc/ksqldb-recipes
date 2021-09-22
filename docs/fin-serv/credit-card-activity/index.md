@@ -19,19 +19,6 @@ Click below to launch this recipe in Confluent Cloud.
 
 <a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
 
-
-## Code Summary
-
---8<-- "docs/shared/code_summary.md"
-
-```sql
---8<-- "docs/fin-serv/credit-card-activity/source.sql"
-
---8<-- "docs/fin-serv/credit-card-activity/process.sql"
-
---8<-- "docs/fin-serv/credit-card-activity/sink.sql"
-```
-
 ## Step-by-step
 
 ### Setup your Environment
@@ -54,4 +41,16 @@ Now you can process the data in a variety of ways.
 
 ```sql
 --8<-- "docs/fin-serv/credit-card-activity/process.sql"
+```
+
+## Code Summary
+
+--8<-- "docs/shared/code_summary.md"
+
+```sql
+--8<-- "docs/fin-serv/credit-card-activity/source.sql"
+
+--8<-- "docs/fin-serv/credit-card-activity/process.sql"
+
+--8<-- "docs/fin-serv/credit-card-activity/sink.sql"
 ```

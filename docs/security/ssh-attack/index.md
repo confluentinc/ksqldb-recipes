@@ -20,16 +20,6 @@ Click below to launch this recipe in Confluent Cloud.
 
 <a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
 
-## Code Summary
-
---8<-- "docs/shared/code_summary.md"
-
-Run the Syslog source connector locally, then proceed with ksqlDB to process the Syslog messages.
-
-```sql
---8<-- "docs/security/ssh-attack/process.sql"
-```
-
 ## Step-by-Step
 
 ### Setup your Environment
@@ -72,6 +62,16 @@ Now you should have Syslog messages being written to the topic `syslog` in Confl
 
 Process the syslog events by flagging events with invalid users, stripping out all the other unnecessary fields, and creating just a stream of relevant information.
 There are many ways to customize the resulting stream to fit the business needs: this example also demonstrates how to enrich the stream with a new field `FACILITY_DESCRIPTION` with human-readable content.
+
+```sql
+--8<-- "docs/security/ssh-attack/process.sql"
+```
+
+## Code Summary
+
+--8<-- "docs/shared/code_summary.md"
+
+Run the Syslog source connector locally, then proceed with ksqlDB to process the Syslog messages.
 
 ```sql
 --8<-- "docs/security/ssh-attack/process.sql"

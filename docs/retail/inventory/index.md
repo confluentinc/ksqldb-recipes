@@ -17,16 +17,6 @@ Click below to launch this recipe in Confluent Cloud.
 
 <a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
 
-## Code Summary
-
---8<-- "docs/shared/code_summary.md"
-
-```sql
---8<-- "docs/retail/inventory/source.sql"
-
---8<-- "docs/retail/inventory/process.sql"
-```
-
 ## Step-by-Step
 
 ### Setup your Environment
@@ -55,5 +45,15 @@ This creates a stream of events, where each event results in the addition or rem
 Create a ksqlDB `TABLE`, which is a mutable, partitioned collection that models change over time that represents what is true as of "now".
 
 ```sql
+--8<-- "docs/retail/inventory/process.sql"
+```
+
+## Code Summary
+
+--8<-- "docs/shared/code_summary.md"
+
+```sql
+--8<-- "docs/retail/inventory/source.sql"
+
 --8<-- "docs/retail/inventory/process.sql"
 ```

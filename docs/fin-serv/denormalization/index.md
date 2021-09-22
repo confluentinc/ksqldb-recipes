@@ -21,18 +21,6 @@ Click below to launch this recipe in Confluent Cloud.
 
 <a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
 
-## Code Summary
-
---8<-- "docs/shared/code_summary.md"
-
-```sql
---8<-- "docs/fin-serv/denormalization/source.sql"
-
---8<-- "docs/fin-serv/denormalization/process.sql"
-
---8<-- "docs/fin-serv/denormalization/sink.sql"
-```
-
 ## Step-by-step
 
 ### Setup your Environment
@@ -64,3 +52,16 @@ Any downstream application or database can receive the denormalized data.
 ```sql
 --8<-- "docs/fin-serv/denormalization/sink.sql"
 ```
+
+## Code Summary
+
+--8<-- "docs/shared/code_summary.md"
+
+```sql
+--8<-- "docs/fin-serv/denormalization/source.sql"
+
+--8<-- "docs/fin-serv/denormalization/process.sql"
+
+--8<-- "docs/fin-serv/denormalization/sink.sql"
+```
+

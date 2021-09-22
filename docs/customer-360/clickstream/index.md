@@ -23,18 +23,6 @@ Click below to launch this recipe in Confluent Cloud.
 
 <a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
 
-## Code Summary
-
---8<-- "docs/shared/code_summary.md"
-
-```sql
---8<-- "docs/customer-360/clickstream/source.sql"
-
---8<-- "docs/customer-360/clickstream/process.sql"
-
---8<-- "docs/customer-360/clickstream/sink.sql"
-```
-
 ## Step-by-step
 
 ### Setup your Environment
@@ -66,5 +54,17 @@ Now you can process the data in a variety of ways, by enriching the clickstream 
 After processing the data, send it to Elasticsearch.
 
 ```sql
+--8<-- "docs/customer-360/clickstream/sink.sql"
+```
+
+## Code Summary
+
+--8<-- "docs/shared/code_summary.md"
+
+```sql
+--8<-- "docs/customer-360/clickstream/source.sql"
+
+--8<-- "docs/customer-360/clickstream/process.sql"
+
 --8<-- "docs/customer-360/clickstream/sink.sql"
 ```
