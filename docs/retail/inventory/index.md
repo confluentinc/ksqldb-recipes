@@ -8,8 +8,9 @@ seo:
 
 ## What is it?
 
-Having an up to date view of inventory on every item is essential in today's online marketplaces.
-This recipe demonstrates how to use ksqlDB to always have an up-to-date snapshot of your inventory.
+Having an up-to-date view of inventory on every item is essential in today's online marketplaces.
+This helps businesses maintain the right amount of inventory—not too much and not too little—so that they can meet demand while minimizing costs.
+This recipe demonstrates how to update inventory in real time and always have an up-to-date snapshot of your stock.
 
 ## Get Started
 
@@ -36,10 +37,6 @@ This creates a stream of events, where each event results in the addition or rem
 
 --8<-- "docs/shared/manual_insert.md"
 
-```sql
---8<-- "docs/retail/inventory/manual.sql"
-```
-
 ### Run stream processing app
 
 Create a ksqlDB `TABLE`, which is a mutable, partitioned collection that models change over time that represents what is true as of "now".
@@ -48,7 +45,13 @@ Create a ksqlDB `TABLE`, which is a mutable, partitioned collection that models 
 --8<-- "docs/retail/inventory/process.sql"
 ```
 
-## Code Summary
+--8<-- "docs/shared/manual_cue.md"
+
+```sql
+--8<-- "docs/retail/inventory/manual.sql"
+```
+
+## Full ksqlDB Statements
 
 --8<-- "docs/shared/code_summary.md"
 

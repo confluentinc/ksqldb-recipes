@@ -57,7 +57,7 @@ After processing the data, send it to Elasticsearch.
 --8<-- "docs/customer-360/clickstream/sink.sql"
 ```
 
-## Code Summary
+## Full ksqlDB Statements
 
 --8<-- "docs/shared/code_summary.md"
 

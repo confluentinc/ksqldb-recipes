@@ -1,1 +1,1 @@
-Here is a summary of all the recipe steps explained above.
+Here is a complete view of all the recipe steps explained above.
