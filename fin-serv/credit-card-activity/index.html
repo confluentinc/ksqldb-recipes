@@ -188,7 +188,6 @@ This recipe analyzes total credit card spend, and if it's more than the average 
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to instantly connect to popular data sources and end systems in the cloud.
 The recipes are shown with some specific connector types and configuration, but you can substitute your own preferred connector to use any data source.
 The principles are the same, just modify the connector configuration shown below to fit your deployment, see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a> for details.</p>
-<p>This recipe creates simulated data with the <code>Datagen</code> connector.</p>
 <pre><code class="language-sql">-- Stream of transactions
 CREATE SOURCE CONNECTOR transactions WITH (
   'connector.class'          = 'OracleDatabaseSource',
@@ -225,6 +224,7 @@ CREATE SOURCE CONNECTOR customers WITH (
   'db.timezone'              = 'UCT',
   'tasks.max'                = '1');
 </code></pre>
+<p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  You can manually insert values into the source streams in the next section.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
 <p>Now you can process the data in a variety of ways.</p>
 <pre><code class="language-sql">-- Register the stream of transactions
@@ -284,6 +284,10 @@ SELECT   TIMESTAMPTOSTRING(WindowStart(), 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_STA
            WINDOW TUMBLING (SIZE 2 HOURS) 
   GROUP BY T.ACCOUNT_ID, T.CARD_TYPE, T.FULL_NAME 
   HAVING   SUM(T.AMOUNT) &gt; MAX(T.AVG_CREDIT_SPEND) ;
+</code></pre>
+<p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
+<pre><code class="language-sql">INSERT INTO ...TODO...
+
 </code></pre>
 <h2 id="full-ksqldb-statements">Full ksqlDB Statements</h2>
 <p>Here is a complete view of all the recipe steps explained above.</p>

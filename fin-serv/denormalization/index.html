@@ -229,6 +229,7 @@ CREATE SOURCE CONNECTOR customers WITH (
   'db.timezone'              = 'UCT',
   'tasks.max'                = '1');
 </code></pre>
+<p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  You can manually insert values into the source streams in the next section.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
 <p>This streams the user orders and denormalizes the data by joining facts (orders) with the dimension (customer).</p>
 <pre><code class="language-sql">-- stream of user orders:
@@ -272,6 +273,10 @@ CREATE STREAM ORDERS_ENRICHED AS
             LEFT JOIN
             CUSTOMERS C
             ON O.customer_id = C.id;
+</code></pre>
+<p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
+<pre><code class="language-sql">INSERT INTO ...TODO...
+
 </code></pre>
 <h3 id="write-the-data-out">Write the data out</h3>
 <p>Any downstream application or database can receive the denormalized data.</p>
