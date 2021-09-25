@@ -29,11 +29,11 @@ This recipe analyzes total credit card spend, and if it's more than the average 
 
 --8<-- "docs/shared/connect.md"
 
-This recipe creates simulated data with the `Datagen` connector.
-
 ```sql
 --8<-- "docs/fin-serv/credit-card-activity/source.sql"
 ```
+
+--8<-- "docs/shared/manual_insert.md"
 
 ### Run stream processing app
 
@@ -41,6 +41,12 @@ Now you can process the data in a variety of ways.
 
 ```sql
 --8<-- "docs/fin-serv/credit-card-activity/process.sql"
+```
+
+--8<-- "docs/shared/manual_cue.md"
+
+```sql
+--8<-- "docs/fin-serv/credit-card-activity/manual.sql"
 ```
 
 ## Full ksqlDB Statements

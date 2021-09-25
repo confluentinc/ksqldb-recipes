@@ -37,12 +37,20 @@ Change Data Capture (CDC) for orders is being written to a SQL Server database, 
 --8<-- "docs/fin-serv/denormalization/source.sql"
 ```
 
+--8<-- "docs/shared/manual_insert.md"
+
 ### Run stream processing app
 
 This streams the user orders and denormalizes the data by joining facts (orders) with the dimension (customer).
 
 ```sql
 --8<-- "docs/fin-serv/denormalization/process.sql"
+```
+
+--8<-- "docs/shared/manual_cue.md"
+
+```sql
+--8<-- "docs/fin-serv/denormalization/manual.sql"
 ```
 
 ### Write the data out
