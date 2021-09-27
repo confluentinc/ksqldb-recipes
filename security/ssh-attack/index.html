@@ -231,16 +231,11 @@ services:
       CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 3
       CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 3
       CONNECT_KEY_CONVERTER: &quot;org.apache.kafka.connect.storage.StringConverter&quot;
-      CONNECT_VALUE_CONVERTER: &quot;io.confluent.connect.avro.AvroConverter&quot;
-      CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: &quot;true&quot;
-      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: $SCHEMA_REGISTRY_URL
-      CONNECT_VALUE_CONVERTER_BASIC_AUTH_CREDENTIALS_SOURCE: $BASIC_AUTH_CREDENTIALS_SOURCE
-      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO: $SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO
+      CONNECT_VALUE_CONVERTER: &quot;org.apache.kafka.connect.json.JsonConverter&quot;
       CONNECT_REST_ADVERTISED_HOST_NAME: &quot;connect&quot;
       CONNECT_PLUGIN_PATH: &quot;/usr/share/java,/usr/share/confluent-hub-components&quot;
       CONNECT_LOG4J_ROOT_LOGLEVEL: INFO
       CONNECT_LOG4J_LOGGERS: org.reflections=ERROR
-      CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-6.2.0.jar
       # Connect worker
       CONNECT_SECURITY_PROTOCOL: SASL_SSL
       CONNECT_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
@@ -267,7 +262,7 @@ DEFINE topic = 'syslog';
 -- Extract relevant fields from log messages
 CREATE OR REPLACE STREAM `syslog` WITH (
   KAFKA_TOPIC = '${topic}',
-  VALUE_FORMAT = 'avro'
+  VALUE_FORMAT = 'json'
 );
 
 CREATE STREAM `by_facility` AS
@@ -311,7 +306,7 @@ CREATE STREAM `ssh_attacks` AS
   EMIT CHANGES;
 </code></pre>
 <h2 id="full-ksqldb-statements">Full ksqlDB Statements</h2>
-<p>Here is a complete view of all the recipe steps explained above.</p>
+<p>Here is the full recipe that you can run with ksqlDB, a consolidation of all the the steps shown above.</p>
 <p>Run the Syslog source connector locally, then proceed with ksqlDB to process the Syslog messages.</p>
 <pre><code class="language-sql">-- Define Kafka parameters
 DEFINE topic = 'syslog';
@@ -319,7 +314,7 @@ DEFINE topic = 'syslog';
 -- Extract relevant fields from log messages
 CREATE OR REPLACE STREAM `syslog` WITH (
   KAFKA_TOPIC = '${topic}',
-  VALUE_FORMAT = 'avro'
+  VALUE_FORMAT = 'json'
 );
 
 CREATE STREAM `by_facility` AS

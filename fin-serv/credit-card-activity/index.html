@@ -186,8 +186,8 @@ This recipe analyzes total credit card spend, and if it's more than the average 
 <p>Then proceed with the recipe, which can be executed with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for processing the data.</p>
 <h3 id="read-the-data-in">Read the data in</h3>
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to instantly connect to popular data sources and end systems in the cloud.
-The recipes are shown with some specific connector types and configuration, but you can substitute your own preferred connector to use any data source.
-The principles are the same, just modify the connector configuration shown below to fit your deployment, see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a> for details.</p>
+This recipe is shown with one example of a data source, but you can substitute your own preferred connector to use any data source.
+The principles are the same, just modify the connector configuration shown below to fit your deployment (see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a>).</p>
 <pre><code class="language-sql">-- Stream of transactions
 CREATE SOURCE CONNECTOR transactions WITH (
   'connector.class'          = 'OracleDatabaseSource',
@@ -224,7 +224,7 @@ CREATE SOURCE CONNECTOR customers WITH (
   'db.timezone'              = 'UCT',
   'tasks.max'                = '1');
 </code></pre>
-<p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  You can manually insert values into the source streams in the next section.</p>
+<p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert values into the streams.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
 <p>Now you can process the data in a variety of ways.</p>
 <pre><code class="language-sql">-- Register the stream of transactions
@@ -239,7 +239,7 @@ CREATE STREAM TRANSACTIONS_RAW (ACCOUNT_ID VARCHAR,
 
 -- Repartition the stream on account_id in order to ensure that all the streams and tables are co-partitioned, which means that input records on both sides of the join have the same configuration settings for partitions.
 CREATE STREAM TRANSACTIONS_SOURCE 
-    WITH (VALUE_FORMAT='AVRO') AS 
+    WITH (VALUE_FORMAT='JSON') AS 
           SELECT * 
             FROM TRANSACTIONS_RAW 
     PARTITION BY ACCOUNT_ID;
@@ -255,7 +255,7 @@ CREATE STREAM CUST_RAW_STREAM (ID BIGINT,
 
 -- Repartition the customer data stream by account_id to prepare for the join
 CREATE STREAM CUSTOMER_REKEYED 
-    WITH (VALUE_FORMAT='AVRO') AS 
+    WITH (VALUE_FORMAT='JSON') AS 
             SELECT * 
               FROM CUST_RAW_STREAM 
       PARTITION BY ID;
@@ -263,7 +263,7 @@ CREATE STREAM CUSTOMER_REKEYED
 -- Register the partitioned customer data topic as a table used for the join with the incoming stream of transactions:
 CREATE TABLE customer 
 WITH (KAFKA_TOPIC='CUSTOMER_REKEYED', 
-      VALUE_FORMAT='AVRO', 
+      VALUE_FORMAT='JSON', 
       KEY='ID');
 
 -- Join the transactions to customer information:
@@ -286,11 +286,15 @@ SELECT   TIMESTAMPTOSTRING(WindowStart(), 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_STA
   HAVING   SUM(T.AMOUNT) &gt; MAX(T.AVG_CREDIT_SPEND) ;
 </code></pre>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
-<pre><code class="language-sql">INSERT INTO ...TODO...
+<pre><code class="language-sql">INSERT INTO transactions (account_id, timestamp, card_type, amount, ip_address, transaction_id) VALUES (6011000990139424, '2021-09-23T10:50:00.000Z', 'visa', 542.99, '192.168.44.1', '3985757');
+INSERT INTO transactions (account_id, timestamp, card_type, amount, ip_address, transaction_id) VALUES (6011000990139424, '2021-09-23T10:50:01.000Z', 'visa', 611.48, '192.168.44.1', '8028435');
+INSERT INTO transactions (account_id, timestamp, card_type, amount, ip_address, transaction_id) VALUES (3530111333300000, '2021-09-23T10:50:00.000Z', 'mastercard', 65.0, '192.168.101.3', '1695780');
 
+INSERT INTO customers (id, first_name, last_name, email, avg_credit_spend) VALUES (6011000990139424, 'Janice', 'Smith', 'jsmith@mycompany.com', 500.00);
+INSERT INTO customers (id, first_name, last_name, email, avg_credit_spend) VALUES (3530111333300000, 'George', 'Mall', 'gmaill@mycompany.com', 20.00);
 </code></pre>
 <h2 id="full-ksqldb-statements">Full ksqlDB Statements</h2>
-<p>Here is a complete view of all the recipe steps explained above.</p>
+<p>Here is the full recipe that you can run with ksqlDB, a consolidation of all the the steps shown above.</p>
 <pre><code class="language-sql">-- Stream of transactions
 CREATE SOURCE CONNECTOR transactions WITH (
   'connector.class'          = 'OracleDatabaseSource',
@@ -339,7 +343,7 @@ CREATE STREAM TRANSACTIONS_RAW (ACCOUNT_ID VARCHAR,
 
 -- Repartition the stream on account_id in order to ensure that all the streams and tables are co-partitioned, which means that input records on both sides of the join have the same configuration settings for partitions.
 CREATE STREAM TRANSACTIONS_SOURCE 
-    WITH (VALUE_FORMAT='AVRO') AS 
+    WITH (VALUE_FORMAT='JSON') AS 
           SELECT * 
             FROM TRANSACTIONS_RAW 
     PARTITION BY ACCOUNT_ID;
@@ -355,7 +359,7 @@ CREATE STREAM CUST_RAW_STREAM (ID BIGINT,
 
 -- Repartition the customer data stream by account_id to prepare for the join
 CREATE STREAM CUSTOMER_REKEYED 
-    WITH (VALUE_FORMAT='AVRO') AS 
+    WITH (VALUE_FORMAT='JSON') AS 
             SELECT * 
               FROM CUST_RAW_STREAM 
       PARTITION BY ID;
@@ -363,7 +367,7 @@ CREATE STREAM CUSTOMER_REKEYED
 -- Register the partitioned customer data topic as a table used for the join with the incoming stream of transactions:
 CREATE TABLE customer 
 WITH (KAFKA_TOPIC='CUSTOMER_REKEYED', 
-      VALUE_FORMAT='AVRO', 
+      VALUE_FORMAT='JSON', 
       KEY='ID');
 
 -- Join the transactions to customer information:

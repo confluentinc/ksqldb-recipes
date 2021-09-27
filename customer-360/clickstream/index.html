@@ -193,8 +193,8 @@
 <p>Then proceed with the recipe, which can be executed with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for processing the data.</p>
 <h3 id="read-the-data-in">Read the data in</h3>
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to instantly connect to popular data sources and end systems in the cloud.
-The recipes are shown with some specific connector types and configuration, but you can substitute your own preferred connector to use any data source.
-The principles are the same, just modify the connector configuration shown below to fit your deployment, see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a> for details.</p>
+This recipe is shown with one example of a data source, but you can substitute your own preferred connector to use any data source.
+The principles are the same, just modify the connector configuration shown below to fit your deployment (see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a>).</p>
 <p>This recipe creates simulated data with the <code>Datagen</code> connector.</p>
 <pre><code class="language-sql">-- Stream of users
 CREATE SOURCE CONNECTOR datagen_clickstream_users WITH (
@@ -269,18 +269,6 @@ CREATE STREAM USER_CLICKSTREAM AS
 -- Build materialized table views:
 ---------------------------------------------------------------------------------------------------
 
--- Per-userId tables -----------------------------------------------------------------------------
-
--- Table of events per minute for each user:
-CREATE table events_per_min AS
-    SELECT
-        userid as k1,
-        AS_VALUE(userid) as userid,
-        WINDOWSTART as EVENT_TS,
-        count(*) AS events
-    FROM clickstream window TUMBLING (size 60 second)
-    GROUP BY userid;
-
 -- Table of html pages per minute for each user:
 CREATE TABLE pages_per_min AS
     SELECT
@@ -292,8 +280,6 @@ CREATE TABLE pages_per_min AS
     WHERE request like '%html%'
     GROUP BY userid;
 
--- Per-username tables ----------------------------------------------------------------------------
-
 -- User sessions table - 30 seconds of inactivity expires the session
 -- Table counts number of events within the session
 CREATE TABLE CLICK_USER_SESSIONS AS
@@ -304,8 +290,6 @@ CREATE TABLE CLICK_USER_SESSIONS AS
         count(*) AS events
     FROM USER_CLICKSTREAM window SESSION (30 second)
     GROUP BY username;
-
--- Per-status tables ------------------------------------------------------------------------------
 
 -- number of errors per min, using 'HAVING' Filter to show ERROR codes &gt; 400 where count &gt; 5
 CREATE TABLE ERRORS_PER_MIN_ALERT AS
@@ -344,7 +328,7 @@ CREATE SINK CONNECTOR analyzed_clickstream WITH (
   'input.data.format'        = 'JSON',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topics'                   = 'USER_IP_ACTIVITY, ENRICHED_ERROR_CODES_COUNT',
+  'topics'                   = 'USER_IP_ACTIVITY, ERRORS_PER_MIN_ALERT',
   'connection.url'           = '&lt;elasticsearch-URI&gt;',
   'connection.user'          = '&lt;elasticsearch-username&gt;',
   'connection.password'      = '&lt;elasticsearch-password&gt;',
@@ -354,7 +338,7 @@ CREATE SINK CONNECTOR analyzed_clickstream WITH (
 );
 </code></pre>
 <h2 id="full-ksqldb-statements">Full ksqlDB Statements</h2>
-<p>Here is a complete view of all the recipe steps explained above.</p>
+<p>Here is the full recipe that you can run with ksqlDB, a consolidation of all the the steps shown above.</p>
 <pre><code class="language-sql">-- Stream of users
 CREATE SOURCE CONNECTOR datagen_clickstream_users WITH (
   'connector.class'          = 'DatagenSource',
@@ -425,18 +409,6 @@ CREATE STREAM USER_CLICKSTREAM AS
 -- Build materialized table views:
 ---------------------------------------------------------------------------------------------------
 
--- Per-userId tables -----------------------------------------------------------------------------
-
--- Table of events per minute for each user:
-CREATE table events_per_min AS
-    SELECT
-        userid as k1,
-        AS_VALUE(userid) as userid,
-        WINDOWSTART as EVENT_TS,
-        count(*) AS events
-    FROM clickstream window TUMBLING (size 60 second)
-    GROUP BY userid;
-
 -- Table of html pages per minute for each user:
 CREATE TABLE pages_per_min AS
     SELECT
@@ -448,8 +420,6 @@ CREATE TABLE pages_per_min AS
     WHERE request like '%html%'
     GROUP BY userid;
 
--- Per-username tables ----------------------------------------------------------------------------
-
 -- User sessions table - 30 seconds of inactivity expires the session
 -- Table counts number of events within the session
 CREATE TABLE CLICK_USER_SESSIONS AS
@@ -460,8 +430,6 @@ CREATE TABLE CLICK_USER_SESSIONS AS
         count(*) AS events
     FROM USER_CLICKSTREAM window SESSION (30 second)
     GROUP BY username;
-
--- Per-status tables ------------------------------------------------------------------------------
 
 -- number of errors per min, using 'HAVING' Filter to show ERROR codes &gt; 400 where count &gt; 5
 CREATE TABLE ERRORS_PER_MIN_ALERT AS
@@ -498,7 +466,7 @@ CREATE SINK CONNECTOR analyzed_clickstream WITH (
   'input.data.format'        = 'JSON',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topics'                   = 'USER_IP_ACTIVITY, ENRICHED_ERROR_CODES_COUNT',
+  'topics'                   = 'USER_IP_ACTIVITY, ERRORS_PER_MIN_ALERT',
   'connection.url'           = '&lt;elasticsearch-URI&gt;',
   'connection.user'          = '&lt;elasticsearch-username&gt;',
   'connection.password'      = '&lt;elasticsearch-password&gt;',
