@@ -51,18 +51,6 @@ CREATE STREAM USER_CLICKSTREAM AS
 -- Build materialized table views:
 ---------------------------------------------------------------------------------------------------
 
--- Per-userId tables -----------------------------------------------------------------------------
-
--- Table of events per minute for each user:
-CREATE table events_per_min AS
-    SELECT
-        userid as k1,
-        AS_VALUE(userid) as userid,
-        WINDOWSTART as EVENT_TS,
-        count(*) AS events
-    FROM clickstream window TUMBLING (size 60 second)
-    GROUP BY userid;
-
 -- Table of html pages per minute for each user:
 CREATE TABLE pages_per_min AS
     SELECT
@@ -74,8 +62,6 @@ CREATE TABLE pages_per_min AS
     WHERE request like '%html%'
     GROUP BY userid;
 
--- Per-username tables ----------------------------------------------------------------------------
-
 -- User sessions table - 30 seconds of inactivity expires the session
 -- Table counts number of events within the session
 CREATE TABLE CLICK_USER_SESSIONS AS
@@ -86,8 +72,6 @@ CREATE TABLE CLICK_USER_SESSIONS AS
         count(*) AS events
     FROM USER_CLICKSTREAM window SESSION (30 second)
     GROUP BY username;
-
--- Per-status tables ------------------------------------------------------------------------------
 
 -- number of errors per min, using 'HAVING' Filter to show ERROR codes > 400 where count > 5
 CREATE TABLE ERRORS_PER_MIN_ALERT AS
