@@ -1,1 +1,1 @@
-Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  You can manually insert values into the source streams in the next section.
+Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert values into the streams.
