@@ -1,1 +1,1 @@
-Here is a complete view of all the recipe steps explained above.
+Here is the full recipe that you can run with ksqlDB, a consolidation of all the the steps shown above.

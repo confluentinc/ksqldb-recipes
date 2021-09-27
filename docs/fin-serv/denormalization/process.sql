@@ -1,20 +1,16 @@
--- stream of user orders:
-CREATE STREAM orders (
-        ...TODO...
-    ) with (
-        kafka_topic = 'orders',
-        value_format = 'json'
-    );
+-- Stream of user orders:
+CREATE STREAM orders (ORDER_ID BIGINT,
+                      CUSTOMER_ID BIGINT,
+                      ITEM VARCHAR,
+                      ORDER_TOTAL_USD DOUBLE)
+    ) with (kafka_topic = 'orders',
+            value_format = 'json');
 
 -- Register the existing stream of customer data
 CREATE STREAM CUST_RAW_STREAM (ID BIGINT,
                                FIRST_NAME VARCHAR,
                                LAST_NAME VARCHAR,
-                               EMAIL VARCHAR,
-                               COMPANY VARCHAR,
-                               STREET_ADDRESS VARCHAR,
-                               CITY VARCHAR,
-                               COUNTRY VARCHAR)
+                               EMAIL VARCHAR)
               WITH (KAFKA_TOPIC='customers',
                     VALUE_FORMAT='JSON');
 
@@ -30,11 +26,7 @@ CREATE STREAM ORDERS_ENRICHED AS
             O.item AS item,
             O.order_total_usd AS order_total_usd,
             C.first_name || ' ' || C.last_name AS full_name,
-            C.email AS email,
-            C.company AS company,
-            C.street_address AS street_address,
-            C.city AS city,
-            C.country AS country
+            C.email AS email
     FROM    ORDERS O
             LEFT JOIN
             CUSTOMERS C

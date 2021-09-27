@@ -5,7 +5,7 @@ CREATE SINK CONNECTOR analyzed_clickstream WITH (
   'input.data.format'        = 'JSON',
   'kafka.api.key'            = '<my-kafka-api-key>',
   'kafka.api.secret'         = '<my-kafka-api-secret>',
-  'topics'                   = 'USER_IP_ACTIVITY, ENRICHED_ERROR_CODES_COUNT',
+  'topics'                   = 'USER_IP_ACTIVITY, ERRORS_PER_MIN_ALERT',
   'connection.url'           = '<elasticsearch-URI>',
   'connection.user'          = '<elasticsearch-username>',
   'connection.password'      = '<elasticsearch-password>',

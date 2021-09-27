@@ -1,7 +1,7 @@
 ---
 seo:
   title: Fleet Management
-  description:  TODO
+  description: This recipe enriches fleet location with information about each vehicle to be able to have a real-time view with consolidation information on the entire fleet.
 ---
 
 # Fleet Management
@@ -10,6 +10,7 @@ seo:
 
 More and more fleet management relies on knowing real-time information on vehicles, their locations, and vehicle telemetry.
 This enables businesses to improve route efficiency, fuel efficiency, automate service schedules, etc.
+This recipe enriches fleet location with information about each vehicle to be able to have a real-time view with consolidation information on the entire fleet.
 
 TODO--add diagram
 
@@ -29,8 +30,6 @@ TODO--add diagram
 
 --8<-- "docs/shared/connect.md"
 
-TODO
-
 ```sql
 --8<-- "docs/retail/fleet_management/source.sql"
 ```
@@ -39,7 +38,8 @@ TODO
 
 ### Run stream processing app
 
-TODO
+Now you can process the data in a variety of ways.
+In this case, the original fleet telemetry is enriched with details about the vehicle.
 
 ```sql
 --8<-- "docs/retail/fleet_management/process.sql"
