@@ -4,7 +4,8 @@ DEFINE topic = 'syslog';
 -- Extract relevant fields from log messages
 CREATE OR REPLACE STREAM `syslog` WITH (
   KAFKA_TOPIC = '${topic}',
-  VALUE_FORMAT = 'json'
+  VALUE_FORMAT = 'json',
+  PARTITIONS = 6
 );
 
 CREATE STREAM `by_facility` AS
