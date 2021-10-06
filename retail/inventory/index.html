@@ -218,7 +218,8 @@ CREATE STREAM inventory_stream (
         quantity INTEGER,
         price DOUBLE)
    with (VALUE_FORMAT='json',
-         KAFKA_TOPIC='inventory');
+         KAFKA_TOPIC='inventory',
+         PARTITIONS = 6);
 
 ---------------------------------------------------------------------------------------------------
 -- Create stateful table with up-to-date information of inventory availability
@@ -272,7 +273,8 @@ CREATE STREAM inventory_stream (
         quantity INTEGER,
         price DOUBLE)
    with (VALUE_FORMAT='json',
-         KAFKA_TOPIC='inventory');
+         KAFKA_TOPIC='inventory',
+         PARTITIONS = 6);
 
 ---------------------------------------------------------------------------------------------------
 -- Create stateful table with up-to-date information of inventory availability

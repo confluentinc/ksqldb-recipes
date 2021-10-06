@@ -233,28 +233,30 @@ In this case, the original fleet telemetry is enriched with details about the ve
 -- stream of locations:
 CREATE STREAM locations (
         vehicle_id int,
-        latitude float,
-        longitude float,
+        latitude double,
+        longitude double,
         timestamp varchar
     ) with (
         kafka_topic = 'locations',
-        value_format = 'json'
+        value_format = 'json',
+        partitions = 6
     );
 
 -- fleet lookup table:
 CREATE TABLE fleet (
-        vehicle_id int,
+        vehicle_id int primary key,
         driver_id int,
         license bigint
     ) with (
         kafka_topic = 'descriptions',
-        value_format = 'json'
+        value_format = 'json',
+        partitions = 6
     );
 
 -- enrich fleet location stream with more fleet information:
 CREATE STREAM fleet_location_enhanced AS
     SELECT
-        vehicle_id,
+        l.vehicle_id,
         latitude,
         longitude,
         timestamp,
@@ -264,13 +266,13 @@ CREATE STREAM fleet_location_enhanced AS
         LEFT JOIN fleet f ON l.vehicle_id = f.vehicle_id;
 </code></pre>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
-<pre><code class="language-sql">INSERT INTO location (vehicle_id, latitude, longitude, timestamp) VALUES (5401, 16.7587537, 96.2482149, '2021-09-23T10:50:00.000Z');
-INSERT INTO location (vehicle_id, latitude, longitude, timestamp) VALUES (5401, 16.004175, 120.7806412, '2021-09-27T06:39:00.000Z');
-INSERT INTO location (vehicle_id, latitude, longitude, timestamp) VALUES (5402, 32.755613, 22.6377432, '2021-09-25T20:22:00.000Z');
+<pre><code class="language-sql">INSERT INTO locations (vehicle_id, latitude, longitude, timestamp) VALUES (5401, 16.7587537, 96.2482149, '2021-09-23T10:50:00.000Z');
+INSERT INTO locations (vehicle_id, latitude, longitude, timestamp) VALUES (5401, 16.004175, 120.7806412, '2021-09-27T06:39:00.000Z');
+INSERT INTO locations (vehicle_id, latitude, longitude, timestamp) VALUES (5402, 32.755613, 22.6377432, '2021-09-25T20:22:00.000Z');
 
-INSERT INTO description (vehicle_id, driver_id, license_plate) VALUES (5401, 847383, 8852693196);
-INSERT INTO description (vehicle_id, driver_id, license_plate) VALUES (5402, 922947, 1255144201);
-INSERT INTO description (vehicle_id, driver_id, license_plate) VALUES (5403, 435309, 2132311746);
+INSERT INTO fleet (vehicle_id, driver_id, license) VALUES (5401, 847383, 8852693196);
+INSERT INTO fleet (vehicle_id, driver_id, license) VALUES (5402, 922947, 1255144201);
+INSERT INTO fleet (vehicle_id, driver_id, license) VALUES (5403, 435309, 2132311746);
 </code></pre>
 <h2 id="full-ksqldb-statements">Full ksqlDB Statements</h2>
 <p>Here is the full recipe that you can run with ksqlDB, a consolidation of all the the steps shown above.</p>
@@ -314,28 +316,30 @@ CREATE SOURCE CONNECTOR fleet_location WITH (
 -- stream of locations:
 CREATE STREAM locations (
         vehicle_id int,
-        latitude float,
-        longitude float,
+        latitude double,
+        longitude double,
         timestamp varchar
     ) with (
         kafka_topic = 'locations',
-        value_format = 'json'
+        value_format = 'json',
+        partitions = 6
     );
 
 -- fleet lookup table:
 CREATE TABLE fleet (
-        vehicle_id int,
+        vehicle_id int primary key,
         driver_id int,
         license bigint
     ) with (
         kafka_topic = 'descriptions',
-        value_format = 'json'
+        value_format = 'json',
+        partitions = 6
     );
 
 -- enrich fleet location stream with more fleet information:
 CREATE STREAM fleet_location_enhanced AS
     SELECT
-        vehicle_id,
+        l.vehicle_id,
         latitude,
         longitude,
         timestamp,

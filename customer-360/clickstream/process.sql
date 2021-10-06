@@ -13,7 +13,8 @@ CREATE STREAM clickstream (
         agent varchar
     ) with (
         kafka_topic = 'clickstream',
-        value_format = 'json'
+        value_format = 'json',
+        partitions = 6
     );
 
 -- users lookup table:
@@ -27,7 +28,8 @@ CREATE TABLE WEB_USERS (
         level varchar
     ) with (
         kafka_topic = 'clickstream_users',
-        value_format = 'json'
+        value_format = 'json',
+        partitions = 6
     );
 
 ---------------------------------------------------------------------------------------------------
