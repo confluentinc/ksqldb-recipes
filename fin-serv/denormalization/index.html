@@ -233,41 +233,50 @@ CREATE SOURCE CONNECTOR customers WITH (
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
 <p>This streams the user orders and denormalizes the data by joining facts (orders) with the dimension (customer).</p>
 <pre><code class="language-sql">-- Stream of user orders:
-CREATE STREAM orders (ORDER_ID BIGINT,
-                      CUSTOMER_ID BIGINT,
-                      ITEM VARCHAR,
-                      ORDER_TOTAL_USD DOUBLE
-    ) with (kafka_topic = 'orders',
-            value_format = 'json',
-            partitions = 6);
+CREATE STREAM orders (
+  ORDER_ID BIGINT,
+  CUSTOMER_ID BIGINT,
+  ITEM VARCHAR,
+  ORDER_TOTAL_USD DOUBLE
+) WITH (
+  kafka_topic = 'orders',
+  value_format = 'json',
+  partitions = 6
+);
 
 -- Register the existing stream of customer data
-CREATE STREAM CUST_RAW_STREAM (ID BIGINT,
-                               FIRST_NAME VARCHAR,
-                               LAST_NAME VARCHAR,
-                               EMAIL VARCHAR)
-              WITH (KAFKA_TOPIC='customers',
-                    VALUE_FORMAT='JSON',
-                    PARTITIONS = 6);
+CREATE STREAM CUST_RAW_STREAM (
+  ID BIGINT,
+  FIRST_NAME VARCHAR,
+  LAST_NAME VARCHAR,
+  EMAIL VARCHAR
+) WITH (
+  KAFKA_TOPIC='customers',
+  VALUE_FORMAT='JSON',
+  PARTITIONS = 6
+);
 
 -- Register the customer data topic as a table
 CREATE TABLE customer (
-     ID BIGINT PRIMARY KEY
-) WITH (KAFKA_TOPIC='CUST_RAW_STREAM',
-      VALUE_FORMAT='JSON',
-      PARTITIONS=6);
+  ID BIGINT PRIMARY KEY
+) WITH (
+  KAFKA_TOPIC='CUST_RAW_STREAM',
+  VALUE_FORMAT='JSON',
+  PARTITIONS=6
+);
 
 -- Denormalize data: joining facts (orders) with the dimension (customer)
 CREATE STREAM ORDERS_ENRICHED AS
-    SELECT  O.order_id AS order_id,
-            O.item AS item,
-            O.order_total_usd AS order_total_usd,
-            C.first_name || ' ' || C.last_name AS full_name,
-            C.email AS email
-    FROM    ORDERS O
-            LEFT JOIN
-            CUSTOMERS C
-            ON O.customer_id = C.id;
+  SELECT
+    O.order_id AS order_id,
+    O.item AS item,
+    O.order_total_usd AS order_total_usd,
+    C.first_name || ' ' || C.last_name AS full_name,
+    C.email AS email
+  FROM ORDERS O
+  LEFT JOIN
+  CUSTOMERS C
+  ON O.customer_id = C.id;
 </code></pre>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
 <pre><code class="language-sql">INSERT INTO orders (order_id, customer_id, item, order_total_usd) VALUES (44697328, 375, 'book', 29.99);
@@ -336,41 +345,50 @@ CREATE SOURCE CONNECTOR customers WITH (
   'tasks.max'                = '1');
 
 -- Stream of user orders:
-CREATE STREAM orders (ORDER_ID BIGINT,
-                      CUSTOMER_ID BIGINT,
-                      ITEM VARCHAR,
-                      ORDER_TOTAL_USD DOUBLE
-    ) with (kafka_topic = 'orders',
-            value_format = 'json',
-            partitions = 6);
+CREATE STREAM orders (
+  ORDER_ID BIGINT,
+  CUSTOMER_ID BIGINT,
+  ITEM VARCHAR,
+  ORDER_TOTAL_USD DOUBLE
+) WITH (
+  kafka_topic = 'orders',
+  value_format = 'json',
+  partitions = 6
+);
 
 -- Register the existing stream of customer data
-CREATE STREAM CUST_RAW_STREAM (ID BIGINT,
-                               FIRST_NAME VARCHAR,
-                               LAST_NAME VARCHAR,
-                               EMAIL VARCHAR)
-              WITH (KAFKA_TOPIC='customers',
-                    VALUE_FORMAT='JSON',
-                    PARTITIONS = 6);
+CREATE STREAM CUST_RAW_STREAM (
+  ID BIGINT,
+  FIRST_NAME VARCHAR,
+  LAST_NAME VARCHAR,
+  EMAIL VARCHAR
+) WITH (
+  KAFKA_TOPIC='customers',
+  VALUE_FORMAT='JSON',
+  PARTITIONS = 6
+);
 
 -- Register the customer data topic as a table
 CREATE TABLE customer (
-     ID BIGINT PRIMARY KEY
-) WITH (KAFKA_TOPIC='CUST_RAW_STREAM',
-      VALUE_FORMAT='JSON',
-      PARTITIONS=6);
+  ID BIGINT PRIMARY KEY
+) WITH (
+  KAFKA_TOPIC='CUST_RAW_STREAM',
+  VALUE_FORMAT='JSON',
+  PARTITIONS=6
+);
 
 -- Denormalize data: joining facts (orders) with the dimension (customer)
 CREATE STREAM ORDERS_ENRICHED AS
-    SELECT  O.order_id AS order_id,
-            O.item AS item,
-            O.order_total_usd AS order_total_usd,
-            C.first_name || ' ' || C.last_name AS full_name,
-            C.email AS email
-    FROM    ORDERS O
-            LEFT JOIN
-            CUSTOMERS C
-            ON O.customer_id = C.id;
+  SELECT
+    O.order_id AS order_id,
+    O.item AS item,
+    O.order_total_usd AS order_total_usd,
+    C.first_name || ' ' || C.last_name AS full_name,
+    C.email AS email
+  FROM ORDERS O
+  LEFT JOIN
+  CUSTOMERS C
+  ON O.customer_id = C.id;
 
 -- Send data to Snowflake
 CREATE SINK CONNECTOR orders_enriched WITH (

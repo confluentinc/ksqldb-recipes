@@ -209,31 +209,28 @@ This creates a stream of events, where each event results in the addition or rem
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert values into the streams.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
 <p>Create a ksqlDB <code>TABLE</code>, which is a mutable, partitioned collection that models change over time that represents what is true as of "now".</p>
-<pre><code class="language-sql">---------------------------------------------------------------------------------------------------
--- Create stream of inventory
----------------------------------------------------------------------------------------------------
+<pre><code class="language-sql">-- Create stream of inventory
 CREATE STREAM inventory_stream (
-        id STRING key,
-        item STRING,
-        quantity INTEGER,
-        price DOUBLE)
-   with (VALUE_FORMAT='json',
-         KAFKA_TOPIC='inventory',
-         PARTITIONS = 6);
+  id STRING key,
+  item STRING,
+  quantity INTEGER,
+  price DOUBLE
+) WITH (
+  VALUE_FORMAT='json',
+  KAFKA_TOPIC='inventory',
+  PARTITIONS = 6);
 
----------------------------------------------------------------------------------------------------
 -- Create stateful table with up-to-date information of inventory availability
----------------------------------------------------------------------------------------------------
 CREATE TABLE inventory_stream_table
     WITH (kafka_topic='inventory_table') AS
-    SELECT
-        item,
-        SUM(quantity) AS item_quantity
-    FROM
-        inventory_stream
-    GROUP BY
-        item
-        EMIT CHANGES;
+  SELECT
+    item,
+    SUM(quantity) AS item_quantity
+  FROM
+    inventory_stream
+  GROUP BY
+    item
+  EMIT CHANGES;
 </code></pre>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
 <pre><code class="language-sql">INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('1', 'Apple Magic Mouse 2', 10, 99.00);
@@ -264,31 +261,28 @@ INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('4', 'iPad4', 2
   'db.timezone'              = 'UTC',
   'tasks.max'                = '1');
 
----------------------------------------------------------------------------------------------------
 -- Create stream of inventory
----------------------------------------------------------------------------------------------------
 CREATE STREAM inventory_stream (
-        id STRING key,
-        item STRING,
-        quantity INTEGER,
-        price DOUBLE)
-   with (VALUE_FORMAT='json',
-         KAFKA_TOPIC='inventory',
-         PARTITIONS = 6);
+  id STRING key,
+  item STRING,
+  quantity INTEGER,
+  price DOUBLE
+) WITH (
+  VALUE_FORMAT='json',
+  KAFKA_TOPIC='inventory',
+  PARTITIONS = 6);
 
----------------------------------------------------------------------------------------------------
 -- Create stateful table with up-to-date information of inventory availability
----------------------------------------------------------------------------------------------------
 CREATE TABLE inventory_stream_table
     WITH (kafka_topic='inventory_table') AS
-    SELECT
-        item,
-        SUM(quantity) AS item_quantity
-    FROM
-        inventory_stream
-    GROUP BY
-        item
-        EMIT CHANGES;
+  SELECT
+    item,
+    SUM(quantity) AS item_quantity
+  FROM
+    inventory_stream
+  GROUP BY
+    item
+  EMIT CHANGES;
 </code></pre>
               
             </div>

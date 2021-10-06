@@ -3,4 +3,4 @@ INSERT INTO transactions (account_id, timestamp, card_type, amount, ip_address, 
 INSERT INTO transactions (account_id, timestamp, card_type, amount, ip_address, transaction_id) VALUES (3530111333300000, '2021-09-23T10:50:00.000Z', 'mastercard', 65.0, '192.168.101.3', '1695780');
 
 INSERT INTO customers (id, first_name, last_name, email, avg_credit_spend) VALUES (6011000990139424, 'Janice', 'Smith', 'jsmith@mycompany.com', 500.00);
-INSERT INTO customers (id, first_name, last_name, email, avg_credit_spend) VALUES (3530111333300000, 'George', 'Mall', 'gmaill@mycompany.com', 20.00);
+INSERT INTO customers (id, first_name, last_name, email, avg_credit_spend) VALUES (3530111333300000, 'George', 'Mall', 'gmall@mycompany.com', 20.00);
