@@ -1,19 +1,18 @@
 -- Register the stream of transactions
-CREATE STREAM TRANSACTIONS_RAW (ACCOUNT_ID VARCHAR, 
+CREATE STREAM TRANSACTIONS_RAW3 (ACCOUNT_ID BIGINT, 
                                 TIMESTAMP VARCHAR, 
                                 CARD_TYPE VARCHAR, 
                                 AMOUNT DOUBLE, 
                                 IP_ADDRESS VARCHAR, 
                                 TRANSACTION_ID VARCHAR) 
-                           WITH (KAFKA_TOPIC='transactions',
+                           WITH (KAFKA_TOPIC='transactions3',
                                  VALUE_FORMAT='JSON', 
 			         PARTITIONS=6);
 
 -- Repartition the stream on account_id in order to ensure that all the streams and tables are co-partitioned, which means that input records on both sides of the join have the same configuration settings for partitions.
-CREATE STREAM TRANSACTIONS_SOURCE 
-    WITH (VALUE_FORMAT='JSON') AS 
+CREATE STREAM TRANSACTIONS_SOURCE3 AS
           SELECT * 
-            FROM TRANSACTIONS_RAW 
+            FROM TRANSACTIONS_RAW3 
     PARTITION BY ACCOUNT_ID;
 
 -- Register the existing stream of customer data
@@ -27,15 +26,18 @@ CREATE STREAM CUST_RAW_STREAM (ID BIGINT,
 	            PARTITIONS=6);
 
 -- Repartition the customer data stream by account_id to prepare for the join
-CREATE STREAM CUSTOMER_REKEYED 
-    WITH (VALUE_FORMAT='JSON') AS 
+CREATE STREAM CUSTOMER_REKEYED AS
             SELECT * 
               FROM CUST_RAW_STREAM 
       PARTITION BY ID;
 
 -- Register the partitioned customer data topic as a table used for the join with the incoming stream of transactions:
 CREATE TABLE customer (
-      ID BIGINT PRIMARY KEY
+      ID BIGINT PRIMARY KEY,
+      FIRST_NAME VARCHAR, 
+      LAST_NAME VARCHAR, 
+      EMAIL VARCHAR, 
+      AVG_CREDIT_SPEND DOUBLE
 ) WITH (KAFKA_TOPIC='CUSTOMER_REKEYED',
       VALUE_FORMAT='JSON',
        PARTITIONS=6);
