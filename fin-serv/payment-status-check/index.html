@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Payment Status Check - ksqlDB Recipes</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Payment Status Check";
+    var mkdocs_page_input_path = "fin-serv/payment-status-check/index.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> ksqlDB Recipes</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">ksqlDB Recipes</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Customer 360</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Clickstream</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../customer-360/clickstream/">Clickstream Data Analysis</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Fin serv</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="#">Credit card activity</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../credit-card-activity/">Detecting Unusual Credit Card Activity</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Denormalization</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../denormalization/">Change Data Capture (CDC) for Orders</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Payment status check</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Payment Status Check</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-it">What is it?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-started">Get Started</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-by-step">Step-by-step</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#setup-your-environment">Setup your Environment</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#read-the-data-in">Read the data in</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#run-stream-processing-app">Run stream processing app</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#full-ksqldb-statements">Full ksqlDB Statements</a>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Retail</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Fleet management</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../retail/fleet_management/">Fleet Management</a>
+                </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Inventory</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../retail/inventory/">Real-time Inventory</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Security</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Ssh attack</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../security/ssh-attack/">Detecting and Analyzing SSH Attacks</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Shared</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../shared/ccloud_launch/">Ccloud launch</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../shared/ccloud_setup/">Ccloud setup</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../shared/code_summary/">Code summary</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../shared/connect/">Connect</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../shared/manual_cue/">Manual cue</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../shared/manual_insert/">Manual insert</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">ksqlDB Recipes</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Fin serv &raquo;</li>
+        
+      
+        
+          <li>Payment status check &raquo;</li>
+        
+      
+    
+    <li>Payment Status Check</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="payment-status-check">Payment Status Check</h1>
+<h2 id="what-is-it">What is it?</h2>
+<p>TODO</p>
+<h2 id="get-started">Get Started</h2>
+<p>Click below to automatically launch this recipe in Confluent Cloud (alternatively: follow the step-by-step instructions that follow).</p>
+<p><a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a></p>
+<h2 id="step-by-step">Step-by-step</h2>
+<h3 id="setup-your-environment">Setup your Environment</h3>
+<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service.</p>
+<p>Then proceed with the recipe, which can be executed with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for processing the data.</p>
+<h3 id="read-the-data-in">Read the data in</h3>
+<p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to instantly connect to popular data sources and end systems in the cloud.
+This recipe is shown with one example of a data source, but you can substitute your own preferred connector to use any data source.
+The principles are the same, just modify the connector configuration shown below to fit your deployment (see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a>).</p>
+<pre><code class="language-sql">-- Stream of customers
+CREATE SOURCE CONNECTOR customers WITH (
+  'connector.class'          = 'PostgresSource',
+  'name'                     = 'recipe-payment-status-check-customers',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '5432',
+  'connection.user'          = 'postgres',
+  'connection.password'      = '&lt;my-database-password&gt;',
+  'db.name'                  = '&lt;db-name&gt;',
+  'table.whitelist'          = 'customers',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UTC',
+  'tasks.max'                = '1');
+
+-- Stream of payments
+CREATE SOURCE CONNECTOR payments WITH (
+  'connector.class'          = 'PostgresSource',
+  'name'                     = 'recipe-payment-status-check-payments',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '5432',
+  'connection.user'          = 'postgres',
+  'connection.password'      = '&lt;my-database-password&gt;',
+  'db.name'                  = '&lt;db-name&gt;',
+  'table.whitelist'          = 'payments',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UTC',
+  'tasks.max'                = '1');
+
+-- Stream of aml_status
+CREATE SOURCE CONNECTOR aml_status WITH (
+  'connector.class'          = 'PostgresSource',
+  'name'                     = 'recipe-payment-status-check-aml_status',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '5432',
+  'connection.user'          = 'postgres',
+  'connection.password'      = '&lt;my-database-password&gt;',
+  'db.name'                  = '&lt;db-name&gt;',
+  'table.whitelist'          = 'aml_status',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UTC',
+  'tasks.max'                = '1');
+
+-- Stream of funds_status
+CREATE SOURCE CONNECTOR funds_status WITH (
+  'connector.class'          = 'PostgresSource',
+  'name'                     = 'recipe-payment-status-check-funds_status',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '5432',
+  'connection.user'          = 'postgres',
+  'connection.password'      = '&lt;my-database-password&gt;',
+  'db.name'                  = '&lt;db-name&gt;',
+  'table.whitelist'          = 'funds_status',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UTC',
+  'tasks.max'                = '1');
+</code></pre>
+<p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert values into the streams.</p>
+<h3 id="run-stream-processing-app">Run stream processing app</h3>
+<p>Now you can process the data in a variety of ways.</p>
+<pre><code class="language-sql">-- Register the initial streams and tables from the Kafka topics
+CREATE STREAM PAYMENTS (
+  PAYMENT_ID INTEGER KEY,
+  CUSTID INTEGER,
+  ACCOUNTID INTEGER,
+  AMOUNT INTEGER,
+  BANK VARCHAR
+) WITH (
+  kafka_topic='Payment_Instruction',
+  value_format='json'
+);
+
+create stream aml_status (
+  PAYMENT_ID INTEGER,
+  BANK VARCHAR,
+  STATUS VARCHAR
+) with (
+  kafka_topic='AML_Status',
+  value_format='json'
+);
+
+create stream funds_status (
+  PAYMENT_ID INTEGER,
+  REASON_CODE VARCHAR,
+  STATUS VARCHAR
+) with (
+  kafka_topic='Funds_Status',
+  value_format='json'
+);
+
+create table customers (
+  ID INTEGER PRIMARY KEY, 
+  FIRST_NAME VARCHAR, 
+  LAST_NAME VARCHAR, 
+  EMAIL VARCHAR, 
+  GENDER VARCHAR, 
+  STATUS360 VARCHAR
+) WITH (
+  kafka_topic='CUSTOMERS_FLAT',
+  value_format='JSON'
+);
+
+-- Enrich Payments stream with Customers table
+create stream enriched_payments as select
+  p.payment_id as payment_id,
+  p.custid as customer_id,
+  p.accountid,
+  p.amount,
+  p.bank,
+  c.first_name,
+  c.last_name,
+  c.email,
+  c.status360
+  from payments p left join customers c on p.custid = c.id;
+
+-- Combine the status streams
+CREATE STREAM payment_statuses AS SELECT payment_id, status, 'AML' as source_system FROM aml_status;
+INSERT INTO payment_statuses SELECT payment_id, status, 'FUNDS' as source_system FROM funds_status;
+
+-- Combine payment and status events in 1 hour window. Why we need a timing window for stream-stream join?
+CREATE STREAM payments_with_status AS SELECT
+  ep.payment_id as payment_id,
+  ep.accountid,
+  ep.amount,
+  ep.bank,
+  ep.first_name,
+  ep.last_name,
+  ep.email,
+  ep.status360,
+  ps.status,
+  ps.source_system
+  FROM enriched_payments ep LEFT JOIN payment_statuses ps WITHIN 1 HOUR ON ep.payment_id = ps.payment_id ;
+
+-- Aggregate data to the final table
+CREATE TABLE payments_final AS SELECT
+  payment_id,
+  histogram(status) as status_counts,
+  collect_list('{ &quot;system&quot; : &quot;' + source_system + '&quot;, &quot;status&quot; : &quot;' + STATUS + '&quot;}') as service_status_list
+  from payments_with_status
+  where status is not null
+  group by payment_id;
+</code></pre>
+<p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
+<pre><code class="language-sql">-- Customer Data
+INSERT INTO customers (id, FIRST_NAME, LAST_NAME, EMAIL, GENDER, STATUS360) VALUES (10,'Brena','Tollerton','btollerton9@furl.net','Female','silver');
+INSERT INTO customers (id, FIRST_NAME, LAST_NAME, EMAIL, GENDER, STATUS360) VALUES (9,'Even','Tinham','etinham8@facebook.com','Male','silver');
+INSERT INTO customers (id, FIRST_NAME, LAST_NAME, EMAIL, GENDER, STATUS360) VALUES (8,'Patti','Rosten','prosten7@ihg.com','Female','silver');
+INSERT INTO customers (id, FIRST_NAME, LAST_NAME, EMAIL, GENDER, STATUS360) VALUES (7,'Fay','Huc','fhuc6@quantcast.com','Female','bronze');
+INSERT INTO customers (id, FIRST_NAME, LAST_NAME, EMAIL, GENDER, STATUS360) VALUES (6,'Robinet','Leheude','rleheude5@reddit.com','Female','platinum');
+INSERT INTO customers (id, FIRST_NAME, LAST_NAME, EMAIL, GENDER, STATUS360) VALUES (5,'Hansiain','Coda','hcoda4@senate.gov','Male','platinum');
+INSERT INTO customers (id, FIRST_NAME, LAST_NAME, EMAIL, GENDER, STATUS360) VALUES (4,'Hashim','Rumke','hrumke3@sohu.com','Male','platinum');
+INSERT INTO customers (id, FIRST_NAME, LAST_NAME, EMAIL, GENDER, STATUS360) VALUES (3,'Mariejeanne','Cocci','mcocci2@techcrunch.com','Female','bronze');
+INSERT INTO customers (id, FIRST_NAME, LAST_NAME, EMAIL, GENDER, STATUS360) VALUES (2,'Ruthie','Brockherst','rbrockherst1@ow.ly','Female','platinum');
+INSERT INTO customers (id, FIRST_NAME, LAST_NAME, EMAIL, GENDER, STATUS360) VALUES (1,'Rica','Blaisdell','rblaisdell0@rambler.ru','Female','bronze');
+
+-- Payment Instruction Data
+INSERT INTO payments (PAYMENT_ID, CUSTID, ACCOUNTID, AMOUNT, BANK) VALUES (1,1,1234000,100,'DBS');
+INSERT INTO payments (PAYMENT_ID, CUSTID, ACCOUNTID, AMOUNT, BANK) VALUES (3,2,1234100,200,'Barclays Bank');
+INSERT INTO payments (PAYMENT_ID, CUSTID, ACCOUNTID, AMOUNT, BANK) VALUES (5,3,1234200,300,'BNP Paribas');
+INSERT INTO payments (PAYMENT_ID, CUSTID, ACCOUNTID, AMOUNT, BANK) VALUES (7,4,1234300,400,'Wells Fargo');
+INSERT INTO payments (PAYMENT_ID, CUSTID, ACCOUNTID, AMOUNT, BANK) VALUES (9,5,1234400,500,'DBS');
+INSERT INTO payments (PAYMENT_ID, CUSTID, ACCOUNTID, AMOUNT, BANK) VALUES (11,6,1234500,600,'Royal Bank of Canada');
+INSERT INTO payments (PAYMENT_ID, CUSTID, ACCOUNTID, AMOUNT, BANK) VALUES (13,7,1234600,700,'DBS');
+INSERT INTO payments (PAYMENT_ID, CUSTID, ACCOUNTID, AMOUNT, BANK) VALUES (15,8,1234700,800,'DBS');
+INSERT INTO payments (PAYMENT_ID, CUSTID, ACCOUNTID, AMOUNT, BANK) VALUES (17,9,1234800,900,'DBS');
+INSERT INTO payments (PAYMENT_ID, CUSTID, ACCOUNTID, AMOUNT, BANK) VALUES (19,10,1234900,1000,'United Overseas Bank');
+
+-- ALM Status Data
+INSERT INTO aml_status(PAYMENT_ID,BANK,STATUS) VALUES (1,'Wells Fargo','OK');
+INSERT INTO aml_status(PAYMENT_ID,BANK,STATUS) VALUES (3,'Commonwealth Bank of Australia','OK');
+INSERT INTO aml_status(PAYMENT_ID,BANK,STATUS) VALUES (5,'Deutsche Bank','OK');
+INSERT INTO aml_status(PAYMENT_ID,BANK,STATUS) VALUES (7,'DBS','OK');
+INSERT INTO aml_status(PAYMENT_ID,BANK,STATUS) VALUES (9,'United Overseas Bank','OK');
+INSERT INTO aml_status(PAYMENT_ID,BANK,STATUS) VALUES (11,'Citi','OK');
+INSERT INTO aml_status(PAYMENT_ID,BANK,STATUS) VALUES (13,'Commonwealth Bank of Australia','OK');
+INSERT INTO aml_status(PAYMENT_ID,BANK,STATUS) VALUES (15,'Barclays Bank','OK');
+INSERT INTO aml_status(PAYMENT_ID,BANK,STATUS) VALUES (17,'United Overseas Bank','OK');
+INSERT INTO aml_status(PAYMENT_ID,BANK,STATUS) VALUES (19,'Royal Bank of Canada','OK');
+
+-- Funds Status Data
+INSERT INTO funds_status(PAYMENT_ID,REASON_CODE,STATUS) VALUES (1,'00','OK');
+INSERT INTO funds_status(PAYMENT_ID,REASON_CODE,STATUS) VALUES (3,'99','OK');
+INSERT INTO funds_status(PAYMENT_ID,REASON_CODE,STATUS) VALUES (5,'30','OK');
+INSERT INTO funds_status(PAYMENT_ID,REASON_CODE,STATUS) VALUES (7,'00','OK');
+INSERT INTO funds_status(PAYMENT_ID,REASON_CODE,STATUS) VALUES (9,'00','OK');
+INSERT INTO funds_status(PAYMENT_ID,REASON_CODE,STATUS) VALUES (11,'00','NOT OK');
+INSERT INTO funds_status(PAYMENT_ID,REASON_CODE,STATUS) VALUES (13,'30','OK');
+INSERT INTO funds_status(PAYMENT_ID,REASON_CODE,STATUS) VALUES (15,'00','OK');
+INSERT INTO funds_status(PAYMENT_ID,REASON_CODE,STATUS) VALUES (17,'10','OK');
+INSERT INTO funds_status(PAYMENT_ID,REASON_CODE,STATUS) VALUES (19,'10','OK');
+</code></pre>
+<h2 id="full-ksqldb-statements">Full ksqlDB Statements</h2>
+<p>Here is the full recipe that you can run with ksqlDB, a consolidation of all the the steps shown above.</p>
+<pre><code class="language-sql">-- Stream of customers
+CREATE SOURCE CONNECTOR customers WITH (
+  'connector.class'          = 'PostgresSource',
+  'name'                     = 'recipe-payment-status-check-customers',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '5432',
+  'connection.user'          = 'postgres',
+  'connection.password'      = '&lt;my-database-password&gt;',
+  'db.name'                  = '&lt;db-name&gt;',
+  'table.whitelist'          = 'customers',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UTC',
+  'tasks.max'                = '1');
+
+-- Stream of payments
+CREATE SOURCE CONNECTOR payments WITH (
+  'connector.class'          = 'PostgresSource',
+  'name'                     = 'recipe-payment-status-check-payments',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '5432',
+  'connection.user'          = 'postgres',
+  'connection.password'      = '&lt;my-database-password&gt;',
+  'db.name'                  = '&lt;db-name&gt;',
+  'table.whitelist'          = 'payments',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UTC',
+  'tasks.max'                = '1');
+
+-- Stream of aml_status
+CREATE SOURCE CONNECTOR aml_status WITH (
+  'connector.class'          = 'PostgresSource',
+  'name'                     = 'recipe-payment-status-check-aml_status',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '5432',
+  'connection.user'          = 'postgres',
+  'connection.password'      = '&lt;my-database-password&gt;',
+  'db.name'                  = '&lt;db-name&gt;',
+  'table.whitelist'          = 'aml_status',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UTC',
+  'tasks.max'                = '1');
+
+-- Stream of funds_status
+CREATE SOURCE CONNECTOR funds_status WITH (
+  'connector.class'          = 'PostgresSource',
+  'name'                     = 'recipe-payment-status-check-funds_status',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '5432',
+  'connection.user'          = 'postgres',
+  'connection.password'      = '&lt;my-database-password&gt;',
+  'db.name'                  = '&lt;db-name&gt;',
+  'table.whitelist'          = 'funds_status',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UTC',
+  'tasks.max'                = '1');
+
+-- Register the initial streams and tables from the Kafka topics
+CREATE STREAM PAYMENTS (
+  PAYMENT_ID INTEGER KEY,
+  CUSTID INTEGER,
+  ACCOUNTID INTEGER,
+  AMOUNT INTEGER,
+  BANK VARCHAR
+) WITH (
+  kafka_topic='Payment_Instruction',
+  value_format='json'
+);
+
+create stream aml_status (
+  PAYMENT_ID INTEGER,
+  BANK VARCHAR,
+  STATUS VARCHAR
+) with (
+  kafka_topic='AML_Status',
+  value_format='json'
+);
+
+create stream funds_status (
+  PAYMENT_ID INTEGER,
+  REASON_CODE VARCHAR,
+  STATUS VARCHAR
+) with (
+  kafka_topic='Funds_Status',
+  value_format='json'
+);
+
+create table customers (
+  ID INTEGER PRIMARY KEY, 
+  FIRST_NAME VARCHAR, 
+  LAST_NAME VARCHAR, 
+  EMAIL VARCHAR, 
+  GENDER VARCHAR, 
+  STATUS360 VARCHAR
+) WITH (
+  kafka_topic='CUSTOMERS_FLAT',
+  value_format='JSON'
+);
+
+-- Enrich Payments stream with Customers table
+create stream enriched_payments as select
+  p.payment_id as payment_id,
+  p.custid as customer_id,
+  p.accountid,
+  p.amount,
+  p.bank,
+  c.first_name,
+  c.last_name,
+  c.email,
+  c.status360
+  from payments p left join customers c on p.custid = c.id;
+
+-- Combine the status streams
+CREATE STREAM payment_statuses AS SELECT payment_id, status, 'AML' as source_system FROM aml_status;
+INSERT INTO payment_statuses SELECT payment_id, status, 'FUNDS' as source_system FROM funds_status;
+
+-- Combine payment and status events in 1 hour window. Why we need a timing window for stream-stream join?
+CREATE STREAM payments_with_status AS SELECT
+  ep.payment_id as payment_id,
+  ep.accountid,
+  ep.amount,
+  ep.bank,
+  ep.first_name,
+  ep.last_name,
+  ep.email,
+  ep.status360,
+  ps.status,
+  ps.source_system
+  FROM enriched_payments ep LEFT JOIN payment_statuses ps WITHIN 1 HOUR ON ep.payment_id = ps.payment_id ;
+
+-- Aggregate data to the final table
+CREATE TABLE payments_final AS SELECT
+  payment_id,
+  histogram(status) as status_counts,
+  collect_list('{ &quot;system&quot; : &quot;' + source_system + '&quot;, &quot;status&quot; : &quot;' + STATUS + '&quot;}') as service_status_list
+  from payments_with_status
+  where status is not null
+  group by payment_id;
+
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../retail/fleet_management/" class="btn btn-neutral float-right" title="Fleet Management">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../denormalization/" class="btn btn-neutral" title="Change Data Capture (CDC) for Orders"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../denormalization/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../retail/fleet_management/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
