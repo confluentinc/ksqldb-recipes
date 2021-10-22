@@ -7,7 +7,8 @@ CREATE STREAM PAYMENTS (
   BANK VARCHAR
 ) WITH (
   kafka_topic='payments',
-  value_format='json'
+  value_format='json',
+  PARTITIONS=6
 );
 
 create stream aml_status (
@@ -16,7 +17,8 @@ create stream aml_status (
   STATUS VARCHAR
 ) with (
   kafka_topic='aml_status',
-  value_format='json'
+  value_format='json',
+  PARTITIONS=6
 );
 
 create stream funds_status (
@@ -25,7 +27,8 @@ create stream funds_status (
   STATUS VARCHAR
 ) with (
   kafka_topic='funds_status',
-  value_format='json'
+  value_format='json',
+  PARTITIONS=6
 );
 
 create table customers (
@@ -37,11 +40,12 @@ create table customers (
   STATUS360 VARCHAR
 ) WITH (
   kafka_topic='customers',
-  value_format='JSON'
+  value_format='JSON',
+  PARTITIONS=6
 );
 
 -- Enrich Payments stream with Customers table
-create stream enriched_payments as select
+CREATE STREAM enriched_payments AS SELECT
   p.payment_id as payment_id,
   p.custid as customer_id,
   p.accountid,
@@ -54,7 +58,12 @@ create stream enriched_payments as select
   from payments p left join customers c on p.custid = c.id;
 
 -- Combine the status streams
-CREATE STREAM payment_statuses AS SELECT payment_id, status, 'AML' as source_system FROM aml_status;
+CREATE STREAM payment_statuses AS SELECT
+  payment_id,
+  status,
+  'AML' as source_system
+  FROM aml_status;
+
 INSERT INTO payment_statuses SELECT payment_id, status, 'FUNDS' as source_system FROM funds_status;
 
 -- Combine payment and status events in 1 hour window. Why we need a timing window for stream-stream join?
@@ -76,6 +85,6 @@ CREATE TABLE payments_final AS SELECT
   payment_id,
   histogram(status) as status_counts,
   collect_list('{ "system" : "' + source_system + '", "status" : "' + STATUS + '"}') as service_status_list
-  from payments_with_status
-  where status is not null
-  group by payment_id;
+  FROM payments_with_status
+  WHERE status is not null
+  GROUP BY payment_id;
