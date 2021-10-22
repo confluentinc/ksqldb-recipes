@@ -17,3 +17,4 @@ toc:
     items:
       - fin-serv/credit-card-activity
       - fin-serv/denormalization
+      - fin-server/payment-status-check
