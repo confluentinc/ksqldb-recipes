@@ -6,7 +6,7 @@ CREATE STREAM PAYMENTS (
   AMOUNT INTEGER,
   BANK VARCHAR
 ) WITH (
-  kafka_topic='Payment_Instruction',
+  kafka_topic='payments',
   value_format='json'
 );
 
@@ -15,7 +15,7 @@ create stream aml_status (
   BANK VARCHAR,
   STATUS VARCHAR
 ) with (
-  kafka_topic='AML_Status',
+  kafka_topic='aml_status',
   value_format='json'
 );
 
@@ -24,7 +24,7 @@ create stream funds_status (
   REASON_CODE VARCHAR,
   STATUS VARCHAR
 ) with (
-  kafka_topic='Funds_Status',
+  kafka_topic='funds_status',
   value_format='json'
 );
 
@@ -36,7 +36,7 @@ create table customers (
   GENDER VARCHAR, 
   STATUS360 VARCHAR
 ) WITH (
-  kafka_topic='CUSTOMERS_FLAT',
+  kafka_topic='customers',
   value_format='JSON'
 );
 
