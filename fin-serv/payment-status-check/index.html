@@ -180,7 +180,8 @@
               
                 <h1 id="payment-status-check">Payment Status Check</h1>
 <h2 id="what-is-it">What is it?</h2>
-<p>TODO</p>
+<p>With financial services, it is useful to do real-time checking of customer payment requests.
+This recipe shows you how to validate payments against available funds and anti-money laundering (AML) policies.</p>
 <h2 id="get-started">Get Started</h2>
 <p>Click below to automatically launch this recipe in Confluent Cloud (alternatively: follow the step-by-step instructions that follow).</p>
 <p><a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a></p>
@@ -379,7 +380,7 @@ INSERT INTO payments (PAYMENT_ID, CUSTID, ACCOUNTID, AMOUNT, BANK) VALUES (15,8,
 INSERT INTO payments (PAYMENT_ID, CUSTID, ACCOUNTID, AMOUNT, BANK) VALUES (17,9,1234800,900,'DBS');
 INSERT INTO payments (PAYMENT_ID, CUSTID, ACCOUNTID, AMOUNT, BANK) VALUES (19,10,1234900,1000,'United Overseas Bank');
 
--- ALM Status Data
+-- AML Status Data
 INSERT INTO aml_status(PAYMENT_ID,BANK,STATUS) VALUES (1,'Wells Fargo','OK');
 INSERT INTO aml_status(PAYMENT_ID,BANK,STATUS) VALUES (3,'Commonwealth Bank of Australia','OK');
 INSERT INTO aml_status(PAYMENT_ID,BANK,STATUS) VALUES (5,'Deutsche Bank','OK');

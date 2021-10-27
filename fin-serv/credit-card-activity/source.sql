@@ -1,5 +1,5 @@
 -- Stream of transactions
-CREATE SOURCE CONNECTOR transactions WITH (
+CREATE SOURCE CONNECTOR FD_transactions WITH (
   'connector.class'          = 'OracleDatabaseSource',
   'name'                     = 'recipe-oracle-transactions',
   'connector.class'          = 'OracleDatabaseSource',
@@ -17,7 +17,7 @@ CREATE SOURCE CONNECTOR transactions WITH (
   'tasks.max'                = '1');
 
 -- Stream of customers
-CREATE SOURCE CONNECTOR customers WITH (
+CREATE SOURCE CONNECTOR FD_customers WITH (
   'connector.class'          = 'OracleDatabaseSource',
   'name'                     = 'recipe-oracle-customers',
   'connector.class'          = 'OracleDatabaseSource',
