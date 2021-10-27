@@ -59,7 +59,7 @@ CREATE STREAM FD_TRANSACTIONS_ENRICHED AS
     C.FIRST_NAME + ' ' + C.LAST_NAME AS FULL_NAME, 
     C.AVG_CREDIT_SPEND 
   FROM FD_TRANSACTIONS_SOURCE T 
-  INNER JOIN CUSTOMER C 
+  INNER JOIN FD_CUSTOMER C 
   ON T.ACCOUNT_ID = C.ID;
 
 -- Aggregate the stream of transactions for each account ID using a two-hour tumbling window, and filter for accounts in which the total spend in a two-hour period is greater than the customer’s average:
