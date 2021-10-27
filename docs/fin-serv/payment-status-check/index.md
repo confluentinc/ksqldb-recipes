@@ -8,7 +8,8 @@ seo:
 
 ## What is it?
 
-TODO
+With financial services, it is useful to do real-time checking of customer payment requests.
+This recipe shows you how to validate payments against available funds and anti-money laundering (AML) policies.
 
 ## Get Started
 
