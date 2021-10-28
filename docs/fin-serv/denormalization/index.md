@@ -8,10 +8,10 @@ seo:
 
 ## What is it?
 
-If you have transactional events for orders in a marketplace, you can stream the Change Data Capture (CDC) and denormalize it.
-Denormalization is a well-established pattern for performance, because most times querying a single table of data will perform better than querying across multiple at runtime.
-Then open it up to be consumed by downstream applications in your business, or stream it out to another destination.
-This recipe demonstrates this principle by streaming from a SQL Server, denormalizing the data, and writing to Snowflake. 
+If you have transactional events for orders in a marketplace, you can stream the Change Data Capture (CDC) and denormalize the events.
+Denormalization is a well-established pattern for performance because querying a single table of enriched data will often perform better than querying across multiple at runtime.
+You can consume the denormalized events from  downstream applications in your business, or stream them to another destination.
+This recipe demonstrates this principle by streaming from a SQL Server, denormalizing the data, and writing to Snowflake.
 
 ![denormalized](../../img/denormalized-data.png)
 

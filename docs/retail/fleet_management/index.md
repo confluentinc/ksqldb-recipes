@@ -8,9 +8,9 @@ seo:
 
 ## What is it?
 
-More and more fleet management relies on knowing real-time information on vehicles, their locations, and vehicle telemetry.
-This enables businesses to improve route efficiency, fuel efficiency, automate service schedules, etc.
-This recipe enriches fleet location with information about each vehicle to be able to have a real-time view with consolidation information on the entire fleet.
+More and more, fleet management relies on knowing real-time information on vehicles, their locations, and vehicle telemetry.
+This enables businesses to improve operational efficiency by optimizing travel routes, lowering fuel consumption, and automating service schedules.
+This recipe enriches fleet location with individual vehicle information, so organizations can have a real-time consolidated view on the entire fleet.
 
 TODO--add diagram
 
