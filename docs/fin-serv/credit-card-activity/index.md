@@ -4,12 +4,13 @@ seo:
   description: This recipe analyzes total credit card spend, and if it's more than the average credit card usage of a customer, the account will be flagged as a possible case of credit card theft.
 ---
 
-# Detecting Unusual Credit Card Activity
+# Anomaly Detection -- Unusual Credit Card Activity
 
 ## What is it?
 
 In banking, fraud can involve using stolen credit cards, forging checks, misleading accounting practices, etc.
-This recipe analyzes total credit card spend, and if it's more than the average credit card usage of a customer, the account will be flagged as a possible case of credit card theft.
+This recipe analyzes total credit card spend.
+If a customer exceeds their average spend, the account will be flagged as a possible case of credit card theft.
 
 ![grafana](../../img/credit-card-activity.jpg)
 
