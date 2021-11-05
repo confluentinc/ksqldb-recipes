@@ -6,7 +6,18 @@ This repository contains a collection of ksqlDB Recipes.
 
 If you'd like to contribute a recipe, please submit a Pull Request.
 The content of that PR should follow the template established by existing recipes.
-Browse through any recipe in https://github.com/confluentinc/ksqldb-recipes/tree/master/docs for more details.
+Browse through any recipe in https://github.com/confluentinc/ksqldb-recipes/tree/master/docs for more details, but it effectively boils down to:
+
+1. Select the `docs/<industry>` folder for the appropriate industry, or create a new one
+2. Create a new subfolder for the new recipe, e.g. `docs/<industry>/<new-recipe-name>`
+3. Create the following files:
+
+- index.md: explain the use case, why it matters, add a graphic if available
+- source.sql: SQL commands to create source connectors to pull from a real end system
+- manual.sql: SQL commands to insert mock data into Kafka topics (if real end system does not exist)
+- process.sql: this is the core of the recipe, the SQL commands that correspond to the event stream processing
+- sink.sql: (optional) SQL commands to create sink connectors to push results to a real end system
+
 
 
 #### Build locally
