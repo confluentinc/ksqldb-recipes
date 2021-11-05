@@ -2,6 +2,13 @@
 
 This repository contains a collection of ksqlDB Recipes.
 
+#### How to contribute
+
+If you'd like to contribute a recipe, please submit a Pull Request.
+The content of that PR should follow the template established by existing recipes.
+Browse through any recipe in https://github.com/confluentinc/ksqldb-recipes/tree/master/docs for more details.
+
+
 #### Build locally
 
 To view your new recipes locally, you can build a local version of the recipes site with `mkdocs`.
