@@ -1,10 +1,10 @@
 ---
 seo:
-  title: Detecting and Analyzing SSH Attacks
+  title: Detect and Analyze SSH Attacks
   description: This recipe processes Syslog data to detect bad logins and streams out those pairs of usernames and IP addresses.
 ---
 
-# Detecting and Analyzing SSH Attacks
+# Detect and Analyze SSH Attacks
 
 ## What is it?
 
