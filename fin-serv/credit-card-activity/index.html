@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Anomaly Detection -- Unusual Credit Card Activity - ksqlDB Recipes</title>
+  <title>Detect Unusual Credit Card Activity - ksqlDB Recipes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Anomaly Detection -- Unusual Credit Card Activity";
+    var mkdocs_page_name = "Detect Unusual Credit Card Activity";
     var mkdocs_page_input_path = "fin-serv/credit-card-activity/index.md";
     var mkdocs_page_url = null;
   </script>
@@ -54,7 +54,7 @@
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="#">Clickstream</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../customer-360/clickstream/">Clickstream Data Analysis</a>
+                <li class="toctree-l2"><a class="reference internal" href="../../customer-360/clickstream/">Understand User Behavior with Clickstream Data</a>
                 </li>
     </ul>
                     </li>
@@ -63,7 +63,7 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="#">Credit card activity</a>
     <ul class="current">
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">Anomaly Detection -- Unusual Credit Card Activity</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Detect Unusual Credit Card Activity</a>
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#what-is-it">What is it?</a>
     </li>
@@ -87,13 +87,13 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Denormalization</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../denormalization/">Change Data Capture (CDC) for Orders</a>
+                <li class="toctree-l2"><a class="reference internal" href="../denormalization/">Denormalize Change Data Capture (CDC) for Orders</a>
                 </li>
     </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Payment status check</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../payment-status-check/">Payment Status Check</a>
+                <li class="toctree-l2"><a class="reference internal" href="../payment-status-check/">Check Payment Requests</a>
                 </li>
     </ul>
                     </li>
@@ -102,13 +102,13 @@
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="#">Fleet management</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../retail/fleet_management/">Fleet Management</a>
+                <li class="toctree-l2"><a class="reference internal" href="../../retail/fleet_management/">Build a Real-time Fleet Management System</a>
                 </li>
     </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Inventory</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../retail/inventory/">Real-time Inventory</a>
+                <li class="toctree-l2"><a class="reference internal" href="../../retail/inventory/">View Real-time Inventory</a>
                 </li>
     </ul>
                     </li>
@@ -117,7 +117,7 @@
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="#">Ssh attack</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../security/ssh-attack/">Detecting and Analyzing SSH Attacks</a>
+                <li class="toctree-l2"><a class="reference internal" href="../../security/ssh-attack/">Detect and Analyze SSH Attacks</a>
                 </li>
     </ul>
                     </li>
@@ -166,7 +166,7 @@
         
       
     
-    <li>Anomaly Detection -- Unusual Credit Card Activity</li>
+    <li>Detect Unusual Credit Card Activity</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -178,7 +178,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="anomaly-detection-unusual-credit-card-activity">Anomaly Detection -- Unusual Credit Card Activity</h1>
+                <h1 id="detect-unusual-credit-card-activity">Detect Unusual Credit Card Activity</h1>
 <h2 id="what-is-it">What is it?</h2>
 <p>In banking, fraud can involve using stolen credit cards, forging checks, misleading accounting practices, etc.
 This recipe analyzes total credit card spend.
@@ -444,10 +444,10 @@ CREATE TABLE FD_POSSIBLE_STOLEN_CARD WITH (key_format='json') AS
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../denormalization/" class="btn btn-neutral float-right" title="Change Data Capture (CDC) for Orders">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../denormalization/" class="btn btn-neutral float-right" title="Denormalize Change Data Capture (CDC) for Orders">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../customer-360/clickstream/" class="btn btn-neutral" title="Clickstream Data Analysis"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../customer-360/clickstream/" class="btn btn-neutral" title="Understand User Behavior with Clickstream Data"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   

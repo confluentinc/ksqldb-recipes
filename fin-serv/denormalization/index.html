@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Change Data Capture (CDC) for Orders - ksqlDB Recipes</title>
+  <title>Denormalize Change Data Capture (CDC) for Orders - ksqlDB Recipes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Change Data Capture (CDC) for Orders";
+    var mkdocs_page_name = "Denormalize Change Data Capture (CDC) for Orders";
     var mkdocs_page_input_path = "fin-serv/denormalization/index.md";
     var mkdocs_page_url = null;
   </script>
@@ -54,7 +54,7 @@
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="#">Clickstream</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../customer-360/clickstream/">Clickstream Data Analysis</a>
+                <li class="toctree-l2"><a class="reference internal" href="../../customer-360/clickstream/">Understand User Behavior with Clickstream Data</a>
                 </li>
     </ul>
                     </li>
@@ -63,13 +63,13 @@
                 <ul class="current">
                     <li class="toctree-l1"><a class="reference internal" href="#">Credit card activity</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../credit-card-activity/">Anomaly Detection -- Unusual Credit Card Activity</a>
+                <li class="toctree-l2"><a class="reference internal" href="../credit-card-activity/">Detect Unusual Credit Card Activity</a>
                 </li>
     </ul>
                     </li>
                     <li class="toctree-l1 current"><a class="reference internal current" href="#">Denormalization</a>
     <ul class="current">
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">Change Data Capture (CDC) for Orders</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Denormalize Change Data Capture (CDC) for Orders</a>
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#what-is-it">What is it?</a>
     </li>
@@ -95,7 +95,7 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Payment status check</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../payment-status-check/">Payment Status Check</a>
+                <li class="toctree-l2"><a class="reference internal" href="../payment-status-check/">Check Payment Requests</a>
                 </li>
     </ul>
                     </li>
@@ -104,13 +104,13 @@
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="#">Fleet management</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../retail/fleet_management/">Fleet Management</a>
+                <li class="toctree-l2"><a class="reference internal" href="../../retail/fleet_management/">Build a Real-time Fleet Management System</a>
                 </li>
     </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Inventory</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../retail/inventory/">Real-time Inventory</a>
+                <li class="toctree-l2"><a class="reference internal" href="../../retail/inventory/">View Real-time Inventory</a>
                 </li>
     </ul>
                     </li>
@@ -119,7 +119,7 @@
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="#">Ssh attack</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../security/ssh-attack/">Detecting and Analyzing SSH Attacks</a>
+                <li class="toctree-l2"><a class="reference internal" href="../../security/ssh-attack/">Detect and Analyze SSH Attacks</a>
                 </li>
     </ul>
                     </li>
@@ -168,7 +168,7 @@
         
       
     
-    <li>Change Data Capture (CDC) for Orders</li>
+    <li>Denormalize Change Data Capture (CDC) for Orders</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -180,7 +180,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="change-data-capture-cdc-for-orders">Change Data Capture (CDC) for Orders</h1>
+                <h1 id="denormalize-change-data-capture-cdc-for-orders">Denormalize Change Data Capture (CDC) for Orders</h1>
 <h2 id="what-is-it">What is it?</h2>
 <p>If you have transactional events for orders in a marketplace, you can stream the Change Data Capture (CDC) and denormalize the events.
 Denormalization is a well-established pattern for performance because querying a single table of enriched data will often perform better than querying across multiple at runtime.
@@ -418,10 +418,10 @@ CREATE SINK CONNECTOR orders_enriched WITH (
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../payment-status-check/" class="btn btn-neutral float-right" title="Payment Status Check">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../payment-status-check/" class="btn btn-neutral float-right" title="Check Payment Requests">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../credit-card-activity/" class="btn btn-neutral" title="Anomaly Detection -- Unusual Credit Card Activity"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../credit-card-activity/" class="btn btn-neutral" title="Detect Unusual Credit Card Activity"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   

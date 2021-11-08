@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Payment Status Check - ksqlDB Recipes</title>
+  <title>Check Payment Requests - ksqlDB Recipes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Payment Status Check";
+    var mkdocs_page_name = "Check Payment Requests";
     var mkdocs_page_input_path = "fin-serv/payment-status-check/index.md";
     var mkdocs_page_url = null;
   </script>
@@ -54,7 +54,7 @@
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="#">Clickstream</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../customer-360/clickstream/">Clickstream Data Analysis</a>
+                <li class="toctree-l2"><a class="reference internal" href="../../customer-360/clickstream/">Understand User Behavior with Clickstream Data</a>
                 </li>
     </ul>
                     </li>
@@ -63,19 +63,19 @@
                 <ul class="current">
                     <li class="toctree-l1"><a class="reference internal" href="#">Credit card activity</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../credit-card-activity/">Anomaly Detection -- Unusual Credit Card Activity</a>
+                <li class="toctree-l2"><a class="reference internal" href="../credit-card-activity/">Detect Unusual Credit Card Activity</a>
                 </li>
     </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Denormalization</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../denormalization/">Change Data Capture (CDC) for Orders</a>
+                <li class="toctree-l2"><a class="reference internal" href="../denormalization/">Denormalize Change Data Capture (CDC) for Orders</a>
                 </li>
     </ul>
                     </li>
                     <li class="toctree-l1 current"><a class="reference internal current" href="#">Payment status check</a>
     <ul class="current">
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">Payment Status Check</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Check Payment Requests</a>
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#what-is-it">What is it?</a>
     </li>
@@ -102,13 +102,13 @@
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="#">Fleet management</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../retail/fleet_management/">Fleet Management</a>
+                <li class="toctree-l2"><a class="reference internal" href="../../retail/fleet_management/">Build a Real-time Fleet Management System</a>
                 </li>
     </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Inventory</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../retail/inventory/">Real-time Inventory</a>
+                <li class="toctree-l2"><a class="reference internal" href="../../retail/inventory/">View Real-time Inventory</a>
                 </li>
     </ul>
                     </li>
@@ -117,7 +117,7 @@
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="#">Ssh attack</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../security/ssh-attack/">Detecting and Analyzing SSH Attacks</a>
+                <li class="toctree-l2"><a class="reference internal" href="../../security/ssh-attack/">Detect and Analyze SSH Attacks</a>
                 </li>
     </ul>
                     </li>
@@ -166,7 +166,7 @@
         
       
     
-    <li>Payment Status Check</li>
+    <li>Check Payment Requests</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -178,7 +178,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="payment-status-check">Payment Status Check</h1>
+                <h1 id="check-payment-requests">Check Payment Requests</h1>
 <h2 id="what-is-it">What is it?</h2>
 <p>With financial services, it is useful to do real-time checking of customer payment requests.
 This recipe shows you how to validate payments against available funds and anti-money-laundering (AML) policies.</p>
@@ -573,10 +573,10 @@ CREATE TABLE payments_final AS SELECT
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../retail/fleet_management/" class="btn btn-neutral float-right" title="Fleet Management">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../retail/fleet_management/" class="btn btn-neutral float-right" title="Build a Real-time Fleet Management System">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../denormalization/" class="btn btn-neutral" title="Change Data Capture (CDC) for Orders"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../denormalization/" class="btn btn-neutral" title="Denormalize Change Data Capture (CDC) for Orders"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
