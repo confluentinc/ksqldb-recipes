@@ -1,10 +1,10 @@
 ---
 seo:
-  title: Clickstream Data Analysis
+  title: Understand User Behavior with Clickstream Data
   description: This recipe processes clickstream data to understand the behavior of its online users
 ---
 
-# Clickstream Data Analysis
+# Understand User Behavior with Clickstream Data
 
 ## What is it?
 

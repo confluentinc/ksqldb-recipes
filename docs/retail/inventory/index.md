@@ -1,10 +1,10 @@
 ---
 seo:
-  title: Real-time Inventory
+  title: View Real-time Inventory
   description: This recipe demonstrates how to use ksqlDB to always have an up-to-date snapshot of your inventory.
 ---
 
-# Real-time Inventory
+# View Real-time Inventory
 
 ## What is it?
 

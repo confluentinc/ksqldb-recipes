@@ -1,10 +1,10 @@
 ---
 seo:
-  title: Detecting Unusual Credit Card Activity
+  title: Detect Unusual Credit Card Activity
   description: This recipe analyzes total credit card spend, and if it's more than the average credit card usage of a customer, the account will be flagged as a possible case of credit card theft.
 ---
 
-# Anomaly Detection -- Unusual Credit Card Activity
+# Detect Unusual Credit Card Activity
 
 ## What is it?
 

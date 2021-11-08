@@ -1,10 +1,10 @@
 ---
 seo:
-  title: Payment Status Check
+  title: Check Payment Requests
   description: TODO
 ---
 
-# Payment Status Check
+# Check Payment Requests
 
 ## What is it?
 

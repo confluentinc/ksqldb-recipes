@@ -1,10 +1,10 @@
 ---
 seo:
-  title: Change Data Capture (CDC) for Orders
+  title: Denormalize Change Data Capture (CDC) for Orders
   description: This recipe demonstrates this principle by streaming from a SQL Server, denormalizing the data, and writing to Snowflake.
 ---
 
-# Change Data Capture (CDC) for Orders
+# Denormalize Change Data Capture (CDC) for Orders
 
 ## What is it?
 

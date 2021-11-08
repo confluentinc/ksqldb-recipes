@@ -1,10 +1,10 @@
 ---
 seo:
-  title: Fleet Management
+  title: Build a Real-time Fleet Management System
   description: This recipe enriches fleet location with information about each vehicle to be able to have a real-time view with consolidation information on the entire fleet.
 ---
 
-# Fleet Management
+# Build a Real-time Fleet Management System
 
 ## What is it?
 
