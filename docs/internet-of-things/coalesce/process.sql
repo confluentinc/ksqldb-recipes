@@ -8,12 +8,14 @@ CREATE STREAM alarms (
   KAFKA_TOPIC='alarms',
   PARTITIONS = 6);
 
--- Create stateful table with up-to-date alarms, filter where code != 0
-CREATE TABLE alarms_table AS
-  SELECT *
+-- Create stream filter where code != 0
+CREATE STREAM alarms_table AS
+  SELECT
+    device_id,
+    alarm_name,
+    code
   FROM alarms
-  GROUP BY alarm_name
-  WHERE code IS NOT 0 
+  WHERE code <> 0
   EMIT CHANGES;
 
 -- Create stream of throughputs 
@@ -28,8 +30,7 @@ CREATE STREAM throughputs (
 -- Create stream of throughputs less than threshold 1000.0
 CREATE STREAM throughput_insufficient AS
   SELECT *
-  FROM alarms
-  GROUP BY device_id
+  FROM throughputs
   WHERE throughput < 1000.0
   EMIT CHANGES;
 
@@ -41,4 +42,4 @@ CREATE STREAM critical_issues_to_investigate AS
     a.alarm_name,
     a.code
   FROM throughput_insufficient t
-  LEFT JOIN alarms a ON t.device_id = f.device_id;
+  LEFT JOIN alarms a ON t.device_id = a.device_id;
