@@ -15,7 +15,7 @@ CREATE STREAM alarms_table AS
     alarm_name,
     code
   FROM alarms
-  WHERE code <> 0
+  GROUP BY device_id
   EMIT CHANGES;
 
 -- Create stream of throughputs 
