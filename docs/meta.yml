@@ -18,6 +18,9 @@ toc:
       - fin-serv/credit-card-activity
       - fin-serv/denormalization
       - fin-server/payment-status-check
+  - title: Internet of Things
+    items:
+      - internet-of-things/coalesce
   - title: Operations
     items:
       - operations/salesforce
