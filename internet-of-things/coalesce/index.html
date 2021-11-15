@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Build a Real-time Fleet Management System - ksqlDB Recipes</title>
+  <title>Coalesce Telemetry for Internet of Things - ksqlDB Recipes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Build a Real-time Fleet Management System";
-    var mkdocs_page_input_path = "retail/fleet_management/index.md";
+    var mkdocs_page_name = "Coalesce Telemetry for Internet of Things";
+    var mkdocs_page_input_path = "internet-of-things/coalesce/index.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -81,34 +81,16 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Internet of things</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="#">Coalesce</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../internet-of-things/coalesce/">Coalesce Telemetry for Internet of Things</a>
-                </li>
-    </ul>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Operations</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="#">Salesforce</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../operations/salesforce/">Handle Corrupted Data From Salesforce</a>
-                </li>
-    </ul>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Retail</span></p>
                 <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Fleet management</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Coalesce</a>
     <ul class="current">
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">Build a Real-time Fleet Management System</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Coalesce Telemetry for Internet of Things</a>
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#what-is-it">What is it?</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#get-started">Get Started</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#step-by-step">Step-by-step</a>
+    <li class="toctree-l3"><a class="reference internal" href="#step-by-step">Step-by-Step</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#setup-your-environment">Setup your Environment</a>
     </li>
@@ -124,9 +106,27 @@
                 </li>
     </ul>
                     </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operations</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Salesforce</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../operations/salesforce/">Handle Corrupted Data From Salesforce</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Retail</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Fleet management</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../retail/fleet_management/">Build a Real-time Fleet Management System</a>
+                </li>
+    </ul>
+                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Inventory</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../inventory/">View Real-time Inventory</a>
+                <li class="toctree-l2"><a class="reference internal" href="../../retail/inventory/">View Real-time Inventory</a>
                 </li>
     </ul>
                     </li>
@@ -176,15 +176,15 @@
     
       
         
-          <li>Retail &raquo;</li>
+          <li>Internet of things &raquo;</li>
         
       
         
-          <li>Fleet management &raquo;</li>
+          <li>Coalesce &raquo;</li>
         
       
     
-    <li>Build a Real-time Fleet Management System</li>
+    <li>Coalesce Telemetry for Internet of Things</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -196,16 +196,14 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="build-a-real-time-fleet-management-system">Build a Real-time Fleet Management System</h1>
+                <h1 id="coalesce-telemetry-for-internet-of-things">Coalesce Telemetry for Internet of Things</h1>
 <h2 id="what-is-it">What is it?</h2>
-<p>More and more, fleet management relies on knowing real-time information on vehicles, their locations, and vehicle telemetry.
-This enables businesses to improve operational efficiency by optimizing travel routes, lowering fuel consumption, and automating service schedules.
-This recipe enriches fleet location with individual vehicle information, so organizations can have a real-time consolidated view on the entire fleet.</p>
-<p>TODO--add diagram</p>
+<p>With Internet of Things, devices can emit a lot of telemetry, and it may be difficult to analyze that information to determine if something is "wrong".
+This recipe shows you how to process and coalesce that telemetry using ksqlDB and flag devices that warrant more investigation.</p>
 <h2 id="get-started">Get Started</h2>
 <p>Click below to automatically launch this recipe in Confluent Cloud (alternatively: follow the step-by-step instructions that follow).</p>
 <p><a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a></p>
-<h2 id="step-by-step">Step-by-step</h2>
+<h2 id="step-by-step">Step-by-Step</h2>
 <h3 id="setup-your-environment">Setup your Environment</h3>
 <p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service.</p>
 <p>Then proceed with the recipe, which can be executed with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which now has connector integration for reading and writing data to other data sources and sinks, as well as language for processing the data.</p>
@@ -213,27 +211,10 @@ This recipe enriches fleet location with individual vehicle information, so orga
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to instantly connect to popular data sources and end systems in the cloud.
 This recipe is shown with one example of a data source, but you can substitute your own preferred connector to use any data source.
 The principles are the same, just modify the connector configuration shown below to fit your deployment (see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a>).</p>
-<pre><code class="language-sql">-- Stream of fleet descriptions
-CREATE SOURCE CONNECTOR fleet_description WITH (
-  'connector.class'          = 'MongoDbAtlasSource',
-  'name'                     = 'recipe-mongodb-fleet_description',
-  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
-  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'connection.host'          = '&lt;database-host-address&gt;',
-  'connection.user'          = '&lt;database-username&gt;',
-  'connection.password'      = '&lt;database-password&gt;',
-  'database'                 = '&lt;database-name&gt;',
-  'collection'               = '&lt;database-collection-name&gt;',
-  'poll.await.time.ms'       = '5000',
-  'poll.max.batch.size'      = '1000',
-  'copy.existing'            = 'true',
-  'output.data.format'       = 'JSON'
-  'tasks.max'                = '1');
-
--- Stream of current location of each vehicle in the fleet
-CREATE SOURCE CONNECTOR fleet_location WITH (
+<p>TODO</p>
+<pre><code class="language-sql">CREATE SOURCE CONNECTOR inventory WITH (
   'connector.class'          = 'PostgresSource',
-  'name'                     = 'recipe-postgres-fleet_location',
+  'name'                     = 'recipe-postgres-iot',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
   'connection.host'          = '&lt;my-database-endpoint&gt;',
@@ -241,7 +222,7 @@ CREATE SOURCE CONNECTOR fleet_location WITH (
   'connection.user'          = 'postgres',
   'connection.password'      = '&lt;my-database-password&gt;',
   'db.name'                  = '&lt;db-name&gt;',
-  'table.whitelist'          = 'fleet_location',
+  'table.whitelist'          = '&lt;table&gt;',
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UTC',
@@ -249,75 +230,61 @@ CREATE SOURCE CONNECTOR fleet_location WITH (
 </code></pre>
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert values into the streams.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
-<p>Now you can process the data in a variety of ways.
-In this case, the original fleet telemetry is enriched with details about the vehicle.</p>
-<pre><code class="language-sql">-- create stream of locations
-CREATE STREAM locations (
-  vehicle_id int,
-  latitude double,
-  longitude double,
-  timestamp varchar
+<p>TODO</p>
+<pre><code class="language-sql">-- Create stream of alarms
+CREATE STREAM alarms (
+  device_id STRING key,
+  alarm_name STRING,
+  code INT
 ) WITH (
-  kafka_topic = 'locations',
-  value_format = 'json',
-  partitions = 6
-);
+  VALUE_FORMAT='json',
+  KAFKA_TOPIC='alarms',
+  PARTITIONS = 6);
 
--- fleet lookup table
-CREATE TABLE fleet (
-  vehicle_id int primary key,
-  driver_id int,
-  license bigint
-) WITH (
-  kafka_topic = 'descriptions',
-  value_format = 'json',
-  partitions = 6
-);
-
--- enrich fleet location stream with more fleet information
-CREATE STREAM fleet_location_enhanced AS
+-- Create stream filter where code != 0
+CREATE STREAM alarms_table AS
   SELECT
-    l.vehicle_id,
-    latitude,
-    longitude,
-    timestamp,
-    f.driver_id,
-    f.license
-  FROM locations l
-  LEFT JOIN fleet f ON l.vehicle_id = f.vehicle_id;
+    device_id,
+    alarm_name,
+    code
+  FROM alarms
+  GROUP BY device_id
+  EMIT CHANGES;
+
+-- Create stream of throughputs 
+CREATE STREAM throughputs (
+  device_id STRING key,
+  throughput DOUBLE
+) WITH (
+  VALUE_FORMAT='json',
+  KAFKA_TOPIC='throughputs',
+  PARTITIONS = 6);
+
+-- Create stream of throughputs less than threshold 1000.0
+CREATE STREAM throughput_insufficient AS
+  SELECT *
+  FROM throughputs
+  WHERE throughput &lt; 1000.0
+  EMIT CHANGES;
+
+-- Combine streams
+CREATE STREAM critical_issues_to_investigate AS
+  SELECT
+    t.device_id,
+    t.throughput,
+    a.alarm_name,
+    a.code
+  FROM throughput_insufficient t
+  LEFT JOIN alarms a ON t.device_id = a.device_id;
 </code></pre>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
-<pre><code class="language-sql">INSERT INTO locations (vehicle_id, latitude, longitude, timestamp) VALUES (5401, 16.7587537, 96.2482149, '2021-09-23T10:50:00.000Z');
-INSERT INTO locations (vehicle_id, latitude, longitude, timestamp) VALUES (5401, 16.004175, 120.7806412, '2021-09-27T06:39:00.000Z');
-INSERT INTO locations (vehicle_id, latitude, longitude, timestamp) VALUES (5402, 32.755613, 22.6377432, '2021-09-25T20:22:00.000Z');
-
-INSERT INTO fleet (vehicle_id, driver_id, license) VALUES (5401, 847383, 8852693196);
-INSERT INTO fleet (vehicle_id, driver_id, license) VALUES (5402, 922947, 1255144201);
-INSERT INTO fleet (vehicle_id, driver_id, license) VALUES (5403, 435309, 2132311746);
+<pre><code class="language-sql">INSERT INTO TODO;
 </code></pre>
 <h2 id="full-ksqldb-statements">Full ksqlDB Statements</h2>
 <p>Here is the full recipe that you can run with ksqlDB, a consolidation of all the the steps shown above.</p>
-<pre><code class="language-sql">-- Stream of fleet descriptions
-CREATE SOURCE CONNECTOR fleet_description WITH (
-  'connector.class'          = 'MongoDbAtlasSource',
-  'name'                     = 'recipe-mongodb-fleet_description',
-  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
-  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'connection.host'          = '&lt;database-host-address&gt;',
-  'connection.user'          = '&lt;database-username&gt;',
-  'connection.password'      = '&lt;database-password&gt;',
-  'database'                 = '&lt;database-name&gt;',
-  'collection'               = '&lt;database-collection-name&gt;',
-  'poll.await.time.ms'       = '5000',
-  'poll.max.batch.size'      = '1000',
-  'copy.existing'            = 'true',
-  'output.data.format'       = 'JSON'
-  'tasks.max'                = '1');
-
--- Stream of current location of each vehicle in the fleet
-CREATE SOURCE CONNECTOR fleet_location WITH (
+<pre><code class="language-sql">CREATE SOURCE CONNECTOR inventory WITH (
   'connector.class'          = 'PostgresSource',
-  'name'                     = 'recipe-postgres-fleet_location',
+  'name'                     = 'recipe-postgres-iot',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
   'connection.host'          = '&lt;my-database-endpoint&gt;',
@@ -325,46 +292,57 @@ CREATE SOURCE CONNECTOR fleet_location WITH (
   'connection.user'          = 'postgres',
   'connection.password'      = '&lt;my-database-password&gt;',
   'db.name'                  = '&lt;db-name&gt;',
-  'table.whitelist'          = 'fleet_location',
+  'table.whitelist'          = '&lt;table&gt;',
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UTC',
   'tasks.max'                = '1');
 
--- create stream of locations
-CREATE STREAM locations (
-  vehicle_id int,
-  latitude double,
-  longitude double,
-  timestamp varchar
+-- Create stream of alarms
+CREATE STREAM alarms (
+  device_id STRING key,
+  alarm_name STRING,
+  code INT
 ) WITH (
-  kafka_topic = 'locations',
-  value_format = 'json',
-  partitions = 6
-);
+  VALUE_FORMAT='json',
+  KAFKA_TOPIC='alarms',
+  PARTITIONS = 6);
 
--- fleet lookup table
-CREATE TABLE fleet (
-  vehicle_id int primary key,
-  driver_id int,
-  license bigint
-) WITH (
-  kafka_topic = 'descriptions',
-  value_format = 'json',
-  partitions = 6
-);
-
--- enrich fleet location stream with more fleet information
-CREATE STREAM fleet_location_enhanced AS
+-- Create stream filter where code != 0
+CREATE STREAM alarms_table AS
   SELECT
-    l.vehicle_id,
-    latitude,
-    longitude,
-    timestamp,
-    f.driver_id,
-    f.license
-  FROM locations l
-  LEFT JOIN fleet f ON l.vehicle_id = f.vehicle_id;
+    device_id,
+    alarm_name,
+    code
+  FROM alarms
+  GROUP BY device_id
+  EMIT CHANGES;
+
+-- Create stream of throughputs 
+CREATE STREAM throughputs (
+  device_id STRING key,
+  throughput DOUBLE
+) WITH (
+  VALUE_FORMAT='json',
+  KAFKA_TOPIC='throughputs',
+  PARTITIONS = 6);
+
+-- Create stream of throughputs less than threshold 1000.0
+CREATE STREAM throughput_insufficient AS
+  SELECT *
+  FROM throughputs
+  WHERE throughput &lt; 1000.0
+  EMIT CHANGES;
+
+-- Combine streams
+CREATE STREAM critical_issues_to_investigate AS
+  SELECT
+    t.device_id,
+    t.throughput,
+    a.alarm_name,
+    a.code
+  FROM throughput_insufficient t
+  LEFT JOIN alarms a ON t.device_id = a.device_id;
 </code></pre>
               
             </div>
@@ -373,10 +351,10 @@ CREATE STREAM fleet_location_enhanced AS
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../inventory/" class="btn btn-neutral float-right" title="View Real-time Inventory">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../operations/salesforce/" class="btn btn-neutral float-right" title="Handle Corrupted Data From Salesforce">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../operations/salesforce/" class="btn btn-neutral" title="Handle Corrupted Data From Salesforce"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../fin-serv/payment-status-check/" class="btn btn-neutral" title="Check Payment Requests"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -402,10 +380,10 @@ CREATE STREAM fleet_location_enhanced AS
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../operations/salesforce/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../fin-serv/payment-status-check/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../inventory/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../operations/salesforce/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

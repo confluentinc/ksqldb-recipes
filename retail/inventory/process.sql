@@ -15,8 +15,6 @@ CREATE TABLE inventory_stream_table
   SELECT
     item,
     SUM(quantity) AS item_quantity
-  FROM
-    inventory_stream
-  GROUP BY
-    item
+  FROM inventory_stream
+  GROUP BY item
   EMIT CHANGES;

@@ -80,6 +80,15 @@
     </ul>
                     </li>
                 </ul>
+                <p class="caption"><span class="caption-text">Internet of things</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Coalesce</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../internet-of-things/coalesce/">Coalesce Telemetry for Internet of Things</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
                 <p class="caption"><span class="caption-text">Operations</span></p>
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="#">Salesforce</a>
@@ -241,10 +250,8 @@ CREATE TABLE inventory_stream_table
   SELECT
     item,
     SUM(quantity) AS item_quantity
-  FROM
-    inventory_stream
-  GROUP BY
-    item
+  FROM inventory_stream
+  GROUP BY item
   EMIT CHANGES;
 </code></pre>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
@@ -293,10 +300,8 @@ CREATE TABLE inventory_stream_table
   SELECT
     item,
     SUM(quantity) AS item_quantity
-  FROM
-    inventory_stream
-  GROUP BY
-    item
+  FROM inventory_stream
+  GROUP BY item
   EMIT CHANGES;
 </code></pre>
               
