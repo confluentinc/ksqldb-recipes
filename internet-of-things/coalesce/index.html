@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Coalesce Telemetry for Internet of Things - ksqlDB Recipes</title>
+  <title>Coalesce Telemetry - ksqlDB Recipes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Coalesce Telemetry for Internet of Things";
+    var mkdocs_page_name = "Coalesce Telemetry";
     var mkdocs_page_input_path = "internet-of-things/coalesce/index.md";
     var mkdocs_page_url = null;
   </script>
@@ -84,7 +84,7 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="#">Coalesce</a>
     <ul class="current">
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">Coalesce Telemetry for Internet of Things</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Coalesce Telemetry</a>
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#what-is-it">What is it?</a>
     </li>
@@ -184,7 +184,7 @@
         
       
     
-    <li>Coalesce Telemetry for Internet of Things</li>
+    <li>Coalesce Telemetry</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -196,9 +196,9 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="coalesce-telemetry-for-internet-of-things">Coalesce Telemetry for Internet of Things</h1>
+                <h1 id="coalesce-telemetry">Coalesce Telemetry</h1>
 <h2 id="what-is-it">What is it?</h2>
-<p>With Internet of Things, devices can emit a lot of telemetry, and it may be difficult to analyze that information to determine if something is "wrong".
+<p>With Internet of Things (IoT), devices can emit a lot of telemetry, and it may be difficult to analyze that information to determine if something is "wrong".
 This recipe shows you how to process and coalesce that telemetry using ksqlDB and flag devices that warrant more investigation.</p>
 <h2 id="get-started">Get Started</h2>
 <p>Click below to automatically launch this recipe in Confluent Cloud (alternatively: follow the step-by-step instructions that follow).</p>
@@ -230,26 +230,17 @@ The principles are the same, just modify the connector configuration shown below
 </code></pre>
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert values into the streams.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
-<p>TODO</p>
-<pre><code class="language-sql">-- Create stream of alarms
-CREATE STREAM alarms (
-  device_id STRING key,
+<p>In this example, there is one stream of data reporting device threshold values and another reporting alarms.
+The following stream processing app identifies which set of devices need to be investigated where threshold is insufficient and alarm code is not zero.</p>
+<pre><code class="language-sql">-- Create table with latest state of alarms
+CREATE TABLE alarms (
+  device_id STRING PRIMARY key,
   alarm_name STRING,
   code INT
 ) WITH (
   VALUE_FORMAT='json',
   KAFKA_TOPIC='alarms',
   PARTITIONS = 6);
-
--- Create stream filter where code != 0
-CREATE STREAM alarms_table AS
-  SELECT
-    device_id,
-    alarm_name,
-    code
-  FROM alarms
-  GROUP BY device_id
-  EMIT CHANGES;
 
 -- Create stream of throughputs 
 CREATE STREAM throughputs (
@@ -260,14 +251,14 @@ CREATE STREAM throughputs (
   KAFKA_TOPIC='throughputs',
   PARTITIONS = 6);
 
--- Create stream of throughputs less than threshold 1000.0
+-- Filter throughputs below threshold 1000.0
 CREATE STREAM throughput_insufficient AS
   SELECT *
   FROM throughputs
   WHERE throughput &lt; 1000.0
   EMIT CHANGES;
 
--- Combine streams
+-- Create new stream where threshold is insufficient and alarm code is not 0
 CREATE STREAM critical_issues_to_investigate AS
   SELECT
     t.device_id,
@@ -275,7 +266,8 @@ CREATE STREAM critical_issues_to_investigate AS
     a.alarm_name,
     a.code
   FROM throughput_insufficient t
-  LEFT JOIN alarms a ON t.device_id = a.device_id;
+  LEFT JOIN alarms a ON t.device_id = a.device_id
+  WHERE a.code != 0;
 </code></pre>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
 <pre><code class="language-sql">INSERT INTO TODO;
@@ -298,25 +290,15 @@ CREATE STREAM critical_issues_to_investigate AS
   'db.timezone'              = 'UTC',
   'tasks.max'                = '1');
 
--- Create stream of alarms
-CREATE STREAM alarms (
-  device_id STRING key,
+-- Create table with latest state of alarms
+CREATE TABLE alarms (
+  device_id STRING PRIMARY key,
   alarm_name STRING,
   code INT
 ) WITH (
   VALUE_FORMAT='json',
   KAFKA_TOPIC='alarms',
   PARTITIONS = 6);
-
--- Create stream filter where code != 0
-CREATE STREAM alarms_table AS
-  SELECT
-    device_id,
-    alarm_name,
-    code
-  FROM alarms
-  GROUP BY device_id
-  EMIT CHANGES;
 
 -- Create stream of throughputs 
 CREATE STREAM throughputs (
@@ -327,14 +309,14 @@ CREATE STREAM throughputs (
   KAFKA_TOPIC='throughputs',
   PARTITIONS = 6);
 
--- Create stream of throughputs less than threshold 1000.0
+-- Filter throughputs below threshold 1000.0
 CREATE STREAM throughput_insufficient AS
   SELECT *
   FROM throughputs
   WHERE throughput &lt; 1000.0
   EMIT CHANGES;
 
--- Combine streams
+-- Create new stream where threshold is insufficient and alarm code is not 0
 CREATE STREAM critical_issues_to_investigate AS
   SELECT
     t.device_id,
@@ -342,7 +324,8 @@ CREATE STREAM critical_issues_to_investigate AS
     a.alarm_name,
     a.code
   FROM throughput_insufficient t
-  LEFT JOIN alarms a ON t.device_id = a.device_id;
+  LEFT JOIN alarms a ON t.device_id = a.device_id
+  WHERE a.code != 0;
 </code></pre>
               
             </div>
