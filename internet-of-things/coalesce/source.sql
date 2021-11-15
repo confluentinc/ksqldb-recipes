@@ -1,4 +1,4 @@
-CREATE SOURCE CONNECTOR inventory WITH (
+CREATE SOURCE CONNECTOR telemetry WITH (
   'connector.class'          = 'PostgresSource',
   'name'                     = 'recipe-postgres-iot',
   'kafka.api.key'            = '<my-kafka-api-key>',
