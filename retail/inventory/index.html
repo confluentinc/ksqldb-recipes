@@ -100,6 +100,12 @@
                 </ul>
                 <p class="caption"><span class="caption-text">Retail</span></p>
                 <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="#">Dynamic pricing</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../dynamic_pricing/">Set Dynamic Pricing</a>
+                </li>
+    </ul>
+                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Fleet management</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="../fleet_management/">Build a Real-time Fleet Management System</a>
@@ -237,8 +243,7 @@ This creates a stream of events, where each event results in the addition or rem
 CREATE STREAM inventory_stream (
   id STRING key,
   item STRING,
-  quantity INTEGER,
-  price DOUBLE
+  quantity INTEGER
 ) WITH (
   VALUE_FORMAT='json',
   KAFKA_TOPIC='inventory',
@@ -255,15 +260,15 @@ CREATE TABLE inventory_stream_table
   EMIT CHANGES;
 </code></pre>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
-<pre><code class="language-sql">INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('1', 'Apple Magic Mouse 2', 10, 99.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('2', 'iPhoneX', 25, 999.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('3', 'MacBookPro13', 100, 1799.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('4', 'iPad4', 20, 340.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('5', 'Apple Pencil', 10, 79.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('5', 'PhoneX', 10, 899.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('4', 'iPad4', -20, 399.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('3', 'MacBookPro13', 10, 1899.00);
-INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('4', 'iPad4', 20, 399.00);
+<pre><code class="language-sql">INSERT INTO inventory_stream (id, item, quantity) VALUES ('1', 'Apple Magic Mouse 2', 10);
+INSERT INTO inventory_stream (id, item, quantity) VALUES ('2', 'iPhoneX', 25);
+INSERT INTO inventory_stream (id, item, quantity) VALUES ('3', 'MacBookPro13', 100);
+INSERT INTO inventory_stream (id, item, quantity) VALUES ('4', 'iPad4', 20);
+INSERT INTO inventory_stream (id, item, quantity) VALUES ('5', 'Apple Pencil', 10);
+INSERT INTO inventory_stream (id, item, quantity) VALUES ('5', 'PhoneX', 10);
+INSERT INTO inventory_stream (id, item, quantity) VALUES ('4', 'iPad4', -20);
+INSERT INTO inventory_stream (id, item, quantity) VALUES ('3', 'MacBookPro13', 10);
+INSERT INTO inventory_stream (id, item, quantity) VALUES ('4', 'iPad4', 20);
 </code></pre>
 <h2 id="full-ksqldb-statements">Full ksqlDB Statements</h2>
 <p>Here is the full recipe that you can run with ksqlDB, a consolidation of all the the steps shown above.</p>
@@ -287,8 +292,7 @@ INSERT INTO inventory_stream (id, item, quantity, price) VALUES ('4', 'iPad4', 2
 CREATE STREAM inventory_stream (
   id STRING key,
   item STRING,
-  quantity INTEGER,
-  price DOUBLE
+  quantity INTEGER
 ) WITH (
   VALUE_FORMAT='json',
   KAFKA_TOPIC='inventory',

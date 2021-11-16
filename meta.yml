@@ -8,6 +8,7 @@ toc:
       - customer-360/clickstream
   - title: Retail
     items:
+      - retail/dynamic_pricing
       - retail/inventory
       - retail/fleet_management
   - title: Security

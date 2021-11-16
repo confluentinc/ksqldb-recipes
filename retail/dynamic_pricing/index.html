@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Coalesce Telemetry - ksqlDB Recipes</title>
+  <title>Set Dynamic Pricing - ksqlDB Recipes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Coalesce Telemetry";
-    var mkdocs_page_input_path = "internet-of-things/coalesce/index.md";
+    var mkdocs_page_name = "Set Dynamic Pricing";
+    var mkdocs_page_input_path = "retail/dynamic_pricing/index.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -81,10 +81,28 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Internet of things</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Coalesce</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../internet-of-things/coalesce/">Coalesce Telemetry</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Operations</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Salesforce</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../operations/salesforce/">Handle Corrupted Data From Salesforce</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Retail</span></p>
                 <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Coalesce</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="#">Dynamic pricing</a>
     <ul class="current">
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">Coalesce Telemetry</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Set Dynamic Pricing</a>
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#what-is-it">What is it?</a>
     </li>
@@ -106,33 +124,15 @@
                 </li>
     </ul>
                     </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Operations</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="#">Salesforce</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../operations/salesforce/">Handle Corrupted Data From Salesforce</a>
-                </li>
-    </ul>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Retail</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="#">Dynamic pricing</a>
-    <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../retail/dynamic_pricing/">Set Dynamic Pricing</a>
-                </li>
-    </ul>
-                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Fleet management</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../retail/fleet_management/">Build a Real-time Fleet Management System</a>
+                <li class="toctree-l2"><a class="reference internal" href="../fleet_management/">Build a Real-time Fleet Management System</a>
                 </li>
     </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">Inventory</a>
     <ul>
-                <li class="toctree-l2"><a class="reference internal" href="../../retail/inventory/">View Real-time Inventory</a>
+                <li class="toctree-l2"><a class="reference internal" href="../inventory/">View Real-time Inventory</a>
                 </li>
     </ul>
                     </li>
@@ -182,15 +182,15 @@
     
       
         
-          <li>Internet of things &raquo;</li>
+          <li>Retail &raquo;</li>
         
       
         
-          <li>Coalesce &raquo;</li>
+          <li>Dynamic pricing &raquo;</li>
         
       
     
-    <li>Coalesce Telemetry</li>
+    <li>Set Dynamic Pricing</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -202,10 +202,10 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="coalesce-telemetry">Coalesce Telemetry</h1>
+                <h1 id="set-dynamic-pricing">Set Dynamic Pricing</h1>
 <h2 id="what-is-it">What is it?</h2>
-<p>With Internet of Things (IoT), devices can emit a lot of telemetry, and it may be difficult to analyze that information to determine if something is "wrong".
-This recipe shows you how to process and coalesce that telemetry using ksqlDB and flag devices that warrant more investigation.</p>
+<p>An online marketplace keeps track of statistics regarding pricing: lowest, median, etc.
+These statistics enable buyers and sellers to make dynamic offers based on historical sales events.</p>
 <h2 id="get-started">Get Started</h2>
 <p>Click below to automatically launch this recipe in Confluent Cloud (alternatively: follow the step-by-step instructions that follow).</p>
 <p><a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a></p>
@@ -217,10 +217,11 @@ This recipe shows you how to process and coalesce that telemetry using ksqlDB an
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to instantly connect to popular data sources and end systems in the cloud.
 This recipe is shown with one example of a data source, but you can substitute your own preferred connector to use any data source.
 The principles are the same, just modify the connector configuration shown below to fit your deployment (see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a>).</p>
-<p>In this example, the telemetry is stored in two tables in a database and is read into 2 Kafak topics in Confluent Cloud.</p>
-<pre><code class="language-sql">CREATE SOURCE CONNECTOR telemetry WITH (
+<p>For this recipe, we are interested in knowing each marketplace event for an item, specifically its pricing. 
+This creates a stream of events, upon which real-time stream processing can keep state and calculate pricing statistics.</p>
+<pre><code class="language-sql">CREATE SOURCE CONNECTOR sales WITH (
   'connector.class'          = 'PostgresSource',
-  'name'                     = 'recipe-postgres-iot',
+  'name'                     = 'recipe-postgres-pricing',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
   'connection.host'          = '&lt;my-database-endpoint&gt;',
@@ -228,7 +229,23 @@ The principles are the same, just modify the connector configuration shown below
   'connection.user'          = 'postgres',
   'connection.password'      = '&lt;my-database-password&gt;',
   'db.name'                  = '&lt;db-name&gt;',
-  'table.whitelist'          = '&lt;table&gt;',
+  'table.whitelist'          = 'sales',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UTC',
+  'tasks.max'                = '1');
+
+CREATE SOURCE CONNECTOR items WITH (
+  'connector.class'          = 'PostgresSource',
+  'name'                     = 'recipe-postgres-items',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '5432',
+  'connection.user'          = 'postgres',
+  'connection.password'      = '&lt;my-database-password&gt;',
+  'db.name'                  = '&lt;db-name&gt;',
+  'table.whitelist'          = 'items',
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UTC',
@@ -236,59 +253,54 @@ The principles are the same, just modify the connector configuration shown below
 </code></pre>
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert values into the streams.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
-<p>In this example, there is one stream of data reporting device threshold values and another reporting alarms.
-The following stream processing app identifies which set of devices need to be investigated where threshold is insufficient and alarm code is not zero.</p>
-<pre><code class="language-sql">-- Create table with latest state of alarms
-CREATE TABLE alarms (
-  device_id STRING PRIMARY key,
-  alarm_name STRING,
-  code INT
+<pre><code class="language-sql">-- Create stream of sales
+CREATE STREAM sales (
+  item_id INT key,
+  seller_id STRING,
+  price DOUBLE
 ) WITH (
   VALUE_FORMAT='json',
-  KAFKA_TOPIC='alarms',
+  KAFKA_TOPIC='sales',
   PARTITIONS = 6);
 
--- Create stream of throughputs 
-CREATE STREAM throughputs (
-  device_id STRING key,
-  throughput DOUBLE
+-- Create table of items
+CREATE TABLE items (
+  item_id INT PRIMARY key,
+  item_name STRING
 ) WITH (
   VALUE_FORMAT='json',
-  KAFKA_TOPIC='throughputs',
+  KAFKA_TOPIC='items',
   PARTITIONS = 6);
 
--- Filter throughputs below threshold 1000.0
-CREATE STREAM throughput_insufficient AS
-  SELECT *
-  FROM throughputs
-  WHERE throughput &lt; 1000.0
-  EMIT CHANGES;
-
--- Create new stream where threshold is insufficient and alarm code is not 0
-CREATE STREAM critical_issues_to_investigate AS
-  SELECT
-    t.device_id,
-    t.throughput,
-    a.alarm_name,
-    a.code
-  FROM throughput_insufficient t
-  LEFT JOIN alarms a ON t.device_id = a.device_id
-  WHERE a.code != 0;
+-- Calculate minimum, maximum, and average price, per item, and join with item name
+CREATE TABLE sales_stats AS
+SELECT S.item_id,
+       I.item_name,
+       MIN(price) AS price_min,
+       MAX(price) AS price_max,
+       AVG(price) AS price_avg
+FROM sales S
+INNER JOIN items I ON S.item_id = I.item_id
+GROUP BY S.item_id
+EMIT CHANGES;
 </code></pre>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
-<pre><code class="language-sql">INSERT INTO alarms (device_id, alarm_name, code) VALUES ('d1', 'CHANNEL_CREATE', 0);
-INSERT INTO alarms (device_id, alarm_name, code) VALUES ('d2', 'CHANNEL_CREATE', 42);
-INSERT INTO alarms (device_id, alarm_name, code) VALUES ('d3', 'CHANNEL_CREATE', 0);
+<pre><code class="language-sql">INSERT INTO items (item_id, item_name) VALUES (1, 'Pikachu card');
+INSERT INTO items (item_id, item_name) VALUES (2, 'Charizard card');
+INSERT INTO items (item_id, item_name) VALUES (3, 'Mew card');
 
-INSERT INTO throughputs (device_id, throughput) VALUES ('d1', 2000.0);
-INSERT INTO throughputs (device_id, throughput) VALUES ('d2', 900.0);
-INSERT INTO throughputs (device_id, throughput) VALUES ('d3', 500.0);
+INSERT INTO sales_stream (item_id, price) VALUES (1, 10.00); 
+INSERT INTO sales_stream (item_id, price) VALUES (2, 20.00); 
+INSERT INTO sales_stream (item_id, price) VALUES (3, 30.00); 
+INSERT INTO sales_stream (item_id, price) VALUES (1, 12.00); 
+INSERT INTO sales_stream (item_id, price) VALUES (1, 17.00); 
+INSERT INTO sales_stream (item_id, price) VALUES (3, 26.00); 
 </code></pre>
 <h2 id="full-ksqldb-statements">Full ksqlDB Statements</h2>
 <p>Here is the full recipe that you can run with ksqlDB, a consolidation of all the the steps shown above.</p>
-<pre><code class="language-sql">CREATE SOURCE CONNECTOR telemetry WITH (
+<pre><code class="language-sql">CREATE SOURCE CONNECTOR sales WITH (
   'connector.class'          = 'PostgresSource',
-  'name'                     = 'recipe-postgres-iot',
+  'name'                     = 'recipe-postgres-pricing',
   'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
   'connection.host'          = '&lt;my-database-endpoint&gt;',
@@ -296,48 +308,58 @@ INSERT INTO throughputs (device_id, throughput) VALUES ('d3', 500.0);
   'connection.user'          = 'postgres',
   'connection.password'      = '&lt;my-database-password&gt;',
   'db.name'                  = '&lt;db-name&gt;',
-  'table.whitelist'          = '&lt;table&gt;',
+  'table.whitelist'          = 'sales',
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UTC',
   'tasks.max'                = '1');
 
--- Create table with latest state of alarms
-CREATE TABLE alarms (
-  device_id STRING PRIMARY key,
-  alarm_name STRING,
-  code INT
+CREATE SOURCE CONNECTOR items WITH (
+  'connector.class'          = 'PostgresSource',
+  'name'                     = 'recipe-postgres-items',
+  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
+  'connection.host'          = '&lt;my-database-endpoint&gt;',
+  'connection.port'          = '5432',
+  'connection.user'          = 'postgres',
+  'connection.password'      = '&lt;my-database-password&gt;',
+  'db.name'                  = '&lt;db-name&gt;',
+  'table.whitelist'          = 'items',
+  'timestamp.column.name'    = 'created_at',
+  'output.data.format'       = 'JSON',
+  'db.timezone'              = 'UTC',
+  'tasks.max'                = '1');
+
+-- Create stream of sales
+CREATE STREAM sales (
+  item_id INT key,
+  seller_id STRING,
+  price DOUBLE
 ) WITH (
   VALUE_FORMAT='json',
-  KAFKA_TOPIC='alarms',
+  KAFKA_TOPIC='sales',
   PARTITIONS = 6);
 
--- Create stream of throughputs 
-CREATE STREAM throughputs (
-  device_id STRING key,
-  throughput DOUBLE
+-- Create table of items
+CREATE TABLE items (
+  item_id INT PRIMARY key,
+  item_name STRING
 ) WITH (
   VALUE_FORMAT='json',
-  KAFKA_TOPIC='throughputs',
+  KAFKA_TOPIC='items',
   PARTITIONS = 6);
 
--- Filter throughputs below threshold 1000.0
-CREATE STREAM throughput_insufficient AS
-  SELECT *
-  FROM throughputs
-  WHERE throughput &lt; 1000.0
-  EMIT CHANGES;
-
--- Create new stream where threshold is insufficient and alarm code is not 0
-CREATE STREAM critical_issues_to_investigate AS
-  SELECT
-    t.device_id,
-    t.throughput,
-    a.alarm_name,
-    a.code
-  FROM throughput_insufficient t
-  LEFT JOIN alarms a ON t.device_id = a.device_id
-  WHERE a.code != 0;
+-- Calculate minimum, maximum, and average price, per item, and join with item name
+CREATE TABLE sales_stats AS
+SELECT S.item_id,
+       I.item_name,
+       MIN(price) AS price_min,
+       MAX(price) AS price_max,
+       AVG(price) AS price_avg
+FROM sales S
+INNER JOIN items I ON S.item_id = I.item_id
+GROUP BY S.item_id
+EMIT CHANGES;
 </code></pre>
               
             </div>
@@ -346,10 +368,10 @@ CREATE STREAM critical_issues_to_investigate AS
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../operations/salesforce/" class="btn btn-neutral float-right" title="Handle Corrupted Data From Salesforce">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../fleet_management/" class="btn btn-neutral float-right" title="Build a Real-time Fleet Management System">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../fin-serv/payment-status-check/" class="btn btn-neutral" title="Check Payment Requests"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../operations/salesforce/" class="btn btn-neutral" title="Handle Corrupted Data From Salesforce"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -375,10 +397,10 @@ CREATE STREAM critical_issues_to_investigate AS
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../fin-serv/payment-status-check/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../operations/salesforce/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../operations/salesforce/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../fleet_management/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
