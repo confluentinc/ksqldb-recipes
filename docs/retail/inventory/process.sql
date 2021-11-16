@@ -2,8 +2,7 @@
 CREATE STREAM inventory_stream (
   id STRING key,
   item STRING,
-  quantity INTEGER,
-  price DOUBLE
+  quantity INTEGER
 ) WITH (
   VALUE_FORMAT='json',
   KAFKA_TOPIC='inventory',
