@@ -315,20 +315,20 @@ INSERT INTO customers (id, first_name, last_name, email) VALUES (983, 'George', 
 </code></pre>
 <h3 id="write-the-data-out">Write the data out</h3>
 <p>Any downstream application or database can receive the denormalized data.</p>
-<pre><code class="language-sql">-- Send data to Snowflake
-CREATE SINK CONNECTOR orders_enriched WITH (
-  'connector.class'          = 'SnowflakeSink',
-  'name'                     = 'recipe-snowflake-analyzed_clickstream',
-  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
-  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topics'                   = 'ORDERS_ENRICHED',
-  'input.data.format'        = 'JSON',
-  'snowflake.url.name'       = 'https=//wm83168.us-central1.gcp.snowflakecomputing.com=443',
-  'snowflake.user.name'      = '&lt;login-username&gt;',
-  'snowflake.private.key'    = '&lt;private-key&gt;',
-  'snowflake.database.name'  = '&lt;database-name&gt;',
-  'snowflake.schema.name'    = '&lt;schema-name&gt;',
-  'tasks.max'                = '1');
+<pre><code class="language-json">{
+  'connector.class'          : 'SnowflakeSink',
+  'name'                     : 'recipe-snowflake-analyzed_clickstream',
+  'kafka.api.key'            : '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         : '&lt;my-kafka-api-secret&gt;',
+  'topics'                   : 'ORDERS_ENRICHED',
+  'input.data.format'        : 'JSON',
+  'snowflake.url.name'       : 'https://wm83168.us-central1.gcp.snowflakecomputing.com:443',
+  'snowflake.user.name'      : '&lt;login-username&gt;',
+  'snowflake.private.key'    : '&lt;private-key&gt;',
+  'snowflake.database.name'  : '&lt;database-name&gt;',
+  'snowflake.schema.name'    : '&lt;schema-name&gt;',
+  'tasks.max'                : '1'
+}
 </code></pre>
               
             </div>

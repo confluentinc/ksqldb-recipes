@@ -215,7 +215,7 @@ The principles are the same, just modify the connector configuration shown below
 <p>To run a fully-managed connector to write the data into Kafka topics, use Confluent Cloud Console or <a href="https://docs.confluent.io/confluent-cli/current/overview.html">Confluent CLI</a> command <code>confluent connect create --config &lt;file&gt;</code>, submit each connector separately.</p>
 <pre><code class="language-json">{
   'connector.class'          : 'OracleDatabaseSource',
-  'name'                     : 'recipe-oracle-transactions',
+  'name'                     : 'recipe-oracle-transactions-cc',
   'connector.class'          : 'OracleDatabaseSource',
   'kafka.api.key'            : '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         : '&lt;my-kafka-api-secret&gt;',
@@ -233,7 +233,7 @@ The principles are the same, just modify the connector configuration shown below
 
 {
   'connector.class'          : 'OracleDatabaseSource',
-  'name'                     : 'recipe-oracle-customers',
+  'name'                     : 'recipe-oracle-customers-cc',
   'connector.class'          : 'OracleDatabaseSource',
   'kafka.api.key'            : '&lt;my-kafka-api-key&gt;',
   'kafka.api.secret'         : '&lt;my-kafka-api-secret&gt;',

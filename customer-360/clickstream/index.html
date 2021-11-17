@@ -340,21 +340,20 @@ CREATE TABLE USER_IP_ACTIVITY WITH (key_format='json') AS
 </code></pre>
 <h3 id="write-the-data-out">Write the data out</h3>
 <p>After processing the data, send it to Elasticsearch.</p>
-<pre><code class="language-sql">-- Send data to Elasticsearch
-CREATE SINK CONNECTOR analyzed_clickstream WITH (
-  'connector.class'          = 'ElasticsearchSink',
-  'name'                     = 'recipe-elasticsearch-analyzed_clickstream',
-  'input.data.format'        = 'JSON',
-  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
-  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topics'                   = 'USER_IP_ACTIVITY, ERRORS_PER_MIN_ALERT',
-  'connection.url'           = '&lt;elasticsearch-URI&gt;',
-  'connection.user'          = '&lt;elasticsearch-username&gt;',
-  'connection.password'      = '&lt;elasticsearch-password&gt;',
-  'type.name'                = 'type.name=kafkaconnect',
-  'key.ignore'               = 'true',
-  'schema.ignore'            = 'true'
-);
+<pre><code class="language-json">{
+  'connector.class'          : 'ElasticsearchSink',
+  'name'                     : 'recipe-elasticsearch-analyzed_clickstream',
+  'input.data.format'        : 'JSON',
+  'kafka.api.key'            : '&lt;my-kafka-api-key&gt;',
+  'kafka.api.secret'         : '&lt;my-kafka-api-secret&gt;',
+  'topics'                   : 'USER_IP_ACTIVITY, ERRORS_PER_MIN_ALERT',
+  'connection.url'           : '&lt;elasticsearch-URI&gt;',
+  'connection.user'          : '&lt;elasticsearch-username&gt;',
+  'connection.password'      : '&lt;elasticsearch-password&gt;',
+  'type.name'                : 'type.name:kafkaconnect',
+  'key.ignore'               : 'true',
+  'schema.ignore'            : 'true'
+}
 </code></pre>
               
             </div>
