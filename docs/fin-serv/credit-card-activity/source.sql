@@ -1,7 +1,7 @@
 -- Stream of transactions
 CREATE SOURCE CONNECTOR FD_transactions WITH (
   'connector.class'          = 'OracleDatabaseSource',
-  'name'                     = 'recipe-oracle-transactions',
+  'name'                     = 'recipe-oracle-transactions-cc',
   'connector.class'          = 'OracleDatabaseSource',
   'kafka.api.key'            = '<my-kafka-api-key>',
   'kafka.api.secret'         = '<my-kafka-api-secret>',
@@ -19,7 +19,7 @@ CREATE SOURCE CONNECTOR FD_transactions WITH (
 -- Stream of customers
 CREATE SOURCE CONNECTOR FD_customers WITH (
   'connector.class'          = 'OracleDatabaseSource',
-  'name'                     = 'recipe-oracle-customers',
+  'name'                     = 'recipe-oracle-customers-cc',
   'connector.class'          = 'OracleDatabaseSource',
   'kafka.api.key'            = '<my-kafka-api-key>',
   'kafka.api.secret'         = '<my-kafka-api-secret>',

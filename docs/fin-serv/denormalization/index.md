@@ -51,6 +51,6 @@ This streams the user orders and denormalizes the data by joining facts (orders)
 
 Any downstream application or database can receive the denormalized data.
 
-```sql
---8<-- "docs/fin-serv/denormalization/sink.sql"
+```json
+--8<-- "docs/fin-serv/denormalization/sink.json"
 ```

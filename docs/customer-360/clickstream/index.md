@@ -47,6 +47,6 @@ Now you can process the data in a variety of ways, by enriching the clickstream 
 
 After processing the data, send it to Elasticsearch.
 
-```sql
---8<-- "docs/customer-360/clickstream/sink.sql"
+```json
+--8<-- "docs/customer-360/clickstream/sink.json"
 ```
