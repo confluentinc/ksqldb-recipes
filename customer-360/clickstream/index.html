@@ -58,8 +58,6 @@
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#what-is-it">What is it?</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-started">Get Started</a>
-    </li>
     <li class="toctree-l3"><a class="reference internal" href="#step-by-step">Step-by-step</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#setup-your-environment">Setup your Environment</a>
@@ -71,8 +69,6 @@
     <li class="toctree-l4"><a class="reference internal" href="#write-the-data-out">Write the data out</a>
     </li>
         </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#full-ksqldb-statements">Full ksqlDB Statements</a>
     </li>
     </ul>
                 </li>
@@ -214,34 +210,32 @@
 <li>How long users are interacting with the site (user sessions)</li>
 </ul>
 <p><img alt="grafana" src="../../img/clickstream.png" /></p>
-<h2 id="get-started">Get Started</h2>
-<p>Click below to automatically launch this recipe in Confluent Cloud (alternatively: follow the step-by-step instructions that follow).</p>
-<p><a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a></p>
 <h2 id="step-by-step">Step-by-step</h2>
 <h3 id="setup-your-environment">Setup your Environment</h3>
 <p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service.</p>
-<p>Then proceed with the recipe, which can be executed with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which has language for processing the data in real-time and will soon support connector integration for reading and writing data to other data sources and sinks.</p>
+<p>Then execute the recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which has language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks).</p>
 <h3 id="read-the-data-in">Read the data in</h3>
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to instantly connect to popular data sources and end systems in the cloud.
-This recipe is shown with one example of a data source, but you can substitute your own preferred connector to use any data source.
+This recipe shows one example of a data source, but you can substitute your own preferred connector to use any data source.
 The principles are the same, just modify the connector configuration shown below to fit your deployment (see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a>).</p>
+<p>To run a fully-managed connector to write the data into Kafka topics, use Confluent Cloud Console or <a href="https://docs.confluent.io/confluent-cli/current/overview.html">Confluent CLI</a> command <code>confluent connect create --config &lt;file&gt;</code>, submit each connector separately.</p>
 <p>This recipe creates simulated data with the <code>Datagen</code> connector.</p>
-<pre><code class="language-sql">-- Stream of users
-CREATE SOURCE CONNECTOR datagen_clickstream_users WITH (
-  'connector.class'          = 'DatagenSource',
-  'kafka.topic'              = 'clickstream_users',
-  'quickstart'               = 'clickstream_users',
-  'maxInterval'              = '10',
-  'format'                   = 'json',
-  'key.converter'            = 'org.apache.kafka.connect.converters.IntegerConverter');
+<pre><code class="language-json">{
+  'connector.class'          : 'DatagenSource',
+  'kafka.topic'              : 'clickstream_users',
+  'quickstart'               : 'clickstream_users',
+  'maxInterval'              : '10',
+  'format'                   : 'json',
+  'key.converter'            : 'org.apache.kafka.connect.converters.IntegerConverter'
+}
 
--- Stream of per-user session information
-CREATE SOURCE CONNECTOR datagen_clickstream WITH (
-  'connector.class'          = 'DatagenSource',
-  'kafka.topic'              = 'clickstream',
-  'quickstart'               = 'clickstream',
-  'maxInterval'              = '30',
-  'format'                   = 'json');
+{
+  'connector.class'          : 'DatagenSource',
+  'kafka.topic'              : 'clickstream',
+  'quickstart'               : 'clickstream',
+  'maxInterval'              : '30',
+  'format'                   : 'json'
+}
 </code></pre>
 <p>Optional: to simulate a real-world scenario where user sessions aren't just always open but do close after some time, you can pause and resume the <code>DATAGEN_CLICKSTREAM</code> connector.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
@@ -347,139 +341,6 @@ CREATE TABLE USER_IP_ACTIVITY WITH (key_format='json') AS
 <h3 id="write-the-data-out">Write the data out</h3>
 <p>After processing the data, send it to Elasticsearch.</p>
 <pre><code class="language-sql">-- Send data to Elasticsearch
-CREATE SINK CONNECTOR analyzed_clickstream WITH (
-  'connector.class'          = 'ElasticsearchSink',
-  'name'                     = 'recipe-elasticsearch-analyzed_clickstream',
-  'input.data.format'        = 'JSON',
-  'kafka.api.key'            = '&lt;my-kafka-api-key&gt;',
-  'kafka.api.secret'         = '&lt;my-kafka-api-secret&gt;',
-  'topics'                   = 'USER_IP_ACTIVITY, ERRORS_PER_MIN_ALERT',
-  'connection.url'           = '&lt;elasticsearch-URI&gt;',
-  'connection.user'          = '&lt;elasticsearch-username&gt;',
-  'connection.password'      = '&lt;elasticsearch-password&gt;',
-  'type.name'                = 'type.name=kafkaconnect',
-  'key.ignore'               = 'true',
-  'schema.ignore'            = 'true'
-);
-</code></pre>
-<h2 id="full-ksqldb-statements">Full ksqlDB Statements</h2>
-<p>Here is the full recipe that you can run with ksqlDB, a consolidation of all the the steps shown above.</p>
-<pre><code class="language-sql">-- Stream of users
-CREATE SOURCE CONNECTOR datagen_clickstream_users WITH (
-  'connector.class'          = 'DatagenSource',
-  'kafka.topic'              = 'clickstream_users',
-  'quickstart'               = 'clickstream_users',
-  'maxInterval'              = '10',
-  'format'                   = 'json',
-  'key.converter'            = 'org.apache.kafka.connect.converters.IntegerConverter');
-
--- Stream of per-user session information
-CREATE SOURCE CONNECTOR datagen_clickstream WITH (
-  'connector.class'          = 'DatagenSource',
-  'kafka.topic'              = 'clickstream',
-  'quickstart'               = 'clickstream',
-  'maxInterval'              = '30',
-  'format'                   = 'json');
-
--- stream of user clicks:
-CREATE STREAM clickstream (
-  _time bigint,
-  time varchar,
-  ip varchar,
-  request varchar,
-  status int,
-  userid int,
-  bytes bigint,
-  agent varchar
-) WITH (
-  kafka_topic = 'clickstream',
-  value_format = 'json',
-  partitions = 6
-);
-
--- users lookup table:
-CREATE TABLE WEB_USERS (
-  user_id int primary key,
-  registered_At BIGINT,
-  username varchar,
-  first_name varchar,
-  last_name varchar,
-  city varchar,
-  level varchar
-) WITH (
-  kafka_topic = 'clickstream_users',
-  value_format = 'json',
-  partitions = 6
-);
-
--- Build materialized stream views:
-
--- enrich click-stream with more user information:
-CREATE STREAM USER_CLICKSTREAM AS
-  SELECT
-    userid,
-    u.username,
-    ip,
-    u.city,
-    request,
-    status,
-    bytes
-  FROM clickstream c
-  LEFT JOIN web_users u ON c.userid = u.user_id;
-
--- Build materialized table views:
-
--- Table of html pages per minute for each user:
-CREATE TABLE pages_per_min AS
-  SELECT
-    userid as k1,
-    AS_VALUE(userid) as userid,
-    WINDOWSTART as EVENT_TS,
-    count(*) AS pages
-  FROM clickstream WINDOW HOPPING (size 60 second, advance by 5 second)
-  WHERE request like '%html%'
-  GROUP BY userid;
-
--- User sessions table - 30 seconds of inactivity expires the session
--- Table counts number of events within the session
-CREATE TABLE CLICK_USER_SESSIONS AS
-  SELECT
-    username as K,
-    AS_VALUE(username) as username,
-    WINDOWEND as EVENT_TS,
-    count(*) AS events
-  FROM USER_CLICKSTREAM window SESSION (30 second)
-  GROUP BY username;
-
--- number of errors per min, using 'HAVING' Filter to show ERROR codes &gt; 400 where count &gt; 5
-CREATE TABLE ERRORS_PER_MIN_ALERT AS
-  SELECT
-    status as k1,
-    AS_VALUE(status) as status,
-    WINDOWSTART as EVENT_TS,
-    count(*) AS errors
-  FROM clickstream window HOPPING (size 60 second, advance by 20 second)
-  WHERE status &gt; 400
-  GROUP BY status
-  HAVING count(*) &gt; 5 AND count(*) is not NULL;
-
--- Enriched user details table:
--- Aggregate (count&amp;groupBy) using a TABLE-Window
-CREATE TABLE USER_IP_ACTIVITY WITH (key_format='json') AS
-  SELECT
-    username as k1,
-    ip as k2,
-    city as k3,
-    AS_VALUE(username) as username,
-    WINDOWSTART as EVENT_TS,
-    AS_VALUE(ip) as ip,
-    AS_VALUE(city) as city,
-    COUNT(*) AS count
-  FROM USER_CLICKSTREAM WINDOW TUMBLING (size 60 second)
-  GROUP BY username, ip, city
-  HAVING COUNT(*) &gt; 1;
-
--- Send data to Elasticsearch
 CREATE SINK CONNECTOR analyzed_clickstream WITH (
   'connector.class'          = 'ElasticsearchSink',
   'name'                     = 'recipe-elasticsearch-analyzed_clickstream',
