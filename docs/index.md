@@ -1,16 +1,20 @@
 ---
 title: ksqlDB Recipes
 seo:
-  title: TBD
-  description: TBD
+  title: ksqlDB Recipes
+  description: These recipes highlight some of our most popular stream processing use cases with ksqlDB
 ---
 
 # Welcome to ksqlDB Recipes
 
-This is a Work in Progress!
-Click in the left nav bar to see one of the recipes.
+These recipes highlight some of our most popular stream processing use cases with ksqlDB.
+Each code example shows a ksqlDB query you can run to process real-time data streams, and connect to your production end systems, 100% in the cloud.
 
-How to run: the recipe explains the use case and shows how to implement in Confluent Cloud.
-It can also be run on Confluent Platform, but you'll first have to make appropriate modifications to the provided configuration files.
+To try any of these out, make sure you first sign up for [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree) and provision a ksqlDB application.
 
-Note: these recipes will be launched on Confluent Developer https://developer.confluent.io.
+# How to Run
+
+Click in the left nav bar to view a recipe.
+Each page explains the use case and how to deploy it in Confluent Cloud.
+
+ksqlDB recipes can also run on Confluent Platform, but you'll first have to make appropriate modifications to the provided configuration files.
