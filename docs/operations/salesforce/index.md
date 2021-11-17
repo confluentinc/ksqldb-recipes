@@ -12,14 +12,6 @@ Salesforce sends a notification when a change to a Salesforce record occurs as p
 However, if there is corrupted data in Salesforce, it sends a gap event instead of a change event, which contains information about the change in the header, such as the change type and record ID.
 These gap events need to be identified and then handled by calling a SFDC API to reconcile the events in real time.
 
-TODO--diagram
-
-## Get Started
-
---8<-- "docs/shared/ccloud_launch.md"
-
-<a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
-
 ## Step-by-step
 
 ### Setup your Environment
@@ -32,22 +24,12 @@ TODO--diagram
 
 Use Avro so ksqlDB can automatically detect the schema.
 
-```sql
---8<-- "docs/operations/salesforce/source.sql"
+```json
+--8<-- "docs/operations/salesforce/source.json"
 ```
 
 ### Run stream processing app
 
 ```sql
---8<-- "docs/operations/salesforce/process.sql"
-```
-
-## Full ksqlDB Statements
-
---8<-- "docs/shared/code_summary.md"
-
-```sql
---8<-- "docs/operations/salesforce/source.sql"
-
 --8<-- "docs/operations/salesforce/process.sql"
 ```

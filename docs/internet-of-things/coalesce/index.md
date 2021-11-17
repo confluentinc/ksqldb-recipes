@@ -11,12 +11,6 @@ seo:
 With Internet of Things (IoT), devices can emit a lot of telemetry, and it may be difficult to analyze that information to determine if something is "wrong".
 This recipe shows you how to process and coalesce that telemetry using ksqlDB and flag devices that warrant more investigation.
 
-## Get Started
-
---8<-- "docs/shared/ccloud_launch.md"
-
-<a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
-
 ## Step-by-Step
 
 ### Setup your Environment
@@ -27,10 +21,10 @@ This recipe shows you how to process and coalesce that telemetry using ksqlDB an
 
 --8<-- "docs/shared/connect.md"
 
-In this example, the telemetry is stored in two tables in a database and is read into 2 Kafak topics in Confluent Cloud.
+In this example, the telemetry is stored in two tables in a database and is read into 2 Kafka topics in Confluent Cloud.
 
-```sql
---8<-- "docs/internet-of-things/coalesce/source.sql"
+```json
+--8<-- "docs/internet-of-things/coalesce/source.json"
 ```
 
 --8<-- "docs/shared/manual_insert.md"
@@ -48,14 +42,4 @@ The following stream processing app identifies which set of devices need to be i
 
 ```sql
 --8<-- "docs/internet-of-things/coalesce/manual.sql"
-```
-
-## Full ksqlDB Statements
-
---8<-- "docs/shared/code_summary.md"
-
-```sql
---8<-- "docs/internet-of-things/coalesce/source.sql"
-
---8<-- "docs/internet-of-things/coalesce/process.sql"
 ```

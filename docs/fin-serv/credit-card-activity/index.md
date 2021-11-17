@@ -14,12 +14,6 @@ If a customer exceeds their average spend, the account will be flagged as a poss
 
 ![grafana](../../img/credit-card-activity.jpg)
 
-## Get Started
-
---8<-- "docs/shared/ccloud_launch.md"
-
-<a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
-
 ## Step-by-step
 
 ### Setup your Environment
@@ -30,8 +24,8 @@ If a customer exceeds their average spend, the account will be flagged as a poss
 
 --8<-- "docs/shared/connect.md"
 
-```sql
---8<-- "docs/fin-serv/credit-card-activity/source.sql"
+```json
+--8<-- "docs/fin-serv/credit-card-activity/source.json"
 ```
 
 --8<-- "docs/shared/manual_insert.md"
@@ -48,16 +42,4 @@ Now you can process the data in a variety of ways.
 
 ```sql
 --8<-- "docs/fin-serv/credit-card-activity/manual.sql"
-```
-
-## Full ksqlDB Statements
-
---8<-- "docs/shared/code_summary.md"
-
-```sql
---8<-- "docs/fin-serv/credit-card-activity/source.sql"
-
---8<-- "docs/fin-serv/credit-card-activity/process.sql"
-
---8<-- "docs/fin-serv/credit-card-activity/sink.sql"
 ```

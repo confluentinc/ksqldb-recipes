@@ -15,12 +15,6 @@ This recipe demonstrates this principle by streaming from a SQL Server, denormal
 
 ![denormalized](../../img/denormalized-data.png)
 
-## Get Started
-
---8<-- "docs/shared/ccloud_launch.md"
-
-<a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
-
 ## Step-by-step
 
 ### Setup your Environment
@@ -33,8 +27,8 @@ This recipe demonstrates this principle by streaming from a SQL Server, denormal
 
 Change Data Capture (CDC) for orders is being written to a SQL Server database, and there is an Oracle database with customer data.
 
-```sql
---8<-- "docs/fin-serv/denormalization/source.sql"
+```json
+--8<-- "docs/fin-serv/denormalization/source.json"
 ```
 
 --8<-- "docs/shared/manual_insert.md"
@@ -60,16 +54,3 @@ Any downstream application or database can receive the denormalized data.
 ```sql
 --8<-- "docs/fin-serv/denormalization/sink.sql"
 ```
-
-## Full ksqlDB Statements
-
---8<-- "docs/shared/code_summary.md"
-
-```sql
---8<-- "docs/fin-serv/denormalization/source.sql"
-
---8<-- "docs/fin-serv/denormalization/process.sql"
-
---8<-- "docs/fin-serv/denormalization/sink.sql"
-```
-

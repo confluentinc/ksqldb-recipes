@@ -14,12 +14,6 @@ With ksqlDB, you can filter and react to events in real time rather than perform
 
 ![ssh-attack](../../img/ssh-attack.png)
 
-## Get Started
-
---8<-- "docs/shared/ccloud_launch.md"
-
-<a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
-
 ## Step-by-Step
 
 ### Setup your Environment

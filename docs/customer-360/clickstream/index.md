@@ -17,12 +17,6 @@ Analyzing clickstream data enables businesses to understand the behavior of its 
 
 ![grafana](../../img/clickstream.png)
 
-## Get Started
-
---8<-- "docs/shared/ccloud_launch.md"
-
-<a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
-
 ## Step-by-step
 
 ### Setup your Environment
@@ -35,8 +29,8 @@ Analyzing clickstream data enables businesses to understand the behavior of its 
 
 This recipe creates simulated data with the `Datagen` connector.
 
-```sql
---8<-- "docs/customer-360/clickstream/source.sql"
+```json
+--8<-- "docs/customer-360/clickstream/source.json"
 ```
 
 Optional: to simulate a real-world scenario where user sessions aren't just always open but do close after some time, you can pause and resume the `DATAGEN_CLICKSTREAM` connector.
@@ -54,17 +48,5 @@ Now you can process the data in a variety of ways, by enriching the clickstream 
 After processing the data, send it to Elasticsearch.
 
 ```sql
---8<-- "docs/customer-360/clickstream/sink.sql"
-```
-
-## Full ksqlDB Statements
-
---8<-- "docs/shared/code_summary.md"
-
-```sql
---8<-- "docs/customer-360/clickstream/source.sql"
-
---8<-- "docs/customer-360/clickstream/process.sql"
-
 --8<-- "docs/customer-360/clickstream/sink.sql"
 ```
