@@ -1,10 +1,10 @@
 ---
 seo:
-  title: Loyalty Programmes
+  title: Building Customer Loyalty Schemes
   description: This recipe tracks customers' purchasing patterns, generating tailored rewards for a loyalty scheme.
 ---
 
-# Customer Loyalty Schemes
+# Building Customer Loyalty Schemes
 
 Customer loyalty schemes are everywhere in retail, even if it's just
 as simple as, "Get 10 stamps on this card and we'll give you a free
