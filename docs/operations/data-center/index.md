@@ -12,7 +12,7 @@ The data centers consume large amounts of electricity which needs to be monitore
 
 Each data center is constructed with smart electrical panels that control the power supplies to multiple customer tenants. The smart panels emit telemetry data that is captured and produced into an Apache Kafka® topic. 
 
-TODO--diagram
+![](diagram.svg)
 
 How can we utilize [ksqlDB](https://ksqldb.io/) to process the control panel telemetry data in real time?
 
