@@ -120,6 +120,8 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#run-stream-processing-app">Run stream processing app</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cleanup">Cleanup</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -147,6 +149,8 @@
                     <li class="toctree-l1"><a class="reference internal" href="../../shared/ccloud_launch/">Ccloud launch</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../shared/ccloud_setup/">Ccloud setup</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../shared/cleanup/">Cleanup</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../shared/code_summary/">Code summary</a>
                     </li>
@@ -293,6 +297,12 @@ INSERT INTO locations (vehicle_id, latitude, longitude, timestamp) VALUES (5402,
 INSERT INTO fleet (vehicle_id, driver_id, license) VALUES (5401, 847383, 8852693196);
 INSERT INTO fleet (vehicle_id, driver_id, license) VALUES (5402, 922947, 1255144201);
 INSERT INTO fleet (vehicle_id, driver_id, license) VALUES (5403, 435309, 2132311746);
+</code></pre>
+<h3 id="cleanup">Cleanup</h3>
+<p>To clean up the resources created by this ksqlDB recipe, use the ksqlDB commands shown below (substitute stream or topic name, as appropriate).
+By including the <code>DELETE TOPIC</code> clause, the stream or table's source topic is also deleted, asynchronously.</p>
+<pre><code>DROP STREAM IF EXISTS &lt;stream_name&gt; DELETE TOPIC;
+DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
 </code></pre>
               
             </div>
