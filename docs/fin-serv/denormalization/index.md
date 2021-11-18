@@ -54,3 +54,7 @@ Any downstream application or database can receive the denormalized data.
 ```json
 --8<-- "docs/fin-serv/denormalization/sink.json"
 ```
+
+### Cleanup
+
+--8<-- "docs/shared/cleanup.md"

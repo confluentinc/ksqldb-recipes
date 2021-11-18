@@ -33,3 +33,7 @@ Use Avro so ksqlDB can automatically detect the schema.
 ```sql
 --8<-- "docs/operations/salesforce/process.sql"
 ```
+
+### Cleanup
+
+--8<-- "docs/shared/cleanup.md"
