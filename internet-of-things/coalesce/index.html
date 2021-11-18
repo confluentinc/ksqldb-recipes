@@ -284,11 +284,12 @@ INSERT INTO throughputs (device_id, throughput) VALUES ('d2', 900.0);
 INSERT INTO throughputs (device_id, throughput) VALUES ('d3', 500.0);
 </code></pre>
 <h3 id="cleanup">Cleanup</h3>
-<p>To clean up the resources created by this ksqlDB recipe, use the ksqlDB commands shown below (substitute stream or topic name, as appropriate).
+<p>To clean up the ksqlDB resources created by this recipe, use the ksqlDB commands shown below (substitute stream or topic name, as appropriate).
 By including the <code>DELETE TOPIC</code> clause, the stream or table's source topic is also deleted, asynchronously.</p>
 <pre><code>DROP STREAM IF EXISTS &lt;stream_name&gt; DELETE TOPIC;
 DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
 </code></pre>
+<p>If you also created connectors, you'll need to remove those as well.</p>
               
             </div>
           </div>
