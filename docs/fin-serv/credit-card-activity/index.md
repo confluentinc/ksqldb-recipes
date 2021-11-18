@@ -43,3 +43,7 @@ Now you can process the data in a variety of ways.
 ```sql
 --8<-- "docs/fin-serv/credit-card-activity/manual.sql"
 ```
+
+### Cleanup
+
+--8<-- "docs/shared/cleanup.md"

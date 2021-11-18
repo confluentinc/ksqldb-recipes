@@ -50,3 +50,7 @@ After processing the data, send it to Elasticsearch.
 ```json
 --8<-- "docs/customer-360/clickstream/sink.json"
 ```
+
+### Cleanup
+
+--8<-- "docs/shared/cleanup.md"

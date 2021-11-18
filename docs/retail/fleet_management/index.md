@@ -42,3 +42,7 @@ In this case, the original fleet telemetry is enriched with details about the ve
 ```sql
 --8<-- "docs/retail/fleet_management/manual.sql"
 ```
+
+### Cleanup
+
+--8<-- "docs/shared/cleanup.md"

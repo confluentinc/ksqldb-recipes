@@ -40,3 +40,7 @@ Now you can process the data in a variety of ways.
 ```sql
 --8<-- "docs/fin-serv/payment-status-check/manual.sql"
 ```
+
+### Cleanup
+
+--8<-- "docs/shared/cleanup.md"

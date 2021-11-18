@@ -44,3 +44,7 @@ Create a ksqlDB `TABLE`, which is a mutable, partitioned collection that models 
 ```sql
 --8<-- "docs/retail/inventory/manual.sql"
 ```
+
+### Cleanup
+
+--8<-- "docs/shared/cleanup.md"

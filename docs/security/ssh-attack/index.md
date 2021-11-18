@@ -70,3 +70,7 @@ Run the Syslog source connector locally, then proceed with ksqlDB to process the
 ```sql
 --8<-- "docs/security/ssh-attack/process.sql"
 ```
+
+### Cleanup
+
+--8<-- "docs/shared/cleanup.md"

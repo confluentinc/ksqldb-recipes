@@ -41,3 +41,7 @@ This creates a stream of events, upon which real-time stream processing can keep
 ```sql
 --8<-- "docs/retail/dynamic_pricing/manual.sql"
 ```
+
+### Cleanup
+
+--8<-- "docs/shared/cleanup.md"

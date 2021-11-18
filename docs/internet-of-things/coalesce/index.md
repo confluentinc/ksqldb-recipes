@@ -43,3 +43,7 @@ The following stream processing app identifies which set of devices need to be i
 ```sql
 --8<-- "docs/internet-of-things/coalesce/manual.sql"
 ```
+
+### Cleanup
+
+--8<-- "docs/shared/cleanup.md"
