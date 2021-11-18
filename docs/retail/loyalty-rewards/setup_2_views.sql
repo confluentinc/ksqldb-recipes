@@ -1,5 +1,5 @@
 -- Summarize products.
-CREATE OR REPLACE TABLE all_products AS
+CREATE TABLE all_products AS
   SELECT
     product_id,
     LATEST_BY_OFFSET(category) AS category,
@@ -8,7 +8,7 @@ CREATE OR REPLACE TABLE all_products AS
   GROUP BY product_id;
 
 -- Enrich purchases.
-CREATE OR REPLACE STREAM enriched_purchases AS
+CREATE STREAM enriched_purchases AS
   SELECT
     purchases.user_id,
     purchases.product_id AS product_id,

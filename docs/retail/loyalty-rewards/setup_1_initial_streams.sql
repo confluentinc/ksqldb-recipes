@@ -1,4 +1,4 @@
-CREATE OR REPLACE STREAM users (
+CREATE STREAM users (
   user_id VARCHAR KEY,
   name VARCHAR
 ) WITH (
@@ -7,7 +7,7 @@ CREATE OR REPLACE STREAM users (
   PARTITIONS = 3
 );
 
-CREATE OR REPLACE STREAM products (
+CREATE STREAM products (
   product_id VARCHAR KEY,
   category VARCHAR,
   price DECIMAL(10,2)
@@ -17,7 +17,7 @@ CREATE OR REPLACE STREAM products (
   PARTITIONS = 3
 );
 
-CREATE OR REPLACE STREAM purchases (
+CREATE STREAM purchases (
   user_id VARCHAR KEY,
   product_id VARCHAR
 ) WITH (
