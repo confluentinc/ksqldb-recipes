@@ -1,16 +1,16 @@
 {
-  'connector.class'          : 'DatagenSource',
-  'kafka.topic'              : 'clickstream_users',
-  'quickstart'               : 'clickstream_users',
-  'maxInterval'              : '10',
-  'format'                   : 'json',
-  'key.converter'            : 'org.apache.kafka.connect.converters.IntegerConverter'
+  "connector.class"          : "DatagenSource",
+  "kafka.topic"              : "clickstream_users",
+  "quickstart"               : "clickstream_users",
+  "maxInterval"              : "10",
+  "format"                   : "json",
+  "key.converter"            : "org.apache.kafka.connect.converters.IntegerConverter"
 }
 
 {
-  'connector.class'          : 'DatagenSource',
-  'kafka.topic'              : 'clickstream',
-  'quickstart'               : 'clickstream',
-  'maxInterval'              : '30',
-  'format'                   : 'json'
+  "connector.class"          : "DatagenSource",
+  "kafka.topic"              : "clickstream",
+  "quickstart"               : "clickstream",
+  "maxInterval"              : "30",
+  "format"                   : "json"
 }
