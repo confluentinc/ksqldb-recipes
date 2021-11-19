@@ -27,25 +27,19 @@ follows-up. That should be enough chit-chat to get the ball rolling.
 
 --8<-- "docs/shared/ccloud_setup.md"
 
-### Create A Data Stream
+### Create The Initial Dataset
 
 ``` sql
---8<-- "docs/social/online-matches/setup.sql"
-```
-
-### Insert Some Messages
-
-``` sql
---8<-- "docs/social/online-matches/message_data.sql"
+--8<-- "docs/social/online-matches/manual.sql"
 ```
 
 ## Tracking Connections
 
-If you look at those `message_data` events, it's clear there are a lot
-of hellos bouncing around, but beyond that it's hard to see any
-patterns. Let's use some queries to make sense of it. We'll build up
-our answer to, "Who's connected to who?"  gradually. Before we begin,
-some session settings to make sure we all get the same results:
+If you look at those `messages`, it's clear there are a lot of hellos
+bouncing around, but beyond that it's hard to see any patterns. Let's
+use some queries to make sense of it. We'll build up our answer to,
+"Who's connected to who?"  gradually. Before we begin, some session
+settings to make sure we all get the same results:
 
 ```sql
 SET 'auto.offset.reset' = 'earliest';
@@ -64,7 +58,7 @@ CREATE TABLE conversations_v1 AS
   SELECT
     ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>') AS conversation_id,
     COLLECT_LIST(rowtime) AS message_times
-  FROM message_stream
+  FROM messages
   GROUP BY 
     ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>');
 ```
@@ -108,7 +102,7 @@ CREATE TABLE conversations_v2 AS
       COLLECT_LIST(CAST(rowtime AS STRING)),
       COLLECT_LIST(send_id)
     ) AS message_times
-  FROM message_stream
+  FROM messages
   GROUP BY 
     ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>');
 ```
@@ -146,7 +140,7 @@ CREATE TABLE conversations_v3 AS
         ),
         true
     ) AS message_times
-  FROM message_stream
+  FROM messages
   GROUP BY 
     ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>');
 ```
