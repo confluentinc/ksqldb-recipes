@@ -1,13 +1,3 @@
-CREATE STREAM messages (
-  send_id BIGINT,
-  recv_id BIGINT,
-  message VARCHAR
-) WITH (
-  KAFKA_TOPIC = 'MESSAGES',
-  VALUE_FORMAT = 'AVRO',
-  PARTITIONS = 3
-);
-
 INSERT INTO messages ( send_id, recv_id, message ) VALUES ( 1, 2, 'Hello' );
 INSERT INTO messages ( send_id, recv_id, message ) VALUES ( 1, 3, 'Hello' );
 INSERT INTO messages ( send_id, recv_id, message ) VALUES ( 2, 1, 'Hey there' );

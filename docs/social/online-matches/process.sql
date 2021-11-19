@@ -1,5 +1,16 @@
 SET 'auto.offset.reset' = 'earliest';
 
+CREATE STREAM messages (
+  send_id BIGINT,
+  recv_id BIGINT,
+  message VARCHAR
+) WITH (
+  KAFKA_TOPIC = 'MESSAGES',
+  VALUE_FORMAT = 'AVRO',
+  PARTITIONS = 3
+);
+
+CREATE STREAM conversations AS
 SELECT
   ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>') AS conversation_id
 FROM messages
