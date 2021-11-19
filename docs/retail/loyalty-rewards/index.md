@@ -20,7 +20,13 @@ We'll start by setting up an environment and some data to work with,
 then see how to make the raw sales data support our marketing
 schemes...
 
-## Setup
+## Solutions
+
+``` sql
+--8<-- "docs/retail/loyalty-rewards/process.sql"
+```
+
+## Explanation
 
 ### Set Up Your Environment
 
@@ -80,7 +86,8 @@ how much they spend. We'll say anyone who spends over $400 is a Gold
 customer, over $300 for Silver and $200 for Bronze. Anyone else is
 still climbing that reward ladder.
 
-This query creates a simple "total by user" summary table, adding in a extra column that groups the users total into price bands:
+This query creates a simple "total by user" summary table, adding in a
+extra column that groups the users total into price bands:
 
 ```sql
 CREATE TABLE sales_totals AS
@@ -154,7 +161,7 @@ use-case.
 The chances are high you have a coffee stamp card in your wallet. (Or serval dozen of them.) To keep our test data small we'll be generous as say our customers only need to buy 5 coffees to get a free one. Whatever the number, the implementation of this scheme is straightforward. We count up the number of drinks they've purchased. When that number gets to 5 the next one's free, and as it hits that 6th free one, we reset to 0.
 
 ```sql
-CREATE TABLE caffiene_index AS
+CREATE TABLE caffeine_index AS
   SELECT
     user_id,
     count(*) as total,
@@ -170,7 +177,7 @@ CREATE TABLE caffiene_index AS
 Selecting from that table:
 ```sql
 SELECT * 
-FROM caffiene_index;
+FROM caffeine_index;
 ```
 
 ```txt
