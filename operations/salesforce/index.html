@@ -923,6 +923,11 @@ The principles are the same, just modify the connector configuration shown below
 }
 </code></pre>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
+<hr />
+<p><strong>NOTE</strong>
+Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.
+This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</p>
+<hr />
 <pre><code class="language-sql">-- Register the stream of SFDC CDC Opportunities
 CREATE STREAM STREAM_SFDC_CDC_OPPORTUNITY_RAW
 WITH (

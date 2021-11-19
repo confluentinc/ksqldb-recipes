@@ -945,6 +945,11 @@ The principles are the same, just modify the connector configuration shown below
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert values into the streams.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
 <p>Now you can process the data in a variety of ways.</p>
+<hr />
+<p><strong>NOTE</strong>
+Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.
+This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</p>
+<hr />
 <pre><code class="language-sql">-- Register the stream of transactions
 CREATE STREAM FD_TRANSACTIONS_RAW (
   ACCOUNT_ID BIGINT, 

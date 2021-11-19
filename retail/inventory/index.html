@@ -927,6 +927,11 @@ This creates a stream of events, where each event results in the addition or rem
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert values into the streams.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
 <p>Create a ksqlDB <code>TABLE</code>, which is a mutable, partitioned collection that models change over time that represents what is true as of "now".</p>
+<hr />
+<p><strong>NOTE</strong>
+Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.
+This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</p>
+<hr />
 <pre><code class="language-sql">-- Create stream of inventory
 CREATE STREAM inventory_stream (
   id STRING key,

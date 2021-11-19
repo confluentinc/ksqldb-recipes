@@ -945,6 +945,11 @@ The principles are the same, just modify the connector configuration shown below
 <p>Optional: to simulate a real-world scenario where user sessions aren't just always open but do close after some time, you can pause and resume the <code>DATAGEN_CLICKSTREAM</code> connector.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
 <p>Now you can process the data in a variety of ways, by enriching the clickstream data with user information, analyze errors, aggregate data into windows of time, etc.</p>
+<hr />
+<p><strong>NOTE</strong>
+Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.
+This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</p>
+<hr />
 <pre><code class="language-sql">-- stream of user clicks:
 CREATE STREAM clickstream (
   _time bigint,

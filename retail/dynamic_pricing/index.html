@@ -942,6 +942,11 @@ This creates a stream of events, upon which real-time stream processing can keep
 </code></pre>
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert values into the streams.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
+<hr />
+<p><strong>NOTE</strong>
+Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.
+This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</p>
+<hr />
 <pre><code class="language-sql">-- Create stream of sales
 CREATE STREAM sales (
   item_id INT key,
