@@ -21,8 +21,8 @@
   "kafka.api.key": "<my-kafka-api-key>",
   "kafka.api.secret": "<my-kafka-api-secret>",
   "kafka.topic" : "panel-readings",
-  "mqtt.server.uri" : "tcp://192.0.0.1:1881",
-  "mqtt.topics" : "<smart-panel-mqtt-topic>"
+  "mqtt.server.uri" : "tcp://<mqtt-server-hostname>:1881",
+  "mqtt.topics" : "<mqtt-topic>"
   "tasks.max" : "1"
 }
 
