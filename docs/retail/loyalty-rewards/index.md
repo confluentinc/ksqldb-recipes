@@ -26,19 +26,7 @@ schemes...
 
 --8<-- "docs/shared/ccloud_setup.md"
 
-### Create Some Data Streams
-
-``` sql
---8<-- "docs/retail/loyalty-rewards/setup_1_initial_streams.sql"
-```
-
-### Derive Some Summaries And Enrichments
-
-``` sql
---8<-- "docs/retail/loyalty-rewards/setup_2_views.sql"
-```
-
-### Populate With Sample Data
+### Create The Initial Dataset
 
 ``` sql
 --8<-- "docs/retail/loyalty-rewards/manual.sql"
