@@ -50,7 +50,7 @@ Now you can process the data in a variety of ways.
 --8<-- "docs/operations/data-center/process.sql"
 ```
 
-The current state of customer tenant occupancy can be represented with a ksqlDB `TABLE`. Events streamed into the `tenant-occupancy` table represent a customer (`customer_id`) beginning an occupancy of a particular tenant (`tenant_id`). As events are observed on the `tenant-occupancy` topic, the table will model the current set of tenant occupants. You can query this table at points in time to determine which customer occupies which tenant. When customers leave a tenant, the source system will need to send a _Tombstone Record_ (an event with a valid `tenant_id` key and a `null` value). ksqlDB will process by the tombstone by removing the row with the given key from the table.
+The current state of customer tenant occupancy can be represented with a ksqlDB `TABLE`. Events streamed into the `tenant-occupancy` topic represent a customer (`customer_id`) beginning an occupancy of a particular tenant (`tenant_id`). As events are observed on the `tenant-occupancy` topic, the table will model the current set of tenant occupants. You can query this table at points in time to determine which customer occupies which tenant. When customers leave a tenant, the source system will need to send a _Tombstone Record_ (an event with a valid `tenant_id` key and a `null` value). ksqlDB will process the tombstone by removing the row with the given key from the table.
 
 Panel sensor readings can be streamed directly into a topic or sourced from an upstream system. A `STREAM` captures the power readings when they flow from the smart panel into Kafka. Each event contains a panel identifier and the associated tenant, in addition to two power readings.
 
