@@ -16,14 +16,13 @@
 }
 
 {
-  "connector.class": "io.confluent.connect.mqtt.MqttSourceConnector",
-  "mqtt.server.uri": "tcp://<mqtt-server>:<mqtt-port>",
-  "mqtt.topics":"panel-readings",
-  "kafka.topic":"panel-readings",
-  "mqtt.qos": "2",
-  "mqtt.username": "<mqtt-username>",
-  "mqtt.password": "<mqtt-password>",
-  "confluent.topic.bootstrap.servers": "<kafka-bootstrap>:9092",
-  "confluent.topic.replication.factor": "1",
-  "tasks.max": "1",
+  "connector.class": "MqttSource",
+  "name": "Smart_Panel_Source",
+  "kafka.api.key": "<my-kafka-api-key>",
+  "kafka.api.secret": "<my-kafka-api-secret>",
+  "kafka.topic" : "panel-readings",
+  "mqtt.server.uri" : "tcp://192.0.0.1:1881",
+  "mqtt.topics" : "<smart-panel-mqtt-topic>"
+  "tasks.max" : "1"
 }
+

@@ -36,9 +36,9 @@ Below are sample Kafka Connect configurations you could use to deploy source con
 --8<-- "docs/operations/data-center/source.json"
 ```
 
-The above `MySqlCdcSource` configuration could be used to stream changes from the `customer` database's `tenant` table into the Kafka cluster. This connector is provided as [fully managed by Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-mysql-source-cdc-debezium.html). Fully managed connectors can be deployed using the web console or the Confluent CLI command `confluent connect create --config <file>`.
+The above `MySqlCdcSource` configuration could be used to stream changes from the `customer` database's `tenant` table into the Kafka cluster. This connector is provided as [fully managed by Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-mysql-source-cdc-debezium.html).  And the same is true for the telemtry data, which can be sourced using the [fully managed MQTT source Connector](https://docs.confluent.io/cloud/current/connectors/cc-mqtt-source.html) on Confluent Cloud.
 
-Sourcing telemtry data could be acheived using the MQTT source Connector. The above configuration is for a self-managed connector, see the documentation for details on connecting a [self-managed connector Confluent Cloud](https://docs.confluent.io/cloud/current/cp-component/connect-cloud-config.html).
+Fully managed connectors can be deployed using the web console or the Confluent CLI command `confluent connect create --config <file>`.
 
 If you do not have equivalent source systems to configure connectors for, you can still proceed with this recipe and utilize the sample `INSERT` statements provided below to simulate the tenant occupancy and telemetry data.
 
@@ -63,40 +63,6 @@ From the Confluent Cloud Console ksqlDB UI, run the following `INSERT` commands 
 
 ```sql
 --8<-- "docs/operations/data-center/manual.sql"
-```
-
-## Notes
-
-Here, I think the gist is to have a table of what “safe” means in terms of a power range, and do a streaming join based on the actual activity. If we want to do a little billing example, too, we could join against a table for how many watts/hour costs in a particular data center.
-
-The user who gave us this use case did a blog on almost exactly this (though with a different name and angle toward UDFs, which we can avoid). https://www.confluent.io/blog/infrastructure-monitoring-with-ksqldb-udtf/
-
-Examples include amps each breaker is using in a panel, and how much power each tenant is consuming. You want to analyze all of this in real-time so that you can take corrective action if there’s a problem, bill customers based on their power utilization, and notify data center operators about any changes.
-
-In this example, we can model the electrical data to ensure that power usage remains under the prescribed safe limits. As a bonus, we could compute customer bills based on usage.
-
-Telemetry data is likely to be sourced into Kafka directly (instead of via a Kafka Connector read from a database or other source system).
-
-```
-SELECT TENANT_OCCUPANCY.CUSTOMER_ID, PANEL_POWER_READINGS.READING FROM PANEL_POWER_READINGS 
-INNER JOIN TENANT_OCCUPANCY ON PANEL_POWER_READINGS.TENANT_ID = TENANT_OCCUPANCY.TENANT_ID
-EMIT CHANGES LIMIT 10;
-```
-
-```
-SELECT * FROM PANEL_POWER_READINGS 
-WHERE READING >= 0.85
-EMIT CHANGES;
-```
-
-## Full ksqlDB Statements
-
---8<-- "docs/shared/code_summary.md"
-
-```sql
---8<-- "docs/operations/data-center/source.sql"
-
---8<-- "docs/operations/data-center/process.sql"
 ```
 
 ### Cleanup
