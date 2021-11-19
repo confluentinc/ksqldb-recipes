@@ -1,6 +1,12 @@
 site_name: ksqlDB Recipes
+site_description: ksqlDB Recipes highlight some of our most popular stream processing use cases with ksqlDB
 
-theme: readthedocs
+theme: material
 
 markdown_extensions:
   - pymdownx.snippets
+
+plugins:
+  - exclude:
+      glob:
+        - shared/*
