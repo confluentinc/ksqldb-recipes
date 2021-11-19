@@ -12,7 +12,7 @@ There are lots of ways SSH can be abused but one of the most straightforward way
 This recipe processes Syslog data to detect bad logins and streams out those pairs of usernames and IP addresses.
 With ksqlDB, you can filter and react to events in real time rather than performing historical analysis of Syslog data from cold storage.
 
-![ssh-attack](../../img/ssh-attack.png)
+![SSH-attack](../../img/ssh-attack.png)
 
 ## Step-by-Step
 
@@ -27,7 +27,7 @@ This recipe is a great demonstration on how to run a self-managed connector, to 
 Create a file called `Dockerfile` to bundle a connect worker with `kafka-connect-syslog`:
 
 ```text
---8<-- "docs/security/ssh-attack/Dockerfile"
+--8<-- "docs/security/SSH-attack/Dockerfile"
 ```
 
 Build the custom Docker image with the command:
@@ -41,7 +41,7 @@ docker build \
 Create a file called `docker-compose.yml` with the following content, substituting your Confluent Cloud connection information:
 
 ```text
---8<-- "docs/security/ssh-attack/docker-compose.yml"
+--8<-- "docs/security/SSH-attack/docker-compose.yml"
 ```
 
 Run the container with:
@@ -58,7 +58,7 @@ Process the syslog events by flagging events with invalid users, stripping out a
 There are many ways to customize the resulting stream to fit the business needs: this example also demonstrates how to enrich the stream with a new field `FACILITY_DESCRIPTION` with human-readable content.
 
 ```sql
---8<-- "docs/security/ssh-attack/process.sql"
+--8<-- "docs/security/SSH-attack/process.sql"
 ```
 
 ## Full ksqlDB Statements
@@ -68,7 +68,7 @@ There are many ways to customize the resulting stream to fit the business needs:
 Run the Syslog source connector locally, then proceed with ksqlDB to process the Syslog messages.
 
 ```sql
---8<-- "docs/security/ssh-attack/process.sql"
+--8<-- "docs/security/SSH-attack/process.sql"
 ```
 
 ### Cleanup
