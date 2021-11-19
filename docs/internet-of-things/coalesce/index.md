@@ -6,8 +6,6 @@ seo:
 
 # Coalesce Telemetry
 
-## What is it?
-
 With Internet of Things (IoT), devices can emit a lot of telemetry, and it may be difficult to analyze that information to determine if something is "wrong".
 This recipe shows you how to process and coalesce that telemetry using ksqlDB and flag devices that warrant more investigation.
 

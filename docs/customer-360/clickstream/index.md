@@ -6,8 +6,6 @@ seo:
 
 # Understand User Behavior with Clickstream Data
 
-## What is it?
-
 Analyzing clickstream data enables businesses to understand the behavior of its online users, for example:
 
 - User activity over a given time frame: how many webpages are users viewing

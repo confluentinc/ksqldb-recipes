@@ -6,8 +6,6 @@ seo:
 
 # Denormalize Change Data Capture (CDC) for Orders
 
-## What is it?
-
 If you have transactional events for orders in a marketplace, you can stream the Change Data Capture (CDC) and denormalize the events.
 Denormalization is a well-established pattern for performance because querying a single table of enriched data will often perform better than querying across multiple at runtime.
 You can consume the denormalized events from  downstream applications in your business, or stream them to another destination.

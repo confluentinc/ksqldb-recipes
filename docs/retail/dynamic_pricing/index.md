@@ -6,8 +6,6 @@ seo:
 
 # Set Dynamic Pricing
 
-## What is it?
-
 An online marketplace keeps track of statistics regarding pricing: lowest, median, etc.
 These statistics enable buyers and sellers to make dynamic offers based on historical sales events.
 

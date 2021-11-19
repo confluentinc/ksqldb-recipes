@@ -6,8 +6,6 @@ seo:
 
 # Detect and Analyze SSH Attacks
 
-## What is it?
-
 There are lots of ways SSH can be abused but one of the most straightforward ways to detect a problem is to monitor for rejected logins.
 This recipe processes Syslog data to detect bad logins and streams out those pairs of usernames and IP addresses.
 With ksqlDB, you can filter and react to events in real time rather than performing historical analysis of Syslog data from cold storage.

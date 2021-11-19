@@ -6,8 +6,6 @@ seo:
 
 # Handle Corrupted Data From Salesforce
 
-## What is it?
-
 Salesforce sends a notification when a change to a Salesforce record occurs as part of a create, update, delete, or undelete operation.
 However, if there is corrupted data in Salesforce, it sends a gap event instead of a change event, which contains information about the change in the header, such as the change type and record ID.
 These gap events need to be identified and then handled by calling a SFDC API to reconcile the events in real time.

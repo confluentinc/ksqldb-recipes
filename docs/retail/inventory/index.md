@@ -6,8 +6,6 @@ seo:
 
 # View Real-time Inventory
 
-## What is it?
-
 Having an up-to-date view of inventory on every item is essential in today's online marketplaces.
 This helps businesses maintain the optimum level of inventory—not too much and not too little—so that they can meet demand while minimizing costs.
 This recipe demonstrates how to see your updated inventory in real-time, so you always have an up-to-date snapshot of your stock.

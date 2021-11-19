@@ -6,8 +6,6 @@ seo:
 
 # Build a Real-time Fleet Management System
 
-## What is it?
-
 More and more, fleet management relies on knowing real-time information on vehicles, their locations, and vehicle telemetry.
 This enables businesses to improve operational efficiency by optimizing travel routes, lowering fuel consumption, and automating service schedules.
 This recipe enriches fleet location with individual vehicle information, so organizations can have a real-time consolidated view on the entire fleet.
