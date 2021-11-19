@@ -14,3 +14,16 @@
   "output.data.format"    : "AVRO",
   "tasks.max"             : "1"
 }
+
+{
+  "connector.class": "io.confluent.connect.mqtt.MqttSourceConnector",
+  "mqtt.server.uri": "tcp://<mqtt-server>:<mqtt-port>",
+  "mqtt.topics":"panel-readings",
+  "kafka.topic":"panel-readings",
+  "mqtt.qos": "2",
+  "mqtt.username": "<mqtt-username>",
+  "mqtt.password": "<mqtt-password>",
+  "confluent.topic.bootstrap.servers": "<kafka-bootstrap>:9092",
+  "confluent.topic.replication.factor": "1",
+  "tasks.max": "1",
+}

@@ -1,12 +1,15 @@
+-- tenant_id is in the form of a resource name used to indicate the 
+--  data center provider, country, regional locale, and tenant id
+INSERT INTO tenant_occupancy (tenant_id, customer_id) VALUES ('dc:eqix:us:chi1:12', 924);
+INSERT INTO tenant_occupancy (tenant_id, customer_id) VALUES ('dc:eqix:us:chi1:10', 243);
+INSERT INTO tenant_occupancy (tenant_id, customer_id) VALUES ('dc:kddi:eu:ber1:15', 924);
+INSERT INTO tenant_occupancy (tenant_id, customer_id) VALUES ('dc:kddi:eu:ber1:20', 123);
+INSERT INTO tenant_occupancy (tenant_id, customer_id) VALUES ('dc:kddi:cn:hnk2:11', 243);
 
-INSERT INTO tenant_occupancy (tenant_id, customer_id, data_center_id) VALUES (12, 924, 'dc:eqix:us:chi1');
-INSERT INTO tenant_occupancy (tenant_id, customer_id, data_center_id) VALUES (10, 243, 'dc:eqix:us:chi1');
-INSERT INTO tenant_occupancy (tenant_id, customer_id, data_center_id) VALUES (15, 924, 'dc:kddi:eu:ber1');
-INSERT INTO tenant_occupancy (tenant_id, customer_id, data_center_id) VALUES (20, 123, 'dc:kddi:eu:ber1');
-INSERT INTO tenant_occupancy (tenant_id, customer_id, data_center_id) VALUES (11, 243, 'dc:kddi:cn:hnk2');
-
-INSERT INTO panel_readings (panel_id, tenant_id, data_center_id, reading) VALUES (1, 12, 'dc:eqix:us:chi1', 1.35);
-INSERT INTO panel_readings (panel_id, tenant_id, data_center_id, reading) VALUES (2, 10, 'dc:eqix:us:chi1', 0.85);
-INSERT INTO panel_readings (panel_id, tenant_id, data_center_id, reading) VALUES (1, 15, 'dc:kddi:eu:ber1', 0.54);
-INSERT INTO panel_readings (panel_id, tenant_id, data_center_id, reading) VALUES (2, 20, 'dc:kddi:eu:ber1', 0.67);
-INSERT INTO panel_readings (panel_id, tenant_id, data_center_id, reading) VALUES (1, 11, 'dc:kddi:cn:hnk2', 1.21);
+-- power readings contain two distinct readings. The current total utilization of the
+--  panel, and the monthly total wattage usage for the referenced tenant
+INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (1, 'dc:eqix:us:chi1:12', 1.05, 1034);
+INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (2, 'dc:eqix:us:chi1:10', 0.85, 867);
+INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (1, 'dc:kddi:eu:ber1:15', 0.54, 345);
+INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (2, 'dc:kddi:eu:ber1:20', 0.67, 288);
+INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (1, 'dc:kddi:cn:hnk2:11', 1.11, 1119);
