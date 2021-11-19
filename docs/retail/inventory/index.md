@@ -35,6 +35,8 @@ This creates a stream of events, where each event results in the addition or rem
 
 Create a ksqlDB `TABLE`, which is a mutable, partitioned collection that models change over time that represents what is true as of "now".
 
+--8<-- "docs/shared/ksqlb_processing_intro.md"
+
 ```sql
 --8<-- "docs/retail/inventory/process.sql"
 ```

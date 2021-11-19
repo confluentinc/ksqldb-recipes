@@ -30,6 +30,8 @@ Use Avro so ksqlDB can automatically detect the schema.
 
 ### Run stream processing app
 
+--8<-- "docs/shared/ksqlb_processing_intro.md"
+
 ```sql
 --8<-- "docs/operations/salesforce/process.sql"
 ```

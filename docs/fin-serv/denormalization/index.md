@@ -37,6 +37,8 @@ Change Data Capture (CDC) for orders is being written to a SQL Server database, 
 
 This streams the user orders and denormalizes the data by joining facts (orders) with the dimension (customer).
 
+--8<-- "docs/shared/ksqlb_processing_intro.md"
+
 ```sql
 --8<-- "docs/fin-serv/denormalization/process.sql"
 ```

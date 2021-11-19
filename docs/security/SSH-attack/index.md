@@ -57,6 +57,8 @@ Now you should have Syslog messages being written to the topic `syslog` in Confl
 Process the syslog events by flagging events with invalid users, stripping out all the other unnecessary fields, and creating just a stream of relevant information.
 There are many ways to customize the resulting stream to fit the business needs: this example also demonstrates how to enrich the stream with a new field `FACILITY_DESCRIPTION` with human-readable content.
 
+--8<-- "docs/shared/ksqlb_processing_intro.md"
+
 ```sql
 --8<-- "docs/security/SSH-attack/process.sql"
 ```

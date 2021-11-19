@@ -32,6 +32,8 @@ This creates a stream of events, upon which real-time stream processing can keep
 
 ### Run stream processing app
 
+--8<-- "docs/shared/ksqlb_processing_intro.md"
+
 ```sql
 --8<-- "docs/retail/dynamic_pricing/process.sql"
 ```

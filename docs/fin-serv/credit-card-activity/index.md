@@ -34,6 +34,8 @@ If a customer exceeds their average spend, the account will be flagged as a poss
 
 Now you can process the data in a variety of ways.
 
+--8<-- "docs/shared/ksqlb_processing_intro.md"
+
 ```sql
 --8<-- "docs/fin-serv/credit-card-activity/process.sql"
 ```

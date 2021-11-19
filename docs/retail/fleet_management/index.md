@@ -33,6 +33,8 @@ This recipe enriches fleet location with individual vehicle information, so orga
 Now you can process the data in a variety of ways.
 In this case, the original fleet telemetry is enriched with details about the vehicle.
 
+--8<-- "docs/shared/ksqlb_processing_intro.md"
+
 ```sql
 --8<-- "docs/retail/fleet_management/process.sql"
 ```

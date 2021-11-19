@@ -39,6 +39,8 @@ Optional: to simulate a real-world scenario where user sessions aren't just alwa
 
 Now you can process the data in a variety of ways, by enriching the clickstream data with user information, analyze errors, aggregate data into windows of time, etc.
 
+--8<-- "docs/shared/ksqlb_processing_intro.md"
+
 ```sql
 --8<-- "docs/customer-360/clickstream/process.sql"
 ```

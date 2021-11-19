@@ -34,6 +34,8 @@ In this example, the telemetry is stored in two tables in a database and is read
 In this example, there is one stream of data reporting device threshold values and another reporting alarms.
 The following stream processing app identifies which set of devices need to be investigated where threshold is insufficient and alarm code is not zero.
 
+--8<-- "docs/shared/ksqlb_processing_intro.md"
+
 ```sql
 --8<-- "docs/internet-of-things/coalesce/process.sql"
 ```

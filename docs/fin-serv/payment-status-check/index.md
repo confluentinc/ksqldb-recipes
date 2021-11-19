@@ -31,6 +31,8 @@ This recipe shows you how to validate payments against available funds and anti-
 
 Now you can process the data in a variety of ways.
 
+--8<-- "docs/shared/ksqlb_processing_intro.md"
+
 ```sql
 --8<-- "docs/fin-serv/payment-status-check/process.sql"
 ```
