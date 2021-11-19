@@ -41,7 +41,7 @@ schemes...
 ### Populate With Sample Data
 
 ``` sql
---8<-- "docs/retail/loyalty-rewards/setup_3_data.sql"
+--8<-- "docs/retail/loyalty-rewards/manual.sql"
 ```
 ### Check
 
