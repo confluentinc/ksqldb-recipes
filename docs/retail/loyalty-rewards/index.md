@@ -20,7 +20,11 @@ We'll start by setting up an environment and some data to work with,
 then see how to make the raw sales data support our marketing
 schemes...
 
-## Solutions
+### Setup your Environment
+
+--8<-- "docs/shared/ccloud_setup.md"
+
+### Run stream processing app
 
 ``` sql
 --8<-- "docs/retail/loyalty-rewards/process.sql"
@@ -28,57 +32,6 @@ schemes...
 
 ## Explanation
 
-### Set Up Your Environment
-
---8<-- "docs/shared/ccloud_setup.md"
-
-### Create The Initial Dataset
-
-``` sql
---8<-- "docs/retail/loyalty-rewards/manual.sql"
-```
-### Check
-
-Let's check that was set up correctly by looking at the rising price of coffee:
-
-```sql
-SET 'auto.offset.reset' = 'earliest';
-
-SELECT *
-FROM enriched_purchases
-WHERE product_id = 'coffee'
-EMIT CHANGES;
-```
-
-Result:
-
-```txt
-+-----------+--------+----------+------+
-|PRODUCT_ID |USER_ID |CATEGORY  |PRICE |
-+-----------+--------+----------+------+
-|coffee     |kris    |beverages |2.99  |
-|coffee     |kris    |beverages |2.99  |
-|coffee     |kris    |beverages |2.99  |
-|coffee     |yeva    |beverages |2.99  |
-|coffee     |kris    |beverages |2.99  |
-|coffee     |yeva    |beverages |2.99  |
-|coffee     |kris    |beverages |2.99  |
-|coffee     |kris    |beverages |2.99  |
-|coffee     |dave    |beverages |2.99  |
-|coffee     |kris    |beverages |2.99  |
-|coffee     |rick    |beverages |3.05  |
-|coffee     |yeva    |beverages |3.05  |
-|coffee     |kris    |beverages |3.05  |
-|coffee     |kris    |beverages |3.05  |
-|coffee     |rick    |beverages |3.05  |
-|coffee     |yeva    |beverages |3.05  |
-|coffee     |kris    |beverages |3.05  |
-|coffee     |kris    |beverages |3.05  |
-|coffee     |kris    |beverages |3.05  |
-|coffee     |kris    |beverages |3.05  |
-```
-
-## The Campaigns
 ### The More You Buy, The Bigger Your Discount
 
 To start with the simplest reward scheme, let's group our customers by
@@ -158,7 +111,13 @@ use-case.
 
 ### Buy 5 And The Next One's On Us
 
-The chances are high you have a coffee stamp card in your wallet. (Or serval dozen of them.) To keep our test data small we'll be generous as say our customers only need to buy 5 coffees to get a free one. Whatever the number, the implementation of this scheme is straightforward. We count up the number of drinks they've purchased. When that number gets to 5 the next one's free, and as it hits that 6th free one, we reset to 0.
+The chances are high you have a coffee stamp card in your wallet. (Or
+serval dozen of them.) To keep our test data small we'll be generous
+as say our customers only need to buy 5 coffees to get a free
+one. Whatever the number, the implementation of this scheme is
+straightforward. We count up the number of drinks they've
+purchased. When that number gets to 5 the next one's free, and as it
+hits that 6th free one, we reset to 0.
 
 ```sql
 CREATE TABLE caffeine_index AS
@@ -172,7 +131,9 @@ CREATE TABLE caffeine_index AS
   GROUP BY user_id;
 ```
 
-(_Note: If you're a programmer, that modulo operator `%` is going to be familiar. If not, you can read the `% 6` bit as, 'remainder after dividing by 6'._)
+(_Note: If you're a programmer, that modulo operator `%` is going to
+be familiar. If not, you can read the `% 6` bit as, 'remainder after
+dividing by 6'._)
 
 Selecting from that table:
 ```sql
