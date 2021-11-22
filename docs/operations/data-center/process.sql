@@ -3,9 +3,10 @@ CREATE TABLE tenant_occupancy (
   tenant_id VARCHAR PRIMARY KEY,
   customer_id BIGINT
 ) WITH (
-  KAFKA_TOPIC='tenant-occupancy',
-  PARTITIONS=3,
-  VALUE_FORMAT='JSON'
+  kafka_topic='tenant-occupancy',
+  partitions=3,
+  key_format='JSON',
+  value_format='JSON'
 );
 
 -- Create a Stream for the power control panel telemetry data.
@@ -16,9 +17,10 @@ CREATE STREAM panel_power_readings (
   panel_current_utilization DOUBLE,
   tenant_kwh_usage BIGINT
 ) WITH (
-  KAFKA_TOPIC='panel-readings',
-  PARTITIONS=3,
-  VALUE_FORMAT='JSON'
+  kafka_topic='panel-readings',
+  partitions=3,
+  key_format='JSON',
+  value_format='JSON'
 );
 
 -- Create a filtered Stream of panel readings registering power usage >= 85%
@@ -30,13 +32,22 @@ CREATE STREAM overloaded_panels AS
   EMIT CHANGES;
 
 -- Create a stream of billable power events 
---  
+--  the tenant_kwh_usage field is the aggregate amount of power used in the
+--  current month 
 CREATE STREAM billable_power AS 
-SELECT 
-  FORMAT_TIMESTAMP(FROM_UNIXTIME(panel_power_readings.ROWTIME), 'yyyy-MM') AS billable_month,
-  tenant_occupancy.customer_id,
-  tenant_occupancy.tenant_id, 
-  panel_power_readings.tenant_kwh_usage
-FROM PANEL_POWER_READINGS 
-INNER JOIN TENANT_OCCUPANCY ON panel_power_readings.tenant_id = tenant_occupancy.tenant_id
-EMIT CHANGES;
+  SELECT 
+      FORMAT_TIMESTAMP(FROM_UNIXTIME(panel_power_readings.ROWTIME), 'yyyy-MM') 
+        AS billable_month,
+      tenant_occupancy.customer_id as customer_id,
+      tenant_occupancy.tenant_id as tenant_id, 
+      panel_power_readings.tenant_kwh_usage as tenant_kwh_usage
+    FROM panel_power_readings
+    INNER JOIN tenant_occupancy ON 
+      panel_power_readings.tenant_id = tenant_occupancy.tenant_id
+  EMIT CHANGES;
+
+-- Create a table that can be queried for billing reports
+CREATE TABLE billable_power_report WITH (key_format='json') AS
+  SELECT customer_id, tenant_id, billable_month, MAX(tenant_kwh_usage) as kwh
+    FROM billable_power
+    GROUP BY tenant_id, customer_id, billable_month;

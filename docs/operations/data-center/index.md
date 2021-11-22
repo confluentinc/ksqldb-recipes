@@ -1,6 +1,6 @@
 ---
 seo:
-  title: Monitor data center power usage 
+  title: Analyze data center power usage 
   description: This recipe analyzes telemetry data from data center power electrical smart panels. The stream processing use cases for this data include detection of power usage levels for safety and accounting purposes.
 ---
 
@@ -56,6 +56,8 @@ Panel sensor readings can be streamed directly into a topic or sourced from an u
 
 * `panel_current_utilization` represents percentage of total capacity of the panel, and is useful for business continuation monitoring.
 * `tenant_kwh_usage` provides the total amount of energy consumed by the tenant in the current month. 
+
+To provide billing reports, a `STREAM` is created that joins the panel sensor readings with the customer tenant information. Functions are used to create a billable month indicator along with the necessary fields from the joined stream and table. Finally, the `billable_power_report` aggregates the `billable_power` stream into a `TABLE` which can be queried to create reports by month, customer, and tenant.
 
 For the purposes of this exercise, we can simulate the tenant occupancy and panel sensor data by using ksqlDB to directly insert sample records into Kafka so we can proceed with building our stream processing applications. 
 
