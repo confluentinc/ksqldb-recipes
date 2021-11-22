@@ -10,7 +10,7 @@ Browse through any recipe in https://github.com/confluentinc/ksqldb-recipes/tree
 
 1. Select the `docs/<industry>` folder for the appropriate industry, or create a new one
 2. Create a new subfolder for the new recipe, e.g. `docs/<industry>/<new-recipe-name>`
-3. Copy the contents of the `template` directory as the basis for your new recipe
+3. Copy the contents of the [template](template) directory as the basis for your new recipe
 
 - index.md: explain the use case, why it matters, add a graphic if available
 - source.sql: SQL commands to create source connectors to pull from a real end system -- for ksqlDB-connect integration
