@@ -1,2 +1,5 @@
--- description
+-- Setup initial stream/table from Kafka topics
 CREATE STREAM ...
+
+-- Application logic
+CREATE TABLE ...
