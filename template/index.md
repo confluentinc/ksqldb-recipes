@@ -22,6 +22,8 @@ TODO: Description and graphic if available
 --8<-- "docs/<industry>/<new-recipe-name>/source.json"
 ```
 
+--8<-- "docs/shared/manual_insert.md"
+
 ### Run stream processing app
 
 TODO: high-level description
@@ -30,6 +32,12 @@ TODO: high-level description
 
 ```sql
 --8<-- "docs/<industry>/<new-recipe-name>/process.sql"
+```
+
+--8<-- "docs/shared/manual_cue.md"
+
+```sql
+--8<-- "docs/retail/fleet_management/manual.sql"
 ```
 
 ### Write the data out
