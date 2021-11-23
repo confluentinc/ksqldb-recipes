@@ -21,7 +21,13 @@ mystery for sociologists, but for our purposes we'll say two people
 have connected properly if A sends a message to B, B responds, and A
 follows-up. That should be enough chit-chat to get the ball rolling.
 
-# Solution
+## Step-by-step
+
+### Setup your Environment
+
+--8<-- "docs/shared/ccloud_setup.md"
+
+### Run stream processing app
 
 ``` sql
 --8<-- "docs/social/online-matches/process.sql"
