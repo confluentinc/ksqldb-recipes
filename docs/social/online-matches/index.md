@@ -66,7 +66,7 @@ can create a unique ID for every pair that chats (or tries to start
 chatting), and use that to group all the events:
 
 ```sql
-CREATE TABLE conversations_v1 AS
+CREATE TABLE conversations_split AS
   SELECT
     ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>') AS conversation_id,
     COLLECT_LIST(rowtime) AS message_times
@@ -78,7 +78,7 @@ CREATE TABLE conversations_v1 AS
 Querying that:
 
 ```sql
-SELECT * FROM conversations_v1;
+SELECT * FROM conversations_split;
 ```
 
 ```txt
@@ -107,7 +107,7 @@ build up a map with the `rowtime` as the key, and the `send_id` as the
 value:
 
 ```sql
-CREATE TABLE conversations_v2 AS
+CREATE TABLE conversations_mapped AS
   SELECT
     ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>') AS conversation_id,
     AS_MAP(
@@ -122,7 +122,7 @@ CREATE TABLE conversations_v2 AS
 Querying that:
 
 ```sql
-SELECT * FROM conversations_v2;
+SELECT * FROM conversations_mapped;
 ```
 
 
@@ -142,7 +142,7 @@ order. Let's turn the `message_times` map back into a sorted list with
 
 
 ```sql
-CREATE TABLE conversations_v3 AS
+CREATE TABLE conversations_sequenced AS
   SELECT
     ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>') AS conversation_id,
     ENTRIES(
@@ -160,7 +160,7 @@ CREATE TABLE conversations_v3 AS
 Querying that:
 
 ```sql
-SELECT * FROM conversations_v3;
+SELECT * FROM conversations_sequenced;
 ```
 
 ```txt
@@ -229,7 +229,7 @@ CREATE OR REPLACE TABLE conversation_states AS
         ELSE old_state
       END
     ) as state
-  FROM conversations_v3;
+  FROM conversations_sequenced;
 ```
 
 Querying that:
