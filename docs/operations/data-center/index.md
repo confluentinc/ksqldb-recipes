@@ -22,7 +22,7 @@ How can we utilize [ksqlDB](https://ksqldb.io/) to process the control panel tel
 
 --8<-- "docs/shared/ccloud_setup.md"
 
-### Source Data
+### Read the data in
 
 Our data center power analysis applications require data from two different sources: customer tenant information and smart control panel readings.
 
