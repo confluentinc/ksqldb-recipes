@@ -1,5 +1,3 @@
-SET 'auto.offset.reset' = 'earliest';
-
 CREATE TABLE CUSTOMER_BOOKINGS AS 
   SELECT C.*, B.ID, B.FLIGHT_ID
   FROM   BOOKINGS B

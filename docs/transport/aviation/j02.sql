@@ -1,5 +1,3 @@
-SET 'auto.offset.reset' = 'earliest';
-
 CREATE TABLE CUSTOMER_FLIGHTS 
   WITH (KAFKA_TOPIC='customer_flights') AS
   SELECT CB.*, F.*

@@ -1,5 +1,3 @@
-SET 'auto.offset.reset' = 'earliest';
-
 CREATE STREAM CF_STREAM WITH (KAFKA_TOPIC='customer_flights', FORMAT='AVRO');
 
 CREATE STREAM CF_REKEY WITH (KAFKA_TOPIC='cf_rekey') AS 
