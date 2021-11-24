@@ -31,6 +31,7 @@ To view your new recipes locally, you can build a local version of the recipes s
     ```bash
     brew install mkdocs
     pip3 install mkdocs pymdown-extensions
+    pip3 install mkdocs-material
     pip3 install mkdocs-exclude
     ```
 
@@ -38,6 +39,8 @@ To view your new recipes locally, you can build a local version of the recipes s
     ```
     python3 -m mkdocs serve  
     ```
+    
+    (If this doesn't work try `mkdocs serve` on its own)
 
 - Point a web browser to the local site at http://localhost:8000 and navigate to your new recipe.
 
