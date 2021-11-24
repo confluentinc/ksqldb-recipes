@@ -14,11 +14,11 @@ Browse through any recipe in https://github.com/confluentinc/ksqldb-recipes/tree
 
 - index.md: explain the use case, why it matters, add a graphic if available
 - source.sql: SQL commands to create source connectors to pull from a real end system -- for ksqlDB-connect integration
-- source.json: Json configuration to create source connectors to pull from a real end system
+- source.json: JSON configuration to create source connectors to pull from a real end system
 - manual.sql: SQL commands to insert mock data into Kafka topics (if real end system does not exist)
 - process.sql: this is the core of the recipe, the SQL commands that correspond to the event stream processing
 - sink.sql: (optional) SQL commands to create sink connectors to push results to a real end system -- for ksqlDB-connect integration
-- sink.json: (optional) Json configuration to create sink connectors to pull from a real end system
+- sink.json: (optional) JSON configuration to create sink connectors to push results to a real end system
 
 
 #### Build locally
