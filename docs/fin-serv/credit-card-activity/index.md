@@ -10,7 +10,7 @@ In banking, fraud can involve using stolen credit cards, forging checks, mislead
 This recipe analyzes total credit card spend.
 If a customer exceeds their average spend, the account will be flagged as a possible case of credit card theft.
 
-![grafana](../../img/credit-card-activity.jpg)
+![credit card being misused](../../img/credit-card-activity.jpg)
 
 ## Step-by-step
 
