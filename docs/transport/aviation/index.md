@@ -14,7 +14,7 @@ This recipe shows how an airline can combine the data they have about passengers
 
 With ksqlDB, you react to events in real time to the benefit of your customers. 
 
-![flight push notification](../../img/TODO.png)
+[//]: # "![flight push notification](../../img/TODO.png)"
 
 ## Get Started
 
@@ -32,7 +32,7 @@ With ksqlDB, you react to events in real time to the benefit of your customers.
 
 ksqlDB supports tables and streams as objects. Both are backed by Kafka topics. Here we're going to create three tables in a normalised data model to hold information about our customers, their bookings, and the flights. 
 
-`TODO: Simple ERD of the three tables`
+[//]: # "`TODO: Simple ERD of the three tables`"
 
 First off, let's create a table that will hold data about our customers: 
 
@@ -79,20 +79,23 @@ insert into bookings (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (4,4,2);
 To give us a single view of the passenger/flight data we'll denormalise down the three tables into one. First, we join the customers to bookings that they've made, and build a new table as a result: 
 
 ```sql
+--8<-- "docs/transport/aviation/o01.sql"
+
 --8<-- "docs/transport/aviation/j01.sql"
 ```
 
 From here we join to details of the flights themselves: 
 
 ```sql
---8<-- "docs/transport/aviation/j02.sql"
+--8<-- "docs/transport/aviation/o01.sql"
 
+--8<-- "docs/transport/aviation/j02.sql"
 ```
 
 At this stage we can query the data held in the tables to show which customers are booked on which flights: 
 
 ```sql
-SET 'auto.offset.reset' = 'earliest';
+--8<-- "docs/transport/aviation/o01.sql"
 
 SELECT  CB_C_NAME           AS NAME
       , CB_C_EMAIL          AS EMAIL
@@ -118,6 +121,8 @@ EMIT CHANGES;
 The last step in denormalising the data is to set the key of the table to that of the Flight ID so that it can be joined to the updates (which we'll get to below). 
 
 ```sql
+--8<-- "docs/transport/aviation/o01.sql"
+
 --8<-- "docs/transport/aviation/r01.sql"
 
 ```
@@ -132,11 +137,11 @@ In the `FLIGHTS` table above we have the scheduled departure time of a flight (`
 --8<-- "docs/transport/aviation/c03.sql"
 ```
 
-### Run stream processing app (notify customers when their flight is delayed)
+### Run stream processing app
 
-By joining between our customer flight booking data and any flight updates we can provide a stream of notifications to passengers. Many platforms exist for providing the push notification, whether bespoke in-app or using a [third-party messaging tool](https://www.confluent.io/blog/building-a-telegram-bot-powered-by-kafka-and-ksqldb/). ksqlDB can integrate with these using its [REST interface](TODO), native [Java client](TODO), or one of the several [community-supported clients](TODO). 
+By joining between our customer flight booking data and any flight updates we can provide a stream of notifications to passengers. Many platforms exist for providing the push notification, whether bespoke in-app or using a [third-party messaging tool](https://www.confluent.io/blog/building-a-telegram-bot-powered-by-kafka-and-ksqldb/). ksqlDB can integrate with these using its [REST interface](https://docs.ksqldb.io/en/latest/developer-guide/api/), native [Java client](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-clients/java-client/), or one of the several [community-supported clients](https://docs.ksqldb.io/en/0.22.0-ksqldb/developer-guide/ksqldb-clients/). 
 
-In one ksqlDB window run the following ksqlDB query to return customer details with flight updates: 
+In one ksqlDB window run the following ksqlDB query to return customer details with flight updates. This is the same query that you would run from your application, and runs continuously. 
 
 ```sql
 --8<-- "docs/transport/aviation/p01.sql"
@@ -153,12 +158,12 @@ insert into FLIGHT_UPDATES (id, flight_id, updated_dep, reason) values (3, 1, '2
 In the original window you will see the details of which passengers are impacted by which flight changes:
 
 ```
-+---------------+---------------------+------------------+-------------------+------------+---------------------+---------------------+-----------------------+
-|CUSTOMER_NAME  |CUSTOMER_EMAIL       |CUSTOMER_PHONE    |FLIGHT_DESTINATION |FLIGHT_CODE |FLIGHT_SCHEDULED_DEP |FLIGHT_UPDATED_DEP   |FLIGHT_CHANGE_REASON   |
-+---------------+---------------------+------------------+-------------------+------------+---------------------+---------------------+-----------------------+
-|Gleda Lealle   |glealle0@senate.gov  |+351 831 301 6746 |AMS                |642         |2021-11-18T06:04:00.0|2021-11-19T08:10:09.0|Icy conditions         |
-|Ker Omond      |komond3@usnews.com   |+33 515 323 0170  |LHR                |9607        |2021-11-18T07:36:00.0|2021-11-18T09:00:00.0|Cabin staff unavailable|
-|Arline Synnott |asynnott4@theatl.com |+62 953 759 8885  |TXL                |7968        |2021-11-18T08:11:00.0|2021-11-19T14:00:00.0|Mechanical checks      |
++---------------+------------------------+--------------------+----------------------+---------------------------+------------------+-------------------+------------+
+|CUSTOMER_NAME  |FLIGHT_CHANGE_REASON    |FLIGHT_UPDATED_DEP  |FLIGHT_SCHEDULED_DEP  |CUSTOMER_EMAIL             |CUSTOMER_PHONE    |FLIGHT_DESTINATION |FLIGHT_CODE |
++---------------+------------------------+--------------------+----------------------+---------------------------+------------------+-------------------+------------+
+|Gleda Lealle   |Icy conditions          |2021-11-19T08:10:09 |2021-11-18T06:04:00   |glealle0@senate.gov        |+351 831 301 6746 |AMS                |642         |
+|Ker Omond      |Cabin staff unavailable |2021-11-18T09:00:00 |2021-11-18T07:36:00   |komond3@usnews.com         |+33 515 323 0170  |LHR                |9607        |
+|Arline Synnott |Mechanical checks       |2021-11-19T14:00:00 |2021-11-18T08:11:00   |asynnott4@theatlantic.com  |+62 953 759 8885  |TXL                |7968        |
 ```
 
 ## Full ksqlDB Statements
@@ -167,11 +172,19 @@ In the original window you will see the details of which passengers are impacted
 
 ```sql
 --8<-- "docs/transport/aviation/c01.sql"
+
 --8<-- "docs/transport/aviation/c02.sql"
+
+--8<-- "docs/transport/aviation/o01.sql"
+
 --8<-- "docs/transport/aviation/j01.sql"
+
 --8<-- "docs/transport/aviation/j02.sql"
+
 --8<-- "docs/transport/aviation/r01.sql"
+
 --8<-- "docs/transport/aviation/c03.sql"
+
 --8<-- "docs/transport/aviation/p01.sql"
 ```
 
