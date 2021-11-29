@@ -12,14 +12,13 @@ Browse through any recipe in https://github.com/confluentinc/ksqldb-recipes/tree
 2. Create a new subfolder for the new recipe, e.g. `docs/<industry>/<new-recipe-name>`
 3. Copy the contents of the [template](template) directory as the basis for your new recipe
 
-- index.md: explain the use case, why it matters, add a graphic if available
-- source.sql: SQL commands to create source connectors to pull from a real end system -- for ksqlDB-connect integration
-- source.json: JSON configuration to create source connectors to pull from a real end system
-- manual.sql: SQL commands to insert mock data into Kafka topics (if real end system does not exist)
-- process.sql: this is the core of the recipe, the SQL commands that correspond to the event stream processing
-- sink.sql: (optional) SQL commands to create sink connectors to push results to a real end system -- for ksqlDB-connect integration
-- sink.json: (optional) JSON configuration to create sink connectors to push results to a real end system
-
+- [index.md](template/index.md): explain the use case, why it matters, add a graphic if available
+- [source.sql](template/source.sql): SQL commands to create source connectors to pull from a real end system -- for ksqlDB-connect integration
+- [source.json](template/source.json): JSON configuration to create source connectors to pull from a real end system
+- [manual.sql](template/manual.sql): SQL commands to insert mock data into Kafka topics (if real end system does not exist)
+- [process.sql](template/process.sql): this is the core of the recipe, the SQL commands that correspond to the event stream processing
+- [sink.sql](template/sink.sql): (optional) SQL commands to create sink connectors to push results to a real end system -- for ksqlDB-connect integration
+- [sink.json](template/sink.json): (optional) JSON configuration to create sink connectors to push results to a real end system
 
 #### Build locally
 
