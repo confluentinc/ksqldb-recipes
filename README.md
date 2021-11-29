@@ -14,12 +14,11 @@ Browse through any recipe in https://github.com/confluentinc/ksqldb-recipes/tree
 
 - [index.md](template/index.md): explain the use case, why it matters, add a graphic if available
 - [source.sql](template/source.sql): SQL commands to create source connectors to pull from a real end system -- for ksqlDB-connect integration
-- [source.json](template/source.json): Json configuration to create source connectors to pull from a real end system
+- [source.json](template/source.json): JSON configuration to create source connectors to pull from a real end system
 - [manual.sql](template/manual.sql): SQL commands to insert mock data into Kafka topics (if real end system does not exist)
 - [process.sql](template/process.sql): this is the core of the recipe, the SQL commands that correspond to the event stream processing
 - [sink.sql](template/sink.sql): (optional) SQL commands to create sink connectors to push results to a real end system -- for ksqlDB-connect integration
-- [sink.json](template/sink.json): (optional) Json configuration to create sink connectors to pull from a real end system
-
+- [sink.json](template/sink.json): (optional) JSON configuration to create sink connectors to push results to a real end system
 
 #### Build locally
 
@@ -31,6 +30,7 @@ To view your new recipes locally, you can build a local version of the recipes s
     ```bash
     brew install mkdocs
     pip3 install mkdocs pymdown-extensions
+    pip3 install mkdocs-material
     pip3 install mkdocs-exclude
     ```
 
@@ -38,6 +38,8 @@ To view your new recipes locally, you can build a local version of the recipes s
     ```
     python3 -m mkdocs serve  
     ```
+    
+    (If this doesn't work try `mkdocs serve` on its own)
 
 - Point a web browser to the local site at http://localhost:8000 and navigate to your new recipe.
 
