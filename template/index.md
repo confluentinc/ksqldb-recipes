@@ -51,3 +51,7 @@ This part is optional
 ### Cleanup
 
 --8<-- "docs/shared/cleanup.md"
+
+## Explanation
+
+This section is optional, but can go into more depth on the recipe use case and execution.
