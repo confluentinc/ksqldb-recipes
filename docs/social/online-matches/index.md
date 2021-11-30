@@ -1,21 +1,22 @@
 ---
 seo:
-  title: Matching Mutually Interested Online Dating Users
+  title: Match Mutually Interested Online Dating Users
   description: This recipe tracks repeated interactions between users of a social network or dating site.
 ---
 
-# Matching Mutually Interested Online Dating Users
+# Match Mutually Interested Online Dating Users
 
-_Dating sites are a very interesting use case. One of their core
-features is a messaging platform, and users chatting back and forth is an
+One core feature of online dating sites is a messaging platform,
+and users chatting back and forth is an
 ideal fit for a real-time streaming system. But look at the site from
 another angle and it's all about making connections between people,
 so maybe a graph database is the right fit? Well, Kafka Connect makes
 it easy to use the strengths of both in tandem, but before we go that
 far, let's dig in and see how much graph-analysis we can do with some
-clever ksqlDB tricks._
+clever ksqlDB tricks.
 
-We'll create a messaging system, and then ask, "Which pairs of people
+This recipe demonstrates a messaging system and can dynamically
+determine "Which pairs of people
 have made proper connections?" Defining a 'proper' connection is a
 mystery for sociologists, but for our purposes we'll say two people
 have connected properly if A sends a message to B, B responds, and A
@@ -39,11 +40,14 @@ follows-up. That should be enough chit-chat to get the ball rolling.
 
 ### Run stream processing app
 
+The application breaks up the stream of messages into individual conversations and puts each of those conversations in time order, keeping track of the sender as we go.
+Then it builds up a function, `(old_state, element) => ...`, that considers different states.
+
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ``` sql
 --8<-- "docs/social/online-matches/process.sql"
-
+```
 
 --8<-- "docs/shared/manual_cue.md"
 
@@ -56,10 +60,10 @@ follows-up. That should be enough chit-chat to get the ball rolling.
 
 ## Explanation
 
-In this solution we'll build up a query that can take a stream of messages and
+This solution builds up a query that can take a stream of messages and
 assemble them into a thread of conversations for analysis.
 
-## Tracking Connections
+### Tracking Connections
 
 If you look at those `messages`, it's clear there are a lot of hellos
 bouncing around, but beyond that it's hard to see any patterns. Let's
@@ -195,7 +199,7 @@ nearly have our answer. First 5 sends a message, then 4 replies, then
 ### Stepping Through Conversations Automatically
 
 If our data sets were tiny, we'd be done - we can see by eye which
-conversations match. To scale this up, let's teach ksqldb to step
+conversations match. To scale this up, let's teach ksqlDB to step
 through that sorted array of `message_times` and track the steps of the
 conversation flowing back and forth. We can do with the `REDUCE`
 function.

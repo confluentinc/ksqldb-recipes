@@ -1,7 +1,7 @@
 -- Example
-CREATE SOURCE CONNECTOR loyalty_rewards WITH (
+CREATE SOURCE CONNECTOR online_dating WITH (
   'connector.class'          = 'PostgresSource',
-  'name'                     = 'recipe-postgres-loyalty-rewards',
+  'name'                     = 'recipe-postgres-dating',
   'kafka.api.key'            = '<my-kafka-api-key>',
   'kafka.api.secret'         = '<my-kafka-api-secret>',
   'connection.host'          = '<database-endpoint>',
