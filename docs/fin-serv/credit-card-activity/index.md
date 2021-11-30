@@ -28,7 +28,7 @@ If a customer exceeds their average spend, the account will be flagged as a poss
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run the stream processing app
+### Run stream processing app
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
