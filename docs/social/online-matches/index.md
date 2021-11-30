@@ -56,6 +56,9 @@ follows-up. That should be enough chit-chat to get the ball rolling.
 
 ## Explanation
 
+In this solution we'll build up a query that can take a stream of messages and
+assemble them into a thread of conversations for analysis.
+
 ## Tracking Connections
 
 If you look at those `messages`, it's clear there are a lot of hellos
