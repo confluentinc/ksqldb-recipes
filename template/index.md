@@ -6,7 +6,7 @@ seo:
 
 # Title
 
-TODO: Description and graphic if available
+TODO: Use case and graphic if available
 
 ## Step-by-step
 
@@ -26,7 +26,7 @@ TODO: Description and graphic if available
 
 ### Run stream processing app
 
-TODO: high-level description
+TODO: high-level description of what the application itself does
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
@@ -42,7 +42,7 @@ TODO: high-level description
 
 ### Write the data out
 
-This part is optional
+This section is optional
 
 ```json
 --8<-- "docs/<industry>/<new-recipe-name>/sink.json"
@@ -54,4 +54,4 @@ This part is optional
 
 ## Explanation
 
-This section is optional, but can go into more depth on the recipe use case and execution.
+TODO: This section is optional, but can go into more depth on the recipe use case and execution.
