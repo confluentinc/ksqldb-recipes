@@ -27,23 +27,34 @@ follows-up. That should be enough chit-chat to get the ball rolling.
 
 --8<-- "docs/shared/ccloud_setup.md"
 
+### Read the data in
+
+--8<-- "docs/shared/connect.md"
+
+```json
+--8<-- "docs/social/online-matches/source.json"
+```
+
+--8<-- "docs/shared/manual_insert.md"
+
 ### Run stream processing app
+
+--8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ``` sql
 --8<-- "docs/social/online-matches/process.sql"
-```
 
-## Explanation
 
-### Set Up Your Environment
+--8<-- "docs/shared/manual_cue.md"
 
---8<-- "docs/shared/ccloud_setup.md"
-
-### Create The Initial Dataset
-
-``` sql
+```sql
 --8<-- "docs/social/online-matches/manual.sql"
 ```
+## Cleanup
+
+--8<-- "docs/shared/cleanup.md"
+
+## Explanation
 
 ## Tracking Connections
 
@@ -265,8 +276,3 @@ WHERE state->step = 'connected';
 |4<>5            |
 |1<>2            |
 ```
-
-## Cleanup
-
---8<-- "docs/shared/cleanup.md"
-
