@@ -1,4 +1,3 @@
--- Example
 CREATE SOURCE CONNECTOR loyalty_rewards WITH (
   'connector.class'          = 'PostgresSource',
   'name'                     = 'recipe-postgres-loyalty-rewards',

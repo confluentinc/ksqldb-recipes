@@ -1,10 +1,10 @@
 ---
 seo:
-  title: Building Customer Loyalty Schemes
+  title: Build Customer Loyalty Schemes
   description: This recipe tracks customers' purchasing patterns, generating tailored rewards for a loyalty scheme.
 ---
 
-# Building Customer Loyalty Schemes
+# Build Customer Loyalty Schemes
 
 Customer loyalty schemes are everywhere in retail, even if it's just
 as simple as, "Get 10 stamps on this card and we'll give you a free
@@ -36,6 +36,8 @@ schemes...
 
 ### Run stream processing app
 
+In this solution we'll look at different ways to analyze user behaviour and determine which rewards we want to issue to our customers.
+
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ``` sql
@@ -53,9 +55,6 @@ schemes...
 --8<-- "docs/shared/cleanup.md"
 
 ## Explanation
-
-In this solution we'll look at different ways to analyze user behaviour and
-determine which rewards we want to issue to our customers.
 
 ### The More You Buy, The Bigger Your Discount
 

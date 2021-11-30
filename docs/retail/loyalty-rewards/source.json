@@ -1,4 +1,3 @@
-// Example
 {
   "connector.class"          : "PostgresSource",
   "name"                     : "recipe-postgres-loyalty-rewards",
