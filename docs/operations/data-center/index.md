@@ -40,7 +40,7 @@ The above `MySqlCdcSource` configuration could be used to stream changes from th
 
 Fully managed connectors can be deployed using the web console or the Confluent CLI command `confluent connect create --config <file>`.
 
-If you do not have equivalent source systems to configure connectors for, you can still proceed with this recipe and utilize the sample `INSERT` statements provided below to simulate the tenant occupancy and telemetry data.
+--8<-- "docs/shared/manual_insert.md"
 
 ### Run stream processing app
 
