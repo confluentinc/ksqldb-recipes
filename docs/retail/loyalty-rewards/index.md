@@ -54,6 +54,9 @@ schemes...
 
 ## Explanation
 
+In this solution we'll look at different ways to analyze user behaviour and
+determine which rewards we want to issue to our customers.
+
 ### The More You Buy, The Bigger Your Discount
 
 To start with the simplest reward scheme, let's group our customers by
