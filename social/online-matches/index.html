@@ -16,7 +16,7 @@
     
     
       
-        <title>Set Dynamic Pricing - ksqlDB Recipes</title>
+        <title>Match Mutually Interested Online Dating Users - ksqlDB Recipes</title>
       
     
     
@@ -63,7 +63,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#set-dynamic-pricing" class="md-skip">
+        <a href="#match-mutually-interested-online-dating-users" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Set Dynamic Pricing
+              Match Mutually Interested Online Dating Users
             
           </span>
         </div>
@@ -510,14 +510,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
       
       <label class="md-nav__link" for="__nav_6">
         Retail
@@ -533,14 +531,12 @@
             
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" >
       
       <label class="md-nav__link" for="__nav_6_1">
         Dynamic pricing
@@ -556,85 +552,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Set Dynamic Pricing
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../retail/dynamic_pricing/" class="md-nav__link">
         Set Dynamic Pricing
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#step-by-step" class="md-nav__link">
-    Step-by-Step
-  </a>
-  
-    <nav class="md-nav" aria-label="Step-by-Step">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#setup-your-environment" class="md-nav__link">
-    Setup your Environment
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#read-the-data-in" class="md-nav__link">
-    Read the data in
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#run-stream-processing-app" class="md-nav__link">
-    Run stream processing app
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cleanup" class="md-nav__link">
-    Cleanup
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -671,7 +593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fleet_management/" class="md-nav__link">
+      <a href="../../retail/fleet_management/" class="md-nav__link">
         Build a Real-time Fleet Management System
       </a>
     </li>
@@ -710,7 +632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../inventory/" class="md-nav__link">
+      <a href="../../retail/inventory/" class="md-nav__link">
         View Real-time Inventory
       </a>
     </li>
@@ -804,12 +726,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" checked>
       
       <label class="md-nav__link" for="__nav_8">
         Social
@@ -825,12 +749,14 @@
             
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1" type="checkbox" id="__nav_8_1" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1" type="checkbox" id="__nav_8_1" checked>
       
       <label class="md-nav__link" for="__nav_8_1">
         Online matches
@@ -846,11 +772,133 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../social/online-matches/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Match Mutually Interested Online Dating Users
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Match Mutually Interested Online Dating Users
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    Step-by-step
+  </a>
+  
+    <nav class="md-nav" aria-label="Step-by-step">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-your-environment" class="md-nav__link">
+    Setup your Environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-the-data-in" class="md-nav__link">
+    Read the data in
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-stream-processing-app" class="md-nav__link">
+    Run stream processing app
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleanup" class="md-nav__link">
+    Cleanup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explanation" class="md-nav__link">
+    Explanation
+  </a>
+  
+    <nav class="md-nav" aria-label="Explanation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tracking-connections" class="md-nav__link">
+    Tracking Connections
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#split-by-conversation" class="md-nav__link">
+    Split By Conversation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-by-chat" class="md-nav__link">
+    Chat By Chat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stepping-through-conversations-automatically" class="md-nav__link">
+    Stepping Through Conversations Automatically
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-answer" class="md-nav__link">
+    Final answer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -894,10 +942,10 @@
       
         <li class="md-nav__item">
   <a href="#step-by-step" class="md-nav__link">
-    Step-by-Step
+    Step-by-step
   </a>
   
-    <nav class="md-nav" aria-label="Step-by-Step">
+    <nav class="md-nav" aria-label="Step-by-step">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -921,9 +969,57 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cleanup" class="md-nav__link">
     Cleanup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explanation" class="md-nav__link">
+    Explanation
+  </a>
+  
+    <nav class="md-nav" aria-label="Explanation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tracking-connections" class="md-nav__link">
+    Tracking Connections
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#split-by-conversation" class="md-nav__link">
+    Split By Conversation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-by-chat" class="md-nav__link">
+    Chat By Chat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stepping-through-conversations-automatically" class="md-nav__link">
+    Stepping Through Conversations Automatically
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-answer" class="md-nav__link">
+    Final answer
   </a>
   
 </li>
@@ -946,10 +1042,22 @@
               
                 
                 
-                <h1 id="set-dynamic-pricing">Set Dynamic Pricing</h1>
-<p>An online marketplace keeps track of statistics regarding pricing: lowest, median, etc.
-These statistics enable buyers and sellers to make dynamic offers based on historical sales events.</p>
-<h2 id="step-by-step">Step-by-Step</h2>
+                <h1 id="match-mutually-interested-online-dating-users">Match Mutually Interested Online Dating Users</h1>
+<p>One core feature of online dating sites is a messaging platform,
+and users chatting back and forth is an
+ideal fit for a real-time streaming system. But look at the site from
+another angle and it's all about making connections between people,
+so maybe a graph database is the right fit? Well, Kafka Connect makes
+it easy to use the strengths of both in tandem, but before we go that
+far, let's dig in and see how much graph-analysis we can do with some
+clever ksqlDB tricks.</p>
+<p>This recipe demonstrates a messaging system and can dynamically
+determine "Which pairs of people
+have made proper connections?" Defining a 'proper' connection is a
+mystery for sociologists, but for our purposes we'll say two people
+have connected properly if A sends a message to B, B responds, and A
+follows-up. That should be enough chit-chat to get the ball rolling.</p>
+<h2 id="step-by-step">Step-by-step</h2>
 <h3 id="setup-your-environment">Setup your Environment</h3>
 <p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service.</p>
 <p>Then execute the recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which has language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks).</p>
@@ -958,36 +1066,17 @@ These statistics enable buyers and sellers to make dynamic offers based on histo
 This recipe shows one example of a data source, but you can substitute your own preferred connector to use any data source.
 The principles are the same, just modify the connector configuration shown below to fit your deployment (see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a>).</p>
 <p>To run a fully-managed connector to write the data into Kafka topics, use Confluent Cloud Console or <a href="https://docs.confluent.io/confluent-cli/current/overview.html">Confluent CLI</a> command <code>confluent connect create --config &lt;file&gt;</code>, submit each connector separately.</p>
-<p>For this recipe, we are interested in knowing each marketplace event for an item, specifically its pricing. 
-This creates a stream of events, upon which real-time stream processing can keep state and calculate pricing statistics.</p>
 <pre><code class="language-json">{
   &quot;connector.class&quot;          : &quot;PostgresSource&quot;,
-  &quot;name&quot;                     : &quot;recipe-postgres-pricing&quot;,
+  &quot;name&quot;                     : &quot;recipe-postgres-dating&quot;,
   &quot;kafka.api.key&quot;            : &quot;&lt;my-kafka-api-key&gt;&quot;,
   &quot;kafka.api.secret&quot;         : &quot;&lt;my-kafka-api-secret&gt;&quot;,
-  &quot;connection.host&quot;          : &quot;&lt;my-database-endpoint&gt;&quot;,
-  &quot;connection.port&quot;          : &quot;5432&quot;,
-  &quot;connection.user&quot;          : &quot;postgres&quot;,
-  &quot;connection.password&quot;      : &quot;&lt;my-database-password&gt;&quot;,
+  &quot;connection.host&quot;          : &quot;&lt;database-endpoint&gt;&quot;,
+  &quot;connection.port&quot;          : &quot;&lt;database-endpoint&gt;&quot;,
+  &quot;connection.user&quot;          : &quot;&lt;database-user&gt;&quot;,
+  &quot;connection.password&quot;      : &quot;&lt;database-password&gt;&quot;,
   &quot;db.name&quot;                  : &quot;&lt;db-name&gt;&quot;,
-  &quot;table.whitelist&quot;          : &quot;sales&quot;,
-  &quot;timestamp.column.name&quot;    : &quot;created_at&quot;,
-  &quot;output.data.format&quot;       : &quot;JSON&quot;,
-  &quot;db.timezone&quot;              : &quot;UTC&quot;,
-  &quot;tasks.max&quot;                : &quot;1&quot;
-}
-
-{
-  &quot;connector.class&quot;          : &quot;PostgresSource&quot;,
-  &quot;name&quot;                     : &quot;recipe-postgres-items&quot;,
-  &quot;kafka.api.key&quot;            : &quot;&lt;my-kafka-api-key&gt;&quot;,
-  &quot;kafka.api.secret&quot;         : &quot;&lt;my-kafka-api-secret&gt;&quot;,
-  &quot;connection.host&quot;          : &quot;&lt;my-database-endpoint&gt;&quot;,
-  &quot;connection.port&quot;          : &quot;5432&quot;,
-  &quot;connection.user&quot;          : &quot;postgres&quot;,
-  &quot;connection.password&quot;      : &quot;&lt;my-database-password&gt;&quot;,
-  &quot;db.name&quot;                  : &quot;&lt;db-name&gt;&quot;,
-  &quot;table.whitelist&quot;          : &quot;items&quot;,
+  &quot;table.whitelist&quot;          : &quot;messages&quot;,
   &quot;timestamp.column.name&quot;    : &quot;created_at&quot;,
   &quot;output.data.format&quot;       : &quot;JSON&quot;,
   &quot;db.timezone&quot;              : &quot;UTC&quot;,
@@ -996,61 +1085,237 @@ This creates a stream of events, upon which real-time stream processing can keep
 </code></pre>
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert values into the streams.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
+<p>The application breaks up the stream of messages into individual conversations and puts each of those conversations in time order, keeping track of the sender as we go.
+Then it builds up a function, <code>(old_state, element) =&gt; ...</code>, that considers different states.</p>
 <hr />
 <p><strong>NOTE</strong>
 Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.
 This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</p>
 <hr />
-<pre><code class="language-sql">-- Create stream of sales
-CREATE STREAM sales (
-  item_id INT key,
-  seller_id STRING,
-  price DOUBLE
+<pre><code class="language-sql">CREATE STREAM messages (
+  send_id BIGINT,
+  recv_id BIGINT,
+  message VARCHAR
 ) WITH (
-  VALUE_FORMAT='json',
-  KAFKA_TOPIC='sales',
-  PARTITIONS = 6);
+  KAFKA_TOPIC = 'MESSAGES',
+  VALUE_FORMAT = 'AVRO',
+  PARTITIONS = 3
+);
 
--- Create table of items
-CREATE TABLE items (
-  item_id INT PRIMARY key,
-  item_name STRING
-) WITH (
-  VALUE_FORMAT='json',
-  KAFKA_TOPIC='items',
-  PARTITIONS = 6);
-
--- Calculate minimum, maximum, and average price, per item, and join with item name
-CREATE TABLE sales_stats AS
-SELECT S.item_id,
-       I.item_name,
-       MIN(price) AS price_min,
-       MAX(price) AS price_max,
-       AVG(price) AS price_avg
-FROM sales S
-INNER JOIN items I ON S.item_id = I.item_id
-GROUP BY S.item_id
+CREATE STREAM conversations AS
+SELECT
+  ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '&lt;&gt;') AS conversation_id
+FROM messages
+GROUP BY
+  ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '&lt;&gt;')
+HAVING
+  REDUCE(
+    ENTRIES(
+        AS_MAP(
+          COLLECT_LIST(CAST(rowtime AS STRING)),
+          COLLECT_LIST(send_id)
+        ),
+        true
+    ),
+    STRUCT(step := 'start', last_sender := CAST(-1 AS BIGINT)),
+    (old_state, element) =&gt; CASE
+      WHEN old_state-&gt;step = 'start'
+        THEN struct(step := 'opened', last_sender := element-&gt;v)
+      WHEN old_state-&gt;step = 'opened' AND old_state-&gt;last_sender != element-&gt;v
+        THEN struct(step := 'replied', last_sender := element-&gt;v)
+      WHEN old_state-&gt;step = 'replied' AND old_state-&gt;last_sender != element-&gt;v
+        THEN struct(step := 'connected', last_sender := element-&gt;v)
+      ELSE old_state
+    END
+  )-&gt;step = 'connected'
 EMIT CHANGES;
 </code></pre>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
-<pre><code class="language-sql">INSERT INTO items (item_id, item_name) VALUES (1, 'Pikachu card');
-INSERT INTO items (item_id, item_name) VALUES (2, 'Charizard card');
-INSERT INTO items (item_id, item_name) VALUES (3, 'Mew card');
-
-INSERT INTO sales_stream (item_id, price) VALUES (1, 10.00); 
-INSERT INTO sales_stream (item_id, price) VALUES (2, 20.00); 
-INSERT INTO sales_stream (item_id, price) VALUES (3, 30.00); 
-INSERT INTO sales_stream (item_id, price) VALUES (1, 12.00); 
-INSERT INTO sales_stream (item_id, price) VALUES (1, 17.00); 
-INSERT INTO sales_stream (item_id, price) VALUES (3, 26.00); 
+<pre><code class="language-sql">INSERT INTO messages ( send_id, recv_id, message ) VALUES ( 1, 2, 'Hello' );
+INSERT INTO messages ( send_id, recv_id, message ) VALUES ( 1, 3, 'Hello' );
+INSERT INTO messages ( send_id, recv_id, message ) VALUES ( 2, 1, 'Hey there' );
+INSERT INTO messages ( send_id, recv_id, message ) VALUES ( 1, 2, 'What''s going on?' );
+INSERT INTO messages ( send_id, recv_id, message ) VALUES ( 3, 4, 'Hi' );
+INSERT INTO messages ( send_id, recv_id, message ) VALUES ( 3, 4, 'Hello' );
+INSERT INTO messages ( send_id, recv_id, message ) VALUES ( 5, 4, 'Hi' );
+INSERT INTO messages ( send_id, recv_id, message ) VALUES ( 4, 5, 'Well hi to you too.' );
+INSERT INTO messages ( send_id, recv_id, message ) VALUES ( 3, 4, 'I''d like to chat.' );
+INSERT INTO messages ( send_id, recv_id, message ) VALUES ( 5, 4, 'Would you like to discuss event streaming with me?' );
 </code></pre>
-<h3 id="cleanup">Cleanup</h3>
+<h2 id="cleanup">Cleanup</h2>
 <p>To clean up the ksqlDB resources created by this recipe, use the ksqlDB commands shown below (substitute stream or topic name, as appropriate).
 By including the <code>DELETE TOPIC</code> clause, the stream or table's source topic is also deleted, asynchronously.</p>
 <pre><code>DROP STREAM IF EXISTS &lt;stream_name&gt; DELETE TOPIC;
 DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
 </code></pre>
 <p>If you also created connectors, you'll need to remove those as well.</p>
+<h2 id="explanation">Explanation</h2>
+<p>This solution builds up a query that can take a stream of messages and
+assemble them into a thread of conversations for analysis.</p>
+<h3 id="tracking-connections">Tracking Connections</h3>
+<p>If you look at those <code>messages</code>, it's clear there are a lot of hellos
+bouncing around, but beyond that it's hard to see any patterns. Let's
+use some queries to make sense of it. We'll build up our answer to,
+"Who's connected to who?"  gradually. Before we begin, some session
+settings to make sure we all get the same results:</p>
+<pre><code class="language-sql">SET 'auto.offset.reset' = 'earliest';
+SET 'ksql.query.pull.table.scan.enabled' = 'true';
+</code></pre>
+<h3 id="split-by-conversation">Split By Conversation</h3>
+<p>The first step is to break the stream up into individual
+conversations. If we sort the sender and receiver of each message, we
+can create a unique ID for every pair that chats (or tries to start
+chatting), and use that to group all the events:</p>
+<pre><code class="language-sql">CREATE TABLE conversations_split AS
+  SELECT
+    ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '&lt;&gt;') AS conversation_id,
+    COLLECT_LIST(rowtime) AS message_times
+  FROM messages
+  GROUP BY 
+    ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '&lt;&gt;');
+</code></pre>
+<p>Querying that:</p>
+<pre><code class="language-sql">SELECT * FROM conversations_split;
+</code></pre>
+<pre><code class="language-txt">+----------------+----------------------------------------------+
+|CONVERSATION_ID |MESSAGE_TIMES                                 |
++----------------+----------------------------------------------+
+|3&lt;&gt;4            |[1637318173288, 1637317383974, 1637318170245] |
+|4&lt;&gt;5            |[1637317384066, 1637317384210, 1637317384126] |
+|1&lt;&gt;2            |[1637317383692, 1637317383832, 1637317383887] |
+|1&lt;&gt;3            |[1637317383778]                               |
+</code></pre>
+<p>(<em>Note that because we sorted the <code>[send_id, recv_id]</code> array, it doesn't matter if 1
+was sending to 2 or 2 was sending to 1 - we get the same conversation ID for both
+directions.</em>)</p>
+<h3 id="chat-by-chat">Chat By Chat</h3>
+<p>That's a big help - we can analyse conversations individually. </p>
+<p>Let's put each of those conversations in time order, and keep track of the sender as we go.</p>
+<p>We do this in two steps - we'll enhance our <code>message_times</code> column to
+build up a map with the <code>rowtime</code> as the key, and the <code>send_id</code> as the
+value:</p>
+<pre><code class="language-sql">CREATE TABLE conversations_mapped AS
+  SELECT
+    ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '&lt;&gt;') AS conversation_id,
+    AS_MAP(
+      COLLECT_LIST(CAST(rowtime AS STRING)),
+      COLLECT_LIST(send_id)
+    ) AS message_times
+  FROM messages
+  GROUP BY 
+    ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '&lt;&gt;');
+</code></pre>
+<p>Querying that:</p>
+<pre><code class="language-sql">SELECT * FROM conversations_mapped;
+</code></pre>
+<pre><code class="language-txt">+----------------+----------------------------------------------------+
+|CONVERSATION_ID |MESSAGE_TIMES                                       |
++----------------+----------------------------------------------------+
+|3&lt;&gt;4            |{1637317383974=3, 1637318170245=3, 1637318173288=3} |
+|4&lt;&gt;5            |{1637317384210=5, 1637317384066=5, 1637317384126=4} |
+|1&lt;&gt;2            |{1637317383832=2, 1637317383887=1, 1637317383692=1} |
+|1&lt;&gt;3            |{1637317383778=1}                                   |
+</code></pre>
+<p>Almost right, but we want to be able to see those messages in
+order. Let's turn the <code>message_times</code> map back into a sorted list with
+<code>ENTRIES(&lt;map&gt;, true)</code>:</p>
+<pre><code class="language-sql">CREATE TABLE conversations_sequenced AS
+  SELECT
+    ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '&lt;&gt;') AS conversation_id,
+    ENTRIES(
+        AS_MAP(
+          COLLECT_LIST(CAST(rowtime AS STRING)),
+          COLLECT_LIST(send_id)
+        ),
+        true
+    ) AS message_times
+  FROM messages
+  GROUP BY 
+    ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '&lt;&gt;');
+</code></pre>
+<p>Querying that:</p>
+<pre><code class="language-sql">SELECT * FROM conversations_sequenced;
+</code></pre>
+<pre><code class="language-txt">+----------------+-------------------------------------------------------------------------+
+|CONVERSATION_ID |MESSAGE_TIMES                                                            |
++----------------+-------------------------------------------------------------------------+
+|3&lt;&gt;4            |[{K=1637317383974, V=3}, {K=1637318170245, V=3}, {K=1637318173288, V=3}] |
+|4&lt;&gt;5            |[{K=1637317384066, V=5}, {K=1637317384126, V=4}, {K=1637317384210, V=5}] |
+|1&lt;&gt;2            |[{K=1637317383692, V=1}, {K=1637317383832, V=2}, {K=1637317383887, V=1}] |
+|1&lt;&gt;3            |[{K=1637317383778, V=1}]                                                 |
+</code></pre>
+<p>Perfect. If you pause and take a look at the <code>4&lt;&gt;5</code> row, you'll see we
+nearly have our answer. First 5 sends a message, then 4 replies, then
+5 follows-up. That's a match!  <code>1&lt;&gt;2</code> also matches, and it looks like
+3 is getting nowhere with 4.</p>
+<h3 id="stepping-through-conversations-automatically">Stepping Through Conversations Automatically</h3>
+<p>If our data sets were tiny, we'd be done - we can see by eye which
+conversations match. To scale this up, let's teach ksqlDB to step
+through that sorted array of <code>message_times</code> and track the steps of the
+conversation flowing back and forth. We can do with the <code>REDUCE</code>
+function.</p>
+<p>For the unfamiliar, <code>REDUCE</code> is a way of stepping through an array,
+entry by entry, and boiling it down to a final result. We give it the
+array (in our case, <code>message_times</code>), a starting state and a function
+which can take our state and one element of the array, and give us the
+next state.</p>
+<p>Our state will track the steps in the flow, and who sent the most
+recent message. We'll start with these placeholder values:</p>
+<pre><code class="language-txt">STRUCT(step := 'start', sender := CAST(-1 AS BIGINT))
+</code></pre>
+<p>And then build up a function, <code>(old_state, element) =&gt; ...</code>, that
+considers each possible case:</p>
+<ul>
+<li>If we're at the <code>start</code> step, the next message is always an
+  opener. Move to <code>opened</code>.</li>
+<li>If we're at <code>opened</code>, and the message has a new <code>send_id</code>, then the
+  sender has changed and that's a reply. Move to <code>replied</code>.</li>
+<li>If we're at <code>replied</code>, and the message has changed <code>send_id</code> again,
+  that's a connection! Move to <code>connected</code>.</li>
+<li>In any other case, there's no change.</li>
+</ul>
+<p>In code that looks like this:</p>
+<pre><code class="language-sql">CREATE OR REPLACE TABLE conversation_states AS
+  SELECT 
+    conversation_id,
+    REDUCE(
+      message_times,
+      STRUCT(step := 'start', last_sender := CAST(-1 AS BIGINT)),
+      (old_state, element) =&gt; CASE
+        WHEN old_state-&gt;step = 'start' 
+          THEN struct(step := 'opened', last_sender := element-&gt;v)
+        WHEN old_state-&gt;step = 'opened' AND old_state-&gt;last_sender != element-&gt;v 
+          THEN struct(step := 'replied', last_sender := element-&gt;v)
+        WHEN old_state-&gt;step = 'replied' AND old_state-&gt;last_sender != element-&gt;v 
+          THEN struct(step := 'connected', last_sender := element-&gt;v)
+        ELSE old_state
+      END
+    ) as state
+  FROM conversations_sequenced;
+</code></pre>
+<p>Querying that:</p>
+<pre><code class="language-sql">SELECT * FROM conversation_states;
+</code></pre>
+<pre><code class="language-txt">+----------------+--------------------------------+
+|CONVERSATION_ID |STATE                           |
++----------------+--------------------------------+
+|3&lt;&gt;4            |{STEP=opened, LAST_SENDER=3}    |
+|4&lt;&gt;5            |{STEP=connected, LAST_SENDER=5} |
+|1&lt;&gt;2            |{STEP=connected, LAST_SENDER=1} |
+|1&lt;&gt;3            |{STEP=opened, LAST_SENDER=1}    |
+</code></pre>
+<h3 id="final-answer">Final answer</h3>
+<p>To wrap up, let's just trim that down to the final answers:</p>
+<pre><code class="language-sql">SELECT conversation_id
+FROM conversation_state
+WHERE state-&gt;step = 'connected';
+</code></pre>
+<pre><code class="language-txt">+----------------+
+|CONVERSATION_ID |
++----------------+
+|4&lt;&gt;5            |
+|1&lt;&gt;2            |
+</code></pre>
                 
                   
                 
@@ -1072,7 +1337,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../operations/salesforce/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Handle Corrupted Data From Salesforce" rel="prev">
+        <a href="../../security/SSH-attack/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Detect and Analyze SSH Attacks" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1081,26 +1346,11 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
               <span class="md-footer__direction">
                 Previous
               </span>
-              Handle Corrupted Data From Salesforce
+              Detect and Analyze SSH Attacks
             </div>
           </div>
         </a>
       
-      
-        
-        <a href="../fleet_management/" class="md-footer__link md-footer__link--next" aria-label="Next: Build a Real-time Fleet Management System" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Build a Real-time Fleet Management System
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
       
     </nav>
   
