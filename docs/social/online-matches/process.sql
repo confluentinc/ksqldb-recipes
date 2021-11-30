@@ -8,6 +8,7 @@ CREATE STREAM messages (
   PARTITIONS = 3
 );
 
+CREATE STREAM conversations AS
 SELECT
   ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>') AS conversation_id
 FROM messages
