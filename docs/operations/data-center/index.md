@@ -28,7 +28,7 @@ Our data center power analysis applications require data from two different sour
 
 Typically, customer information would be sourced from an existing database. As customer occupancy changes, tables in the database would be updated and we can capture those changes and stream them into Kafka with Kafka Connect using [Change Data Capture](https://www.confluent.io/blog/cdc-and-streaming-analytics-using-debezium-kafka/).
 
-Telemetry data may be sourced into Kafka in a variety of ways. MQTT is a popular source for Internet of Things (IoT) devices, and smart electrical panels may provide this functionality out of the box. If the panel data can be sourced from MQTT, an [MQTT Connector](https://docs.confluent.io/kafka-connect-mqtt/current/mqtt-source-connector/index.html) is available to bridge MQTT and Kafka.
+Telemetry data may be sourced into Kafka in a variety of ways. MQTT is a popular source for Internet of Things (IoT) devices, and smart electrical panels may provide this functionality out of the box. If the panel data can be sourced from MQTT, an [MQTT Connector](https://docs.confluent.io/cloud/current/connectors/cc-mqtt-source.html) is available to bridge MQTT and Kafka.
 
 Below are sample Kafka Connect configurations you could use to deploy source connectors to read data from their originating systems. 
 
