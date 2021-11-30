@@ -37,7 +37,7 @@ TODO: high-level description of what the application itself does
 --8<-- "docs/shared/manual_cue.md"
 
 ```sql
---8<-- "docs/retail/fleet_management/manual.sql"
+--8<-- "docs/<industry>/<new-recipe-name>/manual.sql"
 ```
 
 ### Write the data out

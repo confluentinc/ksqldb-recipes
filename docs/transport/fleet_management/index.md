@@ -21,7 +21,7 @@ This recipe enriches fleet location with individual vehicle information, so orga
 --8<-- "docs/shared/connect.md"
 
 ```json
---8<-- "docs/retail/fleet_management/source.json"
+--8<-- "docs/transport/fleet_management/source.json"
 ```
 
 --8<-- "docs/shared/manual_insert.md"
@@ -34,13 +34,13 @@ In this case, the original fleet telemetry is enriched with details about the ve
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ```sql
---8<-- "docs/retail/fleet_management/process.sql"
+--8<-- "docs/transport/fleet_management/process.sql"
 ```
 
 --8<-- "docs/shared/manual_cue.md"
 
 ```sql
---8<-- "docs/retail/fleet_management/manual.sql"
+--8<-- "docs/transport/fleet_management/manual.sql"
 ```
 
 ### Cleanup
