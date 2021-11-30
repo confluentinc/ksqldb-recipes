@@ -136,7 +136,7 @@ use-case.
 ### Buy 5 And The Next One's On Us
 
 The chances are high you have a coffee stamp card in your wallet. (Or
-serval dozen of them.) To keep our test data small we'll be generous
+several dozen of them.) To keep our test data small we'll be generous
 as say our customers only need to buy 5 coffees to get a free
 one. Whatever the number, the implementation of this scheme is
 straightforward. We count up the number of drinks they've

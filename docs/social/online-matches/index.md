@@ -115,7 +115,7 @@ directions._)
 
 ### Chat By Chat
 
-That's a big help - we can analyse conversations individually. 
+That's a big help - we can analyze conversations individually.
 
 
 Let's put each of those conversations in time order, and keep track of the sender as we go.
