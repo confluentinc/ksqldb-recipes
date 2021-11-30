@@ -8,7 +8,7 @@ seo:
 
 Your business provides a cloud infrastructure offering. Multiple physical data center locations are partitioned into smaller tenants, occupied by your customers. These individual tenants allow customers to operate in isolation and provide you with an accounting unit to monitor and accurately invoice your customers.
 
-The data centers consume large amounts of electricity which needs to be monitored to ensure business continuation. Additionally, the cost of the electricity needs to be accounted for and billed to the appropriate customer.
+The data centers consume large amounts of electricity which needs to be monitored to ensure business continuity. Additionally, the cost of the electricity needs to be accounted for and billed to the appropriate customer.
 
 Each data center is constructed with smart electrical panels that control the power supplies to multiple customer tenants. The smart panels emit telemetry data that is captured and produced into an Apache Kafka® topic. 
 
