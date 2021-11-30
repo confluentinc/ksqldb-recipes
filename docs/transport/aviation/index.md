@@ -1,32 +1,67 @@
 ---
 seo:
-  title: Notify passengers of a flight delay
+  title: Notify Passengers of a Flight Delay
   description: This recipe uses a stream of flight updates to notify passengers if their flight is delayed
 ---
 
-# Notify passengers of a flight delay
-
-## What is it?
+# Notify Passengers of a Flight Delay
 
 Worse than having a flight delayed is not even knowing that it's been delayed, or having to get up to keep checking the monitors. 
-
 This recipe shows how an airline can combine the data they have about passengers, their booked flights, and updates to flight plans in order to notify a passenger as soon as there is a delay to their flight. 
-
-With ksqlDB, you react to events in real time to the benefit of your customers. 
-
-[//]: # "![flight push notification](../../img/TODO.png)"
-
-## Get Started
-
---8<-- "docs/shared/ccloud_launch.md"
-
-<a href="https://www.confluent.io/confluent-cloud/tryfree/"><img src="../../img/launch.png" /></a>
 
 ## Step-by-Step
 
 ### Setup your Environment
 
 --8<-- "docs/shared/ccloud_setup.md"
+
+### Read the data in
+
+--8<-- "docs/shared/connect.md"
+
+This example pulls in data from different tables for customers, flights, flight updates, and bookings.
+
+```json
+--8<-- "docs/transport/aviation/source.json"
+```
+
+--8<-- "docs/shared/manual_insert.md"
+
+### Run stream processing app
+
+This ksqlDB application joins between customer flight booking data and any flight updates to provide a stream of notifications to passengers.
+
+--8<-- "docs/shared/ksqlb_processing_intro.md"
+
+```sql
+--8<-- "docs/transport/aviation/c01.sql"
+
+--8<-- "docs/transport/aviation/c02.sql"
+
+--8<-- "docs/transport/aviation/o01.sql"
+
+--8<-- "docs/transport/aviation/j01.sql"
+
+--8<-- "docs/transport/aviation/j02.sql"
+
+--8<-- "docs/transport/aviation/r01.sql"
+
+--8<-- "docs/transport/aviation/c03.sql"
+
+--8<-- "docs/transport/aviation/p01.sql"
+```
+
+--8<-- "docs/shared/manual_cue.md"
+
+```sql
+--8<-- "docs/transport/aviation/manual.sql"
+```
+
+### Cleanup
+
+--8<-- "docs/shared/cleanup.md"
+
+## Explanation
 
 ### Create and populate the underlying tables
 
@@ -137,7 +172,7 @@ In the `FLIGHTS` table above we have the scheduled departure time of a flight (`
 --8<-- "docs/transport/aviation/c03.sql"
 ```
 
-### Run stream processing app
+### Join data
 
 By joining between our customer flight booking data and any flight updates we can provide a stream of notifications to passengers. Many platforms exist for providing the push notification, whether bespoke in-app or using a [third-party messaging tool](https://www.confluent.io/blog/building-a-telegram-bot-powered-by-kafka-and-ksqldb/). ksqlDB can integrate with these using its [REST interface](https://docs.ksqldb.io/en/latest/developer-guide/api/), native [Java client](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-clients/java-client/), or one of the several [community-supported clients](https://docs.ksqldb.io/en/0.22.0-ksqldb/developer-guide/ksqldb-clients/). 
 
@@ -165,31 +200,3 @@ In the original window you will see the details of which passengers are impacted
 |Ker Omond      |Cabin staff unavailable |2021-11-18T09:00:00 |2021-11-18T07:36:00   |komond3@usnews.com         |+33 515 323 0170  |LHR                |9607        |
 |Arline Synnott |Mechanical checks       |2021-11-19T14:00:00 |2021-11-18T08:11:00   |asynnott4@theatlantic.com  |+62 953 759 8885  |TXL                |7968        |
 ```
-
-## Full ksqlDB Statements
-
---8<-- "docs/shared/code_summary.md"
-
---8<-- "docs/shared/ksqlb_processing_intro.md"
-
-```sql
---8<-- "docs/transport/aviation/c01.sql"
-
---8<-- "docs/transport/aviation/c02.sql"
-
---8<-- "docs/transport/aviation/o01.sql"
-
---8<-- "docs/transport/aviation/j01.sql"
-
---8<-- "docs/transport/aviation/j02.sql"
-
---8<-- "docs/transport/aviation/r01.sql"
-
---8<-- "docs/transport/aviation/c03.sql"
-
---8<-- "docs/transport/aviation/p01.sql"
-```
-
-### Cleanup
-
---8<-- "docs/shared/cleanup.md"
