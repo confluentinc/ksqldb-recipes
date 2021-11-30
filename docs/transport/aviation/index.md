@@ -170,6 +170,8 @@ In the original window you will see the details of which passengers are impacted
 
 --8<-- "docs/shared/code_summary.md"
 
+--8<-- "docs/shared/ksqlb_processing_intro.md"
+
 ```sql
 --8<-- "docs/transport/aviation/c01.sql"
 
