@@ -27,7 +27,7 @@ CREATE STREAM panel_power_readings (
 --  good for determining panels which are drawing a high electrical load
 CREATE STREAM overloaded_panels AS 
   SELECT panel_id, tenant_id, panel_current_utilization 
-    FROM PANEL_POWER_READINGS 
+    FROM panel_power_readings 
     WHERE panel_current_utilization >= 0.85
   EMIT CHANGES;
 
