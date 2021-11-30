@@ -1,20 +1,16 @@
 ---
 seo:
-  title: Analyze data center power usage 
+  title: Analyze Data Center Power Usage 
   description: This recipe analyzes telemetry data from data center power electrical smart panels. The stream processing use cases for this data include detection of power usage levels for safety and accounting purposes.
 ---
 
-# Analyze data center power usage 
+# Analyze Data Center Power Usage 
 
-Your business provides a cloud infrastructure offering. Multiple physical data center locations are partitioned into smaller tenants, occupied by your customers. These individual tenants allow customers to operate in isolation and provide you with an accounting unit to monitor and accurately invoice your customers.
-
-The data centers consume large amounts of electricity which needs to be monitored to ensure business continuity. Additionally, the cost of the electricity needs to be accounted for and billed to the appropriate customer.
-
-Each data center is constructed with smart electrical panels that control the power supplies to multiple customer tenants. The smart panels emit telemetry data that is captured and produced into an Apache Kafka® topic. 
+If your business provides a cloud infrastructure offering with multiple physical data center locations with isolated tenants, you may have an accounting unit to monitor and accurately invoice your customers.
+The data centers consume large amounts of electricity which needs to be monitored to ensure business continuity, and each data center is constructed with smart electrical panels that control the power supplies to multiple customer tenants.
+The smart panels emit telemetry data that is captured and produced into an Apache Kafka® topic, and this recipe demonstrates how to accurately bill each customer. 
 
 ![](diagram.svg)
-
-How can we utilize [ksqlDB](https://ksqldb.io/) to process the control panel telemetry data in real time?
 
 ## Step-by-step
 
@@ -24,17 +20,15 @@ How can we utilize [ksqlDB](https://ksqldb.io/) to process the control panel tel
 
 ### Read the data in
 
+--8<-- "docs/shared/connect.md"
+
 Our data center power analysis applications require data from two different sources: customer tenant information and smart control panel readings.
-
-Typically, customer information would be sourced from an existing database. As customer occupancy changes, tables in the database would be updated and we can stream them into Kafka using Kafka Connect with [Change Data Capture](https://www.confluent.io/blog/cdc-and-streaming-analytics-using-debezium-kafka/). The below `MySqlCdcSource` configuration could be used to capture changes from a `customer` database's `tenant` table into the Kafka cluster. This connector is provided [fully managed by Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-mysql-source-cdc-debezium.html).  
-
-Telemetry data may be sourced into Kafka in a variety of ways. MQTT is a popular source for Internet of Things (IoT) devices, and smart electrical panels may provide this functionality out of the box. The [MQTT Connector](https://docs.confluent.io/cloud/current/connectors/cc-mqtt-source.html) is available [fully managed on Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-mqtt-source.html).
 
 ```sql
 --8<-- "docs/operations/data-center/source.json"
 ```
 
-Fully managed connectors can be deployed using the web console or the Confluent CLI command `confluent connect create --config <file>`.
+--8<-- "docs/shared/manual_insert.md"
 
 ### Run stream processing app
 
@@ -44,7 +38,7 @@ Fully managed connectors can be deployed using the web console or the Confluent 
 --8<-- "docs/operations/data-center/process.sql"
 ```
 
-If you do not have exisiting systems to source data from, the following commands can insert sample records to work with initially.
+--8<-- "docs/shared/manual_cue.md"
 
 ```sql
 --8<-- "docs/operations/data-center/manual.sql"
@@ -55,6 +49,10 @@ If you do not have exisiting systems to source data from, the following commands
 --8<-- "docs/shared/cleanup.md"
 
 ## Explanation
+
+Typically, customer information would be sourced from an existing database. As customer occupancy changes, tables in the database would be updated and we can stream them into Kafka using Kafka Connect with [Change Data Capture](https://www.confluent.io/blog/cdc-and-streaming-analytics-using-debezium-kafka/). The earlier example of the `MySqlCdcSource` configuration could be used to capture changes from a `customer` database's `tenant` table into the Kafka cluster. This connector is provided [fully managed by Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-mysql-source-cdc-debezium.html).  
+
+Telemetry data may be sourced into Kafka in a variety of ways. MQTT is a popular source for Internet of Things (IoT) devices, and smart electrical panels may provide this functionality out of the box. The [MQTT Connector](https://docs.confluent.io/cloud/current/connectors/cc-mqtt-source.html) is available [fully managed on Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-mqtt-source.html).
 
 The current state of customer tenant occupancy can be represented with a ksqlDB `TABLE`. Events streamed into the `tenant-occupancy` topic represent a customer (`customer_id`) beginning an occupancy of a particular tenant (`tenant_id`). As events are observed on the `tenant-occupancy` topic, the table will model the current set of tenant occupants. 
 
@@ -121,4 +119,3 @@ CREATE TABLE billable_power_report WITH (key_format='json') AS
     FROM billable_power
     GROUP BY tenant_id, customer_id, billable_month;
 ```
-
