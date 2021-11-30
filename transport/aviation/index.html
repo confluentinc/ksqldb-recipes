@@ -16,7 +16,7 @@
     
     
       
-        <title>Set Dynamic Pricing - ksqlDB Recipes</title>
+        <title>Notify Passengers of a Flight Delay - ksqlDB Recipes</title>
       
     
     
@@ -63,7 +63,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#set-dynamic-pricing" class="md-skip">
+        <a href="#notify-passengers-of-a-flight-delay" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Set Dynamic Pricing
+              Notify Passengers of a Flight Delay
             
           </span>
         </div>
@@ -510,14 +510,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
       
       <label class="md-nav__link" for="__nav_6">
         Retail
@@ -533,14 +531,12 @@
             
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" >
       
       <label class="md-nav__link" for="__nav_6_1">
         Dynamic pricing
@@ -556,85 +552,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Set Dynamic Pricing
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../retail/dynamic_pricing/" class="md-nav__link">
         Set Dynamic Pricing
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#step-by-step" class="md-nav__link">
-    Step-by-Step
-  </a>
-  
-    <nav class="md-nav" aria-label="Step-by-Step">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#setup-your-environment" class="md-nav__link">
-    Setup your Environment
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#read-the-data-in" class="md-nav__link">
-    Read the data in
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#run-stream-processing-app" class="md-nav__link">
-    Run stream processing app
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cleanup" class="md-nav__link">
-    Cleanup
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -671,7 +593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../inventory/" class="md-nav__link">
+      <a href="../../retail/inventory/" class="md-nav__link">
         View Real-time Inventory
       </a>
     </li>
@@ -834,12 +756,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" checked>
       
       <label class="md-nav__link" for="__nav_9">
         Transport
@@ -855,12 +779,14 @@
             
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_1" type="checkbox" id="__nav_9_1" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_1" type="checkbox" id="__nav_9_1" checked>
       
       <label class="md-nav__link" for="__nav_9_1">
         Aviation
@@ -876,11 +802,126 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../transport/aviation/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Notify Passengers of a Flight Delay
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Notify Passengers of a Flight Delay
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    Step-by-Step
+  </a>
+  
+    <nav class="md-nav" aria-label="Step-by-Step">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-your-environment" class="md-nav__link">
+    Setup your Environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-the-data-in" class="md-nav__link">
+    Read the data in
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-stream-processing-app" class="md-nav__link">
+    Run stream processing app
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cleanup" class="md-nav__link">
+    Cleanup
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explanation" class="md-nav__link">
+    Explanation
+  </a>
+  
+    <nav class="md-nav" aria-label="Explanation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-and-populate-the-underlying-tables" class="md-nav__link">
+    Create and populate the underlying tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#denormalise-the-data" class="md-nav__link">
+    Denormalise the data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-a-stream-of-flight-updates" class="md-nav__link">
+    Add a stream of flight updates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-data" class="md-nav__link">
+    Join data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -917,7 +958,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transport/fleet_management/" class="md-nav__link">
+      <a href="../fleet_management/" class="md-nav__link">
         Build a Real-time Fleet Management System
       </a>
     </li>
@@ -1002,6 +1043,47 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#explanation" class="md-nav__link">
+    Explanation
+  </a>
+  
+    <nav class="md-nav" aria-label="Explanation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-and-populate-the-underlying-tables" class="md-nav__link">
+    Create and populate the underlying tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#denormalise-the-data" class="md-nav__link">
+    Denormalise the data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-a-stream-of-flight-updates" class="md-nav__link">
+    Add a stream of flight updates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-data" class="md-nav__link">
+    Join data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1015,9 +1097,9 @@
               
                 
                 
-                <h1 id="set-dynamic-pricing">Set Dynamic Pricing</h1>
-<p>An online marketplace keeps track of statistics regarding pricing: lowest, median, etc.
-These statistics enable buyers and sellers to make dynamic offers based on historical sales events.</p>
+                <h1 id="notify-passengers-of-a-flight-delay">Notify Passengers of a Flight Delay</h1>
+<p>Worse than having a flight delayed is not even knowing that it's been delayed, or having to get up to keep checking the monitors. 
+This recipe shows how an airline can combine the data they have about passengers, their booked flights, and updates to flight plans in order to notify a passenger as soon as there is a delay to their flight. </p>
 <h2 id="step-by-step">Step-by-Step</h2>
 <h3 id="setup-your-environment">Setup your Environment</h3>
 <p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service.</p>
@@ -1027,11 +1109,10 @@ These statistics enable buyers and sellers to make dynamic offers based on histo
 This recipe shows one example of a data source, but you can substitute your own preferred connector to use any data source.
 The principles are the same, just modify the connector configuration shown below to fit your deployment (see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a>).</p>
 <p>To run a fully-managed connector to write the data into Kafka topics, use Confluent Cloud Console or <a href="https://docs.confluent.io/confluent-cli/current/overview.html">Confluent CLI</a> command <code>confluent connect create --config &lt;file&gt;</code>, submit each connector separately.</p>
-<p>For this recipe, we are interested in knowing each marketplace event for an item, specifically its pricing. 
-This creates a stream of events, upon which real-time stream processing can keep state and calculate pricing statistics.</p>
+<p>This example pulls in data from different tables for customers, flights, flight updates, and bookings.</p>
 <pre><code class="language-json">{
   &quot;connector.class&quot;          : &quot;PostgresSource&quot;,
-  &quot;name&quot;                     : &quot;recipe-postgres-pricing&quot;,
+  &quot;name&quot;                     : &quot;recipe-postgres-aviation&quot;,
   &quot;kafka.api.key&quot;            : &quot;&lt;my-kafka-api-key&gt;&quot;,
   &quot;kafka.api.secret&quot;         : &quot;&lt;my-kafka-api-secret&gt;&quot;,
   &quot;connection.host&quot;          : &quot;&lt;my-database-endpoint&gt;&quot;,
@@ -1039,24 +1120,7 @@ This creates a stream of events, upon which real-time stream processing can keep
   &quot;connection.user&quot;          : &quot;postgres&quot;,
   &quot;connection.password&quot;      : &quot;&lt;my-database-password&gt;&quot;,
   &quot;db.name&quot;                  : &quot;&lt;db-name&gt;&quot;,
-  &quot;table.whitelist&quot;          : &quot;sales&quot;,
-  &quot;timestamp.column.name&quot;    : &quot;created_at&quot;,
-  &quot;output.data.format&quot;       : &quot;JSON&quot;,
-  &quot;db.timezone&quot;              : &quot;UTC&quot;,
-  &quot;tasks.max&quot;                : &quot;1&quot;
-}
-
-{
-  &quot;connector.class&quot;          : &quot;PostgresSource&quot;,
-  &quot;name&quot;                     : &quot;recipe-postgres-items&quot;,
-  &quot;kafka.api.key&quot;            : &quot;&lt;my-kafka-api-key&gt;&quot;,
-  &quot;kafka.api.secret&quot;         : &quot;&lt;my-kafka-api-secret&gt;&quot;,
-  &quot;connection.host&quot;          : &quot;&lt;my-database-endpoint&gt;&quot;,
-  &quot;connection.port&quot;          : &quot;5432&quot;,
-  &quot;connection.user&quot;          : &quot;postgres&quot;,
-  &quot;connection.password&quot;      : &quot;&lt;my-database-password&gt;&quot;,
-  &quot;db.name&quot;                  : &quot;&lt;db-name&gt;&quot;,
-  &quot;table.whitelist&quot;          : &quot;items&quot;,
+  &quot;table.whitelist&quot;          : &quot;customers,flights,flight_updates,bookings&quot;,
   &quot;timestamp.column.name&quot;    : &quot;created_at&quot;,
   &quot;output.data.format&quot;       : &quot;JSON&quot;,
   &quot;db.timezone&quot;              : &quot;UTC&quot;,
@@ -1065,53 +1129,119 @@ This creates a stream of events, upon which real-time stream processing can keep
 </code></pre>
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert data into the streams for testing using ksqlDB <code>INSERT INTO</code>.</p>
 <h3 id="run-stream-processing-app">Run stream processing app</h3>
+<p>This ksqlDB application joins between customer flight booking data and any flight updates to provide a stream of notifications to passengers.</p>
 <hr />
 <p><strong>NOTE</strong>
 Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.
 This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</p>
 <hr />
-<pre><code class="language-sql">-- Create stream of sales
-CREATE STREAM sales (
-  item_id INT key,
-  seller_id STRING,
-  price DOUBLE
-) WITH (
-  VALUE_FORMAT='json',
-  KAFKA_TOPIC='sales',
-  PARTITIONS = 6);
+<pre><code class="language-sql">CREATE TABLE CUSTOMERS (ID             INT     PRIMARY KEY
+                       , NAME           VARCHAR
+                       , ADDRESS        VARCHAR
+                       , EMAIL          VARCHAR
+                       , PHONE          VARCHAR
+                       , LOYALTY_STATUS VARCHAR)
+              WITH (KAFKA_TOPIC='customers'
+                   , FORMAT='AVRO'
+                   , PARTITIONS=6);
 
--- Create table of items
-CREATE TABLE items (
-  item_id INT PRIMARY key,
-  item_name STRING
-) WITH (
-  VALUE_FORMAT='json',
-  KAFKA_TOPIC='items',
-  PARTITIONS = 6);
+CREATE TABLE FLIGHTS (ID               INT     PRIMARY KEY
+                       , ORIGIN        VARCHAR
+                       , DESTINATION   VARCHAR
+                       , CODE          VARCHAR
+                       , SCHEDULED_DEP TIMESTAMP
+                       , SCHEDULED_ARR TIMESTAMP)
+              WITH (KAFKA_TOPIC='flights'
+                   , FORMAT='AVRO'
+                   , PARTITIONS=6);
 
--- Calculate minimum, maximum, and average price, per item, and join with item name
-CREATE TABLE sales_stats AS
-SELECT S.item_id,
-       I.item_name,
-       MIN(price) AS price_min,
-       MAX(price) AS price_max,
-       AVG(price) AS price_avg
-FROM sales S
-INNER JOIN items I ON S.item_id = I.item_id
-GROUP BY S.item_id
+CREATE TABLE BOOKINGS (ID            INT     PRIMARY KEY
+                       , CUSTOMER_ID INT
+                       , FLIGHT_ID   INT)
+              WITH (KAFKA_TOPIC='bookings'
+                   , FORMAT='AVRO'
+                   , PARTITIONS=6);
+
+SET 'auto.offset.reset' = 'earliest';
+
+CREATE TABLE CUSTOMER_BOOKINGS AS 
+  SELECT C.*, B.ID, B.FLIGHT_ID
+  FROM   BOOKINGS B
+          INNER JOIN CUSTOMERS C
+              ON B.CUSTOMER_ID = C.ID;
+
+CREATE TABLE CUSTOMER_FLIGHTS 
+  WITH (KAFKA_TOPIC='customer_flights') AS
+  SELECT CB.*, F.*
+  FROM   CUSTOMER_BOOKINGS CB
+          INNER JOIN FLIGHTS F
+              ON CB.FLIGHT_ID=F.ID;
+
+CREATE STREAM CF_STREAM WITH (KAFKA_TOPIC='customer_flights', FORMAT='AVRO');
+
+CREATE STREAM CF_REKEY WITH (KAFKA_TOPIC='cf_rekey') AS 
+  SELECT F_ID                 AS FLIGHT_ID
+        , CB_C_ID             AS CUSTOMER_ID
+        , CB_C_NAME           AS CUSTOMER_NAME
+        , CB_C_ADDRESS        AS CUSTOMER_ADDRESS
+        , CB_C_EMAIL          AS CUSTOMER_EMAIL
+        , CB_C_PHONE          AS CUSTOMER_PHONE
+        , CB_C_LOYALTY_STATUS AS CUSTOMER_LOYALTY_STATUS
+        , F_ORIGIN            AS FLIGHT_ORIGIN
+        , F_DESTINATION       AS FLIGHT_DESTINATION
+        , F_CODE              AS FLIGHT_CODE
+        , F_SCHEDULED_DEP     AS FLIGHT_SCHEDULED_DEP
+        , F_SCHEDULED_ARR     AS FLIGHT_SCHEDULED_ARR
+  FROM CF_STREAM
+  PARTITION BY F_ID;
+
+CREATE TABLE CUSTOMER_FLIGHTS_REKEYED 
+  (FLIGHT_ID INT PRIMARY KEY) 
+  WITH (KAFKA_TOPIC='cf_rekey', FORMAT='AVRO');
+
+CREATE STREAM FLIGHT_UPDATES (ID          INT KEY
+                            , FLIGHT_ID   INT
+                            , UPDATED_DEP TIMESTAMP
+                            , REASON      VARCHAR
+                             )
+              WITH (KAFKA_TOPIC='flight_updates'
+                   , FORMAT='AVRO'
+                   , PARTITIONS=6);
+
+SELECT  CUSTOMER_NAME
+      , FU.REASON      AS FLIGHT_CHANGE_REASON 
+      , FU.UPDATED_DEP AS FLIGHT_UPDATED_DEP
+      , FLIGHT_SCHEDULED_DEP 
+      , CUSTOMER_EMAIL
+      , CUSTOMER_PHONE
+      , FLIGHT_DESTINATION
+      , FLIGHT_CODE
+  FROM FLIGHT_UPDATES FU
+        INNER JOIN CUSTOMER_FLIGHTS_REKEYED CB
+        ON FU.FLIGHT_ID = CB.FLIGHT_ID
 EMIT CHANGES;
 </code></pre>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
-<pre><code class="language-sql">INSERT INTO items (item_id, item_name) VALUES (1, 'Pikachu card');
-INSERT INTO items (item_id, item_name) VALUES (2, 'Charizard card');
-INSERT INTO items (item_id, item_name) VALUES (3, 'Mew card');
+<pre><code class="language-sql">INSERT INTO CUSTOMERS (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (1, 'Gleda Lealle', '93 Express Point', 'glealle0@senate.gov', '+351 831 301 6746', 'Silver');
+INSERT INTO CUSTOMERS (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (2, 'Gilly Crocombe', '332 Blaine Avenue', 'gcrocombe1@homestead.com', '+33 203 565 3736', 'Silver');
+INSERT INTO CUSTOMERS (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (3, 'Astrix Aspall', '56 Randy Place', 'aaspall2@ebay.co.uk', '+33 679 296 6645', 'Gold');
+INSERT INTO CUSTOMERS (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (4, 'Ker Omond', '23255 Tennessee Court', 'komond3@usnews.com', '+33 515 323 0170', 'Silver');
+INSERT INTO CUSTOMERS (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (5, 'Arline Synnott', '144 Ramsey Avenue', 'asynnott4@theatlantic.com', '+62 953 759 8885', 'Bronze');
 
-INSERT INTO sales_stream (item_id, price) VALUES (1, 10.00); 
-INSERT INTO sales_stream (item_id, price) VALUES (2, 20.00); 
-INSERT INTO sales_stream (item_id, price) VALUES (3, 30.00); 
-INSERT INTO sales_stream (item_id, price) VALUES (1, 12.00); 
-INSERT INTO sales_stream (item_id, price) VALUES (1, 17.00); 
-INSERT INTO sales_stream (item_id, price) VALUES (3, 26.00); 
+INSERT INTO FLIGHTS (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (1, 'LBA', 'AMS', '642',  '2021-11-18T06:04:00', '2021-11-18T06:48:00');
+INSERT INTO FLIGHTS (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (2, 'LBA', 'LHR', '9607', '2021-11-18T07:36:00', '2021-11-18T08:05:00');
+INSERT INTO FLIGHTS (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (3, 'AMS', 'TXL', '7968', '2021-11-18T08:11:00', '2021-11-18T10:41:00');
+INSERT INTO FLIGHTS (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (4, 'AMS', 'OSL', '496',  '2021-11-18T11:20:00', '2021-11-18T13:25:00');
+INSERT INTO FLIGHTS (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (5, 'LHR', 'JFK', '9230', '2021-11-18T10:36:00', '2021-11-18T19:07:00');
+
+INSERT INTO BOOKINGS (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (1,2,1);
+INSERT INTO BOOKINGS (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (2,1,1);
+INSERT INTO BOOKINGS (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (3,5,3);
+INSERT INTO BOOKINGS (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (4,4,2);
+
+INSERT INTO FLIGHT_UPDATES (ID, FLIGHT_ID, UPDATED_DEP, REASON) VALUES (1, 2, '2021-11-18T09:00:00.000', 'Cabin staff unavailable');
+INSERT INTO FLIGHT_UPDATES (ID, FLIGHT_ID, UPDATED_DEP, REASON) VALUES (2, 3, '2021-11-19T14:00:00.000', 'Mechanical checks');
+INSERT INTO FLIGHT_UPDATES (ID, FLIGHT_ID, UPDATED_DEP, REASON) VALUES (3, 1, '2021-11-19T08:10:09.000', 'Icy conditions');
 </code></pre>
 <h3 id="cleanup">Cleanup</h3>
 <p>To clean up the ksqlDB resources created by this recipe, use the ksqlDB commands shown below (substitute stream or topic name, as appropriate).
@@ -1120,6 +1250,165 @@ By including the <code>DELETE TOPIC</code> clause, the stream or table's source 
 DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
 </code></pre>
 <p>If you also created connectors, you'll need to remove those as well.</p>
+<h2 id="explanation">Explanation</h2>
+<h3 id="create-and-populate-the-underlying-tables">Create and populate the underlying tables</h3>
+<p>ksqlDB supports tables and streams as objects. Both are backed by Kafka topics. Here we're going to create three tables in a normalised data model to hold information about our customers, their bookings, and the flights. </p>
+<p>First off, let's create a table that will hold data about our customers: </p>
+<pre><code class="language-sql">CREATE TABLE CUSTOMERS (ID             INT     PRIMARY KEY
+                       , NAME           VARCHAR
+                       , ADDRESS        VARCHAR
+                       , EMAIL          VARCHAR
+                       , PHONE          VARCHAR
+                       , LOYALTY_STATUS VARCHAR)
+              WITH (KAFKA_TOPIC='customers'
+                   , FORMAT='AVRO'
+                   , PARTITIONS=6);
+</code></pre>
+<p>This will store the data in a Kafka topic. In practice you would probably populate this directly from your application or a feed from your database using Kafka Connect. For simplicity, here we'll just load some data directly: </p>
+<pre><code class="language-sql">INSERT INTO CUSTOMERS (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (1, 'Gleda Lealle', '93 Express Point', 'glealle0@senate.gov', '+351 831 301 6746', 'Silver');
+INSERT INTO CUSTOMERS (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (2, 'Gilly Crocombe', '332 Blaine Avenue', 'gcrocombe1@homestead.com', '+33 203 565 3736', 'Silver');
+INSERT INTO CUSTOMERS (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (3, 'Astrix Aspall', '56 Randy Place', 'aaspall2@ebay.co.uk', '+33 679 296 6645', 'Gold');
+INSERT INTO CUSTOMERS (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (4, 'Ker Omond', '23255 Tennessee Court', 'komond3@usnews.com', '+33 515 323 0170', 'Silver');
+INSERT INTO CUSTOMERS (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (5, 'Arline Synnott', '144 Ramsey Avenue', 'asynnott4@theatlantic.com', '+62 953 759 8885', 'Bronze');
+</code></pre>
+<p>Next we'll create a table of flights, and associated bookings for our customers. </p>
+<pre><code class="language-sql">CREATE TABLE FLIGHTS (ID               INT     PRIMARY KEY
+                       , ORIGIN        VARCHAR
+                       , DESTINATION   VARCHAR
+                       , CODE          VARCHAR
+                       , SCHEDULED_DEP TIMESTAMP
+                       , SCHEDULED_ARR TIMESTAMP)
+              WITH (KAFKA_TOPIC='flights'
+                   , FORMAT='AVRO'
+                   , PARTITIONS=6);
+
+CREATE TABLE BOOKINGS (ID            INT     PRIMARY KEY
+                       , CUSTOMER_ID INT
+                       , FLIGHT_ID   INT)
+              WITH (KAFKA_TOPIC='bookings'
+                   , FORMAT='AVRO'
+                   , PARTITIONS=6);
+</code></pre>
+<p>For these two tables let's add some data. As before, this would usually come directly from your application or a stream of data from another system integrated through Kafka Connect. </p>
+<pre><code class="language-sql">INSERT INTO FLIGHTS (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (1, 'LBA', 'AMS', '642',  '2021-11-18T06:04:00', '2021-11-18T06:48:00');
+INSERT INTO FLIGHTS (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (2, 'LBA', 'LHR', '9607', '2021-11-18T07:36:00', '2021-11-18T08:05:00');
+INSERT INTO FLIGHTS (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (3, 'AMS', 'TXL', '7968', '2021-11-18T08:11:00', '2021-11-18T10:41:00');
+INSERT INTO FLIGHTS (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (4, 'AMS', 'OSL', '496',  '2021-11-18T11:20:00', '2021-11-18T13:25:00');
+INSERT INTO FLIGHTS (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (5, 'LHR', 'JFK', '9230', '2021-11-18T10:36:00', '2021-11-18T19:07:00');
+</code></pre>
+<pre><code class="language-sql">INSERT INTO BOOKINGS (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (1,2,1);
+INSERT INTO BOOKINGS (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (2,1,1);
+INSERT INTO BOOKINGS (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (3,5,3);
+INSERT INTO BOOKINGS (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (4,4,2);
+</code></pre>
+<h3 id="denormalise-the-data">Denormalise the data</h3>
+<p>To give us a single view of the passenger/flight data we'll denormalise down the three tables into one. First, we join the customers to bookings that they've made, and build a new table as a result: </p>
+<pre><code class="language-sql">SET 'auto.offset.reset' = 'earliest';
+
+CREATE TABLE CUSTOMER_BOOKINGS AS 
+  SELECT C.*, B.ID, B.FLIGHT_ID
+  FROM   BOOKINGS B
+          INNER JOIN CUSTOMERS C
+              ON B.CUSTOMER_ID = C.ID;
+</code></pre>
+<p>From here we join to details of the flights themselves: </p>
+<pre><code class="language-sql">SET 'auto.offset.reset' = 'earliest';
+
+CREATE TABLE CUSTOMER_FLIGHTS 
+  WITH (KAFKA_TOPIC='customer_flights') AS
+  SELECT CB.*, F.*
+  FROM   CUSTOMER_BOOKINGS CB
+          INNER JOIN FLIGHTS F
+              ON CB.FLIGHT_ID=F.ID;
+</code></pre>
+<p>At this stage we can query the data held in the tables to show which customers are booked on which flights: </p>
+<pre><code class="language-sql">SET 'auto.offset.reset' = 'earliest';
+
+SELECT  CB_C_NAME           AS NAME
+      , CB_C_EMAIL          AS EMAIL
+      , CB_C_LOYALTY_STATUS AS LOYALTY_STATUS
+      , F_ORIGIN            AS ORIGIN
+      , F_DESTINATION       AS DESTINATION
+      , F_CODE              AS CODE
+      , F_SCHEDULED_DEP     AS SCHEDULED_DEP 
+FROM CUSTOMER_FLIGHTS
+EMIT CHANGES;      
+</code></pre>
+<pre><code>+---------------+------------------------+---------------+-------+------------+-----+------------------------+
+|NAME           |EMAIL                   |LOYALTY_STATUS |ORIGIN |DESTINATION |CODE |SCHEDULED_DEP           |
++---------------+------------------------+---------------+-------+------------+-----+------------------------+
+|Gilly Crocombe |gcrocombe1@homestead.com|Silver         |LBA    |AMS         |642  |2021-11-18T06:04:00.000 |
+|Ker Omond      |komond3@usnews.com      |Silver         |LBA    |LHR         |9607 |2021-11-18T07:36:00.000 |
+|Gleda Lealle   |glealle0@senate.gov     |Silver         |LBA    |AMS         |642  |2021-11-18T06:04:00.000 |
+|Ker Omond      |komond3@usnews.com      |Silver         |AMS    |TXL         |7968 |2021-11-18T08:11:00.000 |
+</code></pre>
+<p>The last step in denormalising the data is to set the key of the table to that of the Flight ID so that it can be joined to the updates (which we'll get to below). </p>
+<pre><code class="language-sql">SET 'auto.offset.reset' = 'earliest';
+
+CREATE STREAM CF_STREAM WITH (KAFKA_TOPIC='customer_flights', FORMAT='AVRO');
+
+CREATE STREAM CF_REKEY WITH (KAFKA_TOPIC='cf_rekey') AS 
+  SELECT F_ID                 AS FLIGHT_ID
+        , CB_C_ID             AS CUSTOMER_ID
+        , CB_C_NAME           AS CUSTOMER_NAME
+        , CB_C_ADDRESS        AS CUSTOMER_ADDRESS
+        , CB_C_EMAIL          AS CUSTOMER_EMAIL
+        , CB_C_PHONE          AS CUSTOMER_PHONE
+        , CB_C_LOYALTY_STATUS AS CUSTOMER_LOYALTY_STATUS
+        , F_ORIGIN            AS FLIGHT_ORIGIN
+        , F_DESTINATION       AS FLIGHT_DESTINATION
+        , F_CODE              AS FLIGHT_CODE
+        , F_SCHEDULED_DEP     AS FLIGHT_SCHEDULED_DEP
+        , F_SCHEDULED_ARR     AS FLIGHT_SCHEDULED_ARR
+  FROM CF_STREAM
+  PARTITION BY F_ID;
+
+CREATE TABLE CUSTOMER_FLIGHTS_REKEYED 
+  (FLIGHT_ID INT PRIMARY KEY) 
+  WITH (KAFKA_TOPIC='cf_rekey', FORMAT='AVRO');
+
+</code></pre>
+<p>We now have the <code>CUSTOMER_FLIGHTS</code> table, but keyed on <code>FLIGHT_ID</code>. </p>
+<h3 id="add-a-stream-of-flight-updates">Add a stream of flight updates</h3>
+<p>In the <code>FLIGHTS</code> table above we have the scheduled departure time of a flight (<code>SCHEDULED_DEP</code>). Now let's introduce a stream of events that any flight changes will be written to. Again, we're populating it directly, but in the real world it'll be coming from elsewhere - perhaps Kafka Connect pulling the data from a JMS queue (or any of the other <a href="https://hub.confluent.io">hundreds of supported sources</a>). </p>
+<pre><code class="language-sql">CREATE STREAM FLIGHT_UPDATES (ID          INT KEY
+                            , FLIGHT_ID   INT
+                            , UPDATED_DEP TIMESTAMP
+                            , REASON      VARCHAR
+                             )
+              WITH (KAFKA_TOPIC='flight_updates'
+                   , FORMAT='AVRO'
+                   , PARTITIONS=6);
+</code></pre>
+<h3 id="join-data">Join data</h3>
+<p>By joining between our customer flight booking data and any flight updates we can provide a stream of notifications to passengers. Many platforms exist for providing the push notification, whether bespoke in-app or using a <a href="https://www.confluent.io/blog/building-a-telegram-bot-powered-by-kafka-and-ksqldb/">third-party messaging tool</a>. ksqlDB can integrate with these using its <a href="https://docs.ksqldb.io/en/latest/developer-guide/api/">REST interface</a>, native <a href="https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-clients/java-client/">Java client</a>, or one of the several <a href="https://docs.ksqldb.io/en/0.22.0-ksqldb/developer-guide/ksqldb-clients/">community-supported clients</a>. </p>
+<p>In one ksqlDB window run the following ksqlDB query to return customer details with flight updates. This is the same query that you would run from your application, and runs continuously. </p>
+<pre><code class="language-sql">SELECT  CUSTOMER_NAME
+      , FU.REASON      AS FLIGHT_CHANGE_REASON 
+      , FU.UPDATED_DEP AS FLIGHT_UPDATED_DEP
+      , FLIGHT_SCHEDULED_DEP 
+      , CUSTOMER_EMAIL
+      , CUSTOMER_PHONE
+      , FLIGHT_DESTINATION
+      , FLIGHT_CODE
+  FROM FLIGHT_UPDATES FU
+        INNER JOIN CUSTOMER_FLIGHTS_REKEYED CB
+        ON FU.FLIGHT_ID = CB.FLIGHT_ID
+EMIT CHANGES;
+</code></pre>
+<p>In another ksqlDB window add some data to the flight update stream: </p>
+<pre><code>INSERT INTO FLIGHT_UPDATES (ID, FLIGHT_ID, UPDATED_DEP, REASON) VALUES (1, 2, '2021-11-18T09:00:00.000', 'Cabin staff unavailable');
+INSERT INTO FLIGHT_UPDATES (ID, FLIGHT_ID, UPDATED_DEP, REASON) VALUES (2, 3, '2021-11-19T14:00:00.000', 'Mechanical checks');
+INSERT INTO FLIGHT_UPDATES (ID, FLIGHT_ID, UPDATED_DEP, REASON) VALUES (3, 1, '2021-11-19T08:10:09.000', 'Icy conditions');
+</code></pre>
+<p>In the original window you will see the details of which passengers are impacted by which flight changes:</p>
+<pre><code>+---------------+------------------------+--------------------+----------------------+---------------------------+------------------+-------------------+------------+
+|CUSTOMER_NAME  |FLIGHT_CHANGE_REASON    |FLIGHT_UPDATED_DEP  |FLIGHT_SCHEDULED_DEP  |CUSTOMER_EMAIL             |CUSTOMER_PHONE    |FLIGHT_DESTINATION |FLIGHT_CODE |
++---------------+------------------------+--------------------+----------------------+---------------------------+------------------+-------------------+------------+
+|Gleda Lealle   |Icy conditions          |2021-11-19T08:10:09 |2021-11-18T06:04:00   |glealle0@senate.gov        |+351 831 301 6746 |AMS                |642         |
+|Ker Omond      |Cabin staff unavailable |2021-11-18T09:00:00 |2021-11-18T07:36:00   |komond3@usnews.com         |+33 515 323 0170  |LHR                |9607        |
+|Arline Synnott |Mechanical checks       |2021-11-19T14:00:00 |2021-11-18T08:11:00   |asynnott4@theatlantic.com  |+62 953 759 8885  |TXL                |7968        |
+</code></pre>
                 
                   
                 
@@ -1141,7 +1430,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../operations/salesforce/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Handle Corrupted Data From Salesforce" rel="prev">
+        <a href="../../social/online-matches/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Match Mutually Interested Online Dating Users" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1150,20 +1439,20 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
               <span class="md-footer__direction">
                 Previous
               </span>
-              Handle Corrupted Data From Salesforce
+              Match Mutually Interested Online Dating Users
             </div>
           </div>
         </a>
       
       
         
-        <a href="../inventory/" class="md-footer__link md-footer__link--next" aria-label="Next: View Real-time Inventory" rel="next">
+        <a href="../fleet_management/" class="md-footer__link md-footer__link--next" aria-label="Next: Build a Real-time Fleet Management System" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              View Real-time Inventory
+              Build a Real-time Fleet Management System
             </div>
           </div>
           <div class="md-footer__button md-icon">
