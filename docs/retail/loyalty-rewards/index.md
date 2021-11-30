@@ -24,11 +24,33 @@ schemes...
 
 --8<-- "docs/shared/ccloud_setup.md"
 
+### Read the data in
+
+--8<-- "docs/shared/connect.md"
+
+```json
+--8<-- "docs/retail/loyalty-rewards/source.json"
+```
+
+--8<-- "docs/shared/manual_insert.md"
+
 ### Run stream processing app
+
+--8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ``` sql
 --8<-- "docs/retail/loyalty-rewards/process.sql"
 ```
+
+--8<-- "docs/shared/manual_cue.md"
+
+```sql
+--8<-- "docs/retail/fleet_management/manual.sql"
+```
+
+## Cleanup
+
+--8<-- "docs/shared/cleanup.md"
 
 ## Explanation
 
@@ -265,7 +287,3 @@ SELECT * FROM promotion_loose_leaf;
 ```
 
 That's enough campaigning for one day. I think it's time for a tea break...
-
-## Cleanup
-
---8<-- "docs/shared/cleanup.md"

@@ -25,6 +25,7 @@ CREATE STREAM purchases (
   VALUE_FORMAT = 'AVRO',
   PARTITIONS = 3
 );
+
 -- Summarize products.
 CREATE TABLE all_products AS
   SELECT
