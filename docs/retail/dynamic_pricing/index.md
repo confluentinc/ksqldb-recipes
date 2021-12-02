@@ -9,7 +9,7 @@ seo:
 An online marketplace keeps track of statistics regarding pricing: lowest, median, etc.
 These statistics enable buyers and sellers to make dynamic offers based on historical sales events.
 
-## Step by Step
+## Step by step
 
 ### Set up your environment
 

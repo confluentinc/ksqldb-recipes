@@ -12,7 +12,7 @@ With ksqlDB, you can filter and react to events in real time rather than perform
 
 ![SSH-attack](../../img/ssh-attack.png)
 
-## Step by Step
+## Step by step
 
 ### Set up your environment
 
