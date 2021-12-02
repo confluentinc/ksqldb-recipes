@@ -19,7 +19,7 @@ This recipe shows you how to process and coalesce that telemetry using ksqlDB an
 
 --8<-- "docs/shared/connect.md"
 
-In this example, the telemetry is stored in two tables in a database and is read into two Kafka topics in Confluent Cloud.
+In this example, the telemetry events are stored in Postgres database tables. The connector reads from the tables and writes the data into Kafka topics in Confluent Cloud.
 
 ```json
 --8<-- "docs/internet-of-things/coalesce/source.json"
