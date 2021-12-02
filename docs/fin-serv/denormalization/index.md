@@ -4,18 +4,18 @@ seo:
   description: This recipe demonstrates this principle by streaming from a SQL Server, denormalizing the data, and writing to Snowflake.
 ---
 
-# Denormalize Change Data Capture (CDC) for Orders
+# Denormalize change data capture (CDC) for orders
 
-If you have transactional events for orders in a marketplace, you can stream the Change Data Capture (CDC) and denormalize the events.
+If you have transactional events for orders in a marketplace, you can stream the change data capture (CDC) and denormalize the events.
 Denormalization is a well-established pattern for performance because querying a single table of enriched data will often perform better than querying across multiple at runtime.
-You can consume the denormalized events from  downstream applications in your business, or stream them to another destination.
+You can consume the denormalized events from downstream applications in your business, or stream them to another destination.
 This recipe demonstrates this principle by streaming from a SQL Server, denormalizing the data, and writing to Snowflake.
 
 ![denormalized](../../img/denormalized-data.png)
 
-## Step-by-step
+## Step by step
 
-### Setup your Environment
+### Set up your environment
 
 --8<-- "docs/shared/ccloud_setup.md"
 
@@ -23,7 +23,7 @@ This recipe demonstrates this principle by streaming from a SQL Server, denormal
 
 --8<-- "docs/shared/connect.md"
 
-Change Data Capture (CDC) for orders is being written to a SQL Server database, and there is an Oracle database with customer data.
+Change data capture (CDC) for orders is being written to a SQL Server database, and there is an Oracle database with customer data.
 
 ```json
 --8<-- "docs/fin-serv/denormalization/source.json"
@@ -31,7 +31,7 @@ Change Data Capture (CDC) for orders is being written to a SQL Server database, 
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run stream processing app
+### Run the stream processing app
 
 This streams the user orders and denormalizes the data by joining facts (orders) with the dimension (customer).
 
