@@ -1,26 +1,26 @@
 ---
 seo:
   title: Build Customer Loyalty Schemes
-  description: This recipe tracks customers' purchasing patterns, generating tailored rewards for a loyalty scheme.
+  description: This ksqlDB recipe tracks customer purchasing patterns to generate tailored rewards for a loyalty scheme.
 ---
 
-# Build Customer Loyalty Schemes
+# Build customer loyalty schemes
 
 Customer loyalty schemes are everywhere in retail, even if it's just
 as simple as, "Get 10 stamps on this card and we'll give you a free
-coffee." Let's level-up our marketing strategy and take a look at how
-we can build some increasingly-sophisticated reward schemes:
+coffee." Let's level up our marketing strategy and take a look at how
+we can build some increasingly sophisticated reward schemes:
 
-  * A simple, "the more you buy, the bigger your discount," scheme.
-  * An online version of the coffeeshop's, "Buy N, get 1 free," recurring discount.
-  * A customizable program that looks at individual customers'
-    behaviour and offers tailored rewards.
+  * A simple "the more you buy, the bigger your discount" scheme
+  * An online version of the coffee shop's recurring "buy N, get one free" discount
+  * A customizable program that looks at individual customer
+    behavior and offers tailored rewards
 
 We'll start by setting up an environment and some data to work with,
 then see how to make the raw sales data support our marketing
-schemes...
+schemes.
 
-### Setup your Environment
+### Set up your environment
 
 --8<-- "docs/shared/ccloud_setup.md"
 
@@ -34,9 +34,9 @@ schemes...
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run stream processing app
+### Run the stream processing app
 
-In this solution we'll look at different ways to analyze user behaviour and determine which rewards we want to issue to our customers.
+In this solution, we'll look at different ways to analyze user behavior and determine which rewards we want to issue to our customers.
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
@@ -56,15 +56,15 @@ In this solution we'll look at different ways to analyze user behaviour and dete
 
 ## Explanation
 
-### The More You Buy, The Bigger Your Discount
+### The more you buy, the bigger your discount
 
 To start with the simplest reward scheme, let's group our customers by
 how much they spend. We'll say anyone who spends over $400 is a Gold
-customer, over $300 for Silver and $200 for Bronze. Anyone else is
+customer, over $300 is Silver, and $200 is Bronze. Anyone else is
 still climbing that reward ladder.
 
 This query creates a simple "total by user" summary table, adding in a
-extra column that groups the users total into price bands:
+extra column that groups the user's total into price bands:
 
 ```sql
 CREATE TABLE sales_totals AS
@@ -81,14 +81,14 @@ CREATE TABLE sales_totals AS
   GROUP BY user_id;
 ```
 
-Querying from that table we get:
+Querying from that table, we get the following:
 
 ```sql
 SET 'ksql.query.pull.table.scan.enabled' = 'true';
 SELECT * FROM sales_totals;
 ```
 
-Result:
+Here is the result:
 
 ```txt
 +--------+-------+-------------+
@@ -112,7 +112,7 @@ Repeating that same query, Fido has pushed Kris into the Silver rewards scheme:
 SELECT * FROM sales_totals;
 ```
 
-Result:
+Here is the result:
 
 ```txt
 +--------+-------+-------------+
@@ -124,24 +124,23 @@ Result:
 |yeva    |368.07 |SILVER       |
 ```
 
-So we have campaign one - a table of users' reward levels, which updates
-automatically every time the user makes a purchase. That data will
-probably stream off to the users' account settings page so they can see
+So we have campaign one—a table of user reward levels, which updates
+automatically every time a user makes a purchase. That data will
+probably stream off to the user's account settings page so they can see
 their reward levels in an app, and it will probably be read by the
 billing system to calculate a fixed discount. We could also turn that
-table back into a stream, so every time the reward level changes, the
-user gets an email. But for now let's move on to a more complex
-use-case.
+table back into a stream so that every time the reward level changes, the
+user gets an email. But for now, let's move on to a more complex
+use case.
 
-### Buy 5 And The Next One's On Us
+### Buy five and the next one's on us
 
-The chances are high you have a coffee stamp card in your wallet. (Or
-several dozen of them.) To keep our test data small we'll be generous
-as say our customers only need to buy 5 coffees to get a free
+The chances are high that you have a coffee stamp card in your wallet (or
+several dozen of them). To keep our test data small, we'll say our customers only need to buy five coffees to get a free
 one. Whatever the number, the implementation of this scheme is
-straightforward. We count up the number of drinks they've
-purchased. When that number gets to 5 the next one's free, and as it
-hits that 6th free one, we reset to 0.
+straightforward. We count up the number of drinks that they've
+purchased. When that number gets to five, the next one is free, and as it
+hits that sixth (free) one, we reset to zero.
 
 ```sql
 CREATE TABLE caffeine_index AS
@@ -155,9 +154,10 @@ CREATE TABLE caffeine_index AS
   GROUP BY user_id;
 ```
 
-(_Note: If you're a programmer, that modulo operator `%` is going to
-be familiar. If not, you can read the `% 6` bit as, 'remainder after
-dividing by 6'._)
+**NOTE:**
+If you're a programmer, that modulo operator `%` is going to
+be familiar. If not, you can read the `% 6` bit as the "remainder after
+dividing by 6."
 
 Selecting from that table:
 ```sql
@@ -175,22 +175,22 @@ FROM caffeine_index;
 |yeva    |5     |5        |true          |
 ```
 
-(_Note: The `total` and `sequence` columns aren't strictly needed, but they help to show what's going on._)
+**NOTE:**
+The `total` and `sequence` columns aren't strictly needed, but they help to show what's going on.
 
-Again, this updates in real time, so as they purchase their free
-coffee the flag will flip back to `false` automatically.
+Again, this updates in real time, so as customers complete a transaction to get their free
+coffee, the flag will flip back to `false` automatically.
 
-### Custom Campaigns, Tailored Treats
+### Custom campaigns, tailored treats
 
-To finish up, let's think about some bespoke marketing campaigns. One
-to reward certain purchasing habits among our customers, and another
+To finish up, let's think about some bespoke marketing campaigns—one
+to reward certain purchasing habits among our customers and another
 to encourage them to try new things.
 
 As Acting Vice President In Charge Of Marketing, I have decided that
-being French is cool this season, and anyone who has bought a dog and
-a beret is going to get a discount on French Poodles. To figure out
+anyone who has bought a dog and a beret is going to get a discount on Poodles. To figure out
 who this applies to, let's scan through the purchases stream, narrow
-it down to the products we're interested in, and collect those
+it down to the products that we're interested in, and collect those
 products in a set:
 
 ```sql
@@ -203,7 +203,7 @@ GROUP BY user_id
 EMIT CHANGES;
 ```
 
-Result:
+Here is the result:
 
 ```txt
 +-------------------------------------+-------------------------------------+
@@ -216,7 +216,7 @@ Result:
 |kris                                 |[beret, dog]                         |
 ```
 
-That looks about right. Now we just turn that into a table which only
+That looks about right. Now we just turn that into a table, which only
 shows rows that are `HAVING` both products in their purchase set:
 
 ```sql
@@ -234,7 +234,7 @@ CREATE TABLE promotion_french_poodle
   EMIT changes;
 ```
 
-Querying that:
+Querying that looks like this:
 
 ```sql
 SELECT * FROM promotion_french_poodle;
@@ -247,16 +247,16 @@ SELECT * FROM promotion_french_poodle;
 |kris                    |[beret, dog]            |french_poodle           |
 ```
 
-(_Note: It doesn't matter which order they bought the items in, or if
-they bought more than one. We'll get the same result._)
+**NOTE:**
+It doesn't matter which order they bought the items in or if
+they bought more than one. We'll get the same result.
 
-Last, let's try something with a similar query, but a very different
-business angle. We've decided it's now Anglophile month, and we'd like
-to find all the customers who drink coffee, but have never tried
+Lastly, let's try something with a similar query but a very different
+business angle. We'd like to find all the customers who drink coffee but have never tried
 tea. Maybe a discount voucher would encourage them to give it a taste?
 
 Let's create a table that scans the purchase stream, picks out coffee
-and tea, and finds the users `HAVING` bought coffee, `AND NOT` tea.
+and tea, and finds the users `HAVING` bought coffee `AND NOT` tea.
 To keep it meaningful, we'll also limit it to customers who've spent
 at least $20 with us.
 
@@ -275,7 +275,7 @@ CREATE TABLE promotion_loose_leaf AS
   AND sum(price) > 20;
 ```
 
-Querying that table:
+Querying that table looks like this:
 
 ```sql
 SELECT * FROM promotion_loose_leaf;
