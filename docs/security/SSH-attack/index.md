@@ -72,4 +72,3 @@ Process the syslog events by flagging events with invalid users, stripping out a
 
 --8<-- "docs/shared/cleanup.md"
 
-## Explanation
