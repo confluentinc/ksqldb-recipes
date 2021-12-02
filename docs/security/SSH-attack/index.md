@@ -1,34 +1,34 @@
 ---
 seo:
   title: Detect and Analyze SSH Attacks
-  description: This recipe processes Syslog data to detect bad logins and streams out those pairs of usernames and IP addresses.
+  description: This ksqlDB recipe processes Syslog data to detect bad logins and streams out those pairs of usernames and IP addresses.
 ---
 
-# Detect and Analyze SSH Attacks
+# Detect and analyze SSH attacks
 
-There are lots of ways SSH can be abused but one of the most straightforward ways to detect a problem is to monitor for rejected logins.
+There are lots of ways that SSH can be abused, but one of the most straightforward ways to detect a problem is to monitor for rejected logins.
 This recipe processes Syslog data to detect bad logins and streams out those pairs of usernames and IP addresses.
 With ksqlDB, you can filter and react to events in real time rather than performing historical analysis of Syslog data from cold storage.
 
 ![SSH-attack](../../img/ssh-attack.png)
 
-## Step-by-Step
+## Step by Step
 
-### Setup your Environment
+### Set up your environment
 
 --8<-- "docs/shared/ccloud_setup.md"
 
 ### Read the data in
 
-This recipe is a great demonstration on how to run a self-managed connector, to push syslog data into Confluent Cloud into a Kafka topic called `syslog`.
+This recipe is a great demonstration on how to run a self-managed connector and push syslog data into Confluent Cloud into a Kafka topic called `syslog`.
 
-Create a file called `Dockerfile` to bundle a connect worker with `kafka-connect-syslog`:
+Create a file called `Dockerfile` to bundle a Kafka Connect worker with `kafka-connect-syslog`:
 
 ```text
 --8<-- "docs/security/SSH-attack/Dockerfile"
 ```
 
-Build the custom Docker image with the command:
+Build the custom Docker image with this command:
 
 ```
 docker build \
@@ -42,7 +42,7 @@ Create a file called `docker-compose.yml` with the following content, substituti
 --8<-- "docs/security/SSH-attack/docker-compose.yml"
 ```
 
-Run the container with:
+Run the container with this:
 
 ```
 docker-compose up -d
@@ -50,10 +50,10 @@ docker-compose up -d
 
 Now you should have Syslog messages being written to the topic `syslog` in Confluent Cloud.
 
-### Run stream processing app
+### Run the stream processing app
 
-Process the syslog events by flagging events with invalid users, stripping out all the other unnecessary fields, and creating just a stream of relevant information.
-There are many ways to customize the resulting stream to fit the business needs: this example also demonstrates how to enrich the stream with a new field `FACILITY_DESCRIPTION` with human-readable content.
+Process the syslog events by flagging events with invalid users, stripping out all the other unnecessary fields, and creating a stream of relevant information.
+There are many ways to customize the resulting stream to fit the business needs. This particular example also demonstrates how to enrich the stream with a new field `FACILITY_DESCRIPTION` and human-readable content.
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
@@ -61,7 +61,7 @@ There are many ways to customize the resulting stream to fit the business needs:
 --8<-- "docs/security/SSH-attack/process.sql"
 ```
 
-## Full ksqlDB Statements
+## Full ksqlDB statements
 
 --8<-- "docs/shared/code_summary.md"
 
