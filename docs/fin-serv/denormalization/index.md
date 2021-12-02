@@ -23,7 +23,7 @@ This recipe demonstrates this principle by streaming from a SQL Server, denormal
 
 --8<-- "docs/shared/connect.md"
 
-Change data capture (CDC) for orders is being written to a SQL Server database, and there is an Oracle database with customer data.
+Change data capture (CDC) for orders is being read from a SQL Server database, and the customer data is being read from Oracle.
 
 ```json
 --8<-- "docs/fin-serv/denormalization/source.json"
