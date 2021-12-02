@@ -1,17 +1,17 @@
 ---
 seo:
   title: Check Payment Requests
-  description: This ksqlDB recipe shows you how to validate payments against available funds and anti-money-laundering (AML) policies
+  description: This ksqlDB recipe shows you how to validate payments against available funds and anti-money laundering (AML) policies.
 ---
 
-# Check Payment Requests
+# Check payment requests
 
-With financial services, it is useful to do real-time checking of customer payment requests.
-This recipe shows you how to validate payments against available funds and anti-money-laundering (AML) policies.
+With financial services, it is useful to check customer payment requests in real time.
+This recipe shows you how to validate payments against available funds and anti-money laundering (AML) policies.
 
-## Step-by-step
+## Step by step
 
-### Setup your Environment
+### Set up your environment
 
 --8<-- "docs/shared/ccloud_setup.md"
 
@@ -25,7 +25,7 @@ This recipe shows you how to validate payments against available funds and anti-
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run stream processing app
+### Run the stream processing app
 
 Now you can process the data in a variety of ways.
 
