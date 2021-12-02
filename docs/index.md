@@ -12,5 +12,5 @@ Each code example shows a ksqlDB query that you can run to process real-time dat
 
 # How to run
 
-Click in the navigation bar to view any recipe, its use case, and instructions for deploying it in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree).
+Click in the navigation bar to view any recipe, its use case, and instructions for deploying it in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes).
 ksqlDB recipes can also run on Confluent Platform, with appropriate modifications to the provided connector configuration files.
