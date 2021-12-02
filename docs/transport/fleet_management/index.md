@@ -28,8 +28,7 @@ This recipe enriches fleet location with individual vehicle information, so orga
 
 ### Run the stream processing app
 
-Now you can process the data in a variety of ways.
-In this case, the original fleet telemetry is enriched with details about the vehicle.
+This application will enrich the fleet telemetry events with details about the associated vehicle.
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
