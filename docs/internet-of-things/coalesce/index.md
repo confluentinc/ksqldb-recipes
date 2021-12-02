@@ -1,6 +1,6 @@
 ---
 seo:
-  title: Coalesce Telemetry
+  title: Coalesce telemetry
   description: This recipe demonstrates how to use ksqlDB to process telemetry for devices in the Internet of Things (IoT) and to set thresholds.
 ---
 
