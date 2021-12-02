@@ -1098,13 +1098,13 @@
 These statistics enable buyers and sellers to make dynamic offers based on historical sales events.</p>
 <h2 id="step-by-step">Step by step</h2>
 <h3 id="set-up-your-environment">Set up your environment</h3>
-<p>Set up your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully managed Apache Kafka® service.</p>
-<p>Then execute the recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which has language for processing the data in real time (and will soon support connector integration for reading and writing data to other data sources and sinks).</p>
+<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka® service. Within your environment create a <a href="https://ksqldb.io/">ksqlDB</a> application.</p>
+<p>ksqlDB supports a <code>SQL</code> language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
 <h3 id="read-the-data-in">Read the data in</h3>
-<p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to instantly connect to popular data sources and end systems in the cloud.
-This recipe shows one example of a data source, but you can substitute your own preferred connector to use any data source.
-The principles are the same, just modify the connector configuration shown below to fit your deployment (see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a>).</p>
-<p>To run a fully managed connector to write the data into Kafka topics, use the Confluent Cloud Console or <a href="https://docs.confluent.io/confluent-cli/current/overview.html">Confluent CLI</a> command <code>confluent connect create --config &lt;file&gt;</code>, and submit each connector separately.</p>
+<p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to quickly connect to popular data sources and end systems in the cloud.
+This recipe shows some example data sources, but you can substitute your own connectors to connect to any supported data source.
+The principles are the same, just modify the connector configuration shown below to fit your situation (see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a>).</p>
+<p>To run a fully-managed connector to source data into Kafka, use Confluent Cloud Console or <a href="https://docs.confluent.io/confluent-cli/current/overview.html">Confluent CLI</a> command <code>confluent connect create --config &lt;file&gt;</code>. Each connector must be created separately.</p>
 <p>For this recipe, we are interested in knowing each marketplace event for an item, specifically its pricing. 
 This creates a stream of events, upon which real-time stream processing can keep state and calculate pricing statistics.</p>
 <pre><code class="language-json">{
@@ -1179,7 +1179,7 @@ INNER JOIN items I ON S.item_id = I.item_id
 GROUP BY S.item_id
 EMIT CHANGES;
 </code></pre>
-<p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert mock data into source topics with the following statements:</p>
+<p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert example events into the source topics with the following statements:</p>
 <pre><code class="language-sql">INSERT INTO items (item_id, item_name) VALUES (1, 'Pikachu card');
 INSERT INTO items (item_id, item_name) VALUES (2, 'Charizard card');
 INSERT INTO items (item_id, item_name) VALUES (3, 'Mew card');

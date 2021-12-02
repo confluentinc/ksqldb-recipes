@@ -1126,8 +1126,8 @@ With ksqlDB, you can filter and react to events in real time rather than perform
 <p><img alt="SSH-attack" src="../../img/ssh-attack.png" /></p>
 <h2 id="step-by-step">Step by step</h2>
 <h3 id="set-up-your-environment">Set up your environment</h3>
-<p>Set up your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully managed Apache Kafka® service.</p>
-<p>Then execute the recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which has language for processing the data in real time (and will soon support connector integration for reading and writing data to other data sources and sinks).</p>
+<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka® service. Within your environment create a <a href="https://ksqldb.io/">ksqlDB</a> application.</p>
+<p>ksqlDB supports a <code>SQL</code> language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
 <h3 id="read-the-data-in">Read the data in</h3>
 <p>This recipe is a great demonstration on how to run a self-managed connector and push syslog data into Confluent Cloud into a Kafka topic called <code>syslog</code>.</p>
 <p>Create a file called <code>Dockerfile</code> to bundle a Kafka Connect worker with <code>kafka-connect-syslog</code>:</p>
