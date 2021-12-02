@@ -30,8 +30,6 @@ If a customer exceeds their average spend, the account will be flagged as a poss
 
 ### Run the stream processing app
 
-Now you can process the data in a variety of ways.
-
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ```sql
