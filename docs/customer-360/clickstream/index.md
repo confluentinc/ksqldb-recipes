@@ -1,10 +1,10 @@
 ---
 seo:
-  title: Understand User Behavior with Clickstream Data
-  description: This recipe processes clickstream data to understand the behavior of its online users
+  title: Understand User Behavior with Clickstream Data 
+  description: This ksqlDB recipe processes clickstream data to understand the behavior of its online users.
 ---
 
-# Understand User Behavior with Clickstream Data
+# Understand user behavior with clickstream data
 
 Analyzing clickstream data enables businesses to understand the behavior of its online users, for example:
 
@@ -15,9 +15,9 @@ Analyzing clickstream data enables businesses to understand the behavior of its 
 
 ![grafana](../../img/clickstream.png)
 
-## Step-by-step
+## Step by step
 
-### Setup your Environment
+### Set up your environment
 
 --8<-- "docs/shared/ccloud_setup.md"
 
@@ -31,11 +31,11 @@ This recipe creates simulated data with the `Datagen` connector.
 --8<-- "docs/customer-360/clickstream/source.json"
 ```
 
-Optional: to simulate a real-world scenario where user sessions aren't just always open but do close after some time, you can pause and resume the `DATAGEN_CLICKSTREAM` connector.
+Optional: To simulate a real-world scenario where user sessions aren't just always open but do close after some time, you can pause and resume the `DATAGEN_CLICKSTREAM` connector.
 
-### Run stream processing app
+### Run the stream processing app
 
-Now you can process the data in a variety of ways, by enriching the clickstream data with user information, analyze errors, aggregate data into windows of time, etc.
+Now you can process the data in a variety of ways by enriching the clickstream data with user information, analyze errors, aggregate data into windows of time, etc.
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
