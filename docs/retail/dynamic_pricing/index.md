@@ -1,17 +1,17 @@
 ---
 seo:
   title: Set Dynamic Pricing
-  description: This recipe demonstrates how to use ksqlDB to set dynamic pricing in an online marketplace
+  description: This recipe demonstrates how to use ksqlDB to set dynamic pricing in an online marketplace.
 ---
 
-# Set Dynamic Pricing
+# Set dynamic pricing
 
 An online marketplace keeps track of statistics regarding pricing: lowest, median, etc.
 These statistics enable buyers and sellers to make dynamic offers based on historical sales events.
 
-## Step-by-Step
+## Step by Step
 
-### Setup your Environment
+### Set up your environment
 
 --8<-- "docs/shared/ccloud_setup.md"
 
@@ -28,7 +28,7 @@ This creates a stream of events, upon which real-time stream processing can keep
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run stream processing app
+### Run the stream processing app
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
