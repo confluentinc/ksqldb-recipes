@@ -6,7 +6,7 @@ seo:
 
 # Check payment requests
 
-With financial services, it is useful check customer payment requests in real time.
+With financial services, it is useful to check customer payment requests in real time.
 This recipe shows you how to validate payments against available funds and anti-money laundering (AML) policies.
 
 ## Step by step
