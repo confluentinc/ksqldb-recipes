@@ -16,7 +16,7 @@
     
     
       
-        <title>Detect Unusual Credit Card Activity - ksqlDB Recipes</title>
+        <title>Detect unusual credit card activity - ksqlDB Recipes</title>
       
     
     
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Detect Unusual Credit Card Activity
+              Detect unusual credit card activity
             
           </span>
         </div>
@@ -201,7 +201,7 @@
   
     <li class="md-nav__item">
       <a href="../../customer-360/clickstream/" class="md-nav__link">
-        Understand User Behavior with Clickstream Data
+        Understand user behavior with clickstream data
       </a>
     </li>
   
@@ -283,12 +283,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Detect Unusual Credit Card Activity
+          Detect unusual credit card activity
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Detect Unusual Credit Card Activity
+        Detect unusual credit card activity
       </a>
       
         
@@ -307,15 +307,15 @@
       
         <li class="md-nav__item">
   <a href="#step-by-step" class="md-nav__link">
-    Step-by-step
+    Step by step
   </a>
   
-    <nav class="md-nav" aria-label="Step-by-step">
+    <nav class="md-nav" aria-label="Step by step">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#setup-your-environment" class="md-nav__link">
-    Setup your Environment
+  <a href="#set-up-your-environment" class="md-nav__link">
+    Set up your environment
   </a>
   
 </li>
@@ -328,8 +328,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-stream-processing-app" class="md-nav__link">
-    Run stream processing app
+  <a href="#run-the-stream-processing-app" class="md-nav__link">
+    Run the stream processing app
   </a>
   
 </li>
@@ -387,7 +387,7 @@
   
     <li class="md-nav__item">
       <a href="../denormalization/" class="md-nav__link">
-        Denormalize Change Data Capture (CDC) for Orders
+        Denormalize change data capture (CDC) for orders
       </a>
     </li>
   
@@ -426,7 +426,7 @@
   
     <li class="md-nav__item">
       <a href="../payment-status-check/" class="md-nav__link">
-        Check Payment Requests
+        Check payment requests
       </a>
     </li>
   
@@ -564,7 +564,7 @@
   
     <li class="md-nav__item">
       <a href="../../operations/data-center/" class="md-nav__link">
-        Analyze Data Center Power Usage
+        Analyze Datacenter Power Usage
       </a>
     </li>
   
@@ -603,7 +603,7 @@
   
     <li class="md-nav__item">
       <a href="../../operations/salesforce/" class="md-nav__link">
-        Handle Corrupted Data From Salesforce
+        Handle corrupted data from Salesforce
       </a>
     </li>
   
@@ -672,7 +672,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/dynamic_pricing/" class="md-nav__link">
-        Set Dynamic Pricing
+        Set dynamic pricing
       </a>
     </li>
   
@@ -711,7 +711,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/inventory/" class="md-nav__link">
-        View Real-time Inventory
+        View real-time inventory
       </a>
     </li>
   
@@ -819,7 +819,7 @@
   
     <li class="md-nav__item">
       <a href="../../security/SSH-attack/" class="md-nav__link">
-        Detect and Analyze SSH Attacks
+        Detect and analyze SSH attacks
       </a>
     </li>
   
@@ -888,7 +888,7 @@
   
     <li class="md-nav__item">
       <a href="../../social/online-matches/" class="md-nav__link">
-        Match Mutually Interested Online Dating Users
+        Match mutually interested online dating users
       </a>
     </li>
   
@@ -957,7 +957,7 @@
   
     <li class="md-nav__item">
       <a href="../../transport/aviation/" class="md-nav__link">
-        Notify Passengers of a Flight Delay
+        Notify passengers of a flight delay
       </a>
     </li>
   
@@ -996,7 +996,7 @@
   
     <li class="md-nav__item">
       <a href="../../transport/fleet_management/" class="md-nav__link">
-        Build a Real-time Fleet Management System
+        Build a real-time fleet management system
       </a>
     </li>
   
@@ -1041,15 +1041,15 @@
       
         <li class="md-nav__item">
   <a href="#step-by-step" class="md-nav__link">
-    Step-by-step
+    Step by step
   </a>
   
-    <nav class="md-nav" aria-label="Step-by-step">
+    <nav class="md-nav" aria-label="Step by step">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#setup-your-environment" class="md-nav__link">
-    Setup your Environment
+  <a href="#set-up-your-environment" class="md-nav__link">
+    Set up your environment
   </a>
   
 </li>
@@ -1062,8 +1062,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-stream-processing-app" class="md-nav__link">
-    Run stream processing app
+  <a href="#run-the-stream-processing-app" class="md-nav__link">
+    Run the stream processing app
   </a>
   
 </li>
@@ -1093,20 +1093,20 @@
               
                 
                 
-                <h1 id="detect-unusual-credit-card-activity">Detect Unusual Credit Card Activity</h1>
+                <h1 id="detect-unusual-credit-card-activity">Detect unusual credit card activity</h1>
 <p>In banking, fraud can involve using stolen credit cards, forging checks, misleading accounting practices, etc.
 This recipe analyzes total credit card spend.
 If a customer exceeds their average spend, the account will be flagged as a possible case of credit card theft.</p>
 <p><img alt="credit card being misused" src="../../img/credit-card-activity.jpg" /></p>
-<h2 id="step-by-step">Step-by-step</h2>
-<h3 id="setup-your-environment">Setup your Environment</h3>
-<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service.</p>
-<p>Then execute the recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which has language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks).</p>
+<h2 id="step-by-step">Step by step</h2>
+<h3 id="set-up-your-environment">Set up your environment</h3>
+<p>Set up your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully managed Apache Kafka® service.</p>
+<p>Then execute the recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which has language for processing the data in real time (and will soon support connector integration for reading and writing data to other data sources and sinks).</p>
 <h3 id="read-the-data-in">Read the data in</h3>
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to instantly connect to popular data sources and end systems in the cloud.
 This recipe shows one example of a data source, but you can substitute your own preferred connector to use any data source.
 The principles are the same, just modify the connector configuration shown below to fit your deployment (see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a>).</p>
-<p>To run a fully-managed connector to write the data into Kafka topics, use Confluent Cloud Console or <a href="https://docs.confluent.io/confluent-cli/current/overview.html">Confluent CLI</a> command <code>confluent connect create --config &lt;file&gt;</code>, submit each connector separately.</p>
+<p>To run a fully managed connector to write the data into Kafka topics, use the Confluent Cloud Console or <a href="https://docs.confluent.io/confluent-cli/current/overview.html">Confluent CLI</a> command <code>confluent connect create --config &lt;file&gt;</code>, and submit each connector separately.</p>
 <pre><code class="language-json">{
   &quot;connector.class&quot;          : &quot;OracleDatabaseSource&quot;,
   &quot;name&quot;                     : &quot;recipe-oracle-transactions-cc&quot;,
@@ -1144,11 +1144,11 @@ The principles are the same, just modify the connector configuration shown below
 }
 </code></pre>
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert data into the streams for testing using ksqlDB <code>INSERT INTO</code>.</p>
-<h3 id="run-stream-processing-app">Run stream processing app</h3>
+<h3 id="run-the-stream-processing-app">Run the stream processing app</h3>
 <p>Now you can process the data in a variety of ways.</p>
 <hr />
-<p><strong>NOTE</strong>
-Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.
+<p><strong>NOTE:</strong>
+The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.
 This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</p>
 <hr />
 <pre><code class="language-sql">-- Register the stream of transactions
@@ -1265,7 +1265,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../customer-360/clickstream/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Understand User Behavior with Clickstream Data" rel="prev">
+        <a href="../../customer-360/clickstream/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Understand user behavior with clickstream data" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1274,20 +1274,20 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
               <span class="md-footer__direction">
                 Previous
               </span>
-              Understand User Behavior with Clickstream Data
+              Understand user behavior with clickstream data
             </div>
           </div>
         </a>
       
       
         
-        <a href="../denormalization/" class="md-footer__link md-footer__link--next" aria-label="Next: Denormalize Change Data Capture (CDC) for Orders" rel="next">
+        <a href="../denormalization/" class="md-footer__link md-footer__link--next" aria-label="Next: Denormalize change data capture (CDC) for orders" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Denormalize Change Data Capture (CDC) for Orders
+              Denormalize change data capture (CDC) for orders
             </div>
           </div>
           <div class="md-footer__button md-icon">

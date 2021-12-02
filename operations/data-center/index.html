@@ -16,7 +16,7 @@
     
     
       
-        <title>Analyze Data Center Power Usage - ksqlDB Recipes</title>
+        <title>Analyze Datacenter Power Usage - ksqlDB Recipes</title>
       
     
     
@@ -63,7 +63,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#analyze-data-center-power-usage" class="md-skip">
+        <a href="#analyze-datacenter-power-usage" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Analyze Data Center Power Usage
+              Analyze Datacenter Power Usage
             
           </span>
         </div>
@@ -201,7 +201,7 @@
   
     <li class="md-nav__item">
       <a href="../../customer-360/clickstream/" class="md-nav__link">
-        Understand User Behavior with Clickstream Data
+        Understand user behavior with clickstream data
       </a>
     </li>
   
@@ -270,7 +270,7 @@
   
     <li class="md-nav__item">
       <a href="../../fin-serv/credit-card-activity/" class="md-nav__link">
-        Detect Unusual Credit Card Activity
+        Detect unusual credit card activity
       </a>
     </li>
   
@@ -309,7 +309,7 @@
   
     <li class="md-nav__item">
       <a href="../../fin-serv/denormalization/" class="md-nav__link">
-        Denormalize Change Data Capture (CDC) for Orders
+        Denormalize change data capture (CDC) for orders
       </a>
     </li>
   
@@ -348,7 +348,7 @@
   
     <li class="md-nav__item">
       <a href="../../fin-serv/payment-status-check/" class="md-nav__link">
-        Check Payment Requests
+        Check payment requests
       </a>
     </li>
   
@@ -499,12 +499,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Analyze Data Center Power Usage
+          Analyze Datacenter Power Usage
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Analyze Data Center Power Usage
+        Analyze Datacenter Power Usage
       </a>
       
         
@@ -523,15 +523,15 @@
       
         <li class="md-nav__item">
   <a href="#step-by-step" class="md-nav__link">
-    Step-by-step
+    Step by step
   </a>
   
-    <nav class="md-nav" aria-label="Step-by-step">
+    <nav class="md-nav" aria-label="Step by step">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#setup-your-environment" class="md-nav__link">
-    Setup your Environment
+  <a href="#set-up-your-environment" class="md-nav__link">
+    Set up your environment
   </a>
   
 </li>
@@ -544,8 +544,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-stream-processing-app" class="md-nav__link">
-    Run stream processing app
+  <a href="#run-the-stream-processing-app" class="md-nav__link">
+    Run the stream processing app
   </a>
   
 </li>
@@ -610,7 +610,7 @@
   
     <li class="md-nav__item">
       <a href="../salesforce/" class="md-nav__link">
-        Handle Corrupted Data From Salesforce
+        Handle corrupted data from Salesforce
       </a>
     </li>
   
@@ -679,7 +679,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/dynamic_pricing/" class="md-nav__link">
-        Set Dynamic Pricing
+        Set dynamic pricing
       </a>
     </li>
   
@@ -718,7 +718,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/inventory/" class="md-nav__link">
-        View Real-time Inventory
+        View real-time inventory
       </a>
     </li>
   
@@ -826,7 +826,7 @@
   
     <li class="md-nav__item">
       <a href="../../security/SSH-attack/" class="md-nav__link">
-        Detect and Analyze SSH Attacks
+        Detect and analyze SSH attacks
       </a>
     </li>
   
@@ -895,7 +895,7 @@
   
     <li class="md-nav__item">
       <a href="../../social/online-matches/" class="md-nav__link">
-        Match Mutually Interested Online Dating Users
+        Match mutually interested online dating users
       </a>
     </li>
   
@@ -964,7 +964,7 @@
   
     <li class="md-nav__item">
       <a href="../../transport/aviation/" class="md-nav__link">
-        Notify Passengers of a Flight Delay
+        Notify passengers of a flight delay
       </a>
     </li>
   
@@ -1003,7 +1003,7 @@
   
     <li class="md-nav__item">
       <a href="../../transport/fleet_management/" class="md-nav__link">
-        Build a Real-time Fleet Management System
+        Build a real-time fleet management system
       </a>
     </li>
   
@@ -1048,15 +1048,15 @@
       
         <li class="md-nav__item">
   <a href="#step-by-step" class="md-nav__link">
-    Step-by-step
+    Step by step
   </a>
   
-    <nav class="md-nav" aria-label="Step-by-step">
+    <nav class="md-nav" aria-label="Step by step">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#setup-your-environment" class="md-nav__link">
-    Setup your Environment
+  <a href="#set-up-your-environment" class="md-nav__link">
+    Set up your environment
   </a>
   
 </li>
@@ -1069,8 +1069,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-stream-processing-app" class="md-nav__link">
-    Run stream processing app
+  <a href="#run-the-stream-processing-app" class="md-nav__link">
+    Run the stream processing app
   </a>
   
 </li>
@@ -1107,21 +1107,21 @@
               
                 
                 
-                <h1 id="analyze-data-center-power-usage">Analyze Data Center Power Usage</h1>
-<p>If your business provides a cloud infrastructure offering with multiple physical data center locations with isolated tenants, you may have an accounting unit to monitor and accurately invoice your customers.
-The data centers consume large amounts of electricity which needs to be monitored to ensure business continuity, and each data center is constructed with smart electrical panels that control the power supplies to multiple customer tenants.
+                <h1 id="analyze-datacenter-power-usage">Analyze Datacenter Power Usage</h1>
+<p>If your business provides a cloud infrastructure offering with multiple physical datacenter locations with isolated tenants, you may have an accounting unit to monitor and accurately invoice your customers.
+The datacenters consume large amounts of electricity, which need to be monitored to ensure business continuity, and each datacenter is constructed with smart electrical panels that control the power supplies to multiple customer tenants.
 The smart panels emit telemetry data that is captured and produced into an Apache Kafka® topic, and this recipe demonstrates how to accurately bill each customer. </p>
 <p><img alt="" src="diagram.svg" /></p>
-<h2 id="step-by-step">Step-by-step</h2>
-<h3 id="setup-your-environment">Setup your Environment</h3>
-<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka service.</p>
-<p>Then execute the recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which has language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks).</p>
+<h2 id="step-by-step">Step by step</h2>
+<h3 id="set-up-your-environment">Set up your environment</h3>
+<p>Set up your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully managed Apache Kafka® service.</p>
+<p>Then execute the recipe with <code>SQL</code> syntax using Confluent Cloud ksqlDB, which has language for processing the data in real time (and will soon support connector integration for reading and writing data to other data sources and sinks).</p>
 <h3 id="read-the-data-in">Read the data in</h3>
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to instantly connect to popular data sources and end systems in the cloud.
 This recipe shows one example of a data source, but you can substitute your own preferred connector to use any data source.
 The principles are the same, just modify the connector configuration shown below to fit your deployment (see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a>).</p>
-<p>To run a fully-managed connector to write the data into Kafka topics, use Confluent Cloud Console or <a href="https://docs.confluent.io/confluent-cli/current/overview.html">Confluent CLI</a> command <code>confluent connect create --config &lt;file&gt;</code>, submit each connector separately.</p>
-<p>Our data center power analysis applications require data from two different sources: customer tenant information and smart control panel readings.</p>
+<p>To run a fully managed connector to write the data into Kafka topics, use the Confluent Cloud Console or <a href="https://docs.confluent.io/confluent-cli/current/overview.html">Confluent CLI</a> command <code>confluent connect create --config &lt;file&gt;</code>, and submit each connector separately.</p>
+<p>Our datacenter power analysis applications require data from two different sources: customer tenant information and smart control panel readings.</p>
 <pre><code class="language-sql">{
   &quot;connector.class&quot;       : &quot;MySqlCdcSource&quot;,
   &quot;name&quot;                  : &quot;Customer_Tenant_Source&quot;,
@@ -1151,10 +1151,10 @@ The principles are the same, just modify the connector configuration shown below
 }
 </code></pre>
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert data into the streams for testing using ksqlDB <code>INSERT INTO</code>.</p>
-<h3 id="run-stream-processing-app">Run stream processing app</h3>
+<h3 id="run-the-stream-processing-app">Run the stream processing app</h3>
 <hr />
-<p><strong>NOTE</strong>
-Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.
+<p><strong>NOTE:</strong>
+The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.
 This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</p>
 <hr />
 <pre><code class="language-sql">-- Create a Table for the captured tenant occupancy events
@@ -1239,8 +1239,8 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
 </code></pre>
 <p>If you also created connectors, you'll need to remove those as well.</p>
 <h2 id="explanation">Explanation</h2>
-<p>Typically, customer information would be sourced from an existing database. As customer occupancy changes, tables in the database would be updated and we can stream them into Kafka using Kafka Connect with <a href="https://www.confluent.io/blog/cdc-and-streaming-analytics-using-debezium-kafka/">Change Data Capture</a>. The earlier example of the <code>MySqlCdcSource</code> configuration could be used to capture changes from a <code>customer</code> database's <code>tenant</code> table into the Kafka cluster. This connector is provided <a href="https://docs.confluent.io/cloud/current/connectors/cc-mysql-source-cdc-debezium.html">fully managed by Confluent Cloud</a>.  </p>
-<p>Telemetry data may be sourced into Kafka in a variety of ways. MQTT is a popular source for Internet of Things (IoT) devices, and smart electrical panels may provide this functionality out of the box. The <a href="https://docs.confluent.io/cloud/current/connectors/cc-mqtt-source.html">MQTT Connector</a> is available <a href="https://docs.confluent.io/cloud/current/connectors/cc-mqtt-source.html">fully managed on Confluent Cloud</a>.</p>
+<p>Typically, customer information would be sourced from an existing database. As customer occupancy changes, tables in the database are updated and we can stream them into Kafka using Kafka Connect with <a href="https://www.confluent.io/blog/cdc-and-streaming-analytics-using-debezium-kafka/">change data capture</a>. The earlier example of the <code>MySqlCdcSource</code> configuration could be used to capture changes from a <code>customer</code> database's <code>tenant</code> table into the Kafka cluster. This connector is provided as <a href="https://docs.confluent.io/cloud/current/connectors/cc-mysql-source-cdc-debezium.html">fully managed on Confluent Cloud</a>.  </p>
+<p>Telemetry data may be sourced into Kafka in a variety of ways. MQTT is a popular source for the Internet of Things (IoT) devices, and smart electrical panels may provide this functionality out of the box. The <a href="https://docs.confluent.io/cloud/current/connectors/cc-mqtt-source.html">MQTT Connector</a> is available as <a href="https://docs.confluent.io/cloud/current/connectors/cc-mqtt-source.html">fully managed on Confluent Cloud</a>.</p>
 <p>The current state of customer tenant occupancy can be represented with a ksqlDB <code>TABLE</code>. Events streamed into the <code>tenant-occupancy</code> topic represent a customer (<code>customer_id</code>) beginning an occupancy of a particular tenant (<code>tenant_id</code>). As events are observed on the <code>tenant-occupancy</code> topic, the table will model the current set of tenant occupants. </p>
 <pre><code class="language-sql">CREATE TABLE tenant_occupancy (
   tenant_id VARCHAR PRIMARY KEY,
@@ -1255,7 +1255,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
 <p>You can query this table to determine which customer occupies which tenant.</p>
 <pre><code class="language-sql">SELECT * FROM tenant_occupancy EMIT CHANGES;
 </code></pre>
-<p>When customers leave a tenant, the source system will need to send a <a href="https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-table/#primary-key">Tombstone Record</a> (an event with a valid <code>tenant_id</code> key and a <code>null</code> value). ksqlDB will process the tombstone by removing the row with the given key from the table.</p>
+<p>When customers leave a tenant, the source system will need to send a <a href="https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-table/#primary-key">tombstone record</a> (an event with a valid <code>tenant_id</code> key and a <code>null</code> value). ksqlDB will process the tombstone by removing the row with the given key from the table.</p>
 <p>Panel sensor readings can be streamed directly into a topic or sourced from an upstream system. A <code>STREAM</code> captures the power readings when they flow from the smart panel into Kafka. Each event contains a panel identifier and the associated tenant, in addition to two power readings.</p>
 <pre><code class="language-sql">CREATE STREAM panel_power_readings (
   panel_id BIGINT,
@@ -1270,8 +1270,8 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
 );
 </code></pre>
 <ul>
-<li><code>panel_current_utilization</code> represents percentage of total capacity of the panel, and is useful for business continuation monitoring.</li>
-<li><code>tenant_kwh_usage</code> provides the total amount of energy consumed by the tenant in the current month. </li>
+<li><code>panel_current_utilization</code> represents the percentage of total capacity of the panel and is useful for business continuation monitoring</li>
+<li><code>tenant_kwh_usage</code> provides the total amount of energy consumed by the tenant in the current month </li>
 </ul>
 <p>To provide billing reports, a <code>STREAM</code> is created that joins the panel sensor readings with the customer tenant information. Functions are used to create a billable month indicator along with the necessary fields from the joined stream and table. </p>
 <pre><code class="language-sql">CREATE STREAM billable_power AS 
@@ -1286,7 +1286,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
       panel_power_readings.tenant_id = tenant_occupancy.tenant_id
   EMIT CHANGES;
 </code></pre>
-<p>Finally, the <code>billable_power_report</code> aggregates the <code>billable_power</code> stream into a <code>TABLE</code> which can be queried to create reports by month, customer, and tenant.</p>
+<p>Finally, the <code>billable_power_report</code> aggregates the <code>billable_power</code> stream into a <code>TABLE</code> that can be queried to create reports by month, customer, and tenant.</p>
 <pre><code class="language-sql">CREATE TABLE billable_power_report WITH (key_format='json') AS
   SELECT customer_id, tenant_id, billable_month, MAX(tenant_kwh_usage) as kwh
     FROM billable_power
@@ -1329,13 +1329,13 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
       
       
         
-        <a href="../salesforce/" class="md-footer__link md-footer__link--next" aria-label="Next: Handle Corrupted Data From Salesforce" rel="next">
+        <a href="../salesforce/" class="md-footer__link md-footer__link--next" aria-label="Next: Handle corrupted data from Salesforce" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Handle Corrupted Data From Salesforce
+              Handle corrupted data from Salesforce
             </div>
           </div>
           <div class="md-footer__button md-icon">
