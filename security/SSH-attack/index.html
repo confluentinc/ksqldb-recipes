@@ -805,19 +805,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#full-ksqldb-statements" class="md-nav__link">
-    Full ksqlDB statements
-  </a>
-  
-    <nav class="md-nav" aria-label="Full ksqlDB statements">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
   <a href="#cleanup" class="md-nav__link">
     Cleanup
@@ -827,6 +814,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explanation" class="md-nav__link">
+    Explanation
+  </a>
   
 </li>
       
@@ -1081,19 +1075,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#full-ksqldb-statements" class="md-nav__link">
-    Full ksqlDB statements
-  </a>
-  
-    <nav class="md-nav" aria-label="Full ksqlDB statements">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
   <a href="#cleanup" class="md-nav__link">
     Cleanup
@@ -1103,6 +1084,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explanation" class="md-nav__link">
+    Explanation
+  </a>
   
 </li>
       
@@ -1120,17 +1108,17 @@
                 
                 
                 <h1 id="detect-and-analyze-ssh-attacks">Detect and analyze SSH attacks</h1>
-<p>There are lots of ways that SSH can be abused, but one of the most straightforward ways to detect a problem is to monitor for rejected logins.
-This recipe processes Syslog data to detect bad logins and streams out those pairs of usernames and IP addresses.
-With ksqlDB, you can filter and react to events in real time rather than performing historical analysis of Syslog data from cold storage.</p>
+<p>There are lots of ways SSH can be abused, but one of the most straightforward ways to detect a problem is to monitor for failed login attempts.
+This recipe processes Syslog data and streams out pairs of usernames and IP addresses from failed login attempts.
+With <a href="https://ksqldb.io/">ksqlDB</a>, you can filter and react to events in real time rather than performing historical analysis of Syslog data at rest.</p>
 <p><img alt="SSH-attack" src="../../img/ssh-attack.png" /></p>
 <h2 id="step-by-step">Step by step</h2>
 <h3 id="set-up-your-environment">Set up your environment</h3>
-<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka® service. Within your environment create a <a href="https://ksqldb.io/">ksqlDB</a> application.</p>
-<p>ksqlDB supports a <code>SQL</code> language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
+<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/">Confluent Cloud</a>, a fully-managed Apache Kafka® service, and within your environment create a <a href="https://ksqldb.io/">ksqlDB</a> application.</p>
+<p>ksqlDB supports a <code>SQL</code> language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
 <h3 id="read-the-data-in">Read the data in</h3>
-<p>This recipe is a great demonstration on how to run a self-managed connector and push syslog data into Confluent Cloud into a Kafka topic called <code>syslog</code>.</p>
-<p>Create a file called <code>Dockerfile</code> to bundle a Kafka Connect worker with <code>kafka-connect-syslog</code>:</p>
+<p>This recipe demonstrates how to run a self-managed connector to push syslog data into a Kafka topic called <code>syslog</code> on Confluent Cloud.</p>
+<p>Create the below <code>Dockerfile</code> to bundle a connect worker with the <code>kafka-connect-syslog</code> connector:</p>
 <pre><code class="language-text">FROM confluentinc/cp-server-connect-base:6.2.0
 
 ENV CONNECT_PLUGIN_PATH=&quot;/usr/share/java,/usr/share/confluent-hub-components&quot;
@@ -1151,7 +1139,7 @@ CMD [&quot;/etc/confluent/docker/run&quot;]
    -t localbuild/connect_distributed_with_syslog:1.3.4 \
    -f Dockerfile .
 </code></pre>
-<p>Create a file called <code>docker-compose.yml</code> with the following content, substituting your Confluent Cloud connection information:</p>
+<p>Next, create a <code>docker-compose.yml</code> file with the following content, substituting your Confluent Cloud connection information:</p>
 <pre><code class="language-text">---
 version: '2'
 services:
@@ -1163,7 +1151,7 @@ services:
     ports:
       - &quot;8083:8083&quot;
     environment:
-      CONNECT_BOOTSTRAP_SERVERS: $BOOTSTRAP_SERVERS
+      CONNECT_BOOTSTRAP_SERVERS: &lt; BOOTSTRAP SERVER &gt;
       CONNECT_REST_PORT: 8083
       CONNECT_GROUP_ID: &quot;connect&quot;
       CONNECT_CONFIG_STORAGE_TOPIC: recipe-connect-configs
@@ -1181,137 +1169,93 @@ services:
       CONNECT_LOG4J_LOGGERS: org.reflections=ERROR
       # Connect worker
       CONNECT_SECURITY_PROTOCOL: SASL_SSL
-      CONNECT_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
+      CONNECT_SASL_JAAS_CONFIG: &lt; SASL JAAS CONFIG &gt;
       CONNECT_SASL_MECHANISM: PLAIN
       # Connect producer
       CONNECT_PRODUCER_SECURITY_PROTOCOL: SASL_SSL
-      CONNECT_PRODUCER_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
+      CONNECT_PRODUCER_SASL_JAAS_CONFIG: &lt; SASL JAAS CONFIG &gt;
       CONNECT_PRODUCER_SASL_MECHANISM: PLAIN
       # Connect consumer
       CONNECT_CONSUMER_SECURITY_PROTOCOL: SASL_SSL
-      CONNECT_CONSUMER_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
+      CONNECT_CONSUMER_SASL_JAAS_CONFIG: &lt; SASL JAAS CONFIG &gt; 
       CONNECT_CONSUMER_SASL_MECHANISM: PLAIN
 </code></pre>
 <p>Run the container with this:</p>
 <pre><code>docker-compose up -d
 </code></pre>
-<p>Now you should have Syslog messages being written to the topic <code>syslog</code> in Confluent Cloud.</p>
+<p>Now you should have Syslog messages being written to the <code>syslog</code> topic in Confluent Cloud.</p>
+<p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert data into the streams for testing using ksqlDB <code>INSERT INTO</code>.</p>
 <h3 id="run-the-stream-processing-app">Run the stream processing app</h3>
-<p>Process the syslog events by flagging events with invalid users, stripping out all the other unnecessary fields, and creating a stream of relevant information.
-There are many ways to customize the resulting stream to fit the business needs. This particular example also demonstrates how to enrich the stream with a new field <code>FACILITY_DESCRIPTION</code> and human-readable content.</p>
+<p>Process the syslog events by flagging events with invalid users, stripping out all the other unnecessary fields, and creating just a stream of relevant information. There are many ways to customize the resulting stream to fit the business needs: this example also demonstrates how to enrich the stream with a new field <code>FACILITY_DESCRIPTION</code> with human-readable content.</p>
 <hr />
 <p><strong>NOTE:</strong>
 The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.
 This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</p>
 <hr />
-<pre><code class="language-sql">-- Define Kafka parameters
-DEFINE topic = 'syslog';
-
--- Extract relevant fields from log messages
-CREATE OR REPLACE STREAM `syslog` WITH (
-  KAFKA_TOPIC = '${topic}',
+<pre><code class="language-sql">-- Extract relevant fields from log messages
+CREATE STREAM syslog (
+  ts varchar, 
+  host varchar,
+  facility int,
+  message varchar,
+  remote_address varchar 
+) WITH (
+  KAFKA_TOPIC = 'syslog',
   VALUE_FORMAT = 'json',
   PARTITIONS = 6
 );
 
-CREATE STREAM `by_facility` AS
-  SELECT
-    TIMESTAMPTOSTRING(TIMESTAMP, 'yyyy-MM-dd HH:mm:ss') AS SYSLOG_TIMESTAMP,
-    HOST,
-    FACILITY,
-    MESSAGE,
-    REMOTEADDRESS         
-  FROM `syslog`
-  PARTITION BY FACILITY
-  EMIT CHANGES;
-
 -- Flag events with invalid users, and enrich with a new field 'FACILITY_DESCRIPTION'
-CREATE STREAM `invalid_users` AS
+CREATE STREAM invalid_users AS
   SELECT
-    SYSLOG_TIMESTAMP,
-    HOST,
-    FACILITY,
-    MESSAGE, 
-    REMOTEADDRESS,
-    CASE WHEN FACILITY = 0 THEN 'kernel messages'
-         WHEN FACILITY = 1 THEN 'user-level messages'
-         WHEN FACILITY = 2 THEN 'mail system'
-         WHEN FACILITY = 3 THEN 'system daemons'
-         WHEN FACILITY = 4 THEN 'security/authorization messages'
-         WHEN FACILITY = 5 THEN 'messages generated internally by syslogd'
-         WHEN FACILITY = 6 THEN 'line printer subsystem'
+    FORMAT_TIMESTAMP(ts, 'yyyy-MM-dd HH:mm:ss') AS syslog_timestamp,
+    host,
+    facility,
+    message, 
+    remote_address,
+    CASE WHEN facility = 0 THEN 'kernel messages'
+         WHEN facility = 1 THEN 'user-level messages'
+         WHEN facility = 2 THEN 'mail system'
+         WHEN facility = 3 THEN 'system daemons'
+         WHEN facility = 4 THEN 'security/authorization messages'
+         WHEN facility = 5 THEN 'messages generated internally by syslogd'
+         WHEN facility = 6 THEN 'line printer subsystem'
          ELSE '&lt;unknown&gt;'
-       END AS FACILITY_DESCRIPTION
-  FROM `by_facility`
-  WHERE MESSAGE LIKE 'Invalid user%'
+       END AS facility_description
+  FROM syslog 
+  WHERE message LIKE 'Invalid user%'
   EMIT CHANGES;
 
 -- Create actionable stream of SSH attacks, enriched with user and IP
-CREATE STREAM `ssh_attacks` AS 
+CREATE STREAM ssh_attacks AS 
   SELECT
-    SYSLOG_TIMESTAMP,
-    HOST,
-    FACILITY_DESCRIPTION,
-    SPLIT(REPLACE(MESSAGE,'Invalid user ',''),' from ')[1] AS ATTACK_USER,
-    SPLIT(REPLACE(MESSAGE,'Invalid user ',''),' from ')[2] AS ATTACK_IP
-  FROM `invalid_users`
+    syslog_timestamp,
+    host,
+    facility_description,
+    SPLIT(REPLACE(message, 'Invalid user ', ''), ' from ')[1] AS attack_user,
+    remote_address AS attack_ip
+  FROM invalid_users
   EMIT CHANGES;
 </code></pre>
-<h2 id="full-ksqldb-statements">Full ksqlDB statements</h2>
-<p>Here is the full recipe that you can run with ksqlDB, a consolidation of all the steps shown above.</p>
-<p>Run the Syslog source connector locally, then proceed with ksqlDB to process the Syslog messages.</p>
-<pre><code class="language-sql">-- Define Kafka parameters
-DEFINE topic = 'syslog';
+<p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert example events into the source topics with the following statements:</p>
+<pre><code class="language-sql">-- tenant_id is in the form of a resource name used to indicate the 
+--  data center provider, country, regional locale, and tenant id
+INSERT INTO tenant_occupancy (tenant_id, customer_id) VALUES ('dc:eqix:us:chi1:12', 924);
+INSERT INTO tenant_occupancy (tenant_id, customer_id) VALUES ('dc:eqix:us:chi1:10', 243);
+INSERT INTO tenant_occupancy (tenant_id, customer_id) VALUES ('dc:kddi:eu:ber1:15', 924);
+INSERT INTO tenant_occupancy (tenant_id, customer_id) VALUES ('dc:kddi:eu:ber1:20', 123);
+INSERT INTO tenant_occupancy (tenant_id, customer_id) VALUES ('dc:kddi:cn:hnk2:11', 243);
 
--- Extract relevant fields from log messages
-CREATE OR REPLACE STREAM `syslog` WITH (
-  KAFKA_TOPIC = '${topic}',
-  VALUE_FORMAT = 'json',
-  PARTITIONS = 6
-);
-
-CREATE STREAM `by_facility` AS
-  SELECT
-    TIMESTAMPTOSTRING(TIMESTAMP, 'yyyy-MM-dd HH:mm:ss') AS SYSLOG_TIMESTAMP,
-    HOST,
-    FACILITY,
-    MESSAGE,
-    REMOTEADDRESS         
-  FROM `syslog`
-  PARTITION BY FACILITY
-  EMIT CHANGES;
-
--- Flag events with invalid users, and enrich with a new field 'FACILITY_DESCRIPTION'
-CREATE STREAM `invalid_users` AS
-  SELECT
-    SYSLOG_TIMESTAMP,
-    HOST,
-    FACILITY,
-    MESSAGE, 
-    REMOTEADDRESS,
-    CASE WHEN FACILITY = 0 THEN 'kernel messages'
-         WHEN FACILITY = 1 THEN 'user-level messages'
-         WHEN FACILITY = 2 THEN 'mail system'
-         WHEN FACILITY = 3 THEN 'system daemons'
-         WHEN FACILITY = 4 THEN 'security/authorization messages'
-         WHEN FACILITY = 5 THEN 'messages generated internally by syslogd'
-         WHEN FACILITY = 6 THEN 'line printer subsystem'
-         ELSE '&lt;unknown&gt;'
-       END AS FACILITY_DESCRIPTION
-  FROM `by_facility`
-  WHERE MESSAGE LIKE 'Invalid user%'
-  EMIT CHANGES;
-
--- Create actionable stream of SSH attacks, enriched with user and IP
-CREATE STREAM `ssh_attacks` AS 
-  SELECT
-    SYSLOG_TIMESTAMP,
-    HOST,
-    FACILITY_DESCRIPTION,
-    SPLIT(REPLACE(MESSAGE,'Invalid user ',''),' from ')[1] AS ATTACK_USER,
-    SPLIT(REPLACE(MESSAGE,'Invalid user ',''),' from ')[2] AS ATTACK_IP
-  FROM `invalid_users`
-  EMIT CHANGES;
+-- power readings contain two distinct readings. The current total utilization of the
+--  panel, and the monthly total wattage usage for the referenced tenant
+INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (1, 'dc:eqix:us:chi1:12', 1.05, 1034);
+INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (2, 'dc:eqix:us:chi1:10', 0.85, 867);
+INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (1, 'dc:kddi:eu:ber1:15', 0.54, 345);
+INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (2, 'dc:kddi:eu:ber1:20', 0.67, 288);
+INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (1, 'dc:kddi:cn:hnk2:11', 1.11, 1119);
+INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (1, 'dc:eqix:us:chi1:12', 1.01, 1134);
+INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (2, 'dc:eqix:us:chi1:10', 0.75, 898);
+INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (1, 'dc:kddi:cn:hnk2:11', 1.10, 1201);
 </code></pre>
 <h3 id="cleanup">Cleanup</h3>
 <p>To clean up the ksqlDB resources created by this recipe, use the ksqlDB commands shown below (substitute stream or topic name, as appropriate).
@@ -1320,6 +1264,7 @@ By including the <code>DELETE TOPIC</code> clause, the stream or table's source 
 DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
 </code></pre>
 <p>If you also created connectors, you'll need to remove those as well.</p>
+<h2 id="explanation">Explanation</h2>
                 
                   
                 
