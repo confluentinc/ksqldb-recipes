@@ -8,6 +8,8 @@ seo:
 
 More and more, fleet management relies on knowing real-time information on vehicle availability, their locations, and integrating that with data from vehicle telematics. This enables businesses to improve operational efficiency by optimizing travel routes, lowering fuel consumption, and automating service schedules. This recipe combines fleet locations with individual vehicle information, so organizations can have a real-time consolidated view of their entire fleet.
 
+![fleet management](../../img/fleet.png)
+
 ## Step by step
 
 ### Set up your environment

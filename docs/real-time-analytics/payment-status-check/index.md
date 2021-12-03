@@ -8,6 +8,8 @@ seo:
 
 As digital transactions become the new norm, it’s critical to check customer payment requests in real time for suspicious activity. This means financial institutions must verify the payment by checking it against any regulatory restrictions before proceeding to process it. This recipe shows you how to validate these payments against available funds and anti-money-laundering (AML) policies.
 
+![payment verification](../../img/payment.jpg)
+
 ## Step by step
 
 ### Set up your environment

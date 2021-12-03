@@ -6,11 +6,13 @@ seo:
 
 # Build Customer Loyalty Programs
 
-Customer loyalty programs are everywhere in retail, even if it's as simple as "Get 10 stamps for a free coffee." However, in order to create a more sophisticated rewards program that engages customers at the right place and time, , multiple data streams need to be aggregated to properly apply the right promotions. This recipe showcases how a coffee shop has implemented three separate promotions at the same time:
+Customer loyalty programs are everywhere in retail, even if it's as simple as "Get 10 stamps for a free coffee." However, in order to create a more sophisticated rewards program that engages customers at the right place and time, multiple data streams need to be aggregated to properly apply the right promotions. This recipe showcases how a coffee shop has implemented three separate promotions at the same time:
 
 - A simple "the more you buy, the bigger your discount" benefit
 - An online version of "Buy N, get 1 free" recurring reward 
 - A customizable program that looks at individual customer behavior and offers tailored personalized rewards
+
+![loyalty program](../../img/loyalty.png)
 
 ### Set up your environment
 
