@@ -23,7 +23,7 @@ For businesses that provide cloud infrastructure across multiple data centers wi
 Our datacenter power analysis applications require data from two different sources: customer tenant information and smart control panel readings.
 
 ```sql
---8<-- "docs/real-time-analytics/data-center/source.json"
+--8<-- "docs/real-time-analytics/datacenter/source.json"
 ```
 
 --8<-- "docs/shared/manual_insert.md"
@@ -33,13 +33,13 @@ Our datacenter power analysis applications require data from two different sourc
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ```sql
---8<-- "docs/real-time-analytics/data-center/process.sql"
+--8<-- "docs/real-time-analytics/datacenter/process.sql"
 ```
 
 --8<-- "docs/shared/manual_cue.md"
 
 ```sql
---8<-- "docs/real-time-analytics/data-center/manual.sql"
+--8<-- "docs/real-time-analytics/datacenter/manual.sql"
 ```
 
 ### Cleanup
