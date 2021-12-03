@@ -1,12 +1,12 @@
 ---
 seo:
   title: Enrich Orders with Change Data Capture (CDC)
-  description: This recipe demonstrates this principle by streaming from a SQL Server, denormalizing the data, and writing to Snowflake.
+  description: This ksqlDB recipe demonstrates this principle by streaming from a SQL Server, denormalizing the data, and writing to Snowflake.
 ---
 
-# Enrich Orders with Change Data Capture (CDC)
+# Enrich orders with change data capture (CDC)
 
-Change Data Capture (CDC) plays a vital role to ensure recently changed data is quickly ingested, transformed, and used by downstream analytics platforms and applications. If you have transactional events being written to a database, such as sales orders from a marketplace, you can use CDC to capture and denormalize these change events into a single table of enriched data to provide better query performance and consumption. This recipe demonstrates this principle by streaming data from a SQL Server, denormalizing the data, and writing it to Snowflake.
+Change data capture (CDC) plays a vital role to ensure recently changed data is quickly ingested, transformed, and used by downstream analytics platforms and applications. If you have transactional events being written to a database, such as sales orders from a marketplace, you can use CDC to capture and denormalize these change events into a single table of enriched data to provide better query performance and consumption. This recipe demonstrates this principle by streaming data from a SQL Server, denormalizing the data, and writing it to Snowflake.
 
 ![denormalized](../../img/denormalized-data.png)
 
