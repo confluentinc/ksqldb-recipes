@@ -23,7 +23,7 @@ This recipe demonstrates how to run a self-managed connector to push syslog data
 Create the below `Dockerfile` to bundle a connect worker with the `kafka-connect-syslog` connector:
 
 ```text
---8<-- "docs/cyber-security/SSH-attack/Dockerfile"
+--8<-- "docs/cybersecurity/SSH-attack/Dockerfile"
 ```
 
 Build the custom Docker image with this command:
@@ -37,7 +37,7 @@ docker build \
 Next, create a `docker-compose.yml` file with the following content, substituting your Confluent Cloud connection information:
 
 ```text
---8<-- "docs/cyber-security/SSH-attack/docker-compose.yml"
+--8<-- "docs/cybersecurity/SSH-attack/docker-compose.yml"
 ```
 
 Run the container with this:
@@ -57,7 +57,7 @@ Process the syslog events by flagging events with invalid users, stripping out a
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ```sql
---8<-- "docs/cyber-security/SSH-attack/process.sql"
+--8<-- "docs/cybersecurity/SSH-attack/process.sql"
 ```
 
 --8<-- "docs/shared/manual_cue.md"
