@@ -18,7 +18,7 @@ CREATE TABLE items (
   PARTITIONS = 6);
 
 -- Calculate minimum, maximum, and average price, per item, and join with item name
-CREATE TABLE sales_stats AS
+CREATE TABLE sales_stats WITH (KEY_FORMAT='JSON') AS
 SELECT S.item_id,
        I.item_name,
        MIN(price) AS price_min,
@@ -26,5 +26,5 @@ SELECT S.item_id,
        AVG(price) AS price_avg
 FROM sales S
 INNER JOIN items I ON S.item_id = I.item_id
-GROUP BY S.item_id
+GROUP BY S.item_id, I.item_name
 EMIT CHANGES;
