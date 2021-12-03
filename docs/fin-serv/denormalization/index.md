@@ -1,15 +1,12 @@
 ---
 seo:
-  title: Denormalize Change Data Capture (CDC) for Orders
+  title: Enrich Orders with Change Data Capture (CDC)
   description: This recipe demonstrates this principle by streaming from a SQL Server, denormalizing the data, and writing to Snowflake.
 ---
 
-# Denormalize change data capture (CDC) for orders
+# Enrich Orders with Change Data Capture (CDC)
 
-If you have transactional events for orders in a marketplace, you can stream the change data capture (CDC) and denormalize the events.
-Denormalization is a well-established pattern for performance because querying a single table of enriched data will often perform better than querying across multiple at runtime.
-You can consume the denormalized events from downstream applications in your business, or stream them to another destination.
-This recipe demonstrates this principle by streaming from a SQL Server, denormalizing the data, and writing to Snowflake.
+Change Data Capture (CDC) plays a vital role to ensure recently changed data is quickly ingested, transformed, and used by downstream analytics platforms and applications. If you have transactional events being written to a database, such as sales orders from a marketplace, you can use CDC to capture and denormalize these change events into a single table of enriched data to provide better query performance and consumption. This recipe demonstrates this principle by streaming data from a SQL Server, denormalizing the data, and writing it to Snowflake.
 
 ![denormalized](../../img/denormalized-data.png)
 

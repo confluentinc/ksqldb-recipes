@@ -66,7 +66,7 @@ CREATE STREAM payment_statuses AS SELECT
 
 INSERT INTO payment_statuses SELECT payment_id, status, 'FUNDS' as source_system FROM funds_status;
 
--- Combine payment and status events in 1 hour window. Why we need a timing window for stream-stream join?
+-- Combine payment and status events in 1 hour window. 
 CREATE STREAM payments_with_status AS SELECT
   ep.payment_id as payment_id,
   ep.accountid,

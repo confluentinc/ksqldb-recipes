@@ -1,14 +1,12 @@
 ---
 seo:
-  title: View Real-Time Inventory
+  title: Optimize Omni-channel Inventory
   description: This recipe demonstrates how to use ksqlDB to ensure an up-to-date snapshot of your inventory at all times.
 ---
 
-# View real-time inventory
+# Optimize Omni-channel Inventory
 
-Having an up-to-date view of inventory on every item is essential in today's online marketplaces.
-This helps businesses maintain the optimal level of inventory—not too much and not too little—so that they can meet demand while minimizing costs.
-This recipe demonstrates how to see your updated inventory in real time so you always have a live snapshot of your stock levels.
+Having an up-to-date, real-time view of inventory on every item is essential in today's online marketplaces. This helps businesses maintain the optimum level of inventory—not too much and not too little—so that they can meet customer demand while minimizing inventory holding costs. This recipe demonstrates how to track and update inventory in real time, so you always have an up-to-date snapshot of your stock for both your customers and merchandising teams.
 
 ## Step by step
 
