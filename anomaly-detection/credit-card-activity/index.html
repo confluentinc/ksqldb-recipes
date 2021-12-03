@@ -16,7 +16,7 @@
     
     
       
-        <title>Detect and analyze SSH attacks - ksqlDB Recipes</title>
+        <title>Detect unusual credit card activity - ksqlDB Recipes</title>
       
     
     
@@ -63,7 +63,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#detect-and-analyze-ssh-attacks" class="md-skip">
+        <a href="#detect-unusual-credit-card-activity" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Detect and analyze SSH attacks
+              Detect unusual credit card activity
             
           </span>
         </div>
@@ -156,586 +156,46 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       <label class="md-nav__link" for="__nav_2">
-        Customer 360
+        Anomaly detection
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="Customer 360" data-md-level="1">
+      <nav class="md-nav" aria-label="Anomaly detection" data-md-level="1">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
-          Customer 360
+          Anomaly detection
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
             
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
       
       <label class="md-nav__link" for="__nav_2_1">
-        Clickstream
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Clickstream" data-md-level="2">
-        <label class="md-nav__title" for="__nav_2_1">
-          <span class="md-nav__icon md-icon"></span>
-          Clickstream
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../customer-360/clickstream/" class="md-nav__link">
-        Understand user behavior with clickstream data
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
-      
-      <label class="md-nav__link" for="__nav_3">
-        Fin serv
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Fin serv" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
-          <span class="md-nav__icon md-icon"></span>
-          Fin serv
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" >
-      
-      <label class="md-nav__link" for="__nav_3_1">
         Credit card activity
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Credit card activity" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_1">
+        <label class="md-nav__title" for="__nav_2_1">
           <span class="md-nav__icon md-icon"></span>
           Credit card activity
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../fin-serv/credit-card-activity/" class="md-nav__link">
-        Detect unusual credit card activity
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
-      
-      <label class="md-nav__link" for="__nav_3_2">
-        Denormalization
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Denormalization" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_2">
-          <span class="md-nav__icon md-icon"></span>
-          Denormalization
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../fin-serv/denormalization/" class="md-nav__link">
-        Enrich Orders with Change Data Capture (CDC)
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
-      
-      <label class="md-nav__link" for="__nav_3_3">
-        Payment status check
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Payment status check" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_3">
-          <span class="md-nav__icon md-icon"></span>
-          Payment status check
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../fin-serv/payment-status-check/" class="md-nav__link">
-        Automate Instant Payment Verifications
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
-      
-      <label class="md-nav__link" for="__nav_4">
-        Internet of things
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Internet of things" data-md-level="1">
-        <label class="md-nav__title" for="__nav_4">
-          <span class="md-nav__icon md-icon"></span>
-          Internet of things
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" >
-      
-      <label class="md-nav__link" for="__nav_4_1">
-        Coalesce
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Coalesce" data-md-level="2">
-        <label class="md-nav__title" for="__nav_4_1">
-          <span class="md-nav__icon md-icon"></span>
-          Coalesce
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../internet-of-things/coalesce/" class="md-nav__link">
-        Flag Unhealthy IoT Devices
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
-      
-      <label class="md-nav__link" for="__nav_5">
-        Operations
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Operations" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
-          <span class="md-nav__icon md-icon"></span>
-          Operations
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
-      
-      <label class="md-nav__link" for="__nav_5_1">
-        Data center
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Data center" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_1">
-          <span class="md-nav__icon md-icon"></span>
-          Data center
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../operations/data-center/" class="md-nav__link">
-        Analyze Datacenter Power Usage
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2" type="checkbox" id="__nav_5_2" >
-      
-      <label class="md-nav__link" for="__nav_5_2">
-        Salesforce
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Salesforce" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_2">
-          <span class="md-nav__icon md-icon"></span>
-          Salesforce
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../operations/salesforce/" class="md-nav__link">
-        Handle corrupted data from Salesforce
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
-      
-      <label class="md-nav__link" for="__nav_6">
-        Retail
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Retail" data-md-level="1">
-        <label class="md-nav__title" for="__nav_6">
-          <span class="md-nav__icon md-icon"></span>
-          Retail
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" >
-      
-      <label class="md-nav__link" for="__nav_6_1">
-        Dynamic pricing
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Dynamic pricing" data-md-level="2">
-        <label class="md-nav__title" for="__nav_6_1">
-          <span class="md-nav__icon md-icon"></span>
-          Dynamic pricing
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../retail/dynamic_pricing/" class="md-nav__link">
-        Build a Dynamic Pricing Strategy
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2" type="checkbox" id="__nav_6_2" >
-      
-      <label class="md-nav__link" for="__nav_6_2">
-        Inventory
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Inventory" data-md-level="2">
-        <label class="md-nav__title" for="__nav_6_2">
-          <span class="md-nav__icon md-icon"></span>
-          Inventory
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../retail/inventory/" class="md-nav__link">
-        Optimize Omni-channel Inventory
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_3" type="checkbox" id="__nav_6_3" >
-      
-      <label class="md-nav__link" for="__nav_6_3">
-        Loyalty rewards
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Loyalty rewards" data-md-level="2">
-        <label class="md-nav__title" for="__nav_6_3">
-          <span class="md-nav__icon md-icon"></span>
-          Loyalty rewards
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../retail/loyalty-rewards/" class="md-nav__link">
-        Build Customer Loyalty Programs
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-    
-  
-  
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
-      
-      <label class="md-nav__link" for="__nav_7">
-        Security
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Security" data-md-level="1">
-        <label class="md-nav__title" for="__nav_7">
-          <span class="md-nav__icon md-icon"></span>
-          Security
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-    
-  
-  
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" checked>
-      
-      <label class="md-nav__link" for="__nav_7_1">
-        SSH attack
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="SSH attack" data-md-level="2">
-        <label class="md-nav__title" for="__nav_7_1">
-          <span class="md-nav__icon md-icon"></span>
-          SSH attack
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -754,12 +214,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Detect and analyze SSH attacks
+          Detect unusual credit card activity
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Detect and analyze SSH attacks
+        Detect unusual credit card activity
       </a>
       
         
@@ -831,6 +291,45 @@
   
 
           
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      <label class="md-nav__link" for="__nav_2_2">
+        Internet of things
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Internet of things" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Internet of things
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internet-of-things/" class="md-nav__link">
+        Flag Unhealthy IoT Devices
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -848,16 +347,16 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
-      <label class="md-nav__link" for="__nav_8">
-        Social
+      <label class="md-nav__link" for="__nav_3">
+        Customer 360
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="Social" data-md-level="1">
-        <label class="md-nav__title" for="__nav_8">
+      <nav class="md-nav" aria-label="Customer 360" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
-          Social
+          Customer 360
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -869,16 +368,16 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1" type="checkbox" id="__nav_8_1" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" >
       
-      <label class="md-nav__link" for="__nav_8_1">
-        Online matches
+      <label class="md-nav__link" for="__nav_3_1">
+        Clickstream
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="Online matches" data-md-level="2">
-        <label class="md-nav__title" for="__nav_8_1">
+      <nav class="md-nav" aria-label="Clickstream" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
           <span class="md-nav__icon md-icon"></span>
-          Online matches
+          Clickstream
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -887,7 +386,46 @@
   
   
     <li class="md-nav__item">
-      <a href="../../social/online-matches/" class="md-nav__link">
+      <a href="../../customer-360/clickstream/" class="md-nav__link">
+        Understand user behavior with clickstream data
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      <label class="md-nav__link" for="__nav_3_2">
+        Online dating
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Online dating" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Online dating
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer-360/online-dating/" class="md-nav__link">
         Match Users for Online Dating
       </a>
     </li>
@@ -917,16 +455,16 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
       
-      <label class="md-nav__link" for="__nav_9">
-        Transport
+      <label class="md-nav__link" for="__nav_4">
+        Cyber security
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="Transport" data-md-level="1">
-        <label class="md-nav__title" for="__nav_9">
+      <nav class="md-nav" aria-label="Cyber security" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
-          Transport
+          Cyber security
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -938,14 +476,191 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_1" type="checkbox" id="__nav_9_1" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" >
       
-      <label class="md-nav__link" for="__nav_9_1">
+      <label class="md-nav__link" for="__nav_4_1">
+        SSH attack
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="SSH attack" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          SSH attack
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cyber-security/SSH-attack/" class="md-nav__link">
+        Detect and analyze SSH attacks
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Predictive analytics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Predictive analytics" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Predictive analytics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
+      
+      <label class="md-nav__link" for="__nav_5_1">
+        Fleet management
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Fleet management" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Fleet management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../predictive-analytics/fleet_management/" class="md-nav__link">
+        Optimize Fleet Management
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2" type="checkbox" id="__nav_5_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2">
+        Inventory
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Inventory" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          Inventory
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../predictive-analytics/inventory/" class="md-nav__link">
+        Optimize Omni-channel Inventory
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        Real time analytics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Real time analytics" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Real time analytics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" >
+      
+      <label class="md-nav__link" for="__nav_6_1">
         Aviation
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Aviation" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_1">
+        <label class="md-nav__title" for="__nav_6_1">
           <span class="md-nav__icon md-icon"></span>
           Aviation
         </label>
@@ -956,7 +671,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transport/aviation/" class="md-nav__link">
+      <a href="../../real-time-analytics/aviation/" class="md-nav__link">
         Notify Passengers of Flight Updates
       </a>
     </li>
@@ -977,16 +692,16 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_2" type="checkbox" id="__nav_9_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2" type="checkbox" id="__nav_6_2" >
       
-      <label class="md-nav__link" for="__nav_9_2">
-        Fleet management
+      <label class="md-nav__link" for="__nav_6_2">
+        Data center
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="Fleet management" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_2">
+      <nav class="md-nav" aria-label="Data center" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_2">
           <span class="md-nav__icon md-icon"></span>
-          Fleet management
+          Data center
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -995,8 +710,203 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transport/fleet_management/" class="md-nav__link">
-        Optimize Fleet Management
+      <a href="../../real-time-analytics/data-center/" class="md-nav__link">
+        Analyze Datacenter Power Usage
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_3" type="checkbox" id="__nav_6_3" >
+      
+      <label class="md-nav__link" for="__nav_6_3">
+        Denormalization
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Denormalization" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_3">
+          <span class="md-nav__icon md-icon"></span>
+          Denormalization
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../real-time-analytics/denormalization/" class="md-nav__link">
+        Enrich Orders with Change Data Capture (CDC)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_4" type="checkbox" id="__nav_6_4" >
+      
+      <label class="md-nav__link" for="__nav_6_4">
+        Dynamic pricing
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Dynamic pricing" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_4">
+          <span class="md-nav__icon md-icon"></span>
+          Dynamic pricing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../real-time-analytics/dynamic_pricing/" class="md-nav__link">
+        Build a Dynamic Pricing Strategy
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_5" type="checkbox" id="__nav_6_5" >
+      
+      <label class="md-nav__link" for="__nav_6_5">
+        Loyalty rewards
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Loyalty rewards" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_5">
+          <span class="md-nav__icon md-icon"></span>
+          Loyalty rewards
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../real-time-analytics/loyalty-rewards/" class="md-nav__link">
+        Build Customer Loyalty Programs
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_6" type="checkbox" id="__nav_6_6" >
+      
+      <label class="md-nav__link" for="__nav_6_6">
+        Payment status check
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Payment status check" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_6">
+          <span class="md-nav__icon md-icon"></span>
+          Payment status check
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../real-time-analytics/payment-status-check/" class="md-nav__link">
+        Automate Instant Payment Verifications
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_7" type="checkbox" id="__nav_6_7" >
+      
+      <label class="md-nav__link" for="__nav_6_7">
+        Salesforce
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Salesforce" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_7">
+          <span class="md-nav__icon md-icon"></span>
+          Salesforce
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../real-time-analytics/salesforce/" class="md-nav__link">
+        Handle corrupted data from Salesforce
       </a>
     </li>
   
@@ -1093,153 +1003,146 @@
               
                 
                 
-                <h1 id="detect-and-analyze-ssh-attacks">Detect and analyze SSH attacks</h1>
-<p>There are lots of ways SSH can be abused, but one of the most straightforward ways to detect suspicious activity is to monitor for rejected logins. This recipe processes Syslog data to detect failed logins, while streaming out those pairs of usernames and IP addresses. With ksqlDB, you can filter and react to unwanted events in real time to minimize damage rather than performing historical analysis of Syslog data from cold storage.</p>
-<p><img alt="SSH-attack" src="../../img/ssh-attack.jpg" /></p>
+                <h1 id="detect-unusual-credit-card-activity">Detect unusual credit card activity</h1>
+<p>One way many financial institutions detect fraud is to check for unusual activity in a short period of time, raising a red flag to promptly alert their customers and confirm any recent unexpected purchases. Fraud can involve using stolen credit cards, forging checks and account numbers, multiple duplicate transactions, and more. This recipe analyzes a customer’s typical credit card spend, and flags the account when there are instances of excessive spending as a possible case of credit card theft.</p>
+<p><img alt="credit card being misused" src="../../img/credit-card-activity.jpg" /></p>
 <h2 id="step-by-step">Step by step</h2>
 <h3 id="set-up-your-environment">Set up your environment</h3>
 <p>Set up your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka<sup>®</sup> service.</p>
 <p>Once your Confluent Cloud cluster is available, create a <a href="https://ksqldb.io/">ksqlDB</a> application. ksqlDB supports a <code>SQL</code> language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
 <h3 id="read-the-data-in">Read the data in</h3>
-<p>This recipe demonstrates how to run a self-managed connector to push syslog data into a Kafka topic called <code>syslog</code> on Confluent Cloud.</p>
-<p>Create the below <code>Dockerfile</code> to bundle a connect worker with the <code>kafka-connect-syslog</code> connector:</p>
-<pre><code class="language-text">FROM confluentinc/cp-server-connect-base:6.2.0
+<p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to quickly connect to popular data sources and end systems in the cloud.
+This recipe shows some example data sources, but you can substitute your own connectors to connect to any supported data source.
+The principles are the same, just modify the connector configuration shown below to fit your situation (see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a>).</p>
+<p>To run a fully managed connector to source data into Kafka, use the Confluent Cloud Console or <a href="https://docs.confluent.io/confluent-cli/current/overview.html">Confluent CLI</a> command <code>confluent connect create --config &lt;file&gt;</code>. Each connector must be created separately.</p>
+<pre><code class="language-json">{
+  &quot;connector.class&quot;          : &quot;OracleDatabaseSource&quot;,
+  &quot;name&quot;                     : &quot;recipe-oracle-transactions-cc&quot;,
+  &quot;connector.class&quot;          : &quot;OracleDatabaseSource&quot;,
+  &quot;kafka.api.key&quot;            : &quot;&lt;my-kafka-api-key&gt;&quot;,
+  &quot;kafka.api.secret&quot;         : &quot;&lt;my-kafka-api-secret&gt;&quot;,
+  &quot;connection.host&quot;          : &quot;&lt;my-database-endpoint&gt;&quot;,
+  &quot;connection.port&quot;          : &quot;1521&quot;,
+  &quot;connection.user&quot;          : &quot;&lt;database-username&gt;&quot;,
+  &quot;connection.password&quot;      : &quot;&lt;database-password&gt;&quot;,
+  &quot;db.name&quot;                  : &quot;&lt;db-name&gt;&quot;,
+  &quot;table.whitelist&quot;          : &quot;TRANSACTIONS&quot;,
+  &quot;timestamp.column.name&quot;    : &quot;created_at&quot;,
+  &quot;output.data.format&quot;       : &quot;JSON&quot;,
+  &quot;db.timezone&quot;              : &quot;UCT&quot;,
+  &quot;tasks.max&quot;                : &quot;1&quot;
+}
 
-ENV CONNECT_PLUGIN_PATH=&quot;/usr/share/java,/usr/share/confluent-hub-components&quot;
-
-USER root
-COPY --chown=appuser:appuser include/etc/confluent/docker /etc/confluent/docker
-USER appuser
-
-ARG CONNECTOR_OWNER=confluentinc
-ARG CONNECTOR_NAME
-ARG CONNECTOR_VERSION
-RUN confluent-hub install --no-prompt confluent-hub install confluentinc/kafka-connect-syslog:1.3.4
-
-CMD [&quot;/etc/confluent/docker/run&quot;]
+{
+  &quot;connector.class&quot;          : &quot;OracleDatabaseSource&quot;,
+  &quot;name&quot;                     : &quot;recipe-oracle-customers-cc&quot;,
+  &quot;connector.class&quot;          : &quot;OracleDatabaseSource&quot;,
+  &quot;kafka.api.key&quot;            : &quot;&lt;my-kafka-api-key&gt;&quot;,
+  &quot;kafka.api.secret&quot;         : &quot;&lt;my-kafka-api-secret&gt;&quot;,
+  &quot;connection.host&quot;          : &quot;&lt;my-database-endpoint&gt;&quot;,
+  &quot;connection.port&quot;          : &quot;1521&quot;,
+  &quot;connection.user&quot;          : &quot;&lt;database-username&gt;&quot;,
+  &quot;connection.password&quot;      : &quot;&lt;database-password&gt;&quot;,
+  &quot;db.name&quot;                  : &quot;&lt;db-name&gt;&quot;,
+  &quot;table.whitelist&quot;          : &quot;CUSTOMERS&quot;,
+  &quot;timestamp.column.name&quot;    : &quot;created_at&quot;,
+  &quot;output.data.format&quot;       : &quot;JSON&quot;,
+  &quot;db.timezone&quot;              : &quot;UCT&quot;,
+  &quot;tasks.max&quot;                : &quot;1&quot;
+}
 </code></pre>
-<p>Build the custom Docker image with this command:</p>
-<pre><code>docker build \
-   -t localbuild/connect_distributed_with_syslog:1.3.4 \
-   -f Dockerfile .
-</code></pre>
-<p>Next, create a <code>docker-compose.yml</code> file with the following content, substituting your Confluent Cloud connection information:</p>
-<pre><code class="language-text">---
-version: '2'
-services:
-
-  connect:
-    image: localbuild/connect_distributed_with_syslog:1.3.4
-    hostname: connect
-    container_name: connect
-    ports:
-      - &quot;8083:8083&quot;
-    environment:
-      CONNECT_BOOTSTRAP_SERVERS: &lt; BOOTSTRAP SERVER &gt;
-      CONNECT_REST_PORT: 8083
-      CONNECT_GROUP_ID: &quot;connect&quot;
-      CONNECT_CONFIG_STORAGE_TOPIC: recipe-connect-configs
-      CONNECT_OFFSET_STORAGE_TOPIC: recipe-connect-offsets
-      CONNECT_STATUS_STORAGE_TOPIC: recipe-connect-status
-      CONNECT_REPLICATION_FACTOR: 3
-      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 3
-      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 3
-      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 3
-      CONNECT_KEY_CONVERTER: &quot;org.apache.kafka.connect.storage.StringConverter&quot;
-      CONNECT_VALUE_CONVERTER: &quot;org.apache.kafka.connect.json.JsonConverter&quot;
-      CONNECT_REST_ADVERTISED_HOST_NAME: &quot;connect&quot;
-      CONNECT_PLUGIN_PATH: &quot;/usr/share/java,/usr/share/confluent-hub-components&quot;
-      CONNECT_LOG4J_ROOT_LOGLEVEL: INFO
-      CONNECT_LOG4J_LOGGERS: org.reflections=ERROR
-      # Connect worker
-      CONNECT_SECURITY_PROTOCOL: SASL_SSL
-      CONNECT_SASL_JAAS_CONFIG: &lt; SASL JAAS CONFIG &gt;
-      CONNECT_SASL_MECHANISM: PLAIN
-      # Connect producer
-      CONNECT_PRODUCER_SECURITY_PROTOCOL: SASL_SSL
-      CONNECT_PRODUCER_SASL_JAAS_CONFIG: &lt; SASL JAAS CONFIG &gt;
-      CONNECT_PRODUCER_SASL_MECHANISM: PLAIN
-      # Connect consumer
-      CONNECT_CONSUMER_SECURITY_PROTOCOL: SASL_SSL
-      CONNECT_CONSUMER_SASL_JAAS_CONFIG: &lt; SASL JAAS CONFIG &gt; 
-      CONNECT_CONSUMER_SASL_MECHANISM: PLAIN
-</code></pre>
-<p>Run the container with this:</p>
-<pre><code>docker-compose up -d
-</code></pre>
-<p>Now you should have Syslog messages being written to the <code>syslog</code> topic in Confluent Cloud.</p>
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert data into the streams for testing using ksqlDB <code>INSERT INTO</code>.</p>
 <h3 id="run-the-stream-processing-app">Run the stream processing app</h3>
-<p>Process the syslog events by flagging events with invalid users, stripping out all the other unnecessary fields, and creating just a stream of relevant information. There are many ways to customize the resulting stream to fit the business needs: this example also demonstrates how to enrich the stream with a new field <code>FACILITY_DESCRIPTION</code> with human-readable content.</p>
 <hr />
 <p><strong>NOTE:</strong>
 <em>The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.</em>
 <em>This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</em></p>
 <hr />
-<pre><code class="language-sql">-- Extract relevant fields from log messages
-CREATE STREAM syslog (
-  ts varchar, 
-  host varchar,
-  facility int,
-  message varchar,
-  remote_address varchar 
+<pre><code class="language-sql">-- Register the stream of transactions
+CREATE STREAM FD_TRANSACTIONS_RAW (
+  ACCOUNT_ID BIGINT, 
+  TIMESTAMP VARCHAR, 
+  CARD_TYPE VARCHAR, 
+  AMOUNT DOUBLE, 
+  IP_ADDRESS VARCHAR, 
+  TRANSACTION_ID VARCHAR
 ) WITH (
-  KAFKA_TOPIC = 'syslog',
-  VALUE_FORMAT = 'json',
-  PARTITIONS = 6
+  KAFKA_TOPIC='FD_transactions',
+  VALUE_FORMAT='JSON', 
+  PARTITIONS=6
 );
 
--- Flag events with invalid users, and enrich with a new field 'FACILITY_DESCRIPTION'
-CREATE STREAM invalid_users AS
-  SELECT
-    FORMAT_TIMESTAMP(ts, 'yyyy-MM-dd HH:mm:ss') AS syslog_timestamp,
-    host,
-    facility,
-    message, 
-    remote_address,
-    CASE WHEN facility = 0 THEN 'kernel messages'
-         WHEN facility = 1 THEN 'user-level messages'
-         WHEN facility = 2 THEN 'mail system'
-         WHEN facility = 3 THEN 'system daemons'
-         WHEN facility = 4 THEN 'security/authorization messages'
-         WHEN facility = 5 THEN 'messages generated internally by syslogd'
-         WHEN facility = 6 THEN 'line printer subsystem'
-         ELSE '&lt;unknown&gt;'
-       END AS facility_description
-  FROM syslog 
-  WHERE message LIKE 'Invalid user%'
-  EMIT CHANGES;
+-- Repartition the stream on account_id in order to ensure that all the streams and tables are co-partitioned, which means that input records on both sides of the join have the same configuration settings for partitions.
+CREATE STREAM FD_TRANSACTIONS_SOURCE AS
+  SELECT * 
+  FROM FD_TRANSACTIONS_RAW 
+  PARTITION BY ACCOUNT_ID;
 
--- Create actionable stream of SSH attacks, enriched with user and IP
-CREATE STREAM ssh_attacks AS 
+-- Register the existing stream of customer data
+CREATE STREAM FD_CUST_RAW_STREAM (
+  ID BIGINT, 
+  FIRST_NAME VARCHAR, 
+  LAST_NAME VARCHAR, 
+  EMAIL VARCHAR, 
+  AVG_CREDIT_SPEND DOUBLE
+) WITH (
+  KAFKA_TOPIC='FD_customers', 
+  VALUE_FORMAT='JSON', 
+  PARTITIONS=6
+);
+
+-- Repartition the customer data stream by account_id to prepare for the join
+CREATE STREAM FD_CUSTOMER_REKEYED WITH (kafka_topic='FD_CUSTOMER_REKEYED') AS
+  SELECT * 
+  FROM FD_CUST_RAW_STREAM 
+  PARTITION BY ID;
+
+-- Register the partitioned customer data topic as a table used for the join with the incoming stream of transactions:
+CREATE TABLE FD_customer (
+  ID BIGINT PRIMARY KEY,
+  FIRST_NAME VARCHAR, 
+  LAST_NAME VARCHAR, 
+  EMAIL VARCHAR, 
+  AVG_CREDIT_SPEND DOUBLE
+) WITH (
+  KAFKA_TOPIC='FD_CUSTOMER_REKEYED',
+  VALUE_FORMAT='JSON',
+  PARTITIONS=6
+);
+
+-- Join the transactions to customer information:
+CREATE STREAM FD_TRANSACTIONS_ENRICHED AS 
   SELECT
-    syslog_timestamp,
-    host,
-    facility_description,
-    SPLIT(REPLACE(message, 'Invalid user ', ''), ' from ')[1] AS attack_user,
-    remote_address AS attack_ip
-  FROM invalid_users
-  EMIT CHANGES;
+    T.ACCOUNT_ID,
+    T.CARD_TYPE,
+    T.AMOUNT, 
+    C.FIRST_NAME + ' ' + C.LAST_NAME AS FULL_NAME, 
+    C.AVG_CREDIT_SPEND 
+  FROM FD_TRANSACTIONS_SOURCE T 
+  INNER JOIN FD_CUSTOMER C 
+  ON T.ACCOUNT_ID = C.ID;
+
+-- Aggregate the stream of transactions for each account ID using a two-hour tumbling window, and filter for accounts in which the total spend in a two-hour period is greater than the customer’s average:
+CREATE TABLE FD_POSSIBLE_STOLEN_CARD WITH (key_format='json') AS 
+  SELECT
+    TIMESTAMPTOSTRING(WINDOWSTART, 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_START, 
+    T.ACCOUNT_ID,
+    T.CARD_TYPE,
+    SUM(T.AMOUNT) AS TOTAL_CREDIT_SPEND, 
+    T.FULL_NAME,
+    MAX(T.AVG_CREDIT_SPEND) AS AVG_CREDIT_SPEND 
+  FROM FD_TRANSACTIONS_ENRICHED T 
+  WINDOW TUMBLING (SIZE 2 HOURS) 
+  GROUP BY T.ACCOUNT_ID, T.CARD_TYPE, T.FULL_NAME 
+  HAVING SUM(T.AMOUNT) &gt; MAX(T.AVG_CREDIT_SPEND);
 </code></pre>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert example events into the source topics with the following statements:</p>
-<pre><code class="language-sql">-- tenant_id is in the form of a resource name used to indicate the 
---  data center provider, country, regional locale, and tenant id
-INSERT INTO tenant_occupancy (tenant_id, customer_id) VALUES ('dc:eqix:us:chi1:12', 924);
-INSERT INTO tenant_occupancy (tenant_id, customer_id) VALUES ('dc:eqix:us:chi1:10', 243);
-INSERT INTO tenant_occupancy (tenant_id, customer_id) VALUES ('dc:kddi:eu:ber1:15', 924);
-INSERT INTO tenant_occupancy (tenant_id, customer_id) VALUES ('dc:kddi:eu:ber1:20', 123);
-INSERT INTO tenant_occupancy (tenant_id, customer_id) VALUES ('dc:kddi:cn:hnk2:11', 243);
+<pre><code class="language-sql">INSERT INTO FD_transactions_raw (account_id, timestamp, card_type, amount, ip_address, transaction_id) VALUES (6011000990139424, '2021-09-23T10:50:00.000Z', 'visa', 542.99, '192.168.44.1', '3985757');
+INSERT INTO FD_transactions_raw (account_id, timestamp, card_type, amount, ip_address, transaction_id) VALUES (6011000990139424, '2021-09-23T10:50:01.000Z', 'visa', 611.48, '192.168.44.1', '8028435');
+INSERT INTO FD_transactions_raw (account_id, timestamp, card_type, amount, ip_address, transaction_id) VALUES (3530111333300000, '2021-09-23T10:50:00.000Z', 'mastercard', 65.0, '192.168.101.3', '1695780');
 
--- power readings contain two distinct readings. The current total utilization of the
---  panel, and the monthly total wattage usage for the referenced tenant
-INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (1, 'dc:eqix:us:chi1:12', 1.05, 1034);
-INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (2, 'dc:eqix:us:chi1:10', 0.85, 867);
-INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (1, 'dc:kddi:eu:ber1:15', 0.54, 345);
-INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (2, 'dc:kddi:eu:ber1:20', 0.67, 288);
-INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (1, 'dc:kddi:cn:hnk2:11', 1.11, 1119);
-INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (1, 'dc:eqix:us:chi1:12', 1.01, 1134);
-INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (2, 'dc:eqix:us:chi1:10', 0.75, 898);
-INSERT INTO panel_power_readings (panel_id, tenant_id, panel_current_utilization, tenant_kwh_usage) VALUES (1, 'dc:kddi:cn:hnk2:11', 1.10, 1201);
+INSERT INTO FD_cust_raw_stream (id, first_name, last_name, email, avg_credit_spend) VALUES (6011000990139424, 'Janice', 'Smith', 'jsmith@mycompany.com', 500.00);
+INSERT INTO FD_cust_raw_stream (id, first_name, last_name, email, avg_credit_spend) VALUES (3530111333300000, 'George', 'Mall', 'gmall@mycompany.com', 20.00);
 </code></pre>
 <h3 id="cleanup">Cleanup</h3>
 <p>To clean up the ksqlDB resources created by this recipe, use the ksqlDB commands shown below (substitute stream or topic name, as appropriate).
@@ -1269,7 +1172,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../retail/loyalty-rewards/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Build Customer Loyalty Programs" rel="prev">
+        <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1278,20 +1181,20 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
               <span class="md-footer__direction">
                 Previous
               </span>
-              Build Customer Loyalty Programs
+              Overview
             </div>
           </div>
         </a>
       
       
         
-        <a href="../../social/online-matches/" class="md-footer__link md-footer__link--next" aria-label="Next: Match Users for Online Dating" rel="next">
+        <a href="../internet-of-things/" class="md-footer__link md-footer__link--next" aria-label="Next: Flag Unhealthy IoT Devices" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Match Users for Online Dating
+              Flag Unhealthy IoT Devices
             </div>
           </div>
           <div class="md-footer__button md-icon">
