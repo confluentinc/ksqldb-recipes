@@ -8,6 +8,8 @@ seo:
 
 As consumers increasingly transact digitally and online comparison shopping has become common practice, implementing a dynamic pricing strategy is essential to stay competitive. This recipe helps you keep track of pricing trends and statistics, such as lowest, median, and average prices over a given timeframe, so both buyers and sellers can make dynamic offers based on historical sales activity.
 
+![pricing strategy](../../img/pricing.jpg)
+
 ## Step by step
 
 ### Set up your environment

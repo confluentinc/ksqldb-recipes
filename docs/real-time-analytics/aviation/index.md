@@ -8,6 +8,8 @@ seo:
 
 Worse than having a flight delayed is not being notified about the important changes that come with it, such as new boarding times, cancellations, gate changes, and estimated arrivals. This recipe shows how ksqlDB can help airlines combine passenger, flight booking, and current flight plan data to immediately alert a passenger about flight updates in real time.
 
+![flight updates](../../img/flight.png)
+
 ## Step by step
 
 ### Set up your environment

@@ -8,6 +8,8 @@ seo:
 
 Salesforce sends a notification when a change to a Salesforce record occurs as part of a create, update, delete, or undelete operation. However, if there is corrupt data in Salesforce, it sends a gap event instead of a change event, and these gap events should be properly handled to avoid discrepancies between Salesforce reports and internal dashboards. This recipe demonstrates how to process Salesforce data and filter corrupt events, which allows a downstream application to appropriately process and reconcile those events for accurate reporting and analytics.
 
+![Salesforce](../../img/salesforce.jpg)
+
 ## Step by step
 
 ### Set up your environment
