@@ -11,12 +11,12 @@ CREATE STREAM clickstream (
 ) WITH (
   kafka_topic = 'clickstream',
   value_format = 'json',
-  partitions = 6
+  partitions = 1
 );
 
 -- users lookup table:
 CREATE TABLE WEB_USERS (
-  user_id int primary key,
+  user_id varchar primary key,
   registered_At BIGINT,
   username varchar,
   first_name varchar,
@@ -26,7 +26,7 @@ CREATE TABLE WEB_USERS (
 ) WITH (
   kafka_topic = 'clickstream_users',
   value_format = 'json',
-  partitions = 6
+  partitions = 1
 );
 
 -- Build materialized stream views:
@@ -34,7 +34,7 @@ CREATE TABLE WEB_USERS (
 -- enrich click-stream with more user information:
 CREATE STREAM USER_CLICKSTREAM AS
   SELECT
-    userid,
+    u.user_id,
     u.username,
     ip,
     u.city,
@@ -42,7 +42,7 @@ CREATE STREAM USER_CLICKSTREAM AS
     status,
     bytes
   FROM clickstream c
-  LEFT JOIN web_users u ON c.userid = u.user_id;
+  LEFT JOIN web_users u ON cast(c.userid as varchar) = u.user_id;
 
 -- Build materialized table views:
 
@@ -69,7 +69,7 @@ CREATE TABLE CLICK_USER_SESSIONS AS
   GROUP BY username;
 
 -- number of errors per min, using 'HAVING' Filter to show ERROR codes > 400 where count > 5
-CREATE TABLE ERRORS_PER_MIN_ALERT AS
+CREATE TABLE ERRORS_PER_MIN_ALERT WITH (KAFKA_TOPIC='ERRORS_PER_MIN_ALERT') AS
   SELECT
     status as k1,
     AS_VALUE(status) as status,
@@ -82,7 +82,7 @@ CREATE TABLE ERRORS_PER_MIN_ALERT AS
 
 -- Enriched user details table:
 -- Aggregate (count&groupBy) using a TABLE-Window
-CREATE TABLE USER_IP_ACTIVITY WITH (key_format='json') AS
+CREATE TABLE USER_IP_ACTIVITY WITH (key_format='json', KAFKA_TOPIC='USER_IP_ACTIVITY') AS
   SELECT
     username as k1,
     ip as k2,

@@ -1097,7 +1097,7 @@
 <p>Having an up-to-date, real-time view of inventory on every item is essential in today's online marketplaces. This helps businesses maintain the optimum level of inventory—not too much and not too little—so that they can meet customer demand while minimizing inventory holding costs. This recipe demonstrates how to track and update inventory in real time, so you always have an up-to-date snapshot of your stock for both your customers and merchandising teams.</p>
 <h2 id="step-by-step">Step by step</h2>
 <h3 id="set-up-your-environment">Set up your environment</h3>
-<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka<sup>®</sup> service.</p>
+<p>Set up your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka<sup>®</sup> service.</p>
 <p>Once your Confluent Cloud cluster is available, create a <a href="https://ksqldb.io/">ksqlDB</a> application. ksqlDB supports a <code>SQL</code> language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
 <h3 id="read-the-data-in">Read the data in</h3>
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to quickly connect to popular data sources and end systems in the cloud.
@@ -1116,7 +1116,7 @@ This creates a stream of events, where each event results in the addition or rem
   &quot;connection.user&quot;          : &quot;postgres&quot;,
   &quot;connection.password&quot;      : &quot;&lt;my-database-password&gt;&quot;,
   &quot;db.name&quot;                  : &quot;&lt;db-name&gt;&quot;,
-  &quot;table.whitelist&quot;          : &quot;&lt;table&gt;&quot;,
+  &quot;table.whitelist&quot;          : &quot;inventory&quot;,
   &quot;timestamp.column.name&quot;    : &quot;created_at&quot;,
   &quot;output.data.format&quot;       : &quot;JSON&quot;,
   &quot;db.timezone&quot;              : &quot;UTC&quot;,
@@ -1133,17 +1133,18 @@ This creates a stream of events, where each event results in the addition or rem
 <hr />
 <pre><code class="language-sql">-- Create stream of inventory
 CREATE STREAM inventory_stream (
-  id STRING key,
+  id STRING KEY,
   item STRING,
   quantity INTEGER
 ) WITH (
-  VALUE_FORMAT='json',
-  KAFKA_TOPIC='inventory',
-  PARTITIONS = 6);
+  VALUE_FORMAT = 'json',
+  KAFKA_TOPIC = 'inventory',
+  PARTITIONS = 6
+);
 
 -- Create stateful table with up-to-date information of inventory availability
 CREATE TABLE inventory_stream_table
-    WITH (kafka_topic='inventory_table') AS
+    WITH (KAFKA_TOPIC = 'inventory_table') AS
   SELECT
     item,
     SUM(quantity) AS item_quantity

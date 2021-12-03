@@ -708,8 +708,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#setup-your-environment" class="md-nav__link">
-    Setup your Environment
+  <a href="#set-up-your-environment" class="md-nav__link">
+    Set up your environment
   </a>
   
 </li>
@@ -722,8 +722,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#run-stream-processing-app" class="md-nav__link">
-    Run stream processing app
+  <a href="#run-the-stream-processing-app" class="md-nav__link">
+    Run the stream processing app
   </a>
   
 </li>
@@ -745,21 +745,21 @@
         
           <li class="md-nav__item">
   <a href="#the-more-you-buy-the-bigger-your-discount" class="md-nav__link">
-    The More You Buy, The Bigger Your Discount
+    The more you buy, the bigger your discount
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#buy-5-and-the-next-ones-on-us" class="md-nav__link">
-    Buy 5 And The Next One's On Us
+  <a href="#buy-five-and-the-next-ones-on-us" class="md-nav__link">
+    Buy five and the next one's on us
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#custom-campaigns-tailored-treats" class="md-nav__link">
-    Custom Campaigns, Tailored Treats
+    Custom campaigns, tailored treats
   </a>
   
 </li>
@@ -1061,8 +1061,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#setup-your-environment" class="md-nav__link">
-    Setup your Environment
+  <a href="#set-up-your-environment" class="md-nav__link">
+    Set up your environment
   </a>
   
 </li>
@@ -1075,8 +1075,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#run-stream-processing-app" class="md-nav__link">
-    Run stream processing app
+  <a href="#run-the-stream-processing-app" class="md-nav__link">
+    Run the stream processing app
   </a>
   
 </li>
@@ -1098,21 +1098,21 @@
         
           <li class="md-nav__item">
   <a href="#the-more-you-buy-the-bigger-your-discount" class="md-nav__link">
-    The More You Buy, The Bigger Your Discount
+    The more you buy, the bigger your discount
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#buy-5-and-the-next-ones-on-us" class="md-nav__link">
-    Buy 5 And The Next One's On Us
+  <a href="#buy-five-and-the-next-ones-on-us" class="md-nav__link">
+    Buy five and the next one's on us
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#custom-campaigns-tailored-treats" class="md-nav__link">
-    Custom Campaigns, Tailored Treats
+    Custom campaigns, tailored treats
   </a>
   
 </li>
@@ -1142,8 +1142,8 @@
 <li>An online version of "Buy N, get 1 free" recurring reward </li>
 <li>A customizable program that looks at individual customer behavior and offers tailored personalized rewards</li>
 </ul>
-<h3 id="setup-your-environment">Setup your Environment</h3>
-<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka<sup>®</sup> service.</p>
+<h3 id="set-up-your-environment">Set up your environment</h3>
+<p>Set up your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka<sup>®</sup> service.</p>
 <p>Once your Confluent Cloud cluster is available, create a <a href="https://ksqldb.io/">ksqlDB</a> application. ksqlDB supports a <code>SQL</code> language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
 <h3 id="read-the-data-in">Read the data in</h3>
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to quickly connect to popular data sources and end systems in the cloud.
@@ -1168,8 +1168,8 @@ The principles are the same, just modify the connector configuration shown below
 }
 </code></pre>
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert data into the streams for testing using ksqlDB <code>INSERT INTO</code>.</p>
-<h3 id="run-stream-processing-app">Run stream processing app</h3>
-<p>In this solution we'll look at different ways to analyze user behaviour and determine which rewards we want to issue to our customers.</p>
+<h3 id="run-the-stream-processing-app">Run the stream processing app</h3>
+<p>In this solution, we'll look at different ways to analyze user behavior and determine which rewards we want to issue to our customers.</p>
 <hr />
 <p><strong>NOTE:</strong>
 <em>The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.</em>
@@ -1329,13 +1329,13 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
 </code></pre>
 <p>If you also created connectors, you'll need to remove those as well.</p>
 <h2 id="explanation">Explanation</h2>
-<h3 id="the-more-you-buy-the-bigger-your-discount">The More You Buy, The Bigger Your Discount</h3>
+<h3 id="the-more-you-buy-the-bigger-your-discount">The more you buy, the bigger your discount</h3>
 <p>To start with the simplest reward scheme, let's group our customers by
 how much they spend. We'll say anyone who spends over $400 is a Gold
-customer, over $300 for Silver and $200 for Bronze. Anyone else is
+customer, over $300 is Silver, and $200 is Bronze. Anyone else is
 still climbing that reward ladder.</p>
 <p>This query creates a simple "total by user" summary table, adding in a
-extra column that groups the users total into price bands:</p>
+extra column that groups the user's total into price bands:</p>
 <pre><code class="language-sql">CREATE TABLE sales_totals AS
   SELECT
     user_id,
@@ -1349,11 +1349,11 @@ extra column that groups the users total into price bands:</p>
   FROM enriched_purchases
   GROUP BY user_id;
 </code></pre>
-<p>Querying from that table we get:</p>
+<p>Querying from that table, we get the following:</p>
 <pre><code class="language-sql">SET 'ksql.query.pull.table.scan.enabled' = 'true';
 SELECT * FROM sales_totals;
 </code></pre>
-<p>Result:</p>
+<p>Here is the result:</p>
 <pre><code class="language-txt">+--------+-------+-------------+
 |USER_ID |TOTAL  |REWARD_LEVEL |
 +--------+-------+-------------+
@@ -1368,7 +1368,7 @@ SELECT * FROM sales_totals;
 <p>Repeating that same query, Fido has pushed Kris into the Silver rewards scheme:</p>
 <pre><code class="language-sql">SELECT * FROM sales_totals;
 </code></pre>
-<p>Result:</p>
+<p>Here is the result:</p>
 <pre><code class="language-txt">+--------+-------+-------------+
 |USER_ID |TOTAL  |REWARD_LEVEL |
 +--------+-------+-------------+
@@ -1377,22 +1377,21 @@ SELECT * FROM sales_totals;
 |kris    |324.21 |SILVER       |
 |yeva    |368.07 |SILVER       |
 </code></pre>
-<p>So we have campaign one - a table of users' reward levels, which updates
-automatically every time the user makes a purchase. That data will
-probably stream off to the users' account settings page so they can see
+<p>So we have campaign one—a table of user reward levels, which updates
+automatically every time a user makes a purchase. That data will
+probably stream off to the user's account settings page so they can see
 their reward levels in an app, and it will probably be read by the
 billing system to calculate a fixed discount. We could also turn that
-table back into a stream, so every time the reward level changes, the
-user gets an email. But for now let's move on to a more complex
-use-case.</p>
-<h3 id="buy-5-and-the-next-ones-on-us">Buy 5 And The Next One's On Us</h3>
-<p>The chances are high you have a coffee stamp card in your wallet. (Or
-several dozen of them.) To keep our test data small we'll be generous
-as say our customers only need to buy 5 coffees to get a free
+table back into a stream so that every time the reward level changes, the
+user gets an email. But for now, let's move on to a more complex
+use case.</p>
+<h3 id="buy-five-and-the-next-ones-on-us">Buy five and the next one's on us</h3>
+<p>The chances are high that you have a coffee stamp card in your wallet (or
+several dozen of them). To keep our test data small, we'll say our customers only need to buy five coffees to get a free
 one. Whatever the number, the implementation of this scheme is
-straightforward. We count up the number of drinks they've
-purchased. When that number gets to 5 the next one's free, and as it
-hits that 6th free one, we reset to 0.</p>
+straightforward. We count up the number of drinks that they've
+purchased. When that number gets to five, the next one is free, and as it
+hits that sixth (free) one, we reset to zero.</p>
 <pre><code class="language-sql">CREATE TABLE caffeine_index AS
   SELECT
     user_id,
@@ -1403,9 +1402,10 @@ hits that 6th free one, we reset to 0.</p>
   WHERE product_id = 'coffee'
   GROUP BY user_id;
 </code></pre>
-<p>(<em>Note: If you're a programmer, that modulo operator <code>%</code> is going to
-be familiar. If not, you can read the <code>% 6</code> bit as, 'remainder after
-dividing by 6'.</em>)</p>
+<p><strong>NOTE:</strong>
+If you're a programmer, that modulo operator <code>%</code> is going to
+be familiar. If not, you can read the <code>% 6</code> bit as the "remainder after
+dividing by 6."</p>
 <p>Selecting from that table:</p>
 <pre><code class="language-sql">SELECT * 
 FROM caffeine_index;
@@ -1418,18 +1418,18 @@ FROM caffeine_index;
 |kris    |13    |1        |false         |
 |yeva    |5     |5        |true          |
 </code></pre>
-<p>(<em>Note: The <code>total</code> and <code>sequence</code> columns aren't strictly needed, but they help to show what's going on.</em>)</p>
-<p>Again, this updates in real time, so as they purchase their free
-coffee the flag will flip back to <code>false</code> automatically.</p>
-<h3 id="custom-campaigns-tailored-treats">Custom Campaigns, Tailored Treats</h3>
-<p>To finish up, let's think about some bespoke marketing campaigns. One
-to reward certain purchasing habits among our customers, and another
+<p><strong>NOTE:</strong>
+The <code>total</code> and <code>sequence</code> columns aren't strictly needed, but they help to show what's going on.</p>
+<p>Again, this updates in real time, so as customers complete a transaction to get their free
+coffee, the flag will flip back to <code>false</code> automatically.</p>
+<h3 id="custom-campaigns-tailored-treats">Custom campaigns, tailored treats</h3>
+<p>To finish up, let's think about some bespoke marketing campaigns—one
+to reward certain purchasing habits among our customers and another
 to encourage them to try new things.</p>
 <p>As Acting Vice President In Charge Of Marketing, I have decided that
-being French is cool this season, and anyone who has bought a dog and
-a beret is going to get a discount on French Poodles. To figure out
+anyone who has bought a dog and a beret is going to get a discount on Poodles. To figure out
 who this applies to, let's scan through the purchases stream, narrow
-it down to the products we're interested in, and collect those
+it down to the products that we're interested in, and collect those
 products in a set:</p>
 <pre><code class="language-sql">SELECT
     user_id,
@@ -1439,7 +1439,7 @@ WHERE product_id IN ('dog', 'beret')
 GROUP BY user_id
 EMIT CHANGES;
 </code></pre>
-<p>Result:</p>
+<p>Here is the result:</p>
 <pre><code class="language-txt">+-------------------------------------+-------------------------------------+
 |USER_ID                              |PRODUCTS                             |
 +-------------------------------------+-------------------------------------+
@@ -1449,7 +1449,7 @@ EMIT CHANGES;
 |rick                                 |[dog]                                |
 |kris                                 |[beret, dog]                         |
 </code></pre>
-<p>That looks about right. Now we just turn that into a table which only
+<p>That looks about right. Now we just turn that into a table, which only
 shows rows that are <code>HAVING</code> both products in their purchase set:</p>
 <pre><code class="language-sql">CREATE TABLE promotion_french_poodle
   AS
@@ -1464,7 +1464,7 @@ shows rows that are <code>HAVING</code> both products in their purchase set:</p>
   AND ARRAY_CONTAINS( collect_set(product_id), 'beret' )
   EMIT changes;
 </code></pre>
-<p>Querying that:</p>
+<p>Querying that looks like this:</p>
 <pre><code class="language-sql">SELECT * FROM promotion_french_poodle;
 </code></pre>
 <pre><code class="language-txt">+------------------------+------------------------+------------------------+
@@ -1472,14 +1472,14 @@ shows rows that are <code>HAVING</code> both products in their purchase set:</p>
 +------------------------+------------------------+------------------------+
 |kris                    |[beret, dog]            |french_poodle           |
 </code></pre>
-<p>(<em>Note: It doesn't matter which order they bought the items in, or if
-they bought more than one. We'll get the same result.</em>)</p>
-<p>Last, let's try something with a similar query, but a very different
-business angle. We've decided it's now Anglophile month, and we'd like
-to find all the customers who drink coffee, but have never tried
+<p><strong>NOTE:</strong>
+It doesn't matter which order they bought the items in or if
+they bought more than one. We'll get the same result.</p>
+<p>Lastly, let's try something with a similar query but a very different
+business angle. We'd like to find all the customers who drink coffee but have never tried
 tea. Maybe a discount voucher would encourage them to give it a taste?</p>
 <p>Let's create a table that scans the purchase stream, picks out coffee
-and tea, and finds the users <code>HAVING</code> bought coffee, <code>AND NOT</code> tea.
+and tea, and finds the users <code>HAVING</code> bought coffee <code>AND NOT</code> tea.
 To keep it meaningful, we'll also limit it to customers who've spent
 at least $20 with us.</p>
 <pre><code class="language-sql">CREATE TABLE promotion_loose_leaf AS
@@ -1494,7 +1494,7 @@ at least $20 with us.</p>
   AND NOT ARRAY_CONTAINS( collect_set(product_id), 'tea' )
   AND sum(price) &gt; 20;
 </code></pre>
-<p>Querying that table:</p>
+<p>Querying that table looks like this:</p>
 <pre><code class="language-sql">SELECT * FROM promotion_loose_leaf;
 </code></pre>
 <pre><code class="language-txt">+------------------------+------------------------+------------------------+

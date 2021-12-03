@@ -1097,7 +1097,7 @@
 <p>Salesforce sends a notification when a change to a Salesforce record occurs as part of a create, update, delete, or undelete operation. However, if there is corrupt data in Salesforce, it sends a gap event instead of a change event, and these gap events should be properly handled to avoid discrepancies between Salesforce reports and internal dashboards. This recipe demonstrates how to process Salesforce data and filter corrupt events, which allows a downstream application to appropriately process and reconcile those events for accurate reporting and analytics.</p>
 <h2 id="step-by-step">Step by step</h2>
 <h3 id="set-up-your-environment">Set up your environment</h3>
-<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka<sup>®</sup> service.</p>
+<p>Set up your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka<sup>®</sup> service.</p>
 <p>Once your Confluent Cloud cluster is available, create a <a href="https://ksqldb.io/">ksqlDB</a> application. ksqlDB supports a <code>SQL</code> language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
 <h3 id="read-the-data-in">Read the data in</h3>
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to quickly connect to popular data sources and end systems in the cloud.
@@ -1141,7 +1141,7 @@ CREATE STREAM STREAM_SFDC_CDC_OPPORTUNITY_CHANGE_LOG AS
     STREAM_SFDC_CDC_OPPORTUNITY_RAW.REPLAYID AS REPLAYID,
     STREAM_SFDC_CDC_OPPORTUNITY_RAW.CHANGEEVENTHEADER AS CHANGEEVENTHEADER
   FROM STREAM_SFDC_CDC_OPPORTUNITY_RAW
-  WHERE (UCASE(STREAM_SFDC_CDC_OPPORTUNITY_RAW.CHANGEEVENTHEADER-&gt;CHANGETYPE) LIKE 'GAP%')
+  WHERE UCASE(STREAM_SFDC_CDC_OPPORTUNITY_RAW.CHANGEEVENTHEADER-&gt;CHANGETYPE) LIKE 'GAP%'
   EMIT CHANGES;
 </code></pre>
 <h3 id="cleanup">Cleanup</h3>
