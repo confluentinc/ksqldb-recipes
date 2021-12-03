@@ -1046,12 +1046,13 @@
                 
                 
                 <h1 id="build-customer-loyalty-programs">Build Customer Loyalty Programs</h1>
-<p>Customer loyalty programs are everywhere in retail, even if it's as simple as "Get 10 stamps for a free coffee." However, in order to create a more sophisticated rewards program that engages customers at the right place and time, , multiple data streams need to be aggregated to properly apply the right promotions. This recipe showcases how a coffee shop has implemented three separate promotions at the same time:</p>
+<p>Customer loyalty programs are everywhere in retail, even if it's as simple as "Get 10 stamps for a free coffee." However, in order to create a more sophisticated rewards program that engages customers at the right place and time, multiple data streams need to be aggregated to properly apply the right promotions. This recipe showcases how a coffee shop has implemented three separate promotions at the same time:</p>
 <ul>
 <li>A simple "the more you buy, the bigger your discount" benefit</li>
 <li>An online version of "Buy N, get 1 free" recurring reward </li>
 <li>A customizable program that looks at individual customer behavior and offers tailored personalized rewards</li>
 </ul>
+<p><img alt="loyalty program" src="../../img/loyalty.png" /></p>
 <h3 id="set-up-your-environment">Set up your environment</h3>
 <p>Set up your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka<sup>®</sup> service.</p>
 <p>Once your Confluent Cloud cluster is available, create a <a href="https://ksqldb.io/">ksqlDB</a> application. ksqlDB supports a <code>SQL</code> language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
