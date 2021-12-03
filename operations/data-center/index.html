@@ -309,7 +309,7 @@
   
     <li class="md-nav__item">
       <a href="../../fin-serv/denormalization/" class="md-nav__link">
-        Denormalize change data capture (CDC) for orders
+        Enrich Orders with Change Data Capture (CDC)
       </a>
     </li>
   
@@ -348,7 +348,7 @@
   
     <li class="md-nav__item">
       <a href="../../fin-serv/payment-status-check/" class="md-nav__link">
-        Check payment requests
+        Automate Instant Payment Verifications
       </a>
     </li>
   
@@ -417,7 +417,7 @@
   
     <li class="md-nav__item">
       <a href="../../internet-of-things/coalesce/" class="md-nav__link">
-        Coalesce telemetry
+        Flag Unhealthy IoT Devices
       </a>
     </li>
   
@@ -679,7 +679,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/dynamic_pricing/" class="md-nav__link">
-        Set dynamic pricing
+        Build a Dynamic Pricing Strategy
       </a>
     </li>
   
@@ -718,7 +718,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/inventory/" class="md-nav__link">
-        View real-time inventory
+        Optimize Omni-channel Inventory
       </a>
     </li>
   
@@ -757,7 +757,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/loyalty-rewards/" class="md-nav__link">
-        Build Customer Loyalty Schemes
+        Build Customer Loyalty Programs
       </a>
     </li>
   
@@ -895,7 +895,7 @@
   
     <li class="md-nav__item">
       <a href="../../social/online-matches/" class="md-nav__link">
-        Match mutually interested online dating users
+        Match Users for Online Dating
       </a>
     </li>
   
@@ -964,7 +964,7 @@
   
     <li class="md-nav__item">
       <a href="../../transport/aviation/" class="md-nav__link">
-        Notify passengers of a flight delay
+        Notify Passengers of Flight Updates
       </a>
     </li>
   
@@ -1003,7 +1003,7 @@
   
     <li class="md-nav__item">
       <a href="../../transport/fleet_management/" class="md-nav__link">
-        Build a real-time fleet management system
+        Optimize Fleet Management
       </a>
     </li>
   
@@ -1108,9 +1108,7 @@
                 
                 
                 <h1 id="analyze-datacenter-power-usage">Analyze Datacenter Power Usage</h1>
-<p>If your business provides a cloud infrastructure offering with multiple physical datacenter locations with isolated tenants, you may have an accounting unit to monitor and accurately invoice your customers.
-The datacenters consume large amounts of electricity, which need to be monitored to ensure business continuity, and each datacenter is constructed with smart electrical panels that control the power supplies to multiple customer tenants.
-The smart panels emit telemetry data that is captured and produced into an Apache Kafka® topic, and this recipe demonstrates how to accurately bill each customer. </p>
+<p>For businesses that provide cloud infrastructure across multiple data centers with isolated tenants, you may have an accounting unit to accurately monitor and invoice your customers. Oftentimes these data centers consume large amounts of electricity and are constructed with smart electrical panels that control the power supplies to multiple customer tenants. This recipe demonstrates how to accurately bill each customer by capturing and analyzing telemetry data from these smart panels.</p>
 <p><img alt="" src="diagram.svg" /></p>
 <h2 id="step-by-step">Step by step</h2>
 <h3 id="set-up-your-environment">Set up your environment</h3>
@@ -1313,7 +1311,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../internet-of-things/coalesce/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Coalesce telemetry" rel="prev">
+        <a href="../../internet-of-things/coalesce/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Flag Unhealthy IoT Devices" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1322,7 +1320,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
               <span class="md-footer__direction">
                 Previous
               </span>
-              Coalesce telemetry
+              Flag Unhealthy IoT Devices
             </div>
           </div>
         </a>

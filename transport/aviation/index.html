@@ -16,7 +16,7 @@
     
     
       
-        <title>Notify passengers of a flight delay - ksqlDB Recipes</title>
+        <title>Notify Passengers of Flight Updates - ksqlDB Recipes</title>
       
     
     
@@ -63,7 +63,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#notify-passengers-of-a-flight-delay" class="md-skip">
+        <a href="#notify-passengers-of-flight-updates" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Notify passengers of a flight delay
+              Notify Passengers of Flight Updates
             
           </span>
         </div>
@@ -309,7 +309,7 @@
   
     <li class="md-nav__item">
       <a href="../../fin-serv/denormalization/" class="md-nav__link">
-        Denormalize change data capture (CDC) for orders
+        Enrich Orders with Change Data Capture (CDC)
       </a>
     </li>
   
@@ -348,7 +348,7 @@
   
     <li class="md-nav__item">
       <a href="../../fin-serv/payment-status-check/" class="md-nav__link">
-        Check payment requests
+        Automate Instant Payment Verifications
       </a>
     </li>
   
@@ -417,7 +417,7 @@
   
     <li class="md-nav__item">
       <a href="../../internet-of-things/coalesce/" class="md-nav__link">
-        Coalesce telemetry
+        Flag Unhealthy IoT Devices
       </a>
     </li>
   
@@ -594,7 +594,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/dynamic_pricing/" class="md-nav__link">
-        Set dynamic pricing
+        Build a Dynamic Pricing Strategy
       </a>
     </li>
   
@@ -633,7 +633,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/inventory/" class="md-nav__link">
-        View real-time inventory
+        Optimize Omni-channel Inventory
       </a>
     </li>
   
@@ -672,7 +672,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/loyalty-rewards/" class="md-nav__link">
-        Build Customer Loyalty Schemes
+        Build Customer Loyalty Programs
       </a>
     </li>
   
@@ -810,7 +810,7 @@
   
     <li class="md-nav__item">
       <a href="../../social/online-matches/" class="md-nav__link">
-        Match mutually interested online dating users
+        Match Users for Online Dating
       </a>
     </li>
   
@@ -892,12 +892,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Notify passengers of a flight delay
+          Notify Passengers of Flight Updates
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Notify passengers of a flight delay
+        Notify Passengers of Flight Updates
       </a>
       
         
@@ -1037,7 +1037,7 @@
   
     <li class="md-nav__item">
       <a href="../fleet_management/" class="md-nav__link">
-        Build a real-time fleet management system
+        Optimize Fleet Management
       </a>
     </li>
   
@@ -1175,9 +1175,8 @@
               
                 
                 
-                <h1 id="notify-passengers-of-a-flight-delay">Notify passengers of a flight delay</h1>
-<p>Worse than having a flight delayed is not even knowing that it's been delayed or having to get up to keep checking the monitors. 
-This recipe shows how an airline can combine the data that they have about passengers, their booked flights, and updates to flight plans in order to notify a passenger as soon as there is a delay to their flight. </p>
+                <h1 id="notify-passengers-of-flight-updates">Notify Passengers of Flight Updates</h1>
+<p>Worse than having a flight delayed is not being notified about the important changes that come with it, such as new boarding times, cancellations, gate changes, and estimated arrivals. This recipe shows how ksqlDB can help airlines combine passenger, flight booking, and current flight plan data to immediately alert a passenger about flight updates in real time.</p>
 <h2 id="step-by-step">Step by step</h2>
 <h3 id="set-up-your-environment">Set up your environment</h3>
 <p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka<sup>®</sup> service.</p>
@@ -1508,7 +1507,7 @@ INSERT INTO FLIGHT_UPDATES (ID, FLIGHT_ID, UPDATED_DEP, REASON) VALUES (3, 1, '2
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../social/online-matches/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Match mutually interested online dating users" rel="prev">
+        <a href="../../social/online-matches/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Match Users for Online Dating" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1517,20 +1516,20 @@ INSERT INTO FLIGHT_UPDATES (ID, FLIGHT_ID, UPDATED_DEP, REASON) VALUES (3, 1, '2
               <span class="md-footer__direction">
                 Previous
               </span>
-              Match mutually interested online dating users
+              Match Users for Online Dating
             </div>
           </div>
         </a>
       
       
         
-        <a href="../fleet_management/" class="md-footer__link md-footer__link--next" aria-label="Next: Build a real-time fleet management system" rel="next">
+        <a href="../fleet_management/" class="md-footer__link md-footer__link--next" aria-label="Next: Optimize Fleet Management" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Build a real-time fleet management system
+              Optimize Fleet Management
             </div>
           </div>
           <div class="md-footer__button md-icon">

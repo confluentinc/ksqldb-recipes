@@ -16,7 +16,7 @@
     
     
       
-        <title>Build a real-time fleet management system - ksqlDB Recipes</title>
+        <title>Optimize Fleet Management - ksqlDB Recipes</title>
       
     
     
@@ -63,7 +63,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#build-a-real-time-fleet-management-system" class="md-skip">
+        <a href="#optimize-fleet-management" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Build a real-time fleet management system
+              Optimize Fleet Management
             
           </span>
         </div>
@@ -309,7 +309,7 @@
   
     <li class="md-nav__item">
       <a href="../../fin-serv/denormalization/" class="md-nav__link">
-        Denormalize change data capture (CDC) for orders
+        Enrich Orders with Change Data Capture (CDC)
       </a>
     </li>
   
@@ -348,7 +348,7 @@
   
     <li class="md-nav__item">
       <a href="../../fin-serv/payment-status-check/" class="md-nav__link">
-        Check payment requests
+        Automate Instant Payment Verifications
       </a>
     </li>
   
@@ -417,7 +417,7 @@
   
     <li class="md-nav__item">
       <a href="../../internet-of-things/coalesce/" class="md-nav__link">
-        Coalesce telemetry
+        Flag Unhealthy IoT Devices
       </a>
     </li>
   
@@ -594,7 +594,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/dynamic_pricing/" class="md-nav__link">
-        Set dynamic pricing
+        Build a Dynamic Pricing Strategy
       </a>
     </li>
   
@@ -633,7 +633,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/inventory/" class="md-nav__link">
-        View real-time inventory
+        Optimize Omni-channel Inventory
       </a>
     </li>
   
@@ -672,7 +672,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/loyalty-rewards/" class="md-nav__link">
-        Build Customer Loyalty Schemes
+        Build Customer Loyalty Programs
       </a>
     </li>
   
@@ -810,7 +810,7 @@
   
     <li class="md-nav__item">
       <a href="../../social/online-matches/" class="md-nav__link">
-        Match mutually interested online dating users
+        Match Users for Online Dating
       </a>
     </li>
   
@@ -881,7 +881,7 @@
   
     <li class="md-nav__item">
       <a href="../aviation/" class="md-nav__link">
-        Notify passengers of a flight delay
+        Notify Passengers of Flight Updates
       </a>
     </li>
   
@@ -931,12 +931,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Build a real-time fleet management system
+          Optimize Fleet Management
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Build a real-time fleet management system
+        Optimize Fleet Management
       </a>
       
         
@@ -1093,10 +1093,8 @@
               
                 
                 
-                <h1 id="build-a-real-time-fleet-management-system">Build a real-time fleet management system</h1>
-<p>More and more, fleet management relies on knowing real-time information on vehicles, their locations, and vehicle telemetry.
-This enables businesses to improve operational efficiency by optimizing travel routes, lowering fuel consumption, and automating service schedules.
-This recipe enriches fleet location with individual vehicle information, so organizations can have a real-time consolidated view on the entire fleet.</p>
+                <h1 id="optimize-fleet-management">Optimize Fleet Management</h1>
+<p>More and more, fleet management relies on knowing real-time information on vehicle availability, their locations, and integrating that with data from vehicle telematics. This enables businesses to improve operational efficiency by optimizing travel routes, lowering fuel consumption, and automating service schedules. This recipe combines fleet locations with individual vehicle information, so organizations can have a real-time consolidated view of their entire fleet.</p>
 <h2 id="step-by-step">Step by step</h2>
 <h3 id="set-up-your-environment">Set up your environment</h3>
 <p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka<sup>®</sup> service.</p>
@@ -1220,7 +1218,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../aviation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Notify passengers of a flight delay" rel="prev">
+        <a href="../aviation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Notify Passengers of Flight Updates" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1229,7 +1227,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
               <span class="md-footer__direction">
                 Previous
               </span>
-              Notify passengers of a flight delay
+              Notify Passengers of Flight Updates
             </div>
           </div>
         </a>

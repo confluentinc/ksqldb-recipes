@@ -309,7 +309,7 @@
   
     <li class="md-nav__item">
       <a href="../../fin-serv/denormalization/" class="md-nav__link">
-        Denormalize change data capture (CDC) for orders
+        Enrich Orders with Change Data Capture (CDC)
       </a>
     </li>
   
@@ -348,7 +348,7 @@
   
     <li class="md-nav__item">
       <a href="../../fin-serv/payment-status-check/" class="md-nav__link">
-        Check payment requests
+        Automate Instant Payment Verifications
       </a>
     </li>
   
@@ -417,7 +417,7 @@
   
     <li class="md-nav__item">
       <a href="../../internet-of-things/coalesce/" class="md-nav__link">
-        Coalesce telemetry
+        Flag Unhealthy IoT Devices
       </a>
     </li>
   
@@ -594,7 +594,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/dynamic_pricing/" class="md-nav__link">
-        Set dynamic pricing
+        Build a Dynamic Pricing Strategy
       </a>
     </li>
   
@@ -633,7 +633,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/inventory/" class="md-nav__link">
-        View real-time inventory
+        Optimize Omni-channel Inventory
       </a>
     </li>
   
@@ -672,7 +672,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/loyalty-rewards/" class="md-nav__link">
-        Build Customer Loyalty Schemes
+        Build Customer Loyalty Programs
       </a>
     </li>
   
@@ -888,7 +888,7 @@
   
     <li class="md-nav__item">
       <a href="../../social/online-matches/" class="md-nav__link">
-        Match mutually interested online dating users
+        Match Users for Online Dating
       </a>
     </li>
   
@@ -957,7 +957,7 @@
   
     <li class="md-nav__item">
       <a href="../../transport/aviation/" class="md-nav__link">
-        Notify passengers of a flight delay
+        Notify Passengers of Flight Updates
       </a>
     </li>
   
@@ -996,7 +996,7 @@
   
     <li class="md-nav__item">
       <a href="../../transport/fleet_management/" class="md-nav__link">
-        Build a real-time fleet management system
+        Optimize Fleet Management
       </a>
     </li>
   
@@ -1094,10 +1094,8 @@
                 
                 
                 <h1 id="detect-and-analyze-ssh-attacks">Detect and analyze SSH attacks</h1>
-<p>There are lots of ways SSH can be abused, but one of the most straightforward ways to detect a problem is to monitor for failed login attempts.
-This recipe processes Syslog data and streams out pairs of usernames and IP addresses from failed login attempts.
-With <a href="https://ksqldb.io/">ksqlDB</a>, you can filter and react to events in real time rather than performing historical analysis of Syslog data at rest.</p>
-<p><img alt="SSH-attack" src="../../img/ssh-attack.png" /></p>
+<p>There are lots of ways SSH can be abused, but one of the most straightforward ways to detect suspicious activity is to monitor for rejected logins. This recipe processes Syslog data to detect failed logins, while streaming out those pairs of usernames and IP addresses. With ksqlDB, you can filter and react to unwanted events in real time to minimize damage rather than performing historical analysis of Syslog data from cold storage.</p>
+<p><img alt="SSH-attack" src="../../img/ssh-attack.jpg" /></p>
 <h2 id="step-by-step">Step by step</h2>
 <h3 id="set-up-your-environment">Set up your environment</h3>
 <p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka<sup>®</sup> service.</p>
@@ -1271,7 +1269,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../retail/loyalty-rewards/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Build Customer Loyalty Schemes" rel="prev">
+        <a href="../../retail/loyalty-rewards/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Build Customer Loyalty Programs" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1280,20 +1278,20 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
               <span class="md-footer__direction">
                 Previous
               </span>
-              Build Customer Loyalty Schemes
+              Build Customer Loyalty Programs
             </div>
           </div>
         </a>
       
       
         
-        <a href="../../social/online-matches/" class="md-footer__link md-footer__link--next" aria-label="Next: Match mutually interested online dating users" rel="next">
+        <a href="../../social/online-matches/" class="md-footer__link md-footer__link--next" aria-label="Next: Match Users for Online Dating" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Match mutually interested online dating users
+              Match Users for Online Dating
             </div>
           </div>
           <div class="md-footer__button md-icon">

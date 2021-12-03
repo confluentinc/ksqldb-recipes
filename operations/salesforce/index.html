@@ -309,7 +309,7 @@
   
     <li class="md-nav__item">
       <a href="../../fin-serv/denormalization/" class="md-nav__link">
-        Denormalize change data capture (CDC) for orders
+        Enrich Orders with Change Data Capture (CDC)
       </a>
     </li>
   
@@ -348,7 +348,7 @@
   
     <li class="md-nav__item">
       <a href="../../fin-serv/payment-status-check/" class="md-nav__link">
-        Check payment requests
+        Automate Instant Payment Verifications
       </a>
     </li>
   
@@ -417,7 +417,7 @@
   
     <li class="md-nav__item">
       <a href="../../internet-of-things/coalesce/" class="md-nav__link">
-        Coalesce telemetry
+        Flag Unhealthy IoT Devices
       </a>
     </li>
   
@@ -672,7 +672,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/dynamic_pricing/" class="md-nav__link">
-        Set dynamic pricing
+        Build a Dynamic Pricing Strategy
       </a>
     </li>
   
@@ -711,7 +711,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/inventory/" class="md-nav__link">
-        View real-time inventory
+        Optimize Omni-channel Inventory
       </a>
     </li>
   
@@ -750,7 +750,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/loyalty-rewards/" class="md-nav__link">
-        Build Customer Loyalty Schemes
+        Build Customer Loyalty Programs
       </a>
     </li>
   
@@ -888,7 +888,7 @@
   
     <li class="md-nav__item">
       <a href="../../social/online-matches/" class="md-nav__link">
-        Match mutually interested online dating users
+        Match Users for Online Dating
       </a>
     </li>
   
@@ -957,7 +957,7 @@
   
     <li class="md-nav__item">
       <a href="../../transport/aviation/" class="md-nav__link">
-        Notify passengers of a flight delay
+        Notify Passengers of Flight Updates
       </a>
     </li>
   
@@ -996,7 +996,7 @@
   
     <li class="md-nav__item">
       <a href="../../transport/fleet_management/" class="md-nav__link">
-        Build a real-time fleet management system
+        Optimize Fleet Management
       </a>
     </li>
   
@@ -1094,9 +1094,7 @@
                 
                 
                 <h1 id="handle-corrupted-data-from-salesforce">Handle corrupted data from Salesforce</h1>
-<p>Salesforce sends a notification when a change to a Salesforce record occurs as part of a create, update, delete, or undelete operation.
-However, if there is corrupted data in Salesforce, it sends a gap event instead of a change event, which contains information about the change in the header, such as the change type and record ID.
-These gap events need to be identified and then handled by calling a SFDC API to reconcile the events in real time.</p>
+<p>Salesforce sends a notification when a change to a Salesforce record occurs as part of a create, update, delete, or undelete operation. However, if there is corrupt data in Salesforce, it sends a gap event instead of a change event, and these gap events should be properly handled to avoid discrepancies between Salesforce reports and internal dashboards. This recipe demonstrates how to process Salesforce data and filter corrupt events, which allows a downstream application to appropriately process and reconcile those events for accurate reporting and analytics.</p>
 <h2 id="step-by-step">Step by step</h2>
 <h3 id="set-up-your-environment">Set up your environment</h3>
 <p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka<sup>®</sup> service.</p>
@@ -1190,13 +1188,13 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
       
       
         
-        <a href="../../retail/dynamic_pricing/" class="md-footer__link md-footer__link--next" aria-label="Next: Set dynamic pricing" rel="next">
+        <a href="../../retail/dynamic_pricing/" class="md-footer__link md-footer__link--next" aria-label="Next: Build a Dynamic Pricing Strategy" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Set dynamic pricing
+              Build a Dynamic Pricing Strategy
             </div>
           </div>
           <div class="md-footer__button md-icon">

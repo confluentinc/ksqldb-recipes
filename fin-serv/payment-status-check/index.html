@@ -16,7 +16,7 @@
     
     
       
-        <title>Check payment requests - ksqlDB Recipes</title>
+        <title>Automate Instant Payment Verifications - ksqlDB Recipes</title>
       
     
     
@@ -63,7 +63,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#check-payment-requests" class="md-skip">
+        <a href="#automate-instant-payment-verifications" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Check payment requests
+              Automate Instant Payment Verifications
             
           </span>
         </div>
@@ -311,7 +311,7 @@
   
     <li class="md-nav__item">
       <a href="../denormalization/" class="md-nav__link">
-        Denormalize change data capture (CDC) for orders
+        Enrich Orders with Change Data Capture (CDC)
       </a>
     </li>
   
@@ -361,12 +361,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Check payment requests
+          Automate Instant Payment Verifications
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Check payment requests
+        Automate Instant Payment Verifications
       </a>
       
         
@@ -495,7 +495,7 @@
   
     <li class="md-nav__item">
       <a href="../../internet-of-things/coalesce/" class="md-nav__link">
-        Coalesce telemetry
+        Flag Unhealthy IoT Devices
       </a>
     </li>
   
@@ -672,7 +672,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/dynamic_pricing/" class="md-nav__link">
-        Set dynamic pricing
+        Build a Dynamic Pricing Strategy
       </a>
     </li>
   
@@ -711,7 +711,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/inventory/" class="md-nav__link">
-        View real-time inventory
+        Optimize Omni-channel Inventory
       </a>
     </li>
   
@@ -750,7 +750,7 @@
   
     <li class="md-nav__item">
       <a href="../../retail/loyalty-rewards/" class="md-nav__link">
-        Build Customer Loyalty Schemes
+        Build Customer Loyalty Programs
       </a>
     </li>
   
@@ -888,7 +888,7 @@
   
     <li class="md-nav__item">
       <a href="../../social/online-matches/" class="md-nav__link">
-        Match mutually interested online dating users
+        Match Users for Online Dating
       </a>
     </li>
   
@@ -957,7 +957,7 @@
   
     <li class="md-nav__item">
       <a href="../../transport/aviation/" class="md-nav__link">
-        Notify passengers of a flight delay
+        Notify Passengers of Flight Updates
       </a>
     </li>
   
@@ -996,7 +996,7 @@
   
     <li class="md-nav__item">
       <a href="../../transport/fleet_management/" class="md-nav__link">
-        Build a real-time fleet management system
+        Optimize Fleet Management
       </a>
     </li>
   
@@ -1093,9 +1093,8 @@
               
                 
                 
-                <h1 id="check-payment-requests">Check payment requests</h1>
-<p>With financial services, it is useful to check customer payment requests in real time.
-This recipe shows you how to validate payments against available funds and anti-money laundering (AML) policies.</p>
+                <h1 id="automate-instant-payment-verifications">Automate Instant Payment Verifications</h1>
+<p>As digital transactions become the new norm, it’s critical to check customer payment requests in real time for suspicious activity. This means financial institutions must verify the payment by checking it against any regulatory restrictions before proceeding to process it. This recipe shows you how to validate these payments against available funds and anti-money-laundering (AML) policies.</p>
 <h2 id="step-by-step">Step by step</h2>
 <h3 id="set-up-your-environment">Set up your environment</h3>
 <p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka<sup>®</sup> service.</p>
@@ -1349,7 +1348,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../denormalization/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Denormalize change data capture (CDC) for orders" rel="prev">
+        <a href="../denormalization/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Enrich Orders with Change Data Capture (CDC)" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1358,20 +1357,20 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
               <span class="md-footer__direction">
                 Previous
               </span>
-              Denormalize change data capture (CDC) for orders
+              Enrich Orders with Change Data Capture (CDC)
             </div>
           </div>
         </a>
       
       
         
-        <a href="../../internet-of-things/coalesce/" class="md-footer__link md-footer__link--next" aria-label="Next: Coalesce telemetry" rel="next">
+        <a href="../../internet-of-things/coalesce/" class="md-footer__link md-footer__link--next" aria-label="Next: Flag Unhealthy IoT Devices" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Coalesce telemetry
+              Flag Unhealthy IoT Devices
             </div>
           </div>
           <div class="md-footer__button md-icon">
