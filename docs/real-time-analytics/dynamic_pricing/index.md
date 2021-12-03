@@ -1,10 +1,10 @@
 ---
 seo:
   title: Build a Dynamic Pricing Strategy
-  description: This recipe demonstrates how to use ksqlDB to set dynamic pricing in an online marketplace.
+  description: This ksqlDB recipe demonstrates how to use ksqlDB to set dynamic pricing in an online marketplace.
 ---
 
-# Build a Dynamic Pricing Strategy
+# Build a dynamic pricing strategy
 
 As consumers increasingly transact digitally and online comparison shopping has become common practice, implementing a dynamic pricing strategy is essential to stay competitive. This recipe helps you keep track of pricing trends and statistics, such as lowest, median, and average prices over a given timeframe, so both buyers and sellers can make dynamic offers based on historical sales activity.
 
