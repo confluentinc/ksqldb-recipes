@@ -6,12 +6,7 @@ seo:
 
 # Understand user behavior with clickstream data
 
-Analyzing clickstream data enables businesses to understand the behavior of its online users, for example:
-
-- User activity over a given time frame: how many webpages are users viewing
-- Requests that end in error, over a given threshold (e.g., 404 HTTP codes)
-- Where the requests are coming from geographically in a given window of time
-- How long users are interacting with the site (user sessions)
+Analyzing clickstream data enables businesses to optimize webpages and determine the effectiveness of their web presence by better understanding their users’ click activity and navigation patterns. Because clickstream data often involves large data volumes, stream processing is a natural fit, as it quickly processes data as soon as it is ingested for analysis. This recipe enables you to measure key statistics on visitor activity over a given time frame, such as how many webpages they are viewing, how long they’re engaging with the website, and more.
 
 ![grafana](../../img/clickstream.png)
 

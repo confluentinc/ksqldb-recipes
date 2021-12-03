@@ -1,14 +1,12 @@
 ---
 seo:
-  title: Build a Real-Time Fleet Management System
+  title: Optimize Fleet Management
   description: This ksqlDB recipe enriches fleet location data with data about each vehicle for a real-time view of consolidated information on the entire fleet.
 ---
 
-# Build a real-time fleet management system
+# Optimize Fleet Management
 
-More and more, fleet management relies on knowing real-time information on vehicles, their locations, and vehicle telemetry.
-This enables businesses to improve operational efficiency by optimizing travel routes, lowering fuel consumption, and automating service schedules.
-This recipe enriches fleet location with individual vehicle information, so organizations can have a real-time consolidated view on the entire fleet.
+More and more, fleet management relies on knowing real-time information on vehicle availability, their locations, and integrating that with data from vehicle telematics. This enables businesses to improve operational efficiency by optimizing travel routes, lowering fuel consumption, and automating service schedules. This recipe combines fleet locations with individual vehicle information, so organizations can have a real-time consolidated view of their entire fleet.
 
 ## Step by step
 

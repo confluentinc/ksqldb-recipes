@@ -1,13 +1,12 @@
 ---
 seo:
-  title: Notify Passengers of a Flight Delay
+  title: Notify Passengers of Flight Updates
   description: This ksqlDB recipe uses a stream of flight updates to notify passengers if their flight is delayed.
 ---
 
-# Notify passengers of a flight delay
+# Notify Passengers of Flight Updates
 
-Worse than having a flight delayed is not even knowing that it's been delayed or having to get up to keep checking the monitors. 
-This recipe shows how an airline can combine the data that they have about passengers, their booked flights, and updates to flight plans in order to notify a passenger as soon as there is a delay to their flight. 
+Worse than having a flight delayed is not being notified about the important changes that come with it, such as new boarding times, cancellations, gate changes, and estimated arrivals. This recipe shows how ksqlDB can help airlines combine passenger, flight booking, and current flight plan data to immediately alert a passenger about flight updates in real time.
 
 ## Step by step
 
