@@ -1168,7 +1168,7 @@ CREATE TABLE items (
   PARTITIONS = 6);
 
 -- Calculate minimum, maximum, and average price, per item, and join with item name
-CREATE TABLE sales_stats AS
+CREATE TABLE sales_stats WITH (KEY_FORMAT='JSON') AS
 SELECT S.item_id,
        I.item_name,
        MIN(price) AS price_min,
@@ -1176,7 +1176,7 @@ SELECT S.item_id,
        AVG(price) AS price_avg
 FROM sales S
 INNER JOIN items I ON S.item_id = I.item_id
-GROUP BY S.item_id
+GROUP BY S.item_id, I.item_name
 EMIT CHANGES;
 </code></pre>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert example events into the source topics with the following statements:</p>
@@ -1184,12 +1184,12 @@ EMIT CHANGES;
 INSERT INTO items (item_id, item_name) VALUES (2, 'Charizard card');
 INSERT INTO items (item_id, item_name) VALUES (3, 'Mew card');
 
-INSERT INTO sales_stream (item_id, price) VALUES (1, 10.00); 
-INSERT INTO sales_stream (item_id, price) VALUES (2, 20.00); 
-INSERT INTO sales_stream (item_id, price) VALUES (3, 30.00); 
-INSERT INTO sales_stream (item_id, price) VALUES (1, 12.00); 
-INSERT INTO sales_stream (item_id, price) VALUES (1, 17.00); 
-INSERT INTO sales_stream (item_id, price) VALUES (3, 26.00); 
+INSERT INTO sales (item_id, price) VALUES (1, 10.00); 
+INSERT INTO sales (item_id, price) VALUES (2, 20.00); 
+INSERT INTO sales (item_id, price) VALUES (3, 30.00); 
+INSERT INTO sales (item_id, price) VALUES (1, 12.00); 
+INSERT INTO sales (item_id, price) VALUES (1, 17.00); 
+INSERT INTO sales (item_id, price) VALUES (3, 26.00); 
 </code></pre>
 <h3 id="cleanup">Cleanup</h3>
 <p>To clean up the ksqlDB resources created by this recipe, use the ksqlDB commands shown below (substitute stream or topic name, as appropriate).
