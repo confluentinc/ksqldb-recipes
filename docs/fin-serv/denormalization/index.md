@@ -1,21 +1,18 @@
 ---
 seo:
-  title: Denormalize Change Data Capture (CDC) for Orders
+  title: Enrich Orders with Change Data Capture (CDC)
   description: This recipe demonstrates this principle by streaming from a SQL Server, denormalizing the data, and writing to Snowflake.
 ---
 
-# Denormalize Change Data Capture (CDC) for Orders
+# Enrich Orders with Change Data Capture (CDC)
 
-If you have transactional events for orders in a marketplace, you can stream the Change Data Capture (CDC) and denormalize the events.
-Denormalization is a well-established pattern for performance because querying a single table of enriched data will often perform better than querying across multiple at runtime.
-You can consume the denormalized events from  downstream applications in your business, or stream them to another destination.
-This recipe demonstrates this principle by streaming from a SQL Server, denormalizing the data, and writing to Snowflake.
+Change Data Capture (CDC) plays a vital role to ensure recently changed data is quickly ingested, transformed, and used by downstream analytics platforms and applications. If you have transactional events being written to a database, such as sales orders from a marketplace, you can use CDC to capture and denormalize these change events into a single table of enriched data to provide better query performance and consumption. This recipe demonstrates this principle by streaming data from a SQL Server, denormalizing the data, and writing it to Snowflake.
 
 ![denormalized](../../img/denormalized-data.png)
 
-## Step-by-step
+## Step by step
 
-### Setup your Environment
+### Set up your environment
 
 --8<-- "docs/shared/ccloud_setup.md"
 
@@ -23,7 +20,7 @@ This recipe demonstrates this principle by streaming from a SQL Server, denormal
 
 --8<-- "docs/shared/connect.md"
 
-Change Data Capture (CDC) for orders is being written to a SQL Server database, and there is an Oracle database with customer data.
+Change data capture (CDC) for orders is being written to a SQL Server database, and there is an Oracle database with customer data.
 
 ```json
 --8<-- "docs/fin-serv/denormalization/source.json"
@@ -31,7 +28,7 @@ Change Data Capture (CDC) for orders is being written to a SQL Server database, 
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run stream processing app
+### Run the stream processing app
 
 This streams the user orders and denormalizes the data by joining facts (orders) with the dimension (customer).
 

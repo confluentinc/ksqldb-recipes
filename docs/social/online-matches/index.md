@@ -1,30 +1,18 @@
 ---
 seo:
-  title: Match Mutually Interested Online Dating Users
-  description: This recipe tracks repeated interactions between users of a social network or dating site.
+  title: Match Users for Online Dating
+  description: This ksqlDB recipe tracks repeated interactions between users of a social network or dating site.
 ---
 
-# Match Mutually Interested Online Dating Users
+# Match Users for Online Dating
 
-One core feature of online dating sites is a messaging platform,
-and users chatting back and forth is an
-ideal fit for a real-time streaming system. But look at the site from
-another angle and it's all about making connections between people,
-so maybe a graph database is the right fit? Well, Kafka Connect makes
-it easy to use the strengths of both in tandem, but before we go that
-far, let's dig in and see how much graph-analysis we can do with some
-clever ksqlDB tricks.
+When it comes to online dating, matching users based on mutual interests and their personal preferences, while enabling real-time communication are key to finding the right counterpart. This recipe enables developers to dynamically determine which pairs of people have connected and are ripe to get the ball rolling.
 
-This recipe demonstrates a messaging system and can dynamically
-determine "Which pairs of people
-have made proper connections?" Defining a 'proper' connection is a
-mystery for sociologists, but for our purposes we'll say two people
-have connected properly if A sends a message to B, B responds, and A
-follows-up. That should be enough chit-chat to get the ball rolling.
+![online dating](../../img/dating.png)
 
-## Step-by-step
+## Step by step
 
-### Setup your Environment
+### Set up your environment
 
 --8<-- "docs/shared/ccloud_setup.md"
 
@@ -38,10 +26,10 @@ follows-up. That should be enough chit-chat to get the ball rolling.
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run stream processing app
+### Run the stream processing app
 
 The application breaks up the stream of messages into individual conversations and puts each of those conversations in time order, keeping track of the sender as we go.
-Then it builds up a function, `(old_state, element) => ...`, that considers different states.
+Then it builds up the function `(old_state, element) => ...`, which considers different states.
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
@@ -63,20 +51,20 @@ Then it builds up a function, `(old_state, element) => ...`, that considers diff
 This solution builds up a query that can take a stream of messages and
 assemble them into a thread of conversations for analysis.
 
-### Tracking Connections
+### Tracking connections
 
-If you look at those `messages`, it's clear there are a lot of hellos
+If you look at those `messages`, it's clear that there are a lot of hellos
 bouncing around, but beyond that it's hard to see any patterns. Let's
-use some queries to make sense of it. We'll build up our answer to,
-"Who's connected to who?"  gradually. Before we begin, some session
-settings to make sure we all get the same results:
+use some queries to make sense of it. We'll build up our answer to
+"Who's connected to who?"  gradually. Before we begin, here are some session
+settings to make sure that we all get the same results:
 
 ```sql
 SET 'auto.offset.reset' = 'earliest';
 SET 'ksql.query.pull.table.scan.enabled' = 'true';
 ```
 
-### Split By Conversation
+### Split By conversation
 
 The first step is to break the stream up into individual
 conversations. If we sort the sender and receiver of each message, we
@@ -93,7 +81,7 @@ CREATE TABLE conversations_split AS
     ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>');
 ```
 
-Querying that:
+Querying that looks like this:
 
 ```sql
 SELECT * FROM conversations_split;
@@ -109,19 +97,20 @@ SELECT * FROM conversations_split;
 |1<>3            |[1637317383778]                               |
 ```
 
-(_Note that because we sorted the `[send_id, recv_id]` array, it doesn't matter if 1
-was sending to 2 or 2 was sending to 1 - we get the same conversation ID for both
-directions._)
+**NOTE:**
+Because we sorted the `[send_id, recv_id]` array, it doesn't matter if 1
+was sending to 2 or 2 was sending to 1—we get the same conversation ID for both
+directions.
 
-### Chat By Chat
+### Chat By chat
 
-That's a big help - we can analyze conversations individually.
+That's a big help—we can analyze conversations individually.
 
 
-Let's put each of those conversations in time order, and keep track of the sender as we go.
+Let's put each of these conversations in time order, and keep track of the sender as we go.
 
-We do this in two steps - we'll enhance our `message_times` column to
-build up a map with the `rowtime` as the key, and the `send_id` as the
+We do this in two steps. First, we'll enhance our `message_times` column to
+build up a map with the `rowtime` as the key and the `send_id` as the
 value:
 
 ```sql
@@ -137,7 +126,7 @@ CREATE TABLE conversations_mapped AS
     ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>');
 ```
 
-Querying that:
+Querying that looks like this:
 
 ```sql
 SELECT * FROM conversations_mapped;
@@ -154,7 +143,7 @@ SELECT * FROM conversations_mapped;
 |1<>3            |{1637317383778=1}                                   |
 ```
 
-Almost right, but we want to be able to see those messages in
+It's almost right, but we want to be able to see those messages in
 order. Let's turn the `message_times` map back into a sorted list with
 `ENTRIES(<map>, true)`:
 
@@ -175,7 +164,7 @@ CREATE TABLE conversations_sequenced AS
     ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>');
 ```
 
-Querying that:
+Querying that looks like this:
 
 ```sql
 SELECT * FROM conversations_sequenced;
@@ -193,31 +182,31 @@ SELECT * FROM conversations_sequenced;
 
 Perfect. If you pause and take a look at the `4<>5` row, you'll see we
 nearly have our answer. First 5 sends a message, then 4 replies, then
-5 follows-up. That's a match!  `1<>2` also matches, and it looks like
+5 follows up. That's a match!  `1<>2` also matches, and it looks like
 3 is getting nowhere with 4.
 
-### Stepping Through Conversations Automatically
+### Stepping through conversations automatically
 
-If our data sets were tiny, we'd be done - we can see by eye which
+If our data sets were tiny, we'd be done—we can see by eye which
 conversations match. To scale this up, let's teach ksqlDB to step
 through that sorted array of `message_times` and track the steps of the
 conversation flowing back and forth. We can do with the `REDUCE`
 function.
 
-For the unfamiliar, `REDUCE` is a way of stepping through an array,
+`REDUCE` is a way of stepping through an array,
 entry by entry, and boiling it down to a final result. We give it the
 array (in our case, `message_times`), a starting state and a function
-which can take our state and one element of the array, and give us the
+that can take our state and one element of the array, and give us the
 next state.
 
-Our state will track the steps in the flow, and who sent the most
+Our state will track the steps in the flow and who sent the most
 recent message. We'll start with these placeholder values:
 
 ```txt
 STRUCT(step := 'start', sender := CAST(-1 AS BIGINT))
 ```
 
-And then build up a function, `(old_state, element) => ...`, that
+And then build up the function `(old_state, element) => ...`, which
 considers each possible case:
 
 * If we're at the `start` step, the next message is always an
@@ -228,7 +217,7 @@ considers each possible case:
   that's a connection! Move to `connected`.
 * In any other case, there's no change.
 
-In code that looks like this:
+In code, that looks like this:
 
 ```sql
 CREATE OR REPLACE TABLE conversation_states AS
@@ -250,7 +239,7 @@ CREATE OR REPLACE TABLE conversation_states AS
   FROM conversations_sequenced;
 ```
 
-Querying that:
+Querying that looks like this:
 
 ```sql
 SELECT * FROM conversation_states;

@@ -1,18 +1,16 @@
 ---
 seo:
-  title: View Real-time Inventory
-  description: This recipe demonstrates how to use ksqlDB to always have an up-to-date snapshot of your inventory.
+  title: Optimize Omni-channel Inventory
+  description: This recipe demonstrates how to use ksqlDB to ensure an up-to-date snapshot of your inventory at all times.
 ---
 
-# View Real-time Inventory
+# Optimize Omni-channel Inventory
 
-Having an up-to-date view of inventory on every item is essential in today's online marketplaces.
-This helps businesses maintain the optimum level of inventory—not too much and not too little—so that they can meet demand while minimizing costs.
-This recipe demonstrates how to see your updated inventory in real-time, so you always have an up-to-date snapshot of your stock.
+Having an up-to-date, real-time view of inventory on every item is essential in today's online marketplaces. This helps businesses maintain the optimum level of inventory—not too much and not too little—so that they can meet customer demand while minimizing inventory holding costs. This recipe demonstrates how to track and update inventory in real time, so you always have an up-to-date snapshot of your stock for both your customers and merchandising teams.
 
-## Step-by-Step
+## Step by step
 
-### Setup your Environment
+### Set up your environment
 
 --8<-- "docs/shared/ccloud_setup.md"
 
@@ -29,9 +27,9 @@ This creates a stream of events, where each event results in the addition or rem
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run stream processing app
+### Run the stream processing app
 
-Create a ksqlDB `TABLE`, which is a mutable, partitioned collection that models change over time that represents what is true as of "now".
+Create a ksqlDB `TABLE`, which is a mutable, partitioned collection that models change over time and represents what is true as of now.
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 

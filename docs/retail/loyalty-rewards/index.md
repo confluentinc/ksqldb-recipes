@@ -1,24 +1,16 @@
 ---
 seo:
-  title: Build Customer Loyalty Schemes
-  description: This ksqlDB recipe tracks customer purchasing patterns to generate tailored rewards for a loyalty scheme.
+  title: Build Customer Loyalty Programs
+  description: This recipe tracks customers' purchasing patterns, generating tailored rewards for a loyalty scheme.
 ---
 
-# Build customer loyalty schemes
+# Build Customer Loyalty Programs
 
-Customer loyalty schemes are everywhere in retail, even if it's just
-as simple as, "Get 10 stamps on this card and we'll give you a free
-coffee." Let's level up our marketing strategy and take a look at how
-we can build some increasingly sophisticated reward schemes:
+Customer loyalty programs are everywhere in retail, even if it's as simple as "Get 10 stamps for a free coffee." However, in order to create a more sophisticated rewards program that engages customers at the right place and time, , multiple data streams need to be aggregated to properly apply the right promotions. This recipe showcases how a coffee shop has implemented three separate promotions at the same time:
 
-  * A simple "the more you buy, the bigger your discount" scheme
-  * An online version of the coffee shop's recurring "buy N, get one free" discount
-  * A customizable program that looks at individual customer
-    behavior and offers tailored rewards
-
-We'll start by setting up an environment and some data to work with,
-then see how to make the raw sales data support our marketing
-schemes.
+- A simple "the more you buy, the bigger your discount" benefit
+- An online version of "Buy N, get 1 free" recurring reward 
+- A customizable program that looks at individual customer behavior and offers tailored personalized rewards
 
 ### Set up your environment
 
