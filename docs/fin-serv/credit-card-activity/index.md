@@ -6,9 +6,7 @@ seo:
 
 # Detect unusual credit card activity
 
-In banking, fraud can involve using stolen credit cards, forging checks, misleading accounting practices, etc.
-This recipe analyzes total credit card spend.
-If a customer exceeds their average spend, the account will be flagged as a possible case of credit card theft.
+One way many financial institutions detect fraud is to check for unusual activity in a short period of time, raising a red flag to promptly alert their customers and confirm any recent unexpected purchases. Fraud can involve using stolen credit cards, forging checks and account numbers, multiple duplicate transactions, and more. This recipe analyzes a customer’s typical credit card spend, and flags the account when there are instances of excessive spending as a possible case of credit card theft.
 
 ![credit card being misused](../../img/credit-card-activity.jpg)
 

@@ -1,13 +1,14 @@
 ---
 seo:
-  title: Coalesce Telemetry
-  description: This recipe demonstrates how to use ksqlDB to process telemetry for devices in the Internet of Things (IoT) and to set thresholds.
+  title: Flag Unhealthy IoT Devices 
+  description: This recipe demonstrates how to process and coalesce that telemetry data using ksqlDB and flag devices that warrant more investigation.
 ---
 
-# Coalesce telemetry
+# Flag Unhealthy IoT Devices 
 
-With the Internet of Things (IoT), devices can emit a lot of telemetry, and it may be difficult to analyze that information to determine if something is "wrong."
-This recipe shows you how to process and coalesce that telemetry using ksqlDB and flag devices that warrant more investigation.
+Organizations are turning towards the Internet of Things (IoT) to provide immediately actionable insights into the health and performance of various devices. However, each device can emit high volumes of telemetry data, making it difficult to accurately analyze and determine if and when something needs attention in real time. This recipe shows you how to process and coalesce that telemetry data using ksqlDB and flag devices that warrant more investigation.
+
+![internet of things](../../img/internet-of-things.jpg)
 
 ## Step by step
 

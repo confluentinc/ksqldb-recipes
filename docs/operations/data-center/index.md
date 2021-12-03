@@ -6,9 +6,7 @@ seo:
 
 # Analyze Datacenter Power Usage 
 
-If your business provides a cloud infrastructure offering with multiple physical datacenter locations with isolated tenants, you may have an accounting unit to monitor and accurately invoice your customers.
-The datacenters consume large amounts of electricity, which need to be monitored to ensure business continuity, and each datacenter is constructed with smart electrical panels that control the power supplies to multiple customer tenants.
-The smart panels emit telemetry data that is captured and produced into an Apache Kafka® topic, and this recipe demonstrates how to accurately bill each customer. 
+For businesses that provide cloud infrastructure across multiple data centers with isolated tenants, you may have an accounting unit to accurately monitor and invoice your customers. Oftentimes these data centers consume large amounts of electricity and are constructed with smart electrical panels that control the power supplies to multiple customer tenants. This recipe demonstrates how to accurately bill each customer by capturing and analyzing telemetry data from these smart panels.
 
 ![](diagram.svg)
 
