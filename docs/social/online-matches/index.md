@@ -1,25 +1,14 @@
 ---
 seo:
-  title: Match Mutually Interested Online Dating Users
+  title: Match Users for Online Dating
   description: This ksqlDB recipe tracks repeated interactions between users of a social network or dating site.
 ---
 
-# Match mutually interested online dating users
+# Match Users for Online Dating
 
-One core feature of online dating sites is a messaging platform,
-and users chatting back and forth is an
-ideal fit for a real-time event streaming system. However, because it's all about making connections between people,
-perhaps a graph database is the right fit. Thankfully, Kafka Connect makes
-it easy to use the strengths of both in tandem, but before we go that
-far, let's see how much graph analysis we can perform using some
-clever ksqlDB tricks.
+When it comes to online dating, matching users based on mutual interests and their personal preferences, while enabling real-time communication are key to finding the right counterpart. This recipe enables developers to dynamically determine which pairs of people have connected and are ripe to get the ball rolling.
 
-This recipe demonstrates a messaging system and can dynamically
-determine which pairs of people
-have made proper connections. Defining a "proper" connection is a
-mystery for sociologists, but for our purposes, we'll say two people
-have connected properly if A sends a message to B, B responds, and A
-follows up. That should be enough chit-chat to get the ball rolling.
+![online dating](../../img/dating.png)
 
 ## Step by step
 
