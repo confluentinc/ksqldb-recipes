@@ -4,7 +4,7 @@ seo:
   description: This ksqlDB recipe analyzes telemetry data from datacenter power electrical smart panels. The stream processing use cases for this data include detection of power usage levels for safety and accounting purposes.
 ---
 
-# Analyze Datacenter Power Usage 
+# Analyze datacenter power usage 
 
 For businesses that provide cloud infrastructure across multiple data centers with isolated tenants, you may have an accounting unit to accurately monitor and invoice your customers. Oftentimes these data centers consume large amounts of electricity and are constructed with smart electrical panels that control the power supplies to multiple customer tenants. This recipe demonstrates how to accurately bill each customer by capturing and analyzing telemetry data from these smart panels.
 
