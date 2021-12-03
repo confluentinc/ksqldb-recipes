@@ -417,7 +417,7 @@
   
     <li class="md-nav__item">
       <a href="../../internet-of-things/coalesce/" class="md-nav__link">
-        Coalesce Telemetry
+        Coalesce telemetry
       </a>
     </li>
   
@@ -1120,7 +1120,7 @@ The smart panels emit telemetry data that is captured and produced into an Apach
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to quickly connect to popular data sources and end systems in the cloud.
 This recipe shows some example data sources, but you can substitute your own connectors to connect to any supported data source.
 The principles are the same, just modify the connector configuration shown below to fit your situation (see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a>).</p>
-<p>To run a fully-managed connector to source data into Kafka, use Confluent Cloud Console or <a href="https://docs.confluent.io/confluent-cli/current/overview.html">Confluent CLI</a> command <code>confluent connect create --config &lt;file&gt;</code>. Each connector must be created separately.</p>
+<p>To run a fully managed connector to source data into Kafka, use the Confluent Cloud Console or <a href="https://docs.confluent.io/confluent-cli/current/overview.html">Confluent CLI</a> command <code>confluent connect create --config &lt;file&gt;</code>. Each connector must be created separately.</p>
 <p>Our datacenter power analysis applications require data from two different sources: customer tenant information and smart control panel readings.</p>
 <pre><code class="language-sql">{
   &quot;connector.class&quot;       : &quot;MySqlCdcSource&quot;,
@@ -1313,7 +1313,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../internet-of-things/coalesce/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Coalesce Telemetry" rel="prev">
+        <a href="../../internet-of-things/coalesce/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Coalesce telemetry" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1322,7 +1322,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
               <span class="md-footer__direction">
                 Previous
               </span>
-              Coalesce Telemetry
+              Coalesce telemetry
             </div>
           </div>
         </a>
