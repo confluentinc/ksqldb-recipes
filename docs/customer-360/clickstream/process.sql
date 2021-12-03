@@ -11,12 +11,12 @@ CREATE STREAM clickstream (
 ) WITH (
   kafka_topic = 'clickstream',
   value_format = 'json',
-  partitions = 6
+  partitions = 1
 );
 
 -- users lookup table:
 CREATE TABLE WEB_USERS (
-  user_id int primary key,
+  user_id varchar primary key,
   registered_At BIGINT,
   username varchar,
   first_name varchar,
@@ -26,7 +26,7 @@ CREATE TABLE WEB_USERS (
 ) WITH (
   kafka_topic = 'clickstream_users',
   value_format = 'json',
-  partitions = 6
+  partitions = 1
 );
 
 -- Build materialized stream views:
@@ -34,7 +34,7 @@ CREATE TABLE WEB_USERS (
 -- enrich click-stream with more user information:
 CREATE STREAM USER_CLICKSTREAM AS
   SELECT
-    userid,
+    u.user_id,
     u.username,
     ip,
     u.city,
@@ -42,7 +42,7 @@ CREATE STREAM USER_CLICKSTREAM AS
     status,
     bytes
   FROM clickstream c
-  LEFT JOIN web_users u ON c.userid = u.user_id;
+  LEFT JOIN web_users u ON cast(c.userid as varchar) = u.user_id;
 
 -- Build materialized table views:
 
