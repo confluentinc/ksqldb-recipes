@@ -1100,8 +1100,8 @@ With <a href="https://ksqldb.io/">ksqlDB</a>, you can filter and react to events
 <p><img alt="SSH-attack" src="../../img/ssh-attack.png" /></p>
 <h2 id="step-by-step">Step by step</h2>
 <h3 id="set-up-your-environment">Set up your environment</h3>
-<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka® service, and within your environment create a <a href="https://ksqldb.io/">ksqlDB</a> application.</p>
-<p>ksqlDB supports a <code>SQL</code> language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
+<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka<sup>®</sup> service.</p>
+<p>Once your Confluent Cloud cluster is available, create a <a href="https://ksqldb.io/">ksqlDB</a> application. ksqlDB supports a <code>SQL</code> language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
 <h3 id="read-the-data-in">Read the data in</h3>
 <p>This recipe demonstrates how to run a self-managed connector to push syslog data into a Kafka topic called <code>syslog</code> on Confluent Cloud.</p>
 <p>Create the below <code>Dockerfile</code> to bundle a connect worker with the <code>kafka-connect-syslog</code> connector:</p>
@@ -1175,8 +1175,8 @@ services:
 <p>Process the syslog events by flagging events with invalid users, stripping out all the other unnecessary fields, and creating just a stream of relevant information. There are many ways to customize the resulting stream to fit the business needs: this example also demonstrates how to enrich the stream with a new field <code>FACILITY_DESCRIPTION</code> with human-readable content.</p>
 <hr />
 <p><strong>NOTE:</strong>
-The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.
-This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</p>
+<em>The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.</em>
+<em>This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</em></p>
 <hr />
 <pre><code class="language-sql">-- Extract relevant fields from log messages
 CREATE STREAM syslog (

@@ -1099,8 +1099,8 @@ This enables businesses to improve operational efficiency by optimizing travel r
 This recipe enriches fleet location with individual vehicle information, so organizations can have a real-time consolidated view on the entire fleet.</p>
 <h2 id="step-by-step">Step by step</h2>
 <h3 id="set-up-your-environment">Set up your environment</h3>
-<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka® service, and within your environment create a <a href="https://ksqldb.io/">ksqlDB</a> application.</p>
-<p>ksqlDB supports a <code>SQL</code> language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
+<p>Setup your environment in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes">Confluent Cloud</a>, a fully-managed Apache Kafka<sup>®</sup> service.</p>
+<p>Once your Confluent Cloud cluster is available, create a <a href="https://ksqldb.io/">ksqlDB</a> application. ksqlDB supports a <code>SQL</code> language for processing the data in real-time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
 <h3 id="read-the-data-in">Read the data in</h3>
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to quickly connect to popular data sources and end systems in the cloud.
 This recipe shows some example data sources, but you can substitute your own connectors to connect to any supported data source.
@@ -1145,8 +1145,8 @@ The principles are the same, just modify the connector configuration shown below
 <p>This application will enrich the fleet telemetry events with details about the associated vehicle.</p>
 <hr />
 <p><strong>NOTE:</strong>
-The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.
-This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</p>
+<em>The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.</em>
+<em>This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</em></p>
 <hr />
 <pre><code class="language-sql">-- create stream of locations
 CREATE STREAM locations (
