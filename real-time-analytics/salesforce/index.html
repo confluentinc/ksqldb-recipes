@@ -1012,9 +1012,8 @@
 <p>Once your Confluent Cloud cluster is available, create a <a href="https://ksqldb.io/">ksqlDB</a> application. ksqlDB supports a <code>SQL</code> language for processing the data in real time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
 <h3 id="read-the-data-in">Read the data in</h3>
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to quickly connect to popular data sources and end systems in the cloud.
-This recipe shows some example data sources, but you can substitute your own connectors to connect to any supported data source.
-The principles are the same, just modify the connector configuration shown below to fit your situation (see <a href="https://docs.confluent.io/cloud/current/connectors/index.html">documentation</a>).</p>
-<p>To run a fully managed connector to source data into Kafka, use the Confluent Cloud Console or <a href="https://docs.confluent.io/confluent-cli/current/overview.html">Confluent CLI</a> command <code>confluent connect create --config &lt;file&gt;</code>. Each connector must be created separately.</p>
+This recipe shows sample connector configuration(s) below, each of which should be created separately.
+You can also substitute your own connectors to connect to any <a href="https://docs.confluent.io/cloud/current/connectors/index.html">supported data source</a>.</p>
 <p>Use Avro so ksqlDB can automatically detect the schema.</p>
 <pre><code class="language-json">{
   &quot;connector.class&quot;            : &quot;SalesforceCdcSource&quot;,
