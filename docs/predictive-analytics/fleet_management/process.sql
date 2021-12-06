@@ -5,9 +5,9 @@ CREATE STREAM locations (
   longitude double,
   timestamp varchar
 ) WITH (
-  kafka_topic = 'locations',
-  value_format = 'json',
-  partitions = 6
+  KAFKA_TOPIC = 'locations',
+  VALUE_FORMAT = 'json',
+  PARTITIONS = 6
 );
 
 -- fleet lookup table
@@ -16,9 +16,9 @@ CREATE TABLE fleet (
   driver_id int,
   license bigint
 ) WITH (
-  kafka_topic = 'descriptions',
-  value_format = 'json',
-  partitions = 6
+  KAFKA_TOPIC = 'descriptions',
+  VALUE_FORMAT = 'json',
+  PARTITIONS = 6
 );
 
 -- enrich fleet location stream with more fleet information

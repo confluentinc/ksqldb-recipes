@@ -32,7 +32,7 @@ CREATE STREAM FD_CUST_RAW_STREAM (
 );
 
 -- Repartition the customer data stream by account_id to prepare for the join
-CREATE STREAM FD_CUSTOMER_REKEYED WITH (kafka_topic='FD_CUSTOMER_REKEYED') AS
+CREATE STREAM FD_CUSTOMER_REKEYED WITH (KAFKA_TOPIC='FD_CUSTOMER_REKEYED') AS
   SELECT * 
   FROM FD_CUST_RAW_STREAM 
   PARTITION BY ID;
@@ -63,7 +63,7 @@ CREATE STREAM FD_TRANSACTIONS_ENRICHED AS
   ON T.ACCOUNT_ID = C.ID;
 
 -- Aggregate the stream of transactions for each account ID using a two-hour tumbling window, and filter for accounts in which the total spend in a two-hour period is greater than the customer’s average:
-CREATE TABLE FD_POSSIBLE_STOLEN_CARD WITH (key_format='json') AS 
+CREATE TABLE FD_POSSIBLE_STOLEN_CARD WITH (KEY_FORMAT='json') AS 
   SELECT
     TIMESTAMPTOSTRING(WINDOWSTART, 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_START, 
     T.ACCOUNT_ID,
