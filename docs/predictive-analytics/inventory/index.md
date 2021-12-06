@@ -29,7 +29,7 @@ This creates a stream of events, where each event results in the addition or rem
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run the stream processing app
+### ksqlDB code
 
 Create a ksqlDB `TABLE`, which is a mutable, partitioned collection that models change over time and represents what is true as of now.
 

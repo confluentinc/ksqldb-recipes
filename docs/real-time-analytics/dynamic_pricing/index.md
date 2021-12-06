@@ -29,7 +29,7 @@ This creates a stream of events, upon which real-time stream processing can keep
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run the stream processing app
+### ksqlDB code
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 

@@ -28,7 +28,7 @@ Customer loyalty programs are everywhere in retail, even if it's as simple as "G
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run the stream processing app
+### ksqlDB code
 
 In this solution, we'll look at different ways to analyze user behavior and determine which rewards we want to issue to our customers.
 

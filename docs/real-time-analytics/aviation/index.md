@@ -28,7 +28,7 @@ This example pulls in data from different tables for customers, flights, flight 
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run the stream processing app
+### ksqlDB code
 
 This ksqlDB application joins between customer flight booking data and any flight updates to provide a stream of notifications to passengers.
 

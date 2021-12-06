@@ -28,7 +28,7 @@ This recipe creates simulated data with the `Datagen` connector.
 
 Optional: To simulate a real-world scenario where user sessions aren't just always open but do close after some time, you can pause and resume the `DATAGEN_CLICKSTREAM` connector.
 
-### Run the stream processing app
+### ksqlDB code
 
 Now you can process the data in a variety of ways by enriching the clickstream data with user information, analyze errors, aggregate data into windows of time, etc.
 
