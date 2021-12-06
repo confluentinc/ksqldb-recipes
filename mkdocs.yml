@@ -6,6 +6,8 @@ theme: material
 markdown_extensions:
   - pymdownx.snippets
 
+extra_css: [extra.css]
+
 plugins:
   - exclude:
       glob:
