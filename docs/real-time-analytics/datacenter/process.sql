@@ -3,10 +3,10 @@ CREATE TABLE tenant_occupancy (
   tenant_id VARCHAR PRIMARY KEY,
   customer_id BIGINT
 ) WITH (
-  kafka_topic='tenant-occupancy',
-  partitions=3,
-  key_format='JSON',
-  value_format='JSON'
+  KAFKA_TOPIC='tenant-occupancy',
+  PARTITIONS=3,
+  KEY_FORMAT='JSON',
+  VALUE_FORMAT='JSON'
 );
 
 -- Create a Stream for the power control panel telemetry data.
@@ -17,10 +17,10 @@ CREATE STREAM panel_power_readings (
   panel_current_utilization DOUBLE,
   tenant_kwh_usage BIGINT
 ) WITH (
-  kafka_topic='panel-readings',
-  partitions=3,
-  key_format='JSON',
-  value_format='JSON'
+  KAFKA_TOPIC='panel-readings',
+  PARTITIONS=3,
+  KEY_FORMAT='JSON',
+  VALUE_FORMAT='JSON'
 );
 
 -- Create a filtered Stream of panel readings registering power usage >= 85%
@@ -47,7 +47,7 @@ CREATE STREAM billable_power AS
   EMIT CHANGES;
 
 -- Create a table that can be queried for billing reports
-CREATE TABLE billable_power_report WITH (key_format='json') AS
+CREATE TABLE billable_power_report WITH (KEY_FORMAT='json') AS
   SELECT customer_id, tenant_id, billable_month, MAX(tenant_kwh_usage) as kwh
     FROM billable_power
     GROUP BY tenant_id, customer_id, billable_month;
