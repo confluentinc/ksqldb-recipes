@@ -26,7 +26,7 @@ As digital transactions become the new norm, it’s critical to check customer p
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run the stream processing app
+### ksqlDB code
 
 Now you can process the data in a variety of ways.
 

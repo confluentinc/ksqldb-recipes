@@ -50,7 +50,7 @@ Now you should have Syslog messages being written to the `syslog` topic in Confl
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run the stream processing app
+### ksqlDB code
 
 Process the syslog events by flagging events with invalid users, stripping out all the other unnecessary fields, and creating just a stream of relevant information. There are many ways to customize the resulting stream to fit the business needs: this example also demonstrates how to enrich the stream with a new field `FACILITY_DESCRIPTION` with human-readable content.
 

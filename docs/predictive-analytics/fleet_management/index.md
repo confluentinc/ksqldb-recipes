@@ -26,7 +26,7 @@ More and more, fleet management relies on knowing real-time information on vehic
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run the stream processing app
+### ksqlDB code
 
 This application will enrich the fleet telemetry events with details about the associated vehicle.
 

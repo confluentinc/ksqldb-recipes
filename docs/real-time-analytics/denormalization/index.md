@@ -28,7 +28,7 @@ Change data capture (CDC) for orders is being read from a SQL Server database, a
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run the stream processing app
+### ksqlDB code
 
 This streams the user orders and denormalizes the data by joining facts (orders) with the dimension (customer).
 

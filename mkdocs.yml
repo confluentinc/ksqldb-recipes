@@ -8,7 +8,7 @@ theme:
 markdown_extensions:
   - pymdownx.snippets
 
-extra_css: [extra.css]
+#extra_css: [extra.css]
 
 plugins:
   - exclude:

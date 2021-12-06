@@ -26,7 +26,7 @@ Use Avro so ksqlDB can automatically detect the schema.
 --8<-- "docs/real-time-analytics/salesforce/source.json"
 ```
 
-### Run the stream processing app
+### ksqlDB code
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
