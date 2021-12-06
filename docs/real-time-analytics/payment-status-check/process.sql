@@ -83,8 +83,8 @@ CREATE STREAM payments_with_status AS SELECT
 -- Aggregate data to the final table
 CREATE TABLE payments_final AS SELECT
   payment_id,
-  histogram(status) AS status_counts,
-  collect_list('{ "system" : "' + source_system + '", "status" : "' + STATUS + '"}') AS service_status_list
+  HISTOGRAM(status) AS status_counts,
+  COLLECT_LIST('{ "system" : "' + source_system + '", "status" : "' + STATUS + '"}') AS service_status_list
   FROM payments_with_status
-  WHERE status is not null
+  WHERE status IS NOT NULL
   GROUP BY payment_id;
