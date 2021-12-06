@@ -12,7 +12,9 @@ CREATE STREAM FD_TRANSACTIONS_RAW (
   PARTITIONS=6
 );
 
--- Repartition the stream on account_id in order to ensure that all the streams and tables are co-partitioned, which means that input records on both sides of the join have the same configuration settings for partitions.
+-- Repartition the stream on account_id in order to ensure that all the streams
+-- and tables are co-partitioned, which means that input records on both sides
+-- of the join have the same configuration settings for partitions.
 CREATE STREAM FD_TRANSACTIONS_SOURCE AS
   SELECT * 
   FROM FD_TRANSACTIONS_RAW 
@@ -37,7 +39,8 @@ CREATE STREAM FD_CUSTOMER_REKEYED WITH (KAFKA_TOPIC='FD_CUSTOMER_REKEYED') AS
   FROM FD_CUST_RAW_STREAM 
   PARTITION BY ID;
 
--- Register the partitioned customer data topic as a table used for the join with the incoming stream of transactions:
+-- Register the partitioned customer data topic as a table used for the join
+-- with the incoming stream of transactions:
 CREATE TABLE FD_customer (
   ID BIGINT PRIMARY KEY,
   FIRST_NAME VARCHAR, 
@@ -62,7 +65,9 @@ CREATE STREAM FD_TRANSACTIONS_ENRICHED AS
   INNER JOIN FD_CUSTOMER C 
   ON T.ACCOUNT_ID = C.ID;
 
--- Aggregate the stream of transactions for each account ID using a two-hour tumbling window, and filter for accounts in which the total spend in a two-hour period is greater than the customer’s average:
+-- Aggregate the stream of transactions for each account ID using a two-hour
+-- tumbling window, and filter for accounts in which the total spend in a
+-- two-hour period is greater than the customer’s average:
 CREATE TABLE FD_POSSIBLE_STOLEN_CARD WITH (KEY_FORMAT='json') AS 
   SELECT
     TIMESTAMPTOSTRING(WINDOWSTART, 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_START, 
