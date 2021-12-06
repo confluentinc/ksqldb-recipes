@@ -6,32 +6,32 @@ CREATE STREAM PAYMENTS (
   AMOUNT INTEGER,
   BANK VARCHAR
 ) WITH (
-  kafka_topic='payments',
-  value_format='json',
+  KAFKA_TOPIC='payments',
+  VALUE_FORMAT='json',
   PARTITIONS=6
 );
 
-create stream aml_status (
+CREATE STREAM aml_status (
   PAYMENT_ID INTEGER,
   BANK VARCHAR,
   STATUS VARCHAR
-) with (
-  kafka_topic='aml_status',
-  value_format='json',
+) WITH (
+  KAFKA_TOPIC='aml_status',
+  VALUE_FORMAT='json',
   PARTITIONS=6
 );
 
-create stream funds_status (
+CREATE STREAM funds_status (
   PAYMENT_ID INTEGER,
   REASON_CODE VARCHAR,
   STATUS VARCHAR
-) with (
-  kafka_topic='funds_status',
-  value_format='json',
+) WITH (
+  KAFKA_TOPIC='funds_status',
+  VALUE_FORMAT='json',
   PARTITIONS=6
 );
 
-create table customers (
+CREATE TABLE customers (
   ID INTEGER PRIMARY KEY, 
   FIRST_NAME VARCHAR, 
   LAST_NAME VARCHAR, 
@@ -39,15 +39,15 @@ create table customers (
   GENDER VARCHAR, 
   STATUS360 VARCHAR
 ) WITH (
-  kafka_topic='customers',
-  value_format='JSON',
+  KAFKA_TOPIC='customers',
+  VALUE_FORMAT='JSON',
   PARTITIONS=6
 );
 
 -- Enrich Payments stream with Customers table
 CREATE STREAM enriched_payments AS SELECT
-  p.payment_id as payment_id,
-  p.custid as customer_id,
+  p.payment_id AS payment_id,
+  p.custid AS customer_id,
   p.accountid,
   p.amount,
   p.bank,
@@ -55,20 +55,20 @@ CREATE STREAM enriched_payments AS SELECT
   c.last_name,
   c.email,
   c.status360
-  from payments p left join customers c on p.custid = c.id;
+  FROM payments p LEFT JOIN customers c ON p.custid = c.id;
 
 -- Combine the status streams
 CREATE STREAM payment_statuses AS SELECT
   payment_id,
   status,
-  'AML' as source_system
+  'AML' AS source_system
   FROM aml_status;
 
-INSERT INTO payment_statuses SELECT payment_id, status, 'FUNDS' as source_system FROM funds_status;
+INSERT INTO payment_statuses SELECT payment_id, status, 'FUNDS' AS source_system FROM funds_status;
 
 -- Combine payment and status events in 1 hour window. 
 CREATE STREAM payments_with_status AS SELECT
-  ep.payment_id as payment_id,
+  ep.payment_id AS payment_id,
   ep.accountid,
   ep.amount,
   ep.bank,
@@ -83,8 +83,8 @@ CREATE STREAM payments_with_status AS SELECT
 -- Aggregate data to the final table
 CREATE TABLE payments_final AS SELECT
   payment_id,
-  histogram(status) as status_counts,
-  collect_list('{ "system" : "' + source_system + '", "status" : "' + STATUS + '"}') as service_status_list
+  HISTOGRAM(status) AS status_counts,
+  COLLECT_LIST('{ "system" : "' + source_system + '", "status" : "' + STATUS + '"}') AS service_status_list
   FROM payments_with_status
-  WHERE status is not null
+  WHERE status IS NOT NULL
   GROUP BY payment_id;
