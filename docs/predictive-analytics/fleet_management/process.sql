@@ -1,9 +1,9 @@
 -- create stream of locations
 CREATE STREAM locations (
-  vehicle_id int,
-  latitude double,
-  longitude double,
-  timestamp varchar
+  vehicle_id INT,
+  latitude DOUBLE,
+  longitude DOUBLE,
+  timestamp VARCHAR
 ) WITH (
   KAFKA_TOPIC = 'locations',
   VALUE_FORMAT = 'json',
@@ -12,9 +12,9 @@ CREATE STREAM locations (
 
 -- fleet lookup table
 CREATE TABLE fleet (
-  vehicle_id int primary key,
-  driver_id int,
-  license bigint
+  vehicle_id INT PRIMARY KEY,
+  driver_id INT,
+  license BIGINT
 ) WITH (
   KAFKA_TOPIC = 'descriptions',
   VALUE_FORMAT = 'json',
