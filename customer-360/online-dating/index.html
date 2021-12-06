@@ -38,8 +38,6 @@
     
     
     
-      <link rel="stylesheet" href="../../extra.css">
-    
     
       
 
@@ -406,8 +404,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-the-stream-processing-app" class="md-nav__link">
-    Run the stream processing app
+  <a href="#ksqldb-code" class="md-nav__link">
+    ksqlDB code
   </a>
   
 </li>
@@ -1020,8 +1018,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-the-stream-processing-app" class="md-nav__link">
-    Run the stream processing app
+  <a href="#ksqldb-code" class="md-nav__link">
+    ksqlDB code
   </a>
   
 </li>
@@ -1128,7 +1126,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
 }
 </code></pre>
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert data into the streams for testing using ksqlDB <code>INSERT INTO</code>.</p>
-<h3 id="run-the-stream-processing-app">Run the stream processing app</h3>
+<h3 id="ksqldb-code">ksqlDB code</h3>
 <p>The application breaks up the stream of messages into individual conversations and puts each of those conversations in time order, keeping track of the sender as we go.
 Then it builds up the function <code>(old_state, element) =&gt; ...</code>, which considers different states.</p>
 <hr />
