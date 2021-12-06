@@ -1,6 +1,6 @@
-# ksqlDB Recipes
+# Stream Processing Use Cases with ksqlDB
 
-This repository contains the source for the collection of ksqlDB Recipes at https://confluentinc.github.io/ksqldb-recipes/
+This repository contains the source for the collection of Stream Processing Use Cases with ksqlDB at https://confluentinc.github.io/ksqldb-recipes/
 
 #### How to contribute
 

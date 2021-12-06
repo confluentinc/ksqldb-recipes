@@ -1,5 +1,5 @@
-site_name: ksqlDB Recipes
-site_description: ksqlDB Recipes highlight some of our most popular stream processing use cases with ksqlDB
+site_name: Stream Processing Use Cases
+site_description: Stream Processing Use Cases highlight some of our most popular stream processing use cases with ksqlDB
 
 theme:
   name: material
