@@ -63,7 +63,7 @@ Process the syslog events by flagging events with invalid users, stripping out a
 --8<-- "docs/shared/manual_cue.md"
 
 ```sql
---8<-- "docs/operations/data-center/manual.sql"
+--8<-- "docs/cybersecurity/SSH-attack/manual.sql"
 ```
 
 ### Cleanup
