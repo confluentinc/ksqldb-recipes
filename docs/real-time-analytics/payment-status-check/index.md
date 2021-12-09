@@ -14,6 +14,8 @@ As digital transactions become the new norm, it’s critical to check customer p
 
 ### Set up your environment
 
+Set up your environment in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=payment-status-check).
+
 --8<-- "docs/shared/ccloud_setup.md"
 
 ### Read the data in

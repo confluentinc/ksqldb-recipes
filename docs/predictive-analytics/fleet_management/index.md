@@ -14,6 +14,8 @@ More and more, fleet management relies on knowing real-time information on vehic
 
 ### Set up your environment
 
+Set up your environment in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=fleet_management).
+
 --8<-- "docs/shared/ccloud_setup.md"
 
 ### Read the data in
