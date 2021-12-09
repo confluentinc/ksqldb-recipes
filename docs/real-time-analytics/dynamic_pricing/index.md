@@ -14,7 +14,7 @@ As consumers increasingly transact digitally and online comparison shopping has 
 
 ### Set up your environment
 
-Set up your environment in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=dynamic_pricing).
+Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=dynamic_pricing).
 
 --8<-- "docs/shared/ccloud_setup.md"
 

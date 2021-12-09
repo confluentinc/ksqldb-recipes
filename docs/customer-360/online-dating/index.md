@@ -14,7 +14,7 @@ When it comes to online dating, matching users based on mutual interests and the
 
 ### Set up your environment
 
-Set up your environment in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=online-dating).
+Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=online-dating).
 
 --8<-- "docs/shared/ccloud_setup.md"
 
