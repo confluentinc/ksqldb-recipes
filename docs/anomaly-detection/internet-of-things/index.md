@@ -14,6 +14,8 @@ Organizations are turning towards the Internet of Things (IoT) to provide immedi
 
 ### Set up your environment
 
+Set up your environment in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=internet-of-things).
+
 --8<-- "docs/shared/ccloud_setup.md"
 
 ### Read the data in
