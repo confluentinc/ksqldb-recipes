@@ -14,7 +14,7 @@ One way many financial institutions detect fraud is to check for unusual activit
 
 ### Set up your environment
 
-Set up your environment in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=credit-card-activity).
+Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=credit-card-activity).
 
 --8<-- "docs/shared/ccloud_setup.md"
 
