@@ -17,8 +17,9 @@ CREATE STREAM throughputs (
   KAFKA_TOPIC='throughputs',
   PARTITIONS = 6);
 
--- Create new stream where throughputs below threshold 1000.0 and alarm code is not 0
-CREATE STREAM critical_issues_to_investigate AS
+-- Create new stream where throughputs are below threshold 1000.0
+-- and alarm code is not 0
+CREATE STREAM critical_issues_to_investigate WITH (KAFKA_TOPIC='critical_issues_to_investigate') AS
   SELECT
     t.device_id,
     t.throughput,
