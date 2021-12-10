@@ -9,7 +9,7 @@ CREATE STREAM fd_cust_raw_stream (
   AVG_CREDIT_SPEND DOUBLE
 ) WITH (
   KAFKA_TOPIC='FD_customers', 
-  VALUE_FORMAT='JSON', 
+  VALUE_FORMAT='json', 
   PARTITIONS=6
 );
 
@@ -28,7 +28,7 @@ CREATE TABLE fd_customers (
   AVG_CREDIT_SPEND DOUBLE
 ) WITH (
   KAFKA_TOPIC='fd_customer_rekeyed',
-  VALUE_FORMAT='JSON',
+  VALUE_FORMAT='json',
   PARTITIONS=6
 );
 
@@ -42,7 +42,7 @@ CREATE STREAM fd_transactions (
   TRANSACTION_ID VARCHAR
 ) WITH (
   KAFKA_TOPIC='FD_transactions',
-  VALUE_FORMAT='JSON',
+  VALUE_FORMAT='json',
   PARTITIONS=6
 );
 
