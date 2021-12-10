@@ -1,3 +1,5 @@
+SET 'auto.offset.reset' = 'earliest';
+
 -- Register the stream of transactions
 CREATE STREAM FD_TRANSACTIONS (
   ACCOUNT_ID BIGINT, 
