@@ -17,20 +17,13 @@ CREATE STREAM throughputs (
   KAFKA_TOPIC='throughputs',
   PARTITIONS = 6);
 
--- Filter throughputs below threshold 1000.0
-CREATE STREAM throughput_insufficient AS
-  SELECT *
-  FROM throughputs
-  WHERE throughput < 1000.0
-  EMIT CHANGES;
-
--- Create new stream where threshold is insufficient and alarm code is not 0
+-- Create new stream where throughputs below threshold 1000.0 and alarm code is not 0
 CREATE STREAM critical_issues_to_investigate AS
   SELECT
     t.device_id,
     t.throughput,
     a.alarm_name,
     a.code
-  FROM throughput_insufficient t
+  FROM throughputs t
   LEFT JOIN alarms a ON t.device_id = a.device_id
-  WHERE a.code != 0;
+  WHERE throughput < 1000.0 AND a.code != 0;
