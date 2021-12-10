@@ -1,4 +1,4 @@
--- Stream of user orders:
+-- Create stream of orders
 CREATE STREAM orders (
   order_id BIGINT,
   customer_id BIGINT,
@@ -10,18 +10,6 @@ CREATE STREAM orders (
   PARTITIONS = 6
 );
 
--- Register the existing stream of customer data
-CREATE STREAM cust_raw_stream (
-  id BIGINT,
-  first_name VARCHAR,
-  last_name VARCHAR,
-  email VARCHAR
-) WITH (
-  KAFKA_TOPIC = 'customers',
-  VALUE_FORMAT = 'JSON',
-  PARTITIONS = 6
-);
-
 -- Register the customer data topic as a table
 CREATE TABLE customers (
   id BIGINT PRIMARY KEY,
@@ -30,11 +18,11 @@ CREATE TABLE customers (
   email VARCHAR
 ) WITH (
   KAFKA_TOPIC = 'CUST_RAW_STREAM',
-  VALUE_FORMAT = 'JSON',
+  VALUE_FORMAT = 'json',
   PARTITIONS = 6
 );
 
--- Denormalize data: joining facts (orders) with the dimension (customer)
+-- Denormalize data, joining facts (orders) with the dimension (customer)
 CREATE STREAM orders_enriched AS
   SELECT
     c.id AS customer_id,
