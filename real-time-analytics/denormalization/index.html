@@ -763,19 +763,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Stream of user orders:</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Create stream of orders</span>
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">orders</span> <span class="p">(</span>
   <span class="n">order_id</span> <span class="nb">BIGINT</span><span class="p">,</span>
   <span class="n">customer_id</span> <span class="nb">BIGINT</span><span class="p">,</span>
@@ -787,18 +775,6 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
-<span class="c1">-- Register the existing stream of customer data</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">cust_raw_stream</span> <span class="p">(</span>
-  <span class="n">id</span> <span class="nb">BIGINT</span><span class="p">,</span>
-  <span class="n">first_name</span> <span class="nb">VARCHAR</span><span class="p">,</span>
-  <span class="n">last_name</span> <span class="nb">VARCHAR</span><span class="p">,</span>
-  <span class="n">email</span> <span class="nb">VARCHAR</span>
-<span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;customers&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
-<span class="p">);</span>
-
 <span class="c1">-- Register the customer data topic as a table</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customers</span> <span class="p">(</span>
   <span class="n">id</span> <span class="nb">BIGINT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
@@ -807,11 +783,11 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">email</span> <span class="nb">VARCHAR</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
   <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;CUST_RAW_STREAM&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span>
   <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
-<span class="c1">-- Denormalize data: joining facts (orders) with the dimension (customer)</span>
+<span class="c1">-- Denormalize data, joining facts (orders) with the dimension (customer)</span>
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">orders_enriched</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="k">c</span><span class="p">.</span><span class="n">id</span> <span class="k">AS</span> <span class="n">customer_id</span><span class="p">,</span>
