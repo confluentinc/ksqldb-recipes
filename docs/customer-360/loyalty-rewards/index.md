@@ -23,7 +23,7 @@ Customer loyalty programs are everywhere in retail, even if it's as simple as "G
 --8<-- "docs/shared/connect.md"
 
 ```json
---8<-- "docs/real-time-analytics/loyalty-rewards/source.json"
+--8<-- "docs/customer-360/loyalty-rewards/source.json"
 ```
 
 --8<-- "docs/shared/manual_insert.md"
@@ -35,13 +35,13 @@ In this solution, we'll look at different ways to analyze user behavior and dete
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ``` sql
---8<-- "docs/real-time-analytics/loyalty-rewards/process.sql"
+--8<-- "docs/customer-360/loyalty-rewards/process.sql"
 ```
 
 --8<-- "docs/shared/manual_cue.md"
 
 ```sql
---8<-- "docs/real-time-analytics/loyalty-rewards/manual.sql"
+--8<-- "docs/customer-360/loyalty-rewards/manual.sql"
 ```
 
 ## Cleanup
