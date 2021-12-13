@@ -671,7 +671,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert data into the streams for testing using ksqlDB <code>INSERT INTO</code>.</p>
 <h3 id="ksqldb-code">ksqlDB code<a class="headerlink" href="#ksqldb-code" title="Permanent link">&para;</a></h3>
 <p>In this example, there is one stream of data reporting device threshold values and another reporting alarms.
-The following stream processing app identifies which set of devices need to be investigated where the threshold is insufficient and alarm code is not zero.</p>
+The following stream processing app identifies which devices need to be investigated where the threshold is insufficient and alarm code is not zero.</p>
 <hr />
 <p><strong>NOTE:</strong>
 <em>The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.</em>
@@ -706,13 +706,7 @@ The following stream processing app identifies which set of devices need to be i
 <span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Create table with latest state of alarms</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Create table with latest state of alarms</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">alarms</span> <span class="p">(</span>
   <span class="n">device_id</span> <span class="n">STRING</span> <span class="k">PRIMARY</span> <span class="k">key</span><span class="p">,</span>
   <span class="n">alarm_name</span> <span class="n">STRING</span><span class="p">,</span>
@@ -731,23 +725,17 @@ The following stream processing app identifies which set of devices need to be i
   <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;throughputs&#39;</span><span class="p">,</span>
   <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span><span class="p">);</span>
 
-<span class="c1">-- Filter throughputs below threshold 1000.0</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">throughput_insufficient</span> <span class="k">AS</span>
-  <span class="k">SELECT</span> <span class="o">*</span>
-  <span class="k">FROM</span> <span class="n">throughputs</span>
-  <span class="k">WHERE</span> <span class="n">throughput</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">.</span><span class="mi">0</span>
-  <span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
-
-<span class="c1">-- Create new stream where threshold is insufficient and alarm code is not 0</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">critical_issues_to_investigate</span> <span class="k">AS</span>
+<span class="c1">-- Create new stream of critial issues to investigate</span>
+<span class="c1">-- where throughputs are below threshold 1000.0 and alarm code is not 0</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">critical_issues</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;critical_issues&#39;</span><span class="p">)</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="n">t</span><span class="p">.</span><span class="n">device_id</span><span class="p">,</span>
     <span class="n">t</span><span class="p">.</span><span class="n">throughput</span><span class="p">,</span>
     <span class="n">a</span><span class="p">.</span><span class="n">alarm_name</span><span class="p">,</span>
     <span class="n">a</span><span class="p">.</span><span class="n">code</span>
-  <span class="k">FROM</span> <span class="n">throughput_insufficient</span> <span class="n">t</span>
+  <span class="k">FROM</span> <span class="n">throughputs</span> <span class="n">t</span>
   <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">alarms</span> <span class="n">a</span> <span class="k">ON</span> <span class="n">t</span><span class="p">.</span><span class="n">device_id</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">device_id</span>
-  <span class="k">WHERE</span> <span class="n">a</span><span class="p">.</span><span class="n">code</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">WHERE</span> <span class="n">throughput</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">.</span><span class="mi">0</span> <span class="k">AND</span> <span class="n">a</span><span class="p">.</span><span class="n">code</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span>
 </code></pre></div>
 </td></tr></table>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert example events into the source topics with the following statements:</p>

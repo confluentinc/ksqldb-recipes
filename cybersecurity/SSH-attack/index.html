@@ -796,17 +796,7 @@ services:
 <span class="normal">31</span>
 <span class="normal">32</span>
 <span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Extract relevant fields from log messages</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Extract relevant fields from log messages</span>
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">syslog</span> <span class="p">(</span>
   <span class="n">ts</span> <span class="nb">varchar</span><span class="p">,</span> 
   <span class="k">host</span> <span class="nb">varchar</span><span class="p">,</span>
@@ -819,14 +809,13 @@ services:
   <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
-<span class="c1">-- Flag events with invalid users, and enrich with a new field &#39;FACILITY_DESCRIPTION&#39;</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">invalid_users</span> <span class="k">AS</span>
+<span class="c1">-- Create actionable stream of SSH attacks, filtering syslog messages where user is invalid,</span>
+<span class="c1">-- and enriched with user and IP</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">ssh_attacks</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="n">FORMAT_TIMESTAMP</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="s1">&#39;yyyy-MM-dd HH:mm:ss&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">syslog_timestamp</span><span class="p">,</span>
     <span class="k">host</span><span class="p">,</span>
     <span class="n">facility</span><span class="p">,</span>
-    <span class="n">message</span><span class="p">,</span> 
-    <span class="n">remote_address</span><span class="p">,</span>
     <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">facility</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="s1">&#39;kernel messages&#39;</span>
          <span class="k">WHEN</span> <span class="n">facility</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">THEN</span> <span class="s1">&#39;user-level messages&#39;</span>
          <span class="k">WHEN</span> <span class="n">facility</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">THEN</span> <span class="s1">&#39;mail system&#39;</span>
@@ -835,20 +824,11 @@ services:
          <span class="k">WHEN</span> <span class="n">facility</span> <span class="o">=</span> <span class="mi">5</span> <span class="k">THEN</span> <span class="s1">&#39;messages generated internally by syslogd&#39;</span>
          <span class="k">WHEN</span> <span class="n">facility</span> <span class="o">=</span> <span class="mi">6</span> <span class="k">THEN</span> <span class="s1">&#39;line printer subsystem&#39;</span>
          <span class="k">ELSE</span> <span class="s1">&#39;&lt;unknown&gt;&#39;</span>
-       <span class="k">END</span> <span class="k">AS</span> <span class="n">facility_description</span>
-  <span class="k">FROM</span> <span class="n">syslog</span> 
-  <span class="k">WHERE</span> <span class="n">message</span> <span class="k">LIKE</span> <span class="s1">&#39;Invalid user%&#39;</span>
-  <span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
-
-<span class="c1">-- Create actionable stream of SSH attacks, enriched with user and IP</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">ssh_attacks</span> <span class="k">AS</span> 
-  <span class="k">SELECT</span>
-    <span class="n">syslog_timestamp</span><span class="p">,</span>
-    <span class="k">host</span><span class="p">,</span>
-    <span class="n">facility_description</span><span class="p">,</span>
+       <span class="k">END</span> <span class="k">AS</span> <span class="n">facility_description</span><span class="p">,</span>
     <span class="n">SPLIT</span><span class="p">(</span><span class="k">REPLACE</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s1">&#39;Invalid user &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39; from &#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="k">AS</span> <span class="n">attack_user</span><span class="p">,</span>
     <span class="n">remote_address</span> <span class="k">AS</span> <span class="n">attack_ip</span>
-  <span class="k">FROM</span> <span class="n">invalid_users</span>
+  <span class="k">FROM</span> <span class="n">syslog</span>
+  <span class="k">WHERE</span> <span class="n">message</span> <span class="k">LIKE</span> <span class="s1">&#39;Invalid user%&#39;</span>
   <span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
 </code></pre></div>
 </td></tr></table>
