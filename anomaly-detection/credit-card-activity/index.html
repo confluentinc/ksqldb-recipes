@@ -166,13 +166,13 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       <label class="md-nav__link" for="__nav_2">
-        Anomaly Detection
+        Anomaly and Pattern Detection
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="Anomaly Detection" data-md-level="1">
+      <nav class="md-nav" aria-label="Anomaly and Pattern Detection" data-md-level="1">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
-          Anomaly Detection
+          Anomaly and Pattern Detection
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -274,6 +274,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../salesforce/" class="md-nav__link">
+        Handle corrupted data from Salesforce
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -323,6 +335,30 @@
     <li class="md-nav__item">
       <a href="../../customer-360/clickstream/" class="md-nav__link">
         Understand user behavior with clickstream data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer-360/aviation/" class="md-nav__link">
+        Notify passengers of flight updates
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer-360/loyalty-rewards/" class="md-nav__link">
+        Build customer loyalty programs
       </a>
     </li>
   
@@ -483,44 +519,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../real-time-analytics/loyalty-rewards/" class="md-nav__link">
-        Build customer loyalty programs
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../real-time-analytics/denormalization/" class="md-nav__link">
         Enrich orders with change data capture (CDC)
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../real-time-analytics/salesforce/" class="md-nav__link">
-        Handle corrupted data from Salesforce
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../real-time-analytics/aviation/" class="md-nav__link">
-        Notify passengers of flight updates
       </a>
     </li>
   
@@ -786,37 +786,10 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="normal">72</span>
 <span class="normal">73</span>
 <span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Register the stream of transactions</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">FD_TRANSACTIONS_RAW</span> <span class="p">(</span>
-  <span class="n">ACCOUNT_ID</span> <span class="nb">BIGINT</span><span class="p">,</span> 
-  <span class="k">TIMESTAMP</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
-  <span class="n">CARD_TYPE</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
-  <span class="n">AMOUNT</span> <span class="n">DOUBLE</span><span class="p">,</span> 
-  <span class="n">IP_ADDRESS</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
-  <span class="n">TRANSACTION_ID</span> <span class="nb">VARCHAR</span>
-<span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;FD_transactions&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">,</span> 
-  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
-<span class="p">);</span>
+<span class="normal">75</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
 
-<span class="c1">-- Repartition the stream on account_id in order to ensure that all the streams</span>
-<span class="c1">-- and tables are co-partitioned, which means that input records on both sides</span>
-<span class="c1">-- of the join have the same configuration settings for partitions.</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">FD_TRANSACTIONS_SOURCE</span> <span class="k">AS</span>
-  <span class="k">SELECT</span> <span class="o">*</span> 
-  <span class="k">FROM</span> <span class="n">FD_TRANSACTIONS_RAW</span> 
-  <span class="n">PARTITION</span> <span class="k">BY</span> <span class="n">ACCOUNT_ID</span><span class="p">;</span>
-
-<span class="c1">-- Register the existing stream of customer data</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">FD_CUST_RAW_STREAM</span> <span class="p">(</span>
+<span class="c1">-- Create the stream of customer data</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">fd_cust_raw_stream</span> <span class="p">(</span>
   <span class="n">ID</span> <span class="nb">BIGINT</span><span class="p">,</span> 
   <span class="n">FIRST_NAME</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
   <span class="n">LAST_NAME</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
@@ -824,46 +797,59 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">AVG_CREDIT_SPEND</span> <span class="n">DOUBLE</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
   <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;FD_customers&#39;</span><span class="p">,</span> 
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">,</span> 
+  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span> 
   <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
 <span class="p">);</span>
 
-<span class="c1">-- Repartition the customer data stream by account_id to prepare for the join</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">FD_CUSTOMER_REKEYED</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;FD_CUSTOMER_REKEYED&#39;</span><span class="p">)</span> <span class="k">AS</span>
+<span class="c1">-- Repartition the customer data stream by account_id to prepare for the join later</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">fd_customer_rekeyed</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;fd_customer_rekeyed&#39;</span><span class="p">)</span> <span class="k">AS</span>
   <span class="k">SELECT</span> <span class="o">*</span> 
-  <span class="k">FROM</span> <span class="n">FD_CUST_RAW_STREAM</span> 
+  <span class="k">FROM</span> <span class="n">fd_cust_raw_stream</span> 
   <span class="n">PARTITION</span> <span class="k">BY</span> <span class="n">ID</span><span class="p">;</span>
 
-<span class="c1">-- Register the partitioned customer data topic as a table used for the join</span>
-<span class="c1">-- with the incoming stream of transactions:</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">FD_customer</span> <span class="p">(</span>
+<span class="c1">-- Register the partitioned customer data topic as a table</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">fd_customers</span> <span class="p">(</span>
   <span class="n">ID</span> <span class="nb">BIGINT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
   <span class="n">FIRST_NAME</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
   <span class="n">LAST_NAME</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
   <span class="n">EMAIL</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
   <span class="n">AVG_CREDIT_SPEND</span> <span class="n">DOUBLE</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;FD_CUSTOMER_REKEYED&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;fd_customer_rekeyed&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
   <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
 <span class="p">);</span>
 
-<span class="c1">-- Join the transactions to customer information:</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">FD_TRANSACTIONS_ENRICHED</span> <span class="k">AS</span> 
+<span class="c1">-- Create the stream of transactions</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">fd_transactions</span> <span class="p">(</span>
+  <span class="n">ACCOUNT_ID</span> <span class="nb">BIGINT</span><span class="p">,</span>
+  <span class="k">TIMESTAMP</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+  <span class="n">CARD_TYPE</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+  <span class="n">AMOUNT</span> <span class="n">DOUBLE</span><span class="p">,</span>
+  <span class="n">IP_ADDRESS</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+  <span class="n">TRANSACTION_ID</span> <span class="nb">VARCHAR</span>
+<span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
+  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;FD_transactions&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
+<span class="p">);</span>
+
+<span class="c1">-- Join the transactions to customer information</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">fd_transactions_enriched</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;transactions_enriched&#39;</span><span class="p">)</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="n">T</span><span class="p">.</span><span class="n">ACCOUNT_ID</span><span class="p">,</span>
     <span class="n">T</span><span class="p">.</span><span class="n">CARD_TYPE</span><span class="p">,</span>
     <span class="n">T</span><span class="p">.</span><span class="n">AMOUNT</span><span class="p">,</span> 
     <span class="k">C</span><span class="p">.</span><span class="n">FIRST_NAME</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="k">C</span><span class="p">.</span><span class="n">LAST_NAME</span> <span class="k">AS</span> <span class="n">FULL_NAME</span><span class="p">,</span> 
     <span class="k">C</span><span class="p">.</span><span class="n">AVG_CREDIT_SPEND</span> 
-  <span class="k">FROM</span> <span class="n">FD_TRANSACTIONS_SOURCE</span> <span class="n">T</span> 
-  <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">FD_CUSTOMER</span> <span class="k">C</span> 
+  <span class="k">FROM</span> <span class="n">fd_transactions</span> <span class="n">T</span>
+  <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">fd_customers</span> <span class="k">C</span>
   <span class="k">ON</span> <span class="n">T</span><span class="p">.</span><span class="n">ACCOUNT_ID</span> <span class="o">=</span> <span class="k">C</span><span class="p">.</span><span class="n">ID</span><span class="p">;</span>
 
 <span class="c1">-- Aggregate the stream of transactions for each account ID using a two-hour</span>
 <span class="c1">-- tumbling window, and filter for accounts in which the total spend in a</span>
 <span class="c1">-- two-hour period is greater than the customer’s average:</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">FD_POSSIBLE_STOLEN_CARD</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KEY_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">)</span> <span class="k">AS</span> 
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">fd_possible_stolen_card</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;FD_possible_stolen_card&#39;</span><span class="p">,</span><span class="n">KEY_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">)</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="n">TIMESTAMPTOSTRING</span><span class="p">(</span><span class="n">WINDOWSTART</span><span class="p">,</span> <span class="s1">&#39;yyyy-MM-dd HH:mm:ss Z&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">WINDOW_START</span><span class="p">,</span> 
     <span class="n">T</span><span class="p">.</span><span class="n">ACCOUNT_ID</span><span class="p">,</span>
@@ -871,7 +857,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
     <span class="k">SUM</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">AMOUNT</span><span class="p">)</span> <span class="k">AS</span> <span class="n">TOTAL_CREDIT_SPEND</span><span class="p">,</span> 
     <span class="n">T</span><span class="p">.</span><span class="n">FULL_NAME</span><span class="p">,</span>
     <span class="k">MAX</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">AVG_CREDIT_SPEND</span><span class="p">)</span> <span class="k">AS</span> <span class="n">AVG_CREDIT_SPEND</span> 
-  <span class="k">FROM</span> <span class="n">FD_TRANSACTIONS_ENRICHED</span> <span class="n">T</span> 
+  <span class="k">FROM</span> <span class="n">fd_transactions_enriched</span> <span class="n">T</span>
   <span class="n">WINDOW</span> <span class="n">TUMBLING</span> <span class="p">(</span><span class="k">SIZE</span> <span class="mi">2</span> <span class="n">HOURS</span><span class="p">)</span> 
   <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">T</span><span class="p">.</span><span class="n">ACCOUNT_ID</span><span class="p">,</span> <span class="n">T</span><span class="p">.</span><span class="n">CARD_TYPE</span><span class="p">,</span> <span class="n">T</span><span class="p">.</span><span class="n">FULL_NAME</span> 
   <span class="k">HAVING</span> <span class="k">SUM</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">AMOUNT</span><span class="p">)</span> <span class="o">&gt;</span> <span class="k">MAX</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">AVG_CREDIT_SPEND</span><span class="p">);</span>
@@ -883,12 +869,14 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">FD_transactions_raw</span> <span class="p">(</span><span class="n">account_id</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="n">card_type</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">ip_address</span><span class="p">,</span> <span class="n">transaction_id</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">6011000990139424</span><span class="p">,</span> <span class="s1">&#39;2021-09-23T10:50:00.000Z&#39;</span><span class="p">,</span> <span class="s1">&#39;visa&#39;</span><span class="p">,</span> <span class="mi">542</span><span class="p">.</span><span class="mi">99</span><span class="p">,</span> <span class="s1">&#39;192.168.44.1&#39;</span><span class="p">,</span> <span class="s1">&#39;3985757&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">FD_transactions_raw</span> <span class="p">(</span><span class="n">account_id</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="n">card_type</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">ip_address</span><span class="p">,</span> <span class="n">transaction_id</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">6011000990139424</span><span class="p">,</span> <span class="s1">&#39;2021-09-23T10:50:01.000Z&#39;</span><span class="p">,</span> <span class="s1">&#39;visa&#39;</span><span class="p">,</span> <span class="mi">611</span><span class="p">.</span><span class="mi">48</span><span class="p">,</span> <span class="s1">&#39;192.168.44.1&#39;</span><span class="p">,</span> <span class="s1">&#39;8028435&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">FD_transactions_raw</span> <span class="p">(</span><span class="n">account_id</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="n">card_type</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">ip_address</span><span class="p">,</span> <span class="n">transaction_id</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">3530111333300000</span><span class="p">,</span> <span class="s1">&#39;2021-09-23T10:50:00.000Z&#39;</span><span class="p">,</span> <span class="s1">&#39;mastercard&#39;</span><span class="p">,</span> <span class="mi">65</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;192.168.101.3&#39;</span><span class="p">,</span> <span class="s1">&#39;1695780&#39;</span><span class="p">);</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">FD_CUST_RAW_STREAM</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">avg_credit_spend</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">6011000990139424</span><span class="p">,</span> <span class="s1">&#39;Janice&#39;</span><span class="p">,</span> <span class="s1">&#39;Smith&#39;</span><span class="p">,</span> <span class="s1">&#39;jsmith@mycompany.com&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">.</span><span class="mi">00</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">FD_CUST_RAW_STREAM</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">avg_credit_spend</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">3530111333300000</span><span class="p">,</span> <span class="s1">&#39;George&#39;</span><span class="p">,</span> <span class="s1">&#39;Mall&#39;</span><span class="p">,</span> <span class="s1">&#39;gmall@mycompany.com&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">.</span><span class="mi">00</span><span class="p">);</span>
 
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">FD_cust_raw_stream</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">avg_credit_spend</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">6011000990139424</span><span class="p">,</span> <span class="s1">&#39;Janice&#39;</span><span class="p">,</span> <span class="s1">&#39;Smith&#39;</span><span class="p">,</span> <span class="s1">&#39;jsmith@mycompany.com&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">.</span><span class="mi">00</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">FD_cust_raw_stream</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">avg_credit_spend</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">3530111333300000</span><span class="p">,</span> <span class="s1">&#39;George&#39;</span><span class="p">,</span> <span class="s1">&#39;Mall&#39;</span><span class="p">,</span> <span class="s1">&#39;gmall@mycompany.com&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">.</span><span class="mi">00</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">FD_TRANSACTIONS</span> <span class="p">(</span><span class="n">account_id</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="n">card_type</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">ip_address</span><span class="p">,</span> <span class="n">transaction_id</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">6011000990139424</span><span class="p">,</span> <span class="s1">&#39;2021-09-23T10:50:00.000Z&#39;</span><span class="p">,</span> <span class="s1">&#39;visa&#39;</span><span class="p">,</span> <span class="mi">542</span><span class="p">.</span><span class="mi">99</span><span class="p">,</span> <span class="s1">&#39;192.168.44.1&#39;</span><span class="p">,</span> <span class="s1">&#39;3985757&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">FD_TRANSACTIONS</span> <span class="p">(</span><span class="n">account_id</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="n">card_type</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">ip_address</span><span class="p">,</span> <span class="n">transaction_id</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">6011000990139424</span><span class="p">,</span> <span class="s1">&#39;2021-09-23T10:50:01.000Z&#39;</span><span class="p">,</span> <span class="s1">&#39;visa&#39;</span><span class="p">,</span> <span class="mi">611</span><span class="p">.</span><span class="mi">48</span><span class="p">,</span> <span class="s1">&#39;192.168.44.1&#39;</span><span class="p">,</span> <span class="s1">&#39;8028435&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">FD_TRANSACTIONS</span> <span class="p">(</span><span class="n">account_id</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="n">card_type</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">ip_address</span><span class="p">,</span> <span class="n">transaction_id</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">3530111333300000</span><span class="p">,</span> <span class="s1">&#39;2021-09-23T10:50:00.000Z&#39;</span><span class="p">,</span> <span class="s1">&#39;mastercard&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">.</span><span class="mi">31</span><span class="p">,</span> <span class="s1">&#39;192.168.101.3&#39;</span><span class="p">,</span> <span class="s1">&#39;1695780&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">FD_TRANSACTIONS</span> <span class="p">(</span><span class="n">account_id</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="n">card_type</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">ip_address</span><span class="p">,</span> <span class="n">transaction_id</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">3530111333300000</span><span class="p">,</span> <span class="s1">&#39;2021-09-23T10:50:00.000Z&#39;</span><span class="p">,</span> <span class="s1">&#39;mastercard&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="mi">37</span><span class="p">,</span> <span class="s1">&#39;192.168.101.3&#39;</span><span class="p">,</span> <span class="s1">&#39;1695780&#39;</span><span class="p">);</span>
 </code></pre></div>
 </td></tr></table>
 <h3 id="cleanup">Cleanup<a class="headerlink" href="#cleanup" title="Permanent link">&para;</a></h3>
