@@ -33,7 +33,7 @@ In this example, the telemetry events are stored in Postgres database tables. Th
 ### ksqlDB code
 
 In this example, there is one stream of data reporting device threshold values and another reporting alarms.
-The following stream processing app identifies which set of devices need to be investigated where the threshold is insufficient and alarm code is not zero.
+The following stream processing app identifies which devices need to be investigated where the threshold is insufficient and alarm code is not zero.
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
