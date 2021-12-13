@@ -52,7 +52,7 @@ CREATE TABLE pages_per_min AS
     userid AS k1,
     AS_VALUE(userid) AS userid,
     WINDOWSTART AS EVENT_TS,
-    count(*) AS pages
+    COUNT(*) AS pages
   FROM clickstream WINDOW HOPPING (SIZE 60 SECOND, ADVANCE BY 5 SECOND)
   WHERE request LIKE '%html%'
   GROUP BY userid;
@@ -64,7 +64,7 @@ CREATE TABLE click_user_sessions AS
     username AS K,
     AS_VALUE(username) AS username,
     WINDOWEND AS EVENT_TS,
-    count(*) AS events
+    COUNT(*) AS events
   FROM user_clickstream WINDOW SESSION (30 SECOND)
   GROUP BY username;
 
@@ -75,7 +75,7 @@ CREATE TABLE errors_per_min_alert WITH (KAFKA_TOPIC='errors_per_min_alert') AS
     status AS k1,
     AS_VALUE(status) AS status,
     WINDOWSTART AS EVENT_TS,
-    count(*) AS errors
+    COUNT(*) AS errors
   FROM clickstream WINDOW HOPPING (SIZE 60 SECOND, ADVANCE BY 20 SECOND)
   WHERE status > 400
   GROUP BY status
