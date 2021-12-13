@@ -7,12 +7,15 @@ theme:
 
 nav:
   - Overview: index.md
-  - Anomaly Detection:
+  - Anomaly and Pattern Detection:
     - Detect unusual credit card activity: anomaly-detection/credit-card-activity/index.md
     - Flag unhealthy IoT devices: anomaly-detection/internet-of-things/index.md
+    - Handle corrupted data from Salesforce: anomaly-detection/salesforce/index.md
   - Customer 360:
     - Match users for online dating: customer-360/online-dating/index.md
     - Understand user behavior with clickstream data: customer-360/clickstream/index.md
+    - Notify passengers of flight updates: customer-360/aviation/index.md
+    - Build customer loyalty programs: customer-360/loyalty-rewards/index.md
   - Cybersecurity:
     - Detect and analyze SSH attacks: cybersecurity/SSH-attack/index.md
   - Predictive Analytics:
@@ -21,10 +24,7 @@ nav:
   - Real-time Analytics:
     - Analyze datacenter power usage: real-time-analytics/datacenter/index.md
     - Automate instant payment verifications: real-time-analytics/payment-status-check/index.md
-    - Build customer loyalty programs: real-time-analytics/loyalty-rewards/index.md
     - Enrich orders with change data capture (CDC): real-time-analytics/denormalization/index.md
-    - Handle corrupted data from Salesforce: real-time-analytics/salesforce/index.md
-    - Notify passengers of flight updates: real-time-analytics/aviation/index.md
     - Build a dynamic pricing strategy: real-time-analytics/dynamic_pricing/index.md
 
 markdown_extensions:

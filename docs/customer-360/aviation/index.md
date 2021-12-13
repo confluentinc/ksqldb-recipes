@@ -23,7 +23,7 @@ Worse than having a flight delayed is not being notified about the important cha
 This example pulls in data from different tables for customers, flights, flight updates, and bookings.
 
 ```json
---8<-- "docs/real-time-analytics/aviation/source.json"
+--8<-- "docs/customer-360/aviation/source.json"
 ```
 
 --8<-- "docs/shared/manual_insert.md"
@@ -35,27 +35,27 @@ This ksqlDB application joins between customer flight booking data and any fligh
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ```sql
---8<-- "docs/real-time-analytics/aviation/c01.sql"
+--8<-- "docs/customer-360/aviation/c01.sql"
 
---8<-- "docs/real-time-analytics/aviation/c02.sql"
+--8<-- "docs/customer-360/aviation/c02.sql"
 
---8<-- "docs/real-time-analytics/aviation/o01.sql"
+--8<-- "docs/customer-360/aviation/o01.sql"
 
---8<-- "docs/real-time-analytics/aviation/j01.sql"
+--8<-- "docs/customer-360/aviation/j01.sql"
 
---8<-- "docs/real-time-analytics/aviation/j02.sql"
+--8<-- "docs/customer-360/aviation/j02.sql"
 
---8<-- "docs/real-time-analytics/aviation/r01.sql"
+--8<-- "docs/customer-360/aviation/r01.sql"
 
---8<-- "docs/real-time-analytics/aviation/c03.sql"
+--8<-- "docs/customer-360/aviation/c03.sql"
 
---8<-- "docs/real-time-analytics/aviation/p01.sql"
+--8<-- "docs/customer-360/aviation/p01.sql"
 ```
 
 --8<-- "docs/shared/manual_cue.md"
 
 ```sql
---8<-- "docs/real-time-analytics/aviation/manual.sql"
+--8<-- "docs/customer-360/aviation/manual.sql"
 ```
 
 ### Cleanup
@@ -73,7 +73,7 @@ ksqlDB supports tables and streams as objects. Both are backed by Kafka topics. 
 First off, let's create a table that will hold data about our customers: 
 
 ```sql
---8<-- "docs/real-time-analytics/aviation/c01.sql"
+--8<-- "docs/customer-360/aviation/c01.sql"
 ```
 
 This will store the data in a Kafka topic. In practice, you would probably populate this directly from your application or a feed from your database using Kafka Connect. For simplicity, here we'll just load some data directly: 
@@ -90,7 +90,7 @@ Next, we'll create a table of flights and associated bookings for our customers.
 
 
 ```sql
---8<-- "docs/real-time-analytics/aviation/c02.sql"
+--8<-- "docs/customer-360/aviation/c02.sql"
 ```
 
 For these two tables, let's add some data. As before, this would usually come directly from your application or a stream of data from another system integrated through Kafka Connect. 
@@ -115,23 +115,23 @@ INSERT INTO BOOKINGS (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (4,4,2);
 To give us a single view of the passenger/flight data, we'll denormalize down the three tables into one. First, we join the customers to bookings that they've made and build a new table as a result: 
 
 ```sql
---8<-- "docs/real-time-analytics/aviation/o01.sql"
+--8<-- "docs/customer-360/aviation/o01.sql"
 
---8<-- "docs/real-time-analytics/aviation/j01.sql"
+--8<-- "docs/customer-360/aviation/j01.sql"
 ```
 
 From here, we join to details of the flights themselves: 
 
 ```sql
---8<-- "docs/real-time-analytics/aviation/o01.sql"
+--8<-- "docs/customer-360/aviation/o01.sql"
 
---8<-- "docs/real-time-analytics/aviation/j02.sql"
+--8<-- "docs/customer-360/aviation/j02.sql"
 ```
 
 At this stage, we can query the data held in the tables to show which customers are booked on which flights: 
 
 ```sql
---8<-- "docs/real-time-analytics/aviation/o01.sql"
+--8<-- "docs/customer-360/aviation/o01.sql"
 
 SELECT  CB_C_NAME           AS NAME
       , CB_C_EMAIL          AS EMAIL
@@ -157,9 +157,9 @@ EMIT CHANGES;
 The last step in denormalizing the data is to set the key of the table to that of the flight ID so that it can be joined to the updates (which we'll get to below). 
 
 ```sql
---8<-- "docs/real-time-analytics/aviation/o01.sql"
+--8<-- "docs/customer-360/aviation/o01.sql"
 
---8<-- "docs/real-time-analytics/aviation/r01.sql"
+--8<-- "docs/customer-360/aviation/r01.sql"
 
 ```
 
@@ -170,7 +170,7 @@ We now have the `CUSTOMER_FLIGHTS` table but keyed on `FLIGHT_ID`.
 In the `FLIGHTS` table above, we have the scheduled departure time of a flight (`SCHEDULED_DEP`). Now, let's introduce a stream of events that any flight changes will be written to. Again, we're populating it directly, but in the real world it'll be coming from somewhere else—perhaps Kafka Connect pulling the data from a JMS queue (or any of the other [hundreds of supported sources](https://hub.confluent.io)). 
 
 ```sql
---8<-- "docs/real-time-analytics/aviation/c03.sql"
+--8<-- "docs/customer-360/aviation/c03.sql"
 ```
 
 ### Join data
@@ -180,7 +180,7 @@ By joining between our customer flight booking data and any flight updates, we c
 In one ksqlDB window, run the following ksqlDB query to return customer details with flight updates. This is the same query that you would run from your application, and it runs continuously. 
 
 ```sql
---8<-- "docs/real-time-analytics/aviation/p01.sql"
+--8<-- "docs/customer-360/aviation/p01.sql"
 ```
 
 In another ksqlDB window, add some data to the flight update stream: 

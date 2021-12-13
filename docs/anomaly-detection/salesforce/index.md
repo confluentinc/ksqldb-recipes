@@ -23,7 +23,7 @@ Salesforce sends a notification when a change to a Salesforce record occurs as p
 Use Avro so ksqlDB can automatically detect the schema.
 
 ```json
---8<-- "docs/real-time-analytics/salesforce/source.json"
+--8<-- "docs/anomaly-detection/salesforce/source.json"
 ```
 
 ### ksqlDB code
@@ -31,7 +31,7 @@ Use Avro so ksqlDB can automatically detect the schema.
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ```sql
---8<-- "docs/real-time-analytics/salesforce/process.sql"
+--8<-- "docs/anomaly-detection/salesforce/process.sql"
 ```
 
 ### Cleanup
