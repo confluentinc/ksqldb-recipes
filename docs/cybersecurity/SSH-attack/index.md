@@ -14,6 +14,8 @@ There are lots of ways SSH can be abused, but one of the most straightforward wa
 
 ### Set up your environment
 
+Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=ssh_attack).
+
 --8<-- "docs/shared/ccloud_setup.md"
 
 ### Read the data in

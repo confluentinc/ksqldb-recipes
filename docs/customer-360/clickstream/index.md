@@ -14,6 +14,8 @@ Analyzing clickstream data enables businesses to optimize webpages and determine
 
 ### Set up your environment
 
+Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=clickstream).
+
 --8<-- "docs/shared/ccloud_setup.md"
 
 ### Read the data in
