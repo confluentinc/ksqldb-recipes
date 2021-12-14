@@ -1,3 +1,5 @@
+SET 'auto.offset.reset' = 'earliest';
+
 -- stream of user clicks:
 CREATE STREAM clickstream (
   _time BIGINT,

@@ -1,3 +1,5 @@
+SET 'auto.offset.reset' = 'earliest';
+
 -- Extract relevant fields from log messages
 CREATE STREAM syslog (
   ts varchar, 

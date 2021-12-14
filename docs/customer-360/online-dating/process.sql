@@ -1,3 +1,5 @@
+SET 'auto.offset.reset' = 'earliest';
+
 CREATE STREAM messages (
   send_id BIGINT,
   recv_id BIGINT,

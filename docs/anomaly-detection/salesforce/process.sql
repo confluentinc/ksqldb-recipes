@@ -1,3 +1,5 @@
+SET 'auto.offset.reset' = 'earliest';
+
 -- Register the stream of SFDC CDC Opportunities
 CREATE STREAM STREAM_SFDC_CDC_OPPORTUNITY_RAW
 WITH (

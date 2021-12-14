@@ -1,3 +1,5 @@
+SET 'auto.offset.reset' = 'earliest';
+
 -- Create stream of orders
 CREATE STREAM orders (
   order_id BIGINT,
