@@ -4,8 +4,8 @@ CREATE SOURCE CONNECTOR RabbitMQ WITH (
   'kafka.api.key'            = '<my-kafka-api-key>',
   'kafka.api.secret'         = '<my-kafka-api-secret>',
   'kafka.topic'              = 'from-rabbit'
-  'rabbitmq.host'            = '192.168.1.99',
+  'rabbitmq.host'            = '<host>',
   'rabbitmq.username'        = '<username>',
   'rabbitmq.password'        = '<password>',
-  'rabbitmq.queue'           = '<queue-name>',
+  'rabbitmq.queue'           = 'transactions',
   'tasks.max'                = '1');
