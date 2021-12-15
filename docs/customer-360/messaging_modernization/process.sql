@@ -1,8 +1,8 @@
 SET 'auto.offset.reset' = 'earliest';
 
 -- Register the initial stream
-CREATE STREAM rabbit (userid VARCHAR KEY,
-                      BIGINT VARCHAR,
+CREATE STREAM rabbit (userid VARCHAR,
+                      timestamp BIGINT,
                       transaction VARCHAR,
                       amount VARCHAR
 ) WITH (
