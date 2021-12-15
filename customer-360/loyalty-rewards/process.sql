@@ -1,3 +1,5 @@
+SET 'auto.offset.reset' = 'earliest';
+
 CREATE STREAM users (
   user_id VARCHAR KEY,
   name VARCHAR
@@ -61,9 +63,9 @@ CREATE TABLE sales_totals AS
 CREATE TABLE caffeine_index AS
   SELECT
     user_id,
-    count(*) as total,
-    (count(*) % 6) AS sequence,
-    (count(*) % 6) = 5 AS next_one_free
+    COUNT(*) as total,
+    (COUNT(*) % 6) AS sequence,
+    (COUNT(*) % 6) = 5 AS next_one_free
   FROM purchases
   WHERE product_id = 'coffee'
   GROUP BY user_id;

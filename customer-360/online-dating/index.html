@@ -808,7 +808,11 @@ Then it builds up the function <code>(old_state, element) =&gt; ...</code>, whic
 <span class="normal">34</span>
 <span class="normal">35</span>
 <span class="normal">36</span>
-<span class="normal">37</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">messages</span> <span class="p">(</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">messages</span> <span class="p">(</span>
   <span class="n">send_id</span> <span class="nb">BIGINT</span><span class="p">,</span>
   <span class="n">recv_id</span> <span class="nb">BIGINT</span><span class="p">,</span>
   <span class="n">message</span> <span class="nb">VARCHAR</span>

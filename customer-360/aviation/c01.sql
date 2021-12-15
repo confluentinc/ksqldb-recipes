@@ -1,4 +1,4 @@
-CREATE TABLE CUSTOMERS (ID             INT     PRIMARY KEY
+CREATE TABLE customers (ID             INT     PRIMARY KEY
                        , NAME           VARCHAR
                        , ADDRESS        VARCHAR
                        , EMAIL          VARCHAR

@@ -1,3 +1,5 @@
+SET 'auto.offset.reset' = 'earliest';
+
 -- Create stream of sales
 CREATE STREAM sales (
   item_id INT key,

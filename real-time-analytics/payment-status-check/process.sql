@@ -1,3 +1,5 @@
+SET 'auto.offset.reset' = 'earliest';
+
 -- Register the initial streams and tables from the Kafka topics
 CREATE STREAM PAYMENTS (
   PAYMENT_ID INTEGER KEY,

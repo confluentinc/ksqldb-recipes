@@ -687,8 +687,12 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Register the stream of SFDC CDC Opportunities</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">STREAM_SFDC_CDC_OPPORTUNITY_RAW</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Register the stream of SFDC CDC Opportunities</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">stream_sfdc_cdc_opportunity_raw</span>
 <span class="k">WITH</span> <span class="p">(</span>
   <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;sfdc.cdc.raw&#39;</span><span class="p">,</span>
   <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;AVRO&#39;</span><span class="p">,</span>
@@ -696,11 +700,11 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="p">);</span>
 
 <span class="c1">-- Create a new stream with Replay ID and Change Event Header for just Gap Events</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">STREAM_SFDC_CDC_OPPORTUNITY_CHANGE_LOG</span> <span class="k">AS</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">stream_sfdc_cdc_opportunity_change_log</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="n">STREAM_SFDC_CDC_OPPORTUNITY_RAW</span><span class="p">.</span><span class="n">REPLAYID</span> <span class="k">AS</span> <span class="n">REPLAYID</span><span class="p">,</span>
     <span class="n">STREAM_SFDC_CDC_OPPORTUNITY_RAW</span><span class="p">.</span><span class="n">CHANGEEVENTHEADER</span> <span class="k">AS</span> <span class="n">CHANGEEVENTHEADER</span>
-  <span class="k">FROM</span> <span class="n">STREAM_SFDC_CDC_OPPORTUNITY_RAW</span>
+  <span class="k">FROM</span> <span class="n">stream_sfdc_cdc_opportunity_raw</span>
   <span class="k">WHERE</span> <span class="n">UCASE</span><span class="p">(</span><span class="n">STREAM_SFDC_CDC_OPPORTUNITY_RAW</span><span class="p">.</span><span class="n">CHANGEEVENTHEADER</span><span class="o">-&gt;</span><span class="n">CHANGETYPE</span><span class="p">)</span> <span class="k">LIKE</span> <span class="s1">&#39;GAP%&#39;</span>
   <span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
 </code></pre></div>

@@ -814,7 +814,11 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="normal">91</span>
 <span class="normal">92</span>
 <span class="normal">93</span>
-<span class="normal">94</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">users</span> <span class="p">(</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">users</span> <span class="p">(</span>
   <span class="n">user_id</span> <span class="nb">VARCHAR</span> <span class="k">KEY</span><span class="p">,</span>
   <span class="n">name</span> <span class="nb">VARCHAR</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
@@ -877,9 +881,9 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">caffeine_index</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="n">user_id</span><span class="p">,</span>
-    <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">total</span><span class="p">,</span>
-    <span class="p">(</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span><span class="p">)</span> <span class="k">AS</span> <span class="n">sequence</span><span class="p">,</span>
-    <span class="p">(</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span><span class="p">)</span> <span class="o">=</span> <span class="mi">5</span> <span class="k">AS</span> <span class="n">next_one_free</span>
+    <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">total</span><span class="p">,</span>
+    <span class="p">(</span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span><span class="p">)</span> <span class="k">AS</span> <span class="n">sequence</span><span class="p">,</span>
+    <span class="p">(</span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span><span class="p">)</span> <span class="o">=</span> <span class="mi">5</span> <span class="k">AS</span> <span class="n">next_one_free</span>
   <span class="k">FROM</span> <span class="n">purchases</span>
   <span class="k">WHERE</span> <span class="n">product_id</span> <span class="o">=</span> <span class="s1">&#39;coffee&#39;</span>
   <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">user_id</span><span class="p">;</span>
@@ -1124,9 +1128,9 @@ hits that sixth (free) one, we reset to zero.</p>
 <span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">caffeine_index</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="n">user_id</span><span class="p">,</span>
-    <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">total</span><span class="p">,</span>
-    <span class="p">(</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span><span class="p">)</span> <span class="k">AS</span> <span class="n">sequence</span><span class="p">,</span>
-    <span class="p">(</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span><span class="p">)</span> <span class="o">=</span> <span class="mi">5</span> <span class="k">AS</span> <span class="n">next_one_free</span>
+    <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">total</span><span class="p">,</span>
+    <span class="p">(</span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span><span class="p">)</span> <span class="k">AS</span> <span class="n">sequence</span><span class="p">,</span>
+    <span class="p">(</span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span><span class="p">)</span> <span class="o">=</span> <span class="mi">5</span> <span class="k">AS</span> <span class="n">next_one_free</span>
   <span class="k">FROM</span> <span class="n">purchases</span>
   <span class="k">WHERE</span> <span class="n">product_id</span> <span class="o">=</span> <span class="s1">&#39;coffee&#39;</span>
   <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">user_id</span><span class="p">;</span>

@@ -706,7 +706,11 @@ The following stream processing app identifies which devices need to be investig
 <span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
-<span class="normal">30</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Create table with latest state of alarms</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Create table with latest state of alarms</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">alarms</span> <span class="p">(</span>
   <span class="n">device_id</span> <span class="n">STRING</span> <span class="k">PRIMARY</span> <span class="k">key</span><span class="p">,</span>
   <span class="n">alarm_name</span> <span class="n">STRING</span><span class="p">,</span>

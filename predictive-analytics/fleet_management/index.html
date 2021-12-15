@@ -742,7 +742,11 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="normal">31</span>
 <span class="normal">32</span>
 <span class="normal">33</span>
-<span class="normal">34</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- create stream of locations</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+
+<span class="c1">-- create stream of locations</span>
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">locations</span> <span class="p">(</span>
   <span class="n">vehicle_id</span> <span class="nb">INT</span><span class="p">,</span>
   <span class="n">latitude</span> <span class="n">DOUBLE</span><span class="p">,</span>

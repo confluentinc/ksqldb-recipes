@@ -1,3 +1,5 @@
+SET 'auto.offset.reset' = 'earliest';
+
 -- Create table with latest state of alarms
 CREATE TABLE alarms (
   device_id STRING PRIMARY key,

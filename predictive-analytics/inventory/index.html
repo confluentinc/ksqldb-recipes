@@ -696,7 +696,11 @@ This creates a stream of events, where each event results in the addition or rem
 <span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
-<span class="normal">20</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Create stream of inventory</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Create stream of inventory</span>
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">inventory_stream</span> <span class="p">(</span>
   <span class="n">id</span> <span class="n">STRING</span> <span class="k">KEY</span><span class="p">,</span>
   <span class="n">item</span> <span class="n">STRING</span><span class="p">,</span>

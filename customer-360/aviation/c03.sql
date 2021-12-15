@@ -1,4 +1,4 @@
-CREATE STREAM FLIGHT_UPDATES (ID          INT KEY
+CREATE STREAM flight_updates (ID          INT KEY
                             , FLIGHT_ID   INT
                             , UPDATED_DEP TIMESTAMP
                             , REASON      VARCHAR

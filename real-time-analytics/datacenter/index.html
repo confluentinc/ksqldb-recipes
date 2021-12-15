@@ -763,7 +763,11 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="normal">50</span>
 <span class="normal">51</span>
 <span class="normal">52</span>
-<span class="normal">53</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Create a Table for the captured tenant occupancy events</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Create a Table for the captured tenant occupancy events</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">tenant_occupancy</span> <span class="p">(</span>
   <span class="n">tenant_id</span> <span class="nb">VARCHAR</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
   <span class="n">customer_id</span> <span class="nb">BIGINT</span>

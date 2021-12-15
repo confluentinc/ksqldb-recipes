@@ -866,7 +866,11 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="normal">87</span>
 <span class="normal">88</span>
 <span class="normal">89</span>
-<span class="normal">90</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Register the initial streams and tables from the Kafka topics</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Register the initial streams and tables from the Kafka topics</span>
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">PAYMENTS</span> <span class="p">(</span>
   <span class="n">PAYMENT_ID</span> <span class="nb">INTEGER</span> <span class="k">KEY</span><span class="p">,</span>
   <span class="n">CUSTID</span> <span class="nb">INTEGER</span><span class="p">,</span>

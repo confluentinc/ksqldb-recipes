@@ -1,3 +1,5 @@
+SET 'auto.offset.reset' = 'earliest';
+
 -- Create stream of inventory
 CREATE STREAM inventory_stream (
   id STRING KEY,

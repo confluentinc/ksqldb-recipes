@@ -796,7 +796,11 @@ services:
 <span class="normal">31</span>
 <span class="normal">32</span>
 <span class="normal">33</span>
-<span class="normal">34</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Extract relevant fields from log messages</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Extract relevant fields from log messages</span>
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">syslog</span> <span class="p">(</span>
   <span class="n">ts</span> <span class="nb">varchar</span><span class="p">,</span> 
   <span class="k">host</span> <span class="nb">varchar</span><span class="p">,</span>

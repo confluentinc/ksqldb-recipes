@@ -1,3 +1,5 @@
+SET 'auto.offset.reset' = 'earliest';
+
 -- Create a Table for the captured tenant occupancy events
 CREATE TABLE tenant_occupancy (
   tenant_id VARCHAR PRIMARY KEY,
