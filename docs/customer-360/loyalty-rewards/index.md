@@ -142,9 +142,9 @@ hits that sixth (free) one, we reset to zero.
 CREATE TABLE caffeine_index AS
   SELECT
     user_id,
-    count(*) as total,
-    (count(*) % 6) AS sequence,
-    (count(*) % 6) = 5 AS next_one_free
+    COUNT(*) as total,
+    (COUNT(*) % 6) AS sequence,
+    (COUNT(*) % 6) = 5 AS next_one_free
   FROM purchases
   WHERE product_id = 'coffee'
   GROUP BY user_id;

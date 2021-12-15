@@ -1,4 +1,4 @@
-CREATE TABLE FLIGHTS (ID               INT     PRIMARY KEY
+CREATE TABLE flights (ID               INT     PRIMARY KEY
                        , ORIGIN        VARCHAR
                        , DESTINATION   VARCHAR
                        , CODE          VARCHAR
@@ -8,7 +8,7 @@ CREATE TABLE FLIGHTS (ID               INT     PRIMARY KEY
                    , FORMAT='AVRO'
                    , PARTITIONS=6);
 
-CREATE TABLE BOOKINGS (ID            INT     PRIMARY KEY
+CREATE TABLE bookings (ID            INT     PRIMARY KEY
                        , CUSTOMER_ID INT
                        , FLIGHT_ID   INT)
               WITH (KAFKA_TOPIC='bookings'

@@ -81,11 +81,11 @@ First off, let's create a table that will hold data about our customers:
 This will store the data in a Kafka topic. In practice, you would probably populate this directly from your application or a feed from your database using Kafka Connect. For simplicity, here we'll just load some data directly: 
 
 ```sql
-INSERT INTO CUSTOMERS (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (1, 'Gleda Lealle', '93 Express Point', 'glealle0@senate.gov', '+351 831 301 6746', 'Silver');
-INSERT INTO CUSTOMERS (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (2, 'Gilly Crocombe', '332 Blaine Avenue', 'gcrocombe1@homestead.com', '+33 203 565 3736', 'Silver');
-INSERT INTO CUSTOMERS (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (3, 'Astrix Aspall', '56 Randy Place', 'aaspall2@ebay.co.uk', '+33 679 296 6645', 'Gold');
-INSERT INTO CUSTOMERS (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (4, 'Ker Omond', '23255 Tennessee Court', 'komond3@usnews.com', '+33 515 323 0170', 'Silver');
-INSERT INTO CUSTOMERS (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (5, 'Arline Synnott', '144 Ramsey Avenue', 'asynnott4@theatlantic.com', '+62 953 759 8885', 'Bronze');
+INSERT INTO customers (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (1, 'Gleda Lealle', '93 Express Point', 'glealle0@senate.gov', '+351 831 301 6746', 'Silver');
+INSERT INTO customers (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (2, 'Gilly Crocombe', '332 Blaine Avenue', 'gcrocombe1@homestead.com', '+33 203 565 3736', 'Silver');
+INSERT INTO customers (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (3, 'Astrix Aspall', '56 Randy Place', 'aaspall2@ebay.co.uk', '+33 679 296 6645', 'Gold');
+INSERT INTO customers (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (4, 'Ker Omond', '23255 Tennessee Court', 'komond3@usnews.com', '+33 515 323 0170', 'Silver');
+INSERT INTO customers (ID, NAME, ADDRESS, EMAIL, PHONE, LOYALTY_STATUS) VALUES (5, 'Arline Synnott', '144 Ramsey Avenue', 'asynnott4@theatlantic.com', '+62 953 759 8885', 'Bronze');
 ```
 
 Next, we'll create a table of flights and associated bookings for our customers. 
@@ -98,18 +98,18 @@ Next, we'll create a table of flights and associated bookings for our customers.
 For these two tables, let's add some data. As before, this would usually come directly from your application or a stream of data from another system integrated through Kafka Connect. 
 
 ```sql
-INSERT INTO FLIGHTS (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (1, 'LBA', 'AMS', '642',  '2021-11-18T06:04:00', '2021-11-18T06:48:00');
-INSERT INTO FLIGHTS (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (2, 'LBA', 'LHR', '9607', '2021-11-18T07:36:00', '2021-11-18T08:05:00');
-INSERT INTO FLIGHTS (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (3, 'AMS', 'TXL', '7968', '2021-11-18T08:11:00', '2021-11-18T10:41:00');
-INSERT INTO FLIGHTS (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (4, 'AMS', 'OSL', '496',  '2021-11-18T11:20:00', '2021-11-18T13:25:00');
-INSERT INTO FLIGHTS (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (5, 'LHR', 'JFK', '9230', '2021-11-18T10:36:00', '2021-11-18T19:07:00');
+INSERT INTO flights (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (1, 'LBA', 'AMS', '642',  '2021-11-18T06:04:00', '2021-11-18T06:48:00');
+INSERT INTO flights (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (2, 'LBA', 'LHR', '9607', '2021-11-18T07:36:00', '2021-11-18T08:05:00');
+INSERT INTO flights (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (3, 'AMS', 'TXL', '7968', '2021-11-18T08:11:00', '2021-11-18T10:41:00');
+INSERT INTO flights (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (4, 'AMS', 'OSL', '496',  '2021-11-18T11:20:00', '2021-11-18T13:25:00');
+INSERT INTO flights (ID, ORIGIN, DESTINATION, CODE, SCHEDULED_DEP, SCHEDULED_ARR) VALUES (5, 'LHR', 'JFK', '9230', '2021-11-18T10:36:00', '2021-11-18T19:07:00');
 ```
 
 ```sql
-INSERT INTO BOOKINGS (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (1,2,1);
-INSERT INTO BOOKINGS (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (2,1,1);
-INSERT INTO BOOKINGS (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (3,5,3);
-INSERT INTO BOOKINGS (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (4,4,2);
+INSERT INTO bookings (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (1,2,1);
+INSERT INTO bookings (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (2,1,1);
+INSERT INTO bookings (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (3,5,3);
+INSERT INTO bookings (ID, CUSTOMER_ID, FLIGHT_ID) VALUES (4,4,2);
 ```
 
 ### Denormalize the data
@@ -142,7 +142,7 @@ SELECT  CB_C_NAME           AS NAME
       , F_DESTINATION       AS DESTINATION
       , F_CODE              AS CODE
       , F_SCHEDULED_DEP     AS SCHEDULED_DEP 
-FROM CUSTOMER_FLIGHTS
+FROM customer_flights
 EMIT CHANGES;      
 ```
 
@@ -165,11 +165,11 @@ The last step in denormalizing the data is to set the key of the table to that o
 
 ```
 
-We now have the `CUSTOMER_FLIGHTS` table but keyed on `FLIGHT_ID`. 
+We now have the `customer_flights` table but keyed on `FLIGHT_ID`. 
 
 ### Add a stream of flight updates
 
-In the `FLIGHTS` table above, we have the scheduled departure time of a flight (`SCHEDULED_DEP`). Now, let's introduce a stream of events that any flight changes will be written to. Again, we're populating it directly, but in the real world it'll be coming from somewhere else—perhaps Kafka Connect pulling the data from a JMS queue (or any of the other [hundreds of supported sources](https://hub.confluent.io)). 
+In the `flights` table above, we have the scheduled departure time of a flight (`SCHEDULED_DEP`). Now, let's introduce a stream of events that any flight changes will be written to. Again, we're populating it directly, but in the real world it'll be coming from somewhere else—perhaps Kafka Connect pulling the data from a JMS queue (or any of the other [hundreds of supported sources](https://hub.confluent.io)). 
 
 ```sql
 --8<-- "docs/customer-360/aviation/c03.sql"
@@ -188,9 +188,9 @@ In one ksqlDB window, run the following ksqlDB query to return customer details 
 In another ksqlDB window, add some data to the flight update stream: 
 
 ```
-INSERT INTO FLIGHT_UPDATES (ID, FLIGHT_ID, UPDATED_DEP, REASON) VALUES (1, 2, '2021-11-18T09:00:00.000', 'Cabin staff unavailable');
-INSERT INTO FLIGHT_UPDATES (ID, FLIGHT_ID, UPDATED_DEP, REASON) VALUES (2, 3, '2021-11-19T14:00:00.000', 'Mechanical checks');
-INSERT INTO FLIGHT_UPDATES (ID, FLIGHT_ID, UPDATED_DEP, REASON) VALUES (3, 1, '2021-11-19T08:10:09.000', 'Icy conditions');
+INSERT INTO flight_updates (ID, FLIGHT_ID, UPDATED_DEP, REASON) VALUES (1, 2, '2021-11-18T09:00:00.000', 'Cabin staff unavailable');
+INSERT INTO flight_updates (ID, FLIGHT_ID, UPDATED_DEP, REASON) VALUES (2, 3, '2021-11-19T14:00:00.000', 'Mechanical checks');
+INSERT INTO flight_updates (ID, FLIGHT_ID, UPDATED_DEP, REASON) VALUES (3, 1, '2021-11-19T08:10:09.000', 'Icy conditions');
 ```
 
 In the original window, you will see the details of which passengers are impacted by which flight changes:

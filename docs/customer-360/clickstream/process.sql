@@ -15,7 +15,7 @@ CREATE STREAM clickstream (
 );
 
 -- users lookup table:
-CREATE TABLE WEB_USERS (
+CREATE TABLE web_users (
   user_id VARCHAR PRIMARY KEY,
   registered_At BIGINT,
   username VARCHAR,
@@ -32,7 +32,7 @@ CREATE TABLE WEB_USERS (
 -- Build materialized stream views:
 
 -- enrich click-stream with more user information:
-CREATE STREAM USER_CLICKSTREAM AS
+CREATE STREAM user_clickstream AS
   SELECT
     u.user_id,
     u.username,
@@ -52,30 +52,30 @@ CREATE TABLE pages_per_min AS
     userid AS k1,
     AS_VALUE(userid) AS userid,
     WINDOWSTART AS EVENT_TS,
-    count(*) AS pages
+    COUNT(*) AS pages
   FROM clickstream WINDOW HOPPING (SIZE 60 SECOND, ADVANCE BY 5 SECOND)
   WHERE request LIKE '%html%'
   GROUP BY userid;
 
 -- User sessions table - 30 seconds of inactivity expires the session
 -- Table counts number of events within the session
-CREATE TABLE CLICK_USER_SESSIONS AS
+CREATE TABLE click_user_sessions AS
   SELECT
     username AS K,
     AS_VALUE(username) AS username,
     WINDOWEND AS EVENT_TS,
-    count(*) AS events
-  FROM USER_CLICKSTREAM WINDOW SESSION (30 SECOND)
+    COUNT(*) AS events
+  FROM user_clickstream WINDOW SESSION (30 SECOND)
   GROUP BY username;
 
 -- number of errors per min, using 'HAVING' Filter to show ERROR codes > 400
 -- where count > 5
-CREATE TABLE ERRORS_PER_MIN_ALERT WITH (KAFKA_TOPIC='ERRORS_PER_MIN_ALERT') AS
+CREATE TABLE errors_per_min_alert WITH (KAFKA_TOPIC='errors_per_min_alert') AS
   SELECT
     status AS k1,
     AS_VALUE(status) AS status,
     WINDOWSTART AS EVENT_TS,
-    count(*) AS errors
+    COUNT(*) AS errors
   FROM clickstream WINDOW HOPPING (SIZE 60 SECOND, ADVANCE BY 20 SECOND)
   WHERE status > 400
   GROUP BY status
@@ -83,7 +83,7 @@ CREATE TABLE ERRORS_PER_MIN_ALERT WITH (KAFKA_TOPIC='ERRORS_PER_MIN_ALERT') AS
 
 -- Enriched user details table:
 -- Aggregate (count&groupBy) using a TABLE-Window
-CREATE TABLE USER_IP_ACTIVITY WITH (KEY_FORMAT='json', KAFKA_TOPIC='USER_IP_ACTIVITY') AS
+CREATE TABLE user_ip_activity WITH (KEY_FORMAT='json', KAFKA_TOPIC='user_ip_activity') AS
   SELECT
     username AS k1,
     ip AS k2,
@@ -93,6 +93,6 @@ CREATE TABLE USER_IP_ACTIVITY WITH (KEY_FORMAT='json', KAFKA_TOPIC='USER_IP_ACTI
     AS_VALUE(ip) AS ip,
     AS_VALUE(city) AS city,
     COUNT(*) AS count
-  FROM USER_CLICKSTREAM WINDOW TUMBLING (SIZE 60 SECOND)
+  FROM user_clickstream WINDOW TUMBLING (SIZE 60 SECOND)
   GROUP BY username, ip, city
   HAVING COUNT(*) > 1;
