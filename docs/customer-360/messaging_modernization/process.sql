@@ -22,3 +22,12 @@ CREATE STREAM rabbit_transactions
   FROM rabbit
   WHERE TIMESTAMP IS NOT NULL
   EMIT CHANGES;
+
+-- Count the number of transactions
+CREATE TABLE number_transactions
+  WITH (KAFKA_TOPIC = 'number_transactions') AS
+  SELECT USERID,
+         COUNT(USERID)
+  FROM rabbit_transactions
+  GROUP BY USERID
+  EMIT CHANGES;
