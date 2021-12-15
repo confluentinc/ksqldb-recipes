@@ -1,7 +1,7 @@
-INSERT INTO rabbit (transaction, amount, userid) VALUES ('CREDIT', '$141.73', '33');
-INSERT INTO rabbit (transaction, amount, userid) VALUES ('CREDIT', '$99.28', '89');
-INSERT INTO rabbit (transaction, amount, userid) VALUES ('CREDIT', '$31.29', '61');
-INSERT INTO rabbit (transaction, amount, userid) VALUES ('DEBIT', '$121.50', '33');
-INSERT INTO rabbit (transaction, amount, userid) VALUES ('CREDIT', '$105.00', '61');
-INSERT INTO rabbit (transaction, amount, userid) VALUES ('CREDIT', '$55.13', '89');
-INSERT INTO rabbit (transaction, amount, userid) VALUES ('DEBIT', '$67.14', '33');
+INSERT INTO rabbit (userid, timestamp, transaction, amount) VALUES ('33', UNIX_TIMESTAMP(), 'CREDIT', '$141.73');
+INSERT INTO rabbit (userid, timestamp, transaction, amount) VALUES ('89', UNIX_TIMESTAMP(), 'CREDIT', '$99.28');
+INSERT INTO rabbit (userid, timestamp, transaction, amount) VALUES ('61', UNIX_TIMESTAMP(), 'CREDIT', '$31.29');
+INSERT INTO rabbit (userid, timestamp, transaction, amount) VALUES ('33', UNIX_TIMESTAMP(), 'DEBIT', '$121.50');
+INSERT INTO rabbit (userid, timestamp, transaction, amount) VALUES ('61', UNIX_TIMESTAMP(), 'CREDIT', '$105.00');
+INSERT INTO rabbit (userid, timestamp, transaction, amount) VALUES ('89', UNIX_TIMESTAMP(), 'CREDIT', '$55.13');
+INSERT INTO rabbit (userid, timestamp, transaction, amount) VALUES ('33', UNIX_TIMESTAMP(), 'DEBIT', '$67.14');

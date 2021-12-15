@@ -1,10 +1,10 @@
 SET 'auto.offset.reset' = 'earliest';
 
 -- Register the initial stream
-CREATE STREAM rabbit (timestamp VARCHAR KEY,
+CREATE STREAM rabbit (userid VARCHAR KEY,
+                      BIGIN VARCHAR,
                       transaction VARCHAR,
-                      amount VARCHAR,
-                      userid VARCHAR
+                      amount VARCHAR
 ) WITH (
   KAFKA_TOPIC='from-rabbit',
   VALUE_FORMAT='json',
@@ -14,8 +14,8 @@ CREATE STREAM rabbit (timestamp VARCHAR KEY,
 -- Convert the transactions stream to typed fields
 CREATE STREAM rabbit_transactions 
   WITH (KAFKA_TOPIC = 'rabbit_transactions') AS
-  SELECT ROWTIME AS TX_TIMESTAMP,
-         TRANSACTION AS TX_TYPE,
+  SELECT TRANSACTION AS TX_TYPE,
+         TIMESTAMP AS TX_TIMESTAMP,
          SUBSTRING(AMOUNT,1,1) AS CURRENCY,
          CAST(SUBSTRING(AMOUNT,2,LEN(AMOUNT)-1) AS DECIMAL(9,2)) AS TX_AMOUNT,
          CAST(USERID AS INT) AS USERID
