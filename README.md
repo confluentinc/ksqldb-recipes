@@ -9,7 +9,7 @@ We welcome all contributions, thank you!
 _Contributing an idea?_ Submit a [GitHub issue](https://github.com/confluentinc/ksqldb-recipes/issues).
 
 _Contributing a full recipe and want to publish it?_ Submit a [GitHub Pull Request](https://github.com/confluentinc/ksqldb-recipes/pulls).
-The content of that PR should follow the template established by existing recipes (browse through any recipe in https://github.com/confluentinc/ksqldb-recipes/tree/master/docs for more details):
+The content of that PR should follow the template established by existing recipes (browse through any recipe in https://github.com/confluentinc/ksqldb-recipes/tree/main/docs for more details):
 
 1. Select the `docs/<industry>` folder for the appropriate industry, or create a new one
 2. Create a new subfolder for the new recipe, e.g. `docs/<industry>/<new-recipe-name>`
@@ -48,7 +48,7 @@ To view your new recipes locally, you can build a local version of the recipes s
 
 #### Publishing
 
-If you are a Confluent employee, you can publish using the `mkdocs` GitHub integration. From the `master` branch (in the desired state):
+If you are a Confluent employee, you can publish using the `mkdocs` GitHub integration. From the `main` branch (in the desired state):
 
 - Run the provided script, `./release.sh`
 - After a few minutes, the updated site will be available at https://confluentinc.github.io/ksqldb-recipes/
