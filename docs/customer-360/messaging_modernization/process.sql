@@ -11,7 +11,7 @@ CREATE STREAM rabbit (userid VARCHAR,
   PARTITIONS=6
 );
 
--- Convert the transactions stream to typed fields
+-- Convert the stream to typed fields
 CREATE STREAM rabbit_transactions 
   WITH (KAFKA_TOPIC = 'rabbit_transactions') AS
   SELECT TRANSACTION AS TX_TYPE,
