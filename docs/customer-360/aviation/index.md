@@ -36,22 +36,8 @@ This ksqlDB application joins between customer flight booking data and any fligh
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
-```sql
---8<-- "docs/customer-360/aviation/c01.sql"
-
---8<-- "docs/customer-360/aviation/c02.sql"
-
---8<-- "docs/customer-360/aviation/o01.sql"
-
---8<-- "docs/customer-360/aviation/j01.sql"
-
---8<-- "docs/customer-360/aviation/j02.sql"
-
---8<-- "docs/customer-360/aviation/r01.sql"
-
---8<-- "docs/customer-360/aviation/c03.sql"
-
---8<-- "docs/customer-360/aviation/p01.sql"
+``` sql
+--8<-- "docs/customer-360/aviation/process.sql"
 ```
 
 --8<-- "docs/shared/manual_cue.md"
