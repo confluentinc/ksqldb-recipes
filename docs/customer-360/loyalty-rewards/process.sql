@@ -1,3 +1,5 @@
+SET 'auto.offset.reset' = 'earliest';
+
 CREATE STREAM users (
   user_id VARCHAR KEY,
   name VARCHAR

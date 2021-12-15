@@ -1,3 +1,5 @@
+SET 'auto.offset.reset' = 'earliest';
+
 -- create stream of locations
 CREATE STREAM locations (
   vehicle_id INT,
