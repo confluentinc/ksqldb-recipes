@@ -9,7 +9,7 @@ seo:
 Traditional messaging systems like Message Queues (MQs), Enterprise Service Buses (ESBs), and Extract, Transform and Load (ETL) tools have been widely used for decades to handle message distribution and inter-service communication across distributed applications.
 However, they can no longer keep up with the needs of modern applications across hybrid and multi cloud environments for asynchronicity, heterogeneous datasets and high volume throughput.
 Designed as monolithic systems, they are riddled with many challenges: they lack persistence or the ability to efficiently handle highly scalable, efficient and reliable message delivery.
-If you have critical data in legacy messaging systems, you can source that into Confluent Cloud and then do the real-time interactions and in-flight stream processing that modern applications demand.
+If you instead want to do real-time interactions and in-flight stream processing that modern applications demand, you can use a connector to read critical data from legacy messaging systems into Kafka and then do the processing there.
 
 ## Step by step
 

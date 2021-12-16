@@ -1,5 +1,5 @@
 To clean up the ksqlDB resources created by this recipe, use the ksqlDB commands shown below (substitute stream or topic name, as appropriate).
-By including the `DELETE TOPIC` clause, the stream or table's source topic is also deleted, asynchronously.
+By including the `DELETE TOPIC` clause, the topic backing the stream or table is also deleted, asynchronously.
 
 ```
 DROP STREAM IF EXISTS <stream_name> DELETE TOPIC;
