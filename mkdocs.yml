@@ -18,6 +18,7 @@ nav:
     - Build customer loyalty programs: customer-360/loyalty-rewards/index.md
   - Cybersecurity:
     - Detect and analyze SSH attacks: cybersecurity/SSH-attack/index.md
+    - Identify firewall deny events from Splunk and SIEM Optimization: cybersecurity/firewall-splunk/index.md
   - Predictive Analytics:
     - Optimize fleet management: predictive-analytics/fleet_management/index.md
     - Optimize omni-channel inventory: predictive-analytics/inventory/index.md
