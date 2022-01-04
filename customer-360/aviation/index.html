@@ -842,7 +842,10 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="normal">82</span>
 <span class="normal">83</span>
 <span class="normal">84</span>
-<span class="normal">85</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customers</span> <span class="p">(</span><span class="n">ID</span>             <span class="nb">INT</span>     <span class="k">PRIMARY</span> <span class="k">KEY</span>
+<span class="normal">85</span>
+<span class="normal">86</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customers</span> <span class="p">(</span><span class="n">ID</span>             <span class="nb">INT</span>     <span class="k">PRIMARY</span> <span class="k">KEY</span>
                        <span class="p">,</span> <span class="n">NAME</span>           <span class="nb">VARCHAR</span>
                        <span class="p">,</span> <span class="n">ADDRESS</span>        <span class="nb">VARCHAR</span>
                        <span class="p">,</span> <span class="n">EMAIL</span>          <span class="nb">VARCHAR</span>
@@ -869,12 +872,10 @@ You can also substitute your own connectors to connect to any <a href="https://d
                    <span class="p">,</span> <span class="n">FORMAT</span><span class="o">=</span><span class="s1">&#39;AVRO&#39;</span>
                    <span class="p">,</span> <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span><span class="p">);</span>
 
-<span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
-
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customer_bookings</span> <span class="k">AS</span> 
   <span class="k">SELECT</span> <span class="k">C</span><span class="p">.</span><span class="o">*</span><span class="p">,</span> <span class="n">B</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">B</span><span class="p">.</span><span class="n">FLIGHT_ID</span>
   <span class="k">FROM</span>   <span class="n">bookings</span> <span class="n">B</span>
-          <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">CUSTOMERS</span> <span class="k">C</span>
+          <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">customers</span> <span class="k">C</span>
               <span class="k">ON</span> <span class="n">B</span><span class="p">.</span><span class="n">CUSTOMER_ID</span> <span class="o">=</span> <span class="k">C</span><span class="p">.</span><span class="n">ID</span><span class="p">;</span>
 
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customer_flights</span> 
@@ -915,7 +916,8 @@ You can also substitute your own connectors to connect to any <a href="https://d
                    <span class="p">,</span> <span class="n">FORMAT</span><span class="o">=</span><span class="s1">&#39;AVRO&#39;</span>
                    <span class="p">,</span> <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span><span class="p">);</span>
 
-<span class="k">SELECT</span>  <span class="n">CUSTOMER_NAME</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">customer_flight_updates</span> <span class="k">AS</span>
+  <span class="k">SELECT</span>  <span class="n">CUSTOMER_NAME</span>
       <span class="p">,</span> <span class="n">FU</span><span class="p">.</span><span class="n">REASON</span>      <span class="k">AS</span> <span class="n">FLIGHT_CHANGE_REASON</span> 
       <span class="p">,</span> <span class="n">FU</span><span class="p">.</span><span class="n">UPDATED_DEP</span> <span class="k">AS</span> <span class="n">FLIGHT_UPDATED_DEP</span>
       <span class="p">,</span> <span class="n">FLIGHT_SCHEDULED_DEP</span> 
@@ -926,7 +928,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="k">FROM</span> <span class="n">flight_updates</span> <span class="n">FU</span>
         <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">customer_flights_rekeyed</span> <span class="n">CB</span>
         <span class="k">ON</span> <span class="n">FU</span><span class="p">.</span><span class="n">FLIGHT_ID</span> <span class="o">=</span> <span class="n">CB</span><span class="p">.</span><span class="n">FLIGHT_ID</span>
-<span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
+  <span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
 </code></pre></div>
 </td></tr></table>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert example events into the source topics with the following statements:</p>
@@ -1083,7 +1085,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customer_bookings</span> <span class="k">AS</span> 
   <span class="k">SELECT</span> <span class="k">C</span><span class="p">.</span><span class="o">*</span><span class="p">,</span> <span class="n">B</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">B</span><span class="p">.</span><span class="n">FLIGHT_ID</span>
   <span class="k">FROM</span>   <span class="n">bookings</span> <span class="n">B</span>
-          <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">CUSTOMERS</span> <span class="k">C</span>
+          <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">customers</span> <span class="k">C</span>
               <span class="k">ON</span> <span class="n">B</span><span class="p">.</span><span class="n">CUSTOMER_ID</span> <span class="o">=</span> <span class="k">C</span><span class="p">.</span><span class="n">ID</span><span class="p">;</span>
 </code></pre></div>
 </td></tr></table>
