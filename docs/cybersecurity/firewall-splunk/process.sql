@@ -22,6 +22,7 @@ EMIT CHANGES;
 
 -- Filter messages for Cisco ASA and action is Deny
 CREATE STREAM splunk_filtered WITH (KAFKA_TOPIC = 'splunk_filtered') AS SELECT
+  host,
   sourcetype,
   KSQL_COL_0[2] AS action,
   KSQL_COL_0[3] AS protocol,

@@ -8,7 +8,8 @@ seo:
 
 A challenge in the SIEM world is consolidating data from a variety of sources where each source may have its own set of collectors, generating different dataflows, and identifying actionable events.
 By putting Kafka in the middle of the solution, you can use connectors to intercept those data flows, and then analyze or filter the data in any way before they are sent to an aggregator.
-This recipe demonstrates how to optimize your Splunk data ingestion, identiy deny events, remove unnecessary fields to reduce message size, and then send the more targeted set of events to Splunk for indexing.
+This recipe demonstrates how to optimize your Splunk data ingestion by intercepting data that normally be sent to a Splunk HTTP Event Collector (HEC) using the [Splunk S2S Source connector](https://docs.confluent.io/kafka-connect-splunk-s2s/current/overview.html), which supports receiving data from a Splunk Universal Forwarder (UF) with the Splunk-2-Splunk protocol. 
+The stream processing application identifies `deny` events, removes unnecessary fields to reduce message size, and then sends the more targeted set of events to Splunk for indexing.
 
 ## Step by step
 
@@ -22,9 +23,7 @@ Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluen
 
 --8<-- "docs/shared/self_managed_connector.md"
 
-In this recipe, we show you how to intercept data that normally be sent to a Splunk HTTP Event Collector (HEC), by using either the [Splunk Source connector](https://docs.confluent.io/kafka-connect-splunk-source/current/overview.html) or [Splunk S2S Source connector](https://docs.confluent.io/kafka-connect-splunk-s2s/current/overview.html), the latter supports receiving data from a Splunk Universal Forwarder (UF) with the Splunk-2-Splunk protocol. 
-
-This recipe uses Cisco Adaptive Security Appliance (ASA) for demonstration and should be run on the same host with the Splunk UF, but the same logic can be applied to any type of device.
+This recipe shows the source as Cisco Adaptive Security Appliance (ASA) and the Splunk S2S Source connector should be run on the same host with the Splunk UF, but the same logic can be applied to any type of device.
 To stream ASA data into a Kafka topic called `splunk`, create the `Dockerfile` below to bundle a connect worker with the `kafka-connect-splunk-s2s` connector:
 
 ```text
