@@ -62,7 +62,7 @@ Submit that connector to the connect worker:
 curl -X POST -H "Content-Type: application/json" --data @connector-splunk-s2s.config http://localhost:8083/connectors
 ```
 
-Now you should have ASA data being written to the `splunk` topic in Confluent Cloud.
+Now you should have ASA events being written to the `splunk` topic in Confluent Cloud.
 
 --8<-- "docs/shared/manual_insert.md"
 
@@ -82,7 +82,7 @@ Now you should have ASA data being written to the `splunk` topic in Confluent Cl
 
 ### Write the data out
 
-After processing the data, send it to Splunk.
+After processing the data, send the more targeted set of events to Splunk for indexing.
 
 ```json
 --8<-- "docs/cybersecurity/firewall-splunk/sink.json"

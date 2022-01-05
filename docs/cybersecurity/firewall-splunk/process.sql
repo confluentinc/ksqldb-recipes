@@ -20,7 +20,7 @@ CREATE STREAM splunk_parsed WITH (KAFKA_TOPIC = 'splunk_parsed') AS SELECT
 FROM splunk
 EMIT CHANGES;
 
--- Filter messages for Cisco ASA and action is Deny
+-- Filter messages for Cisco ASA and where action is Deny
 CREATE STREAM splunk_filtered WITH (KAFKA_TOPIC = 'splunk_filtered') AS SELECT
   host,
   sourcetype,
