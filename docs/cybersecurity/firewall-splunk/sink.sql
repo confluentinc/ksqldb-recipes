@@ -5,7 +5,7 @@ CREATE SINK CONNECTOR cybersecurity_splunk WITH (
   'input.data.format'        = 'JSON',
   'kafka.api.key'            = '<my-kafka-api-key>',
   'kafka.api.secret'         = '<my-kafka-api-secret>',
-  'topics'                   = 'orders',
+  'topics'                   = 'splunk_filtered',
   'splunk.hec.uri'           = '<splunk-indexers>',
   'splunk.hec.token'         = '<Splunk HTTP Event Collector token>',
   'tasks.max'                = '1'
