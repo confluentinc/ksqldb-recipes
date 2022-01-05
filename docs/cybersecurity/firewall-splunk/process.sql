@@ -22,12 +22,15 @@ EMIT CHANGES;
 
 -- Filter messages for Cisco ASA and where action is Deny
 CREATE STREAM splunk_filtered WITH (KAFKA_TOPIC = 'splunk_filtered') AS SELECT
+  time,
   host,
   sourcetype,
   KSQL_COL_0[2] AS action,
   KSQL_COL_0[3] AS protocol,
-  REGEXP_SPLIT_TO_ARRAY(KSQL_COL_0[5], 'inside:')[2] as inside,
-  REGEXP_SPLIT_TO_ARRAY(KSQL_COL_0[7], 'outside:')[2] as outside
+  SPLIT(REGEXP_SPLIT_TO_ARRAY(KSQL_COL_0[5], 'inside:')[2], '/')[1] as inside_ip,
+  SPLIT(REGEXP_SPLIT_TO_ARRAY(KSQL_COL_0[5], 'inside:')[2], '/')[2] as inside_port,
+  SPLIT(REGEXP_SPLIT_TO_ARRAY(KSQL_COL_0[7], 'outside:')[2], '/')[1] as outside_ip,
+  SPLIT(REGEXP_SPLIT_TO_ARRAY(KSQL_COL_0[7], 'outside:')[2], '/')[2] as outside_port
 FROM splunk_parsed
 WHERE sourcetype = 'cisco:asa' and KSQL_COL_0[2] = 'Deny'
 EMIT CHANGES;
