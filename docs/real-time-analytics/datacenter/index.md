@@ -62,7 +62,7 @@ CREATE TABLE tenant_occupancy (
   customer_id BIGINT
 ) WITH (
   kafka_topic='tenant-occupancy',
-  partitions=3,
+  partitions=6,
   key_format='JSON',
   value_format='JSON'
 );
@@ -86,7 +86,7 @@ CREATE STREAM panel_power_readings (
   tenant_kwh_usage BIGINT
 ) WITH (
   kafka_topic='panel-readings',
-  partitions=3,
+  partitions=6,
   key_format='JSON',
   value_format='JSON'
 );
