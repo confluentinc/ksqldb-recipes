@@ -1,7 +1,7 @@
 ---
 seo:
   title: Next Best Offer - Anticipating Your Customer's Needs 
-  description: This recipe demonstrates how to use ksqlDB to present relevant offers to your custmers from a banking perspective.
+  description: This recipe demonstrates how to use ksqlDB to present relevant offers to your customers from a banking perspective.
 ---
 
 # Next Best Offer - Anticipating Your Customer's Needs
@@ -29,7 +29,7 @@ Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluen
 
 ### Run stream processing app
 
-This application will perform a series of joins between event streams and tables to calcuate the next best offer for a banking consumer based on their activity which should yield higer customer actvity and satisfaction.
+This application will perform a series of joins between event streams and tables to calculate the next best offer for a banking consumer based on their activity which should yield higher customer activity and satisfaction.
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
@@ -70,7 +70,7 @@ CREATE STREAM CUSTOMER_ACTIVITY_STREAM (
 
 You should take note that the `CUSTOMER_ID` field is the key in the stream's key-value pairs and you'll see why this is important in the next section.
 
-In a production setting you'll popluate the stream's underlying topic either with `KafkaProducer` application or from an external system using a [managed connector on Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/index.html) But for the purpose of running this example you'll manually insert records into the stream with [INSERT VALUES](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/insert-values/#insert-values) statements:
+In a production setting you'll populate the stream's underlying topic either with `KafkaProducer` application or from an external system using a [managed connector on Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/index.html) But for the purpose of running this example you'll manually insert records into the stream with [INSERT VALUES](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/insert-values/#insert-values) statements:
 
 ```sql
 INSERT INTO CUSTOMER_ACTIVITY_STREAM (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (1,'121.219.110.170',1,'branch_visit',0.4);
@@ -87,7 +87,7 @@ INSERT INTO CUSTOMER_ACTIVITY_STREAM (activity_id, ip_address, customer_id, acti
 
 ### Adding the lookup tables
 
-In the event stream you created above, each activity entry contains only the id for the customer, this is expected as it's a common practice to have [normalized](https://en.wikipedia.org/wiki/Database_normalization) event streams.  But when it comes time to analyze the data, it's important to have additional customer information to provide context for any analaysts reviewing the results. You'll also need a table for the calculated offer based off customer activity.
+In the event stream you created above, each activity entry contains only the id for the customer, this is expected as it's a common practice to have [normalized](https://en.wikipedia.org/wiki/Database_normalization) event streams.  But when it comes time to analyze the data, it's important to have additional customer information to provide context for any analysts reviewing the results. You'll also need a table for the calculated offer based off customer activity.
 
 #### Creating the customer table and inserting records
 
@@ -109,7 +109,7 @@ CREATE TABLE CUSTOMERS (
 );
 ```
 
-Typically, customer information would be sourced from an existing database. As customer details change, tables in the database are updated and we can stream them into Kafka using Kafka Connect with [change data capture](https://www.confluent.io/blog/cdc-and-streaming-analytics-using-debezium-kafka/).  The primary key for the `CUSTOMERS` is the customer id which corresponds to the key of the `CUSTOMER_ACTIVITY_STREAM` which facilates joins for enriching customer information.  For the purposes of running the example you'll exectute these insert statements to populate the `CUSTOMERS` table:
+Typically, customer information would be sourced from an existing database. As customer details change, tables in the database are updated and we can stream them into Kafka using Kafka Connect with [change data capture](https://www.confluent.io/blog/cdc-and-streaming-analytics-using-debezium-kafka/).  The primary key for the `CUSTOMERS` is the customer id which corresponds to the key of the `CUSTOMER_ACTIVITY_STREAM` which facilitates joins for enriching customer information.  For the purposes of running the example you'll execute these insert statements to populate the `CUSTOMERS` table:
 
 ```sql
 INSERT INTO CUSTOMERS (customer_id, first_name, last_name, email, gender, income, fico) VALUES  (1,'Waylen','Tubble','wtubble0@hc360.com','Male',403646, 465);
