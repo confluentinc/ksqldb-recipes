@@ -48,6 +48,18 @@ Run the container with this:
 docker-compose up -d
 ```
 
+Create a Syslog Source connector configuration file called `connector-syslog.config`:
+
+```json
+--8<-- "docs/cybersecurity/SSH-attack/source.json"
+```
+
+Submit that connector to the connect worker:
+
+```
+curl -X POST -H "Content-Type: application/json" --data @connector-syslog.config http://localhost:8083/connectors
+```
+
 Now you should have Syslog messages being written to the `syslog` topic in Confluent Cloud.
 
 --8<-- "docs/shared/manual_insert.md"
