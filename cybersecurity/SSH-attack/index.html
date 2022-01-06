@@ -754,6 +754,28 @@ services:
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker-compose up -d
 </code></pre></div>
 </td></tr></table>
+<p>Create a Syslog Source connector configuration file called <code>connector-syslog.config</code>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;connector.class&quot;</span>          <span class="p">:</span> <span class="s2">&quot;io.confluent.connect.syslog.SyslogSourceConnector&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;recipe-syslog-source&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;syslog.port&quot;</span>              <span class="p">:</span> <span class="s2">&quot;&lt;port&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;syslog.listener&quot;</span>          <span class="p">:</span> <span class="s2">&quot;TCP&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.topic&quot;</span>              <span class="p">:</span> <span class="s2">&quot;syslog&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;tasks.max&quot;</span>                <span class="p">:</span> <span class="s2">&quot;1&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>Submit that connector to the connect worker:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -X POST -H &quot;Content-Type: application/json&quot; --data @connector-syslog.config http://localhost:8083/connectors
+</code></pre></div>
+</td></tr></table>
 <p>Now you should have Syslog messages being written to the <code>syslog</code> topic in Confluent Cloud.</p>
 <p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert data into the streams for testing using ksqlDB <code>INSERT INTO</code>.</p>
 <h3 id="ksqldb-code">ksqlDB code<a class="headerlink" href="#ksqldb-code" title="Permanent link">&para;</a></h3>
