@@ -6,10 +6,12 @@ seo:
 
 # Identify Firewall Deny Events from Splunk
 
-A challenge in the SIEM world is consolidating data from a variety of sources where each source may have its own set of collectors, generating different dataflows, and identifying actionable events.
-By putting Kafka in the middle of the solution, you can use connectors to intercept those data flows, and then analyze or filter the data in any way before they are sent to an aggregator.
-This recipe demonstrates how to optimize your Splunk data ingestion by intercepting data that normally be sent to a Splunk HTTP Event Collector (HEC) using the [Splunk S2S Source connector](https://docs.confluent.io/kafka-connect-splunk-s2s/current/overview.html), which supports receiving data from a Splunk Universal Forwarder (UF) with the Splunk-2-Splunk protocol. 
-The stream processing application identifies `deny` events, removes unnecessary fields to reduce message size, and then sends the more targeted set of events to Splunk for indexing.
+In the Security Information Event Management (SIEM) world, it's important to have a scalable cyber intelligence platform so you can swiftly identify potential security threats and vulnerabilities.
+However, with each source having its own set of collectors generating different dataflows, there may be too much aggregate information to analyze and take action in a timely manner.
+If you first intercept those data flows from the sources, you can analyze or filter the data in any way before they are sent to an aggregator.
+This recipe demonstrates how to optimize Splunk data ingestion, by using the [Splunk S2S Source connector](https://docs.confluent.io/kafka-connect-splunk-s2s/current/overview.html), which supports receiving data from a Splunk Universal Forwarder (UF) with the Splunk-2-Splunk protocol, to intercept data that would normally be sent to a Splunk HTTP Event Collector (HEC).
+The stream processing application identifies and includes only `deny` events, removes unnecessary fields to reduce message size, and then sends the more targeted set of events to Splunk for indexing.
+You can also extend this solution to intercept data from a variety of SIEM vendors to create a more vendor-independent solution that leverages multiple tools and analytic destinations.
 
 ## Step by step
 
