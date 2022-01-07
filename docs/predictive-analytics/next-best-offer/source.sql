@@ -12,5 +12,5 @@ CREATE SOURCE CONNECTOR fleet_description WITH (
   'poll.await.time.ms'       = '5000',
   'poll.max.batch.size'      = '1000',
   'copy.existing'            = 'true',
-  'output.data.format'       = 'JSON'
+  'output.data.format'       = 'JSON',
   'tasks.max'                = '1');
