@@ -6,9 +6,9 @@ seo:
 
 # Track Customer Journey
 
-Companies that have a web footprint that customers can browse want to know what their customer's journey has been throughout the site.
-Knowing what the customer behavior is online—which pages does a customer hit, in which order—can be useful for analytics and to understand what exactly they did if they call in for support.
-For real-time analysis of the customer journey, you can use ksqlDB to collect a customer's journey, and then potentially sent out to another end system for analytics.
+Companies that have an online website, and customers that browse through it, want to know which webpages the customers have visited.
+Knowing what the online customer behavior is—which pages does a customer visit—can be useful for analytics and to understand what exactly they did if they call in for support.
+For real-time analysis of the customer journey, you can use ksqlDB to collect the pages that a customer visited, and then send the list out for analytics in another application.
 
 ## Step by step
 
