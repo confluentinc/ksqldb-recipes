@@ -2,12 +2,12 @@ SET 'auto.offset.reset' = 'earliest';
 
 -- Create stream of pages
 CREATE STREAM pages (
+  customer INTEGER,
   time BIGINT,
-  page_id STRING KEY,
-  page STRING,
-  customer INTEGER
+  page_id STRING,
+  page STRING
 ) WITH (
-  VALUE_FORMAT = 'json',
+  VALUE_FORMAT = 'JSON',
   KAFKA_TOPIC = 'pages',
   PARTITIONS = 6
 );
@@ -16,7 +16,6 @@ CREATE STREAM pages (
 -- Pages are added to an Array using the `COLLECT_LIST` function
 CREATE TABLE pages_per_customer WITH (KAFKA_TOPIC = 'pages_per_customer') AS
 SELECT
-  time,
   customer,
   COLLECT_LIST(page) AS page_list,
   COUNT(*) AS count
