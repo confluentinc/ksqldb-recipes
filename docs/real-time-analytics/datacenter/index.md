@@ -105,7 +105,7 @@ CREATE STREAM overloaded_panels AS
   EMIT CHANGES;
 ```
 
-This command filters the panel power readings for instances where utilization is 85% or higher. This stream could be used in a monitoring or alerting context to notify on call personal of a potential issue with the power supplies to the datacenter.
+This command filters the panel power readings for instances where utilization is 85% or higher. This stream could be used in a monitoring or alerting context to notify on-call personnel of a potential issue with the power supplies to the datacenter.
 
 To provide billing reports, a `STREAM` is created that joins the panel sensor readings with the customer tenant information. Functions are used to create a billable month indicator along with the necessary fields from the joined stream and table. 
 
