@@ -95,6 +95,18 @@ CREATE STREAM panel_power_readings (
 * `panel_current_utilization` represents the percentage of total capacity of the panel and is useful for business continuation monitoring
 * `tenant_kwh_usage` provides the total amount of energy consumed by the tenant in the current month 
 
+A simple example for determining when a panel is overloaded is provided by:
+
+```sql
+CREATE STREAM overloaded_panels AS 
+  SELECT panel_id, tenant_id, panel_current_utilization 
+    FROM panel_power_readings 
+    WHERE panel_current_utilization >= 0.85
+  EMIT CHANGES;
+```
+
+This command filters the panel power readings for instances where utilization is 85% or higher. This stream could be used in a monitoring or alerting context to notify on-call personnel of a potential issue with the power supplies to the datacenter.
+
 To provide billing reports, a `STREAM` is created that joins the panel sensor readings with the customer tenant information. Functions are used to create a billable month indicator along with the necessary fields from the joined stream and table. 
 
 ```sql
