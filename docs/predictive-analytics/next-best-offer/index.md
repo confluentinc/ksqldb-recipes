@@ -55,7 +55,7 @@ This application will perform a series of joins between event streams and tables
 To get started you'll first need to create a stream that contains the customer activity:
 
 ```sql
-CREATE STREAM CUSTOMER_ACTIVITY_STREAM (
+CREATE STREAM customer_activity_stream (
     ACTIVITY_ID INTEGER,
     IP_ADDRESS STRING,
     CUSTOMER_ID INTEGER KEY,
@@ -73,16 +73,16 @@ You should take note that the `CUSTOMER_ID` field is the key in the stream's key
 In a production setting you'll populate the stream's underlying topic either with `KafkaProducer` application or from an external system using a [managed connector on Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/index.html) But for the purpose of running this example you'll manually insert records into the stream with [INSERT VALUES](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/insert-values/#insert-values) statements:
 
 ```sql
-INSERT INTO CUSTOMER_ACTIVITY_STREAM (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (1,'121.219.110.170',1,'branch_visit',0.4);
-INSERT INTO CUSTOMER_ACTIVITY_STREAM (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (2,'210.232.55.188',2,'deposit',0.56);
-INSERT INTO CUSTOMER_ACTIVITY_STREAM (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (3,'84.197.123.173',3,'web_open',0.33);
-INSERT INTO CUSTOMER_ACTIVITY_STREAM (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (4,'70.149.233.32',1,'deposit',0.41);
-INSERT INTO CUSTOMER_ACTIVITY_STREAM (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (5,'221.234.209.67',2,'deposit',0.44);
-INSERT INTO CUSTOMER_ACTIVITY_STREAM (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (6,'102.187.28.148',3,'web_open',0.33);
-INSERT INTO CUSTOMER_ACTIVITY_STREAM (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (7,'135.37.250.250',1,'mobile_open',0.97);
-INSERT INTO CUSTOMER_ACTIVITY_STREAM (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (8,'122.157.243.25',2,'deposit',0.83);
-INSERT INTO CUSTOMER_ACTIVITY_STREAM (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (9,'114.215.212.181',3,'deposit',0.86);
-INSERT INTO CUSTOMER_ACTIVITY_STREAM (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (10,'248.248.0.78',1,'new_account',0.14);
+INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (1,'121.219.110.170',1,'branch_visit',0.4);
+INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (2,'210.232.55.188',2,'deposit',0.56);
+INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (3,'84.197.123.173',3,'web_open',0.33);
+INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (4,'70.149.233.32',1,'deposit',0.41);
+INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (5,'221.234.209.67',2,'deposit',0.44);
+INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (6,'102.187.28.148',3,'web_open',0.33);
+INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (7,'135.37.250.250',1,'mobile_open',0.97);
+INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (8,'122.157.243.25',2,'deposit',0.83);
+INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (9,'114.215.212.181',3,'deposit',0.86);
+INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (10,'248.248.0.78',1,'new_account',0.14);
 ```
 
 ### Adding the lookup tables
@@ -94,7 +94,7 @@ In the event stream you created above, each activity entry contains only the id 
 First you'll create the table for customer information:
 
 ```sql
-CREATE TABLE CUSTOMERS (
+CREATE TABLE customers (
     CUSTOMER_ID INTEGER PRIMARY KEY,
     FIRST_NAME STRING,
     LAST_NAME STRING,
@@ -109,12 +109,12 @@ CREATE TABLE CUSTOMERS (
 );
 ```
 
-Typically, customer information would be sourced from an existing database. As customer details change, tables in the database are updated and we can stream them into Kafka using Kafka Connect with [change data capture](https://www.confluent.io/blog/cdc-and-streaming-analytics-using-debezium-kafka/).  The primary key for the `CUSTOMERS` is the customer id which corresponds to the key of the `CUSTOMER_ACTIVITY_STREAM` which facilitates joins for enriching customer information.  For the purposes of running the example you'll execute these insert statements to populate the `CUSTOMERS` table:
+Typically, customer information would be sourced from an existing database. As customer details change, tables in the database are updated and we can stream them into Kafka using Kafka Connect with [change data capture](https://www.confluent.io/blog/cdc-and-streaming-analytics-using-debezium-kafka/).  The primary key for the `customers` is the customer id which corresponds to the key of the `customer_activity_stream` which facilitates joins for enriching customer information.  For the purposes of running the example you'll execute these insert statements to populate the `customers` table:
 
 ```sql
-INSERT INTO CUSTOMERS (customer_id, first_name, last_name, email, gender, income, fico) VALUES  (1,'Waylen','Tubble','wtubble0@hc360.com','Male',403646, 465);
-INSERT INTO CUSTOMERS (customer_id, first_name, last_name, email, gender, income, fico) VALUES  (2,'Joell','Wilshin','jwilshin1@yellowpages.com','Female',109825, 624);
-INSERT INTO CUSTOMERS (customer_id, first_name, last_name, email, gender, income, fico) VALUES  (3,'Ilaire','Latus','ilatus2@baidu.com','Male',407964, 683);
+INSERT INTO customers (customer_id, first_name, last_name, email, gender, income, fico) VALUES  (1,'Waylen','Tubble','wtubble0@hc360.com','Male',403646, 465);
+INSERT INTO customers (customer_id, first_name, last_name, email, gender, income, fico) VALUES  (2,'Joell','Wilshin','jwilshin1@yellowpages.com','Female',109825, 624);
+INSERT INTO customers (customer_id, first_name, last_name, email, gender, income, fico) VALUES  (3,'Ilaire','Latus','ilatus2@baidu.com','Male',407964, 683);
 ```
 
 #### Creating the offer table
@@ -122,7 +122,7 @@ INSERT INTO CUSTOMERS (customer_id, first_name, last_name, email, gender, income
 The last lookup table you'll add is the `OFFERS` table:
 
 ```sql
-CREATE TABLE OFFERS (
+CREATE TABLE offers (
     OFFER_ID INTEGER PRIMARY KEY,
     OFFER_NAME STRING,
     OFFER_URL STRING
@@ -138,11 +138,11 @@ This table provides the enrichment information needed once the application calcu
 Here are the insert statements to fill the `OFFERS` table:
 
 ```sql
-INSERT INTO OFFERS (offer_id, offer_name, offer_url) VALUES (1,'new_savings','http://google.com.br/magnis/dis/parturient.json');
-INSERT INTO OFFERS (offer_id, offer_name, offer_url) VALUES (2,'new_checking','https://earthlink.net/in/ante.js');
-INSERT INTO OFFERS (offer_id, offer_name, offer_url) VALUES (3,'new_home_loan','https://webs.com/in/ante.jpg');
-INSERT INTO OFFERS (offer_id, offer_name, offer_url) VALUES (4,'new_auto_loan','http://squidoo.com/venenatis/non/sodales/sed/tincidunt/eu.js');
-INSERT INTO OFFERS (offer_id, offer_name, offer_url) VALUES (5,'no_offer','https://ezinearticles.com/ipsum/primis/in/faucibus/orci/luctus.html');
+INSERT INTO offers (offer_id, offer_name, offer_url) VALUES (1,'new_savings','http://google.com.br/magnis/dis/parturient.json');
+INSERT INTO offers (offer_id, offer_name, offer_url) VALUES (2,'new_checking','https://earthlink.net/in/ante.js');
+INSERT INTO offers (offer_id, offer_name, offer_url) VALUES (3,'new_home_loan','https://webs.com/in/ante.jpg');
+INSERT INTO offers (offer_id, offer_name, offer_url) VALUES (4,'new_auto_loan','http://squidoo.com/venenatis/non/sodales/sed/tincidunt/eu.js');
+INSERT INTO offers (offer_id, offer_name, offer_url) VALUES (5,'no_offer','https://ezinearticles.com/ipsum/primis/in/faucibus/orci/luctus.html');
 ```
 
 ### Determining the next best offer
@@ -154,7 +154,7 @@ Now you'll create the stream that calculates the next best offer for your custom
 To perform the next offer calculation you'll create a stream that performs a join between the `CUSTOMER_ACTIVITY_STREAM` and the `CUSTOMERS` table
 
 ```sql
-CREATE STREAM NEXT_BEST_OFFER
+CREATE STREAM next_best_offer
 WITH (
     KAFKA_TOPIC = 'NEXT_BEST_OFFER',
     VALUE_FORMAT = 'JSON',
@@ -174,8 +174,8 @@ CASE
     WHEN ct.INCOME > 100000 AND ct.FICO >= 700 AND cask.PROPENSITY_TO_BUY < 0.9 THEN 4
     ELSE 5
 END AS OFFER_ID 
-FROM CUSTOMER_ACTIVITY_STREAM cask
-INNER JOIN CUSTOMERS ct ON cask.CUSTOMER_ID = ct.CUSTOMER_ID
+FROM customer_activity_stream cask
+INNER JOIN customers ct ON cask.CUSTOMER_ID = ct.CUSTOMER_ID
 ```
 The `CASE` statement is the workhorse for the query and provides the next offer for the customer based on information resulting from the join.  Note that you're using an `INNER JOIN` here because if the customer id isn't found in the `CUSTOMERS` table there's no calculation to make.  You'll notice that the result of the `CASE` statement is a single integer with the code for the offer to make, so you'll have one final step to take.
 
@@ -184,7 +184,7 @@ The `CASE` statement is the workhorse for the query and provides the next offer 
 For the last step you'll create a query which contains the final results by joining the `NEXT_BEST_OFFER` stream with the `OFFERS` table:
 
 ```sql
-CREATE STREAM NEXT_BEST_OFFER_LOOKUP
+CREATE STREAM next_best_offer_lookup
 WITH (
     KAFKA_TOPIC = 'NEXT_BEST_OFFER_LOOKUP',
     VALUE_FORMAT = 'JSON',
@@ -200,7 +200,7 @@ SELECT
     nbo.FICO,
     ot.OFFER_NAME,
     ot.OFFER_URL
-FROM NEXT_BEST_OFFER nbo
+FROM next_best_offer nbo
 INNER JOIN OFFERS ot
 ON nbo.OFFER_ID = ot.OFFER_ID;
 ```

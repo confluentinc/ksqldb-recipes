@@ -58,8 +58,8 @@ CASE
     WHEN ct.INCOME > 100000 AND ct.FICO >= 700 AND cask.PROPENSITY_TO_BUY < 0.9 THEN 4
     ELSE 5
 END AS OFFER_ID 
-FROM CUSTOMER_ACTIVITY_STREAM cask
-INNER JOIN CUSTOMERS ct ON cask.CUSTOMER_ID = ct.CUSTOMER_ID
+FROM customer_activity_stream cask
+INNER JOIN customers ct ON cask.CUSTOMER_ID = ct.CUSTOMER_ID
 
 CREATE STREAM next_best_offer_lookup
 WITH (
@@ -77,6 +77,6 @@ SELECT
     nbo.FICO,
     ot.OFFER_NAME,
     ot.OFFER_URL
-FROM NEXT_BEST_OFFER nbo
-INNER JOIN OFFERS ot
+FROM next_best_offer nbo
+INNER JOIN offers ot
 ON nbo.OFFER_ID = ot.OFFER_ID;
