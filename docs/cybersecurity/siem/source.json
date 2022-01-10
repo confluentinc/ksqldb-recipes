@@ -1,0 +1,17 @@
+{
+  "name": "syslog",
+  "config": {
+    "tasks.max": "1",
+    "connector.class": "io.confluent.connect.syslog.SyslogSourceConnector",
+    "syslog.port": "5140",
+    "syslog.listener": "UDP"
+  }
+}
+
+{
+  "name": "SplunkS2SSourceConnectorConnector_0",
+  "config": {
+    "name": "SplunkS2SSourceConnectorConnector_0",
+    "connector.class": "io.confluent.connect.splunk.s2s.SplunkS2SSourceConnector"
+  }
+}
