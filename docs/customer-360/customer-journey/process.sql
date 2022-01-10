@@ -12,13 +12,13 @@ CREATE STREAM pages (
   PARTITIONS = 6
 );
 
--- Create stateful table with list of pages visited by each customer
--- Pages are added to an Array using the `COLLECT_LIST` function
+-- Create stateful table with Array of pages visited by each customer, using the `COLLECT_LIST` function
+-- Get `COUNT_DISTINCT` page IDs
 CREATE TABLE pages_per_customer WITH (KAFKA_TOPIC = 'pages_per_customer') AS
 SELECT
   customer,
   COLLECT_LIST(page) AS page_list,
-  COUNT(*) AS count
+  COUNT_DISTINCT (page_id) AS count_distinct
 FROM pages
 GROUP BY customer
 EMIT CHANGES;
