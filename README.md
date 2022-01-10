@@ -32,7 +32,7 @@ _Contributing a full recipe to be published?_
 - [sink.json](template/sink.json): (optional) JSON configuration to create Confluent Cloud sink connectors to push results to a real end system
 - [sink.sql](template/sink.sql): (optional) SQL commands to create Confluent Cloud sink connectors to push results to a real end system (this file is not referenced today in `index.md`, but getting ready for ksqlDB-connect integration)
 
-5. Submit a [GitHub Pull Request](https://github.com/confluentinc/ksqldb-recipes/pulls) and tag [confluentinc/devx](https://github.com/orgs/confluentinc/teams/devx) for review.
+5. Submit a [GitHub Pull Request](https://github.com/confluentinc/ksqldb-recipes/pulls). Ensure the new recipe adheres to the [checklist](https://github.com/confluentinc/ksqldb-recipes/blob/main/.github/pull_request_template.md) and then tag [confluentinc/devx](https://github.com/orgs/confluentinc/teams/devx) for review.
 
 ### Build locally
 
