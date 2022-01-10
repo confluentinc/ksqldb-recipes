@@ -1,29 +1,40 @@
 # Stream Processing Use Cases with ksqlDB
 
-This repository contains the source for the collection of Stream Processing Use Cases with ksqlDB at https://confluentinc.github.io/ksqldb-recipes/
+This repository contains the source for the collection of Stream Processing Use Cases with ksqlDB.
 
-#### How to contribute
+Landing page: https://developer.confluent.io/ksqldb-recipes/
+Recipes: https://confluentinc.github.io/ksqldb-recipes/
+
+Goals of the project:
+
+- Provide short, concrete descriptions of how ksqlDB is used in the real world—including SQL code.
+- Make it easy to replicate that code end-to-end, with a `1-click` experience to populate the code into the ksqlDB editor in Confluent Cloud Console.
+
+### How to contribute
 
 We welcome all contributions, thank you!
 
 _Contributing an idea?_ Submit a [GitHub issue](https://github.com/confluentinc/ksqldb-recipes/issues).
 
-_Contributing a full recipe and want to publish it?_ Submit a [GitHub Pull Request](https://github.com/confluentinc/ksqldb-recipes/pulls).
-The content of that PR should follow the template established by existing recipes (browse through any recipe in https://github.com/confluentinc/ksqldb-recipes/tree/main/docs for more details):
+_Contributing a full recipe to be published?_ 
 
-1. Select the `docs/<industry>` folder for the appropriate industry, or create a new one
-2. Create a new subfolder for the new recipe, e.g. `docs/<industry>/<new-recipe-name>`
-3. Copy the contents of the [template](template) directory as the basis for your new recipe
+1. Self-assign a recipe idea from the list in [GitHub issues](https://github.com/confluentinc/ksqldb-recipes/issues?q=is%3Aissue+is%3Aopen+label%3A%22new+recipe%22).
+2. Create a new branch (based off `main`) for the new recipe
+3. Select the `docs/<industry>` folder for the appropriate industry, or create a new one
+4. Create a new subfolder for the new recipe, e.g. `docs/<industry>/<new-recipe-name>`
+5. The recipe should follow the structure of [existing recipes](https://github.com/confluentinc/ksqldb-recipes/tree/main/docs). Copy the contents of an existing recipe (e.g. [aviation](https://github.com/confluentinc/ksqldb-recipes/tree/main/docs/customer-360/aviation) or the [template](template) directory as the basis for your new recipe.
 
 - [index.md](template/index.md): explain the use case, why it matters, add a graphic if available
-- [source.sql](template/source.sql): SQL commands to create source connectors to pull from a real end system -- for ksqlDB-connect integration
-- [source.json](template/source.json): JSON configuration to create source connectors to pull from a real end system
-- [manual.sql](template/manual.sql): SQL commands to insert mock data into Kafka topics (if real end system does not exist)
-- [process.sql](template/process.sql): this is the core of the recipe, the SQL commands that correspond to the event stream processing
-- [sink.sql](template/sink.sql): (optional) SQL commands to create sink connectors to push results to a real end system -- for ksqlDB-connect integration
-- [sink.json](template/sink.json): (optional) JSON configuration to create sink connectors to push results to a real end system
+- [source.json](template/source.json): JSON configuration to create Confluent Cloud source connectors to pull from a real end system
+- [source.sql](template/source.sql): SQL commands to create Confluent Cloud source connectors to pull from a real end system (this file is not referenced today in `index.md`, but getting ready for ksqlDB-connect integration)
+- [manual.sql](template/manual.sql): SQL commands to insert mock data into Kafka topics, if a user does not have a real end system
+- [process.sql](template/process.sql): this is the core code of the recipe, the SQL commands that correspond to the event stream processing
+- [sink.json](template/sink.json): (optional) JSON configuration to create Confluent Cloud sink connectors to push results to a real end system
+- [sink.sql](template/sink.sql): (optional) SQL commands to create Confluent Cloud sink connectors to push results to a real end system (this file is not referenced today in `index.md`, but getting ready for ksqlDB-connect integration)
 
-#### Build locally
+6. Submit a [GitHub Pull Request](https://github.com/confluentinc/ksqldb-recipes/pulls) and tag `devx` for review.
+
+### Build locally
 
 To view your new recipes locally, you can build a local version of the recipes site with `mkdocs`.
 
@@ -46,10 +57,9 @@ To view your new recipes locally, you can build a local version of the recipes s
 
 - Point a web browser to the local site at http://localhost:8000 and navigate to your new recipe.
 
-#### Publishing
+### Publishing
 
 If you are a Confluent employee, you can publish using the `mkdocs` GitHub integration. From the `main` branch (in the desired state):
 
 - Run the provided script, `./release.sh`
 - After a few minutes, the updated site will be available at https://confluentinc.github.io/ksqldb-recipes/
-
