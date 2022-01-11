@@ -34,7 +34,17 @@ _Contributing a full recipe to be published?_
 
 5. Submit a [GitHub Pull Request](https://github.com/confluentinc/ksqldb-recipes/pulls). Ensure the new recipe adheres to the [checklist](https://github.com/confluentinc/ksqldb-recipes/blob/main/.github/pull_request_template.md) and then tag [confluentinc/devx](https://github.com/orgs/confluentinc/teams/devx) for review.
 
-### Build locally
+### Handling connectors
+
+A recipe is more compelling if it uses Confluent Cloud fully-managed connectors, especially when the ksqlDB-connect integration is ready.
+But what if the recipe you want to write does not have a connector available in Confluent Cloud?
+Some options for your to consider, in order of preference:
+
+1. Stick with the original recipe idea, but use another connector in Confluent Cloud, that still fits the use case
+2. Pick a different recipe, maybe in the same industry, that uses a connector available in Confluent Cloud. This maximizes the impact of your recipe contribution
+3. Stick with your original recipe idea, and use a self-managed connector that runs locally. Follow precedent steps in [this recipe](https://confluentinc.github.io/ksqldb-recipes/cybersecurity/SSH-attack/#read-the-data-in)
+
+### Build recipes docs locally
 
 To view your new recipes locally, you can build a local version of the recipes site with `mkdocs`.
 
@@ -57,7 +67,7 @@ To view your new recipes locally, you can build a local version of the recipes s
 
 - Point a web browser to the local site at http://localhost:8000 and navigate to your new recipe.
 
-### Publishing
+### Publishing recipes to live site
 
 If you are a Confluent employee, you can publish using the `mkdocs` GitHub integration. From the `main` branch (in the desired state):
 
