@@ -38,8 +38,9 @@ _Contributing a full recipe to be published?_
 
 A recipe is more compelling if it uses Confluent Cloud fully-managed connectors, especially when the ksqlDB-connect integration is ready.
 But what if the recipe you want to write does not have a connector available in Confluent Cloud?
+Some options for your to consider, in order of preference:
 
-1. Stick with your original recipe idea, but use another connector in Confluent Cloud, that still fits the use case
+1. Stick with the original recipe idea, but use another connector in Confluent Cloud, that still fits the use case
 2. Pick a different recipe, maybe in the same industry, that uses a connector available in Confluent Cloud. This maximizes the impact of your recipe contribution
 3. Stick with your original recipe idea, and use a self-managed connector that runs locally. Follow precedent steps in [this recipe](https://confluentinc.github.io/ksqldb-recipes/cybersecurity/SSH-attack/#read-the-data-in)
 
