@@ -22,7 +22,7 @@ Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluen
 
 --8<-- "docs/shared/self_managed_connector.md"
 
-To stream syslog data into a Kafka topic called `syslog`, create the `Dockerfile` below to bundle a connect worker with the `kafka-connect-syslog` connector:
+To stream syslog data into a Kafka topic called `syslog`, create the `Dockerfile` below to bundle a Kafka Connect worker with the `kafka-connect-syslog` connector:
 
 ```text
 --8<-- "docs/cybersecurity/SSH-attack/Dockerfile"
