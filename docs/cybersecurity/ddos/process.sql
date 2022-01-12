@@ -38,4 +38,4 @@ WINDOW TUMBLING (SIZE 60 SECONDS)
 WHERE 
   layers->tcp->flags_ack = '1' AND layers->tcp->flags_reset = '1'
 GROUP BY layers->ip->src
-HAVING count(*) > 100;
+HAVING count(*) > 10;

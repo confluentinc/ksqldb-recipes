@@ -24,39 +24,31 @@ Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluen
 
 This recipe assumes you have captured your network packet data and published it to a RabbitMQ queue in JSON format. An example packet may look like the following example. 
 
-**Note**: For this recipe, some fields have been removed from a typical packet capture event for brevity.
+**Note**: To keep this recipe brief some fields have been removed and names simplified from a typical packet capture event.
 
 ```json
 {
   "timestamp": "1590682723239",
   "layers": {
     "frame": { 
-      "frame_frame_time": "May 28, 2020 11:48:43.239564000 CST",
-      "frame_frame_protocols": "eth:ethertype:ip:tcp"
+      "time": "May 28, 2020 11:48:43.239564000 CST",
+      "protocols": "eth:ethertype:ip:tcp"
     },
     "eth": { 
-      "eth_eth_src": "98:da:c4:2d:cd:4e",
-      "eth_eth_dst": "38:f9:d3:e4:38:ef"
+      "src": "FF:AA:C9:83:C0:21",
+      "dst": "DF:ED:E3:91:D4:13"
     },
     "ip": {
-      "ip_ip_src": "192.168.33.11",
-      "ip_ip_addr": [
-        "192.168.33.11",
-        "192.168.33.77"
-      ],
-      "ip_ip_src_host": "192.168.33.11",
-      "ip_ip_host": [
-        "192.168.33.11",
-        "192.168.33.77"
-      ],
-      "ip_ip_dst": "192.168.33.77",
-      "ip_ip_dst_host": "192.168.33.77"
+      "src": "192.168.33.11",
+      "src_host": "192.168.33.11",
+      "dst": "192.168.33.77",
+      "dst_host": "192.168.33.77"
     },
     "tcp": { 
-      "tcp_tcp_srcport": "59202",
-      "tcp_tcp_dstport": "443",
-      "tcp_tcp_flags_ack": "1",
-      "tcp_tcp_flags_reset": "0"
+      "srcport": "59202",
+      "dstport": "443",
+      "flags_ack": "1",
+      "flags_reset": "0"
     }
   }
 }
