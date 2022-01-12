@@ -1,16 +1,16 @@
 ---
 seo:
-  title: Next Best Offer - Anticipating Your Customer's Needs 
-  description: This recipe demonstrates how to use ksqlDB to present relevant offers to your customers from a banking perspective.
+  title: Next Best Offer — Anticipating Your Customer's Needs 
+  description: This recipe demonstrates how to use ksqlDB to present relevant offers to banking customers.
 ---
 
-# Next Best Offer - Anticipating Your Customer's Needs
+# Next Best Offer — Anticipating Your Customer's Needs
 
-Consumers today are faced with never ending marketing messages from a variety of sources.  Often these messages are generic and don't have any consideration for the individual needs of the consumer.  This one-size-fits-all approach leads to poor conversion rates.  A better approach is to tailor offerings that take into consideration the interests of the consumer based on previous purchases or behavior.   This recipe demonstrates how to take existing customer information and provide a "Next Best Offer" to encourage sales and retain customers.
+Consumers today are faced with never-ending marketing messages from a variety of sources. Often these messages are generic and don't have any consideration for the individual needs of the consumer. This one-size-fits-all approach leads to poor conversion rates. A better approach is to tailor offerings that take into consideration the interests of the consumer, based on previous purchases or behavior. This recipe demonstrates how to take existing customer information and provide a "Next Best Offer" to encourage sales and retain customers.
 
 ## Step-by-step
 
-### Setup your Environment
+### Set up your environment
 
 Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=next_best_effort).
 
@@ -27,9 +27,9 @@ Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluen
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run stream processing app
+### Run the stream processing application
 
-This application will perform a series of joins between event streams and tables to calculate the next best offer for a banking consumer based on their activity which should yield higher customer activity and satisfaction.
+This application will perform a series of joins between event streams and tables to calculate the next best offer for a banking consumer, based on their activity. This should yield higher customer activity and satisfaction.
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
@@ -52,7 +52,7 @@ This application will perform a series of joins between event streams and tables
 
 ### Creating an event stream
 
-To get started you'll first need to create a stream that contains the customer activity:
+To get started, you'll first need to create a stream that contains the customer activity:
 
 ```sql
 CREATE STREAM customer_activity_stream (
@@ -68,9 +68,9 @@ CREATE STREAM customer_activity_stream (
 );
 ```
 
-You should take note that the `CUSTOMER_ID` field is the key in the stream's key-value pairs and you'll see why this is important in the next section.
+Note that the `CUSTOMER_ID` field is the key in the stream's key-value pairs. You'll see why this is important in the next section.
 
-In a production setting you'll populate the stream's underlying topic either with `KafkaProducer` application or from an external system using a [managed connector on Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/index.html) But for the purpose of running this example you'll manually insert records into the stream with [INSERT VALUES](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/insert-values/#insert-values) statements:
+In a production setting, you would populate the stream's underlying topic either using a `KafkaProducer` application or from an external system via a [managed connector on Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/index.html). For the purposes of this example, you'll manually insert records into the stream, using [INSERT VALUES](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/insert-values/#insert-values) statements:
 
 ```sql
 INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (1,'121.219.110.170',1,'branch_visit',0.4);
@@ -87,11 +87,11 @@ INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, acti
 
 ### Adding the lookup tables
 
-In the event stream you created above, each activity entry contains only the id for the customer, this is expected as it's a common practice to have [normalized](https://en.wikipedia.org/wiki/Database_normalization) event streams.  But when it comes time to analyze the data, it's important to have additional customer information to provide context for any analysts reviewing the results. You'll also need a table for the calculated offer based off customer activity.
+In the event stream you created above, each activity entry contains only the id for the customer. This is expected, as it's a common practice to have [normalized](https://en.wikipedia.org/wiki/Database_normalization) event streams.  But when it's time to analyze the data, it's important to have additional customer information to provide context for any analysts reviewing the results. You'll also need a table to use for the calculated offer.
 
 #### Creating the customer table and inserting records
 
-First you'll create the table for customer information:
+Create the table for customer information:
 
 ```sql
 CREATE TABLE customers (
@@ -109,7 +109,7 @@ CREATE TABLE customers (
 );
 ```
 
-Typically, customer information would be sourced from an existing database. As customer details change, tables in the database are updated and we can stream them into Kafka using Kafka Connect with [change data capture](https://www.confluent.io/blog/cdc-and-streaming-analytics-using-debezium-kafka/).  The primary key for the `customers` is the customer id which corresponds to the key of the `customer_activity_stream` which facilitates joins for enriching customer information.  For the purposes of running the example you'll execute these insert statements to populate the `customers` table:
+Typically, customer information would be sourced from an existing database. As customer details change, tables in the database are updated and we can stream them into Kafka using Kafka Connect with [change data capture](https://www.confluent.io/blog/cdc-and-streaming-analytics-using-debezium-kafka/) (CDC).  The primary key for the `customers` table is the customer id, which corresponds to the key of the `customer_activity_stream`. This stream facilitates joins for enriching customer information. In this example, we'll populate the `customers` table by executing the following `INSERT` statements:
 
 ```sql
 INSERT INTO customers (customer_id, first_name, last_name, email, gender, income, fico) VALUES  (1,'Waylen','Tubble','wtubble0@hc360.com','Male',403646, 465);
@@ -133,9 +133,9 @@ CREATE TABLE offers (
 );
 ```
 
-This table provides the enrichment information needed once the application calculates the "next best offer".
+This table provides the enrichment information that will be needed when the application calculates the next best offer.
 
-Here are the insert statements to fill the `OFFERS` table:
+To populate the `OFFERS` table, execute the following `INSERT` statements:
 
 ```sql
 INSERT INTO offers (offer_id, offer_name, offer_url) VALUES (1,'new_savings','http://google.com.br/magnis/dis/parturient.json');
@@ -147,11 +147,11 @@ INSERT INTO offers (offer_id, offer_name, offer_url) VALUES (5,'no_offer','https
 
 ### Determining the next best offer
 
-Now you'll create the stream that calculates the next best offer for your customers based on their activity. 
+Now you'll create the event stream that calculates the next best offer for your customers based on their activity. 
 
 #### Calculating the offer
 
-To perform the next offer calculation you'll create a stream that performs a join between the `CUSTOMER_ACTIVITY_STREAM` and the `CUSTOMERS` table
+To perform the next offer calculation, create a stream that performs a join between the `CUSTOMER_ACTIVITY_STREAM` and the `CUSTOMERS` table:
 
 ```sql
 CREATE STREAM next_best_offer
@@ -177,11 +177,12 @@ END AS OFFER_ID
 FROM customer_activity_stream cask
 INNER JOIN customers ct ON cask.CUSTOMER_ID = ct.CUSTOMER_ID
 ```
-The `CASE` statement is the workhorse for the query and provides the next offer for the customer based on information resulting from the join.  Note that you're using an `INNER JOIN` here because if the customer id isn't found in the `CUSTOMERS` table there's no calculation to make.  You'll notice that the result of the `CASE` statement is a single integer with the code for the offer to make, so you'll have one final step to take.
+
+The `CASE` statement is the workhorse for the query. It provides the next offer for the customer based on information resulting from the join. Note that you're using an `INNER JOIN` here because if the customer id isn't found in the `CUSTOMERS` table, there's no calculation to make. You'll notice that the result of the `CASE` statement is a single integer—the code for the offer to be made—so there's one final step left.
 
 #### Final results
 
-For the last step you'll create a query which contains the final results by joining the `NEXT_BEST_OFFER` stream with the `OFFERS` table:
+For the last step, create a query which contains the final results by joining the `NEXT_BEST_OFFER` stream with the `OFFERS` table:
 
 ```sql
 CREATE STREAM next_best_offer_lookup
