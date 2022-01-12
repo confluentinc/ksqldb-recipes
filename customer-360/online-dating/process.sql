@@ -7,7 +7,7 @@ CREATE STREAM messages (
 ) WITH (
   KAFKA_TOPIC = 'MESSAGES',
   VALUE_FORMAT = 'AVRO',
-  PARTITIONS = 3
+  PARTITIONS = 6
 );
 
 CREATE STREAM conversations AS

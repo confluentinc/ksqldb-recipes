@@ -6,7 +6,7 @@ CREATE STREAM users (
 ) WITH (
   KAFKA_TOPIC = 'USERS',
   VALUE_FORMAT = 'AVRO',
-  PARTITIONS = 3
+  PARTITIONS = 6
 );
 
 CREATE STREAM products (
@@ -16,7 +16,7 @@ CREATE STREAM products (
 ) WITH (
   KAFKA_TOPIC = 'products',
   VALUE_FORMAT = 'AVRO',
-  PARTITIONS = 3
+  PARTITIONS = 6
 );
 
 CREATE STREAM purchases (
@@ -25,7 +25,7 @@ CREATE STREAM purchases (
 ) WITH (
   KAFKA_TOPIC = 'purchases',
   VALUE_FORMAT = 'AVRO',
-  PARTITIONS = 3
+  PARTITIONS = 6
 );
 
 -- Summarize products.

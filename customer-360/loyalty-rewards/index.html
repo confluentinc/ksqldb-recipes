@@ -824,7 +824,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
   <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;USERS&#39;</span><span class="p">,</span>
   <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;AVRO&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">3</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">products</span> <span class="p">(</span>
@@ -834,7 +834,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
   <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;products&#39;</span><span class="p">,</span>
   <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;AVRO&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">3</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">purchases</span> <span class="p">(</span>
@@ -843,7 +843,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
   <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;purchases&#39;</span><span class="p">,</span>
   <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;AVRO&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">3</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
 <span class="c1">-- Summarize products.</span>

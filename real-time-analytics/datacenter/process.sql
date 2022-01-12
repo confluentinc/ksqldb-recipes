@@ -6,7 +6,7 @@ CREATE TABLE tenant_occupancy (
   customer_id BIGINT
 ) WITH (
   KAFKA_TOPIC='tenant-occupancy',
-  PARTITIONS=3,
+  PARTITIONS=6,
   KEY_FORMAT='JSON',
   VALUE_FORMAT='JSON'
 );
@@ -20,7 +20,7 @@ CREATE STREAM panel_power_readings (
   tenant_kwh_usage BIGINT
 ) WITH (
   KAFKA_TOPIC='panel-readings',
-  PARTITIONS=3,
+  PARTITIONS=6,
   KEY_FORMAT='JSON',
   VALUE_FORMAT='JSON'
 );

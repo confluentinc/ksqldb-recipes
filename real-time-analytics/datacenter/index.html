@@ -773,7 +773,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">customer_id</span> <span class="nb">BIGINT</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
   <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;tenant-occupancy&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
   <span class="n">KEY_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
   <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span>
 <span class="p">);</span>
@@ -787,7 +787,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">tenant_kwh_usage</span> <span class="nb">BIGINT</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
   <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;panel-readings&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
   <span class="n">KEY_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
   <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span>
 <span class="p">);</span>
@@ -886,7 +886,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
   <span class="n">customer_id</span> <span class="nb">BIGINT</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
   <span class="n">kafka_topic</span><span class="o">=</span><span class="s1">&#39;tenant-occupancy&#39;</span><span class="p">,</span>
-  <span class="n">partitions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+  <span class="n">partitions</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
   <span class="n">key_format</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
   <span class="n">value_format</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span>
 <span class="p">);</span>
@@ -915,7 +915,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
   <span class="n">tenant_kwh_usage</span> <span class="nb">BIGINT</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
   <span class="n">kafka_topic</span><span class="o">=</span><span class="s1">&#39;panel-readings&#39;</span><span class="p">,</span>
-  <span class="n">partitions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+  <span class="n">partitions</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
   <span class="n">key_format</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
   <span class="n">value_format</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span>
 <span class="p">);</span>
@@ -925,6 +925,19 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
 <li><code>panel_current_utilization</code> represents the percentage of total capacity of the panel and is useful for business continuation monitoring</li>
 <li><code>tenant_kwh_usage</code> provides the total amount of energy consumed by the tenant in the current month </li>
 </ul>
+<p>A simple example for determining when a panel is overloaded is provided by:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">overloaded_panels</span> <span class="k">AS</span> 
+  <span class="k">SELECT</span> <span class="n">panel_id</span><span class="p">,</span> <span class="n">tenant_id</span><span class="p">,</span> <span class="n">panel_current_utilization</span> 
+    <span class="k">FROM</span> <span class="n">panel_power_readings</span> 
+    <span class="k">WHERE</span> <span class="n">panel_current_utilization</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">85</span>
+  <span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
+</code></pre></div>
+</td></tr></table>
+<p>This command filters the panel power readings for instances where utilization is 85% or higher. This stream could be used in a monitoring or alerting context to notify on-call personnel of a potential issue with the power supplies to the datacenter.</p>
 <p>To provide billing reports, a <code>STREAM</code> is created that joins the panel sensor readings with the customer tenant information. Functions are used to create a billable month indicator along with the necessary fields from the joined stream and table. </p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
