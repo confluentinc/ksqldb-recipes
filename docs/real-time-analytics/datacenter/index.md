@@ -126,7 +126,7 @@ CREATE STREAM billable_power AS
 Finally, the `billable_power_report` aggregates the `billable_power` stream into a `TABLE` that can be queried to create reports by month, customer, and tenant.
 
 ```sql
-CREATE TABLE billable_power_report WITH (KEY_FORMAT='json') AS
+CREATE TABLE billable_power_report WITH (KEY_FORMAT='JSON') AS
   SELECT customer_id, tenant_id, billable_month, MAX(tenant_kwh_usage) as kwh
     FROM billable_power
     GROUP BY tenant_id, customer_id, billable_month;
