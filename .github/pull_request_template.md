@@ -11,3 +11,4 @@
 - [ ] Added recipe to [navigation](https://github.com/confluentinc/ksqldb-recipes/blob/main/mkdocs.yml)
 - [ ] SQL style consistent to existing recipes
 - [ ] Spell check, e.g. using `aspell`
+- [ ] Source connector's auto topic naming convention works with the ksqlDB app values for `KAFKA_TOPIC`
