@@ -6,8 +6,8 @@ CREATE TABLE alarms (
   alarm_name STRING,
   code INT
 ) WITH (
-  VALUE_FORMAT='JSON',
-  KAFKA_TOPIC='alarms',
+  VALUE_FORMAT = 'JSON',
+  KAFKA_TOPIC = 'alarms',
   PARTITIONS = 6
 );
 
@@ -16,14 +16,14 @@ CREATE STREAM throughputs (
   device_id STRING KEY,
   throughput DOUBLE
 ) WITH (
-  VALUE_FORMAT='JSON',
-  KAFKA_TOPIC='throughputs',
+  VALUE_FORMAT = 'JSON',
+  KAFKA_TOPIC = 'throughputs',
   PARTITIONS = 6
 );
 
 -- Create new stream of critial issues to investigate
 -- where throughputs are below threshold 1000.0 and alarm code is not 0
-CREATE STREAM critical_issues WITH (KAFKA_TOPIC='critical_issues') AS
+CREATE STREAM critical_issues WITH (KAFKA_TOPIC = 'critical_issues') AS
   SELECT
     t.device_id,
     t.throughput,

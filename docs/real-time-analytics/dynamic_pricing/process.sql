@@ -6,8 +6,8 @@ CREATE STREAM sales (
   seller_id STRING,
   price DOUBLE
 ) WITH (
-  VALUE_FORMAT='JSON',
-  KAFKA_TOPIC='sales',
+  VALUE_FORMAT = 'JSON',
+  KAFKA_TOPIC = 'sales',
   PARTITIONS = 6
 );
 
@@ -16,13 +16,13 @@ CREATE TABLE items (
   item_id INT PRIMARY KEY,
   item_name STRING
 ) WITH (
-  VALUE_FORMAT='JSON',
-  KAFKA_TOPIC='items',
+  VALUE_FORMAT = 'JSON',
+  KAFKA_TOPIC = 'items',
   PARTITIONS = 6
 );
 
 -- Calculate minimum, maximum, and average price, per item, and join with item name
-CREATE TABLE sales_stats WITH (KEY_FORMAT='JSON') AS
+CREATE TABLE sales_stats WITH (KEY_FORMAT = 'JSON') AS
 SELECT S.item_id,
        I.item_name,
        MIN(price) AS price_min,

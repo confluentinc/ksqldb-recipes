@@ -72,7 +72,7 @@ CREATE TABLE click_user_sessions AS
 
 -- number of errors per min, using 'HAVING' Filter to show ERROR codes > 400
 -- where count > 5
-CREATE TABLE errors_per_min_alert WITH (KAFKA_TOPIC='errors_per_min_alert') AS
+CREATE TABLE errors_per_min_alert WITH (KAFKA_TOPIC = 'errors_per_min_alert') AS
   SELECT
     status AS k1,
     AS_VALUE(status) AS status,
@@ -85,7 +85,7 @@ CREATE TABLE errors_per_min_alert WITH (KAFKA_TOPIC='errors_per_min_alert') AS
 
 -- Enriched user details table:
 -- Aggregate (count&groupBy) using a TABLE-Window
-CREATE TABLE user_ip_activity WITH (KEY_FORMAT='JSON', KAFKA_TOPIC='user_ip_activity') AS
+CREATE TABLE user_ip_activity WITH (KEY_FORMAT = 'JSON', KAFKA_TOPIC = 'user_ip_activity') AS
   SELECT
     username AS k1,
     ip AS k2,
