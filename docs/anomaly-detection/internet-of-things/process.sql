@@ -2,22 +2,24 @@ SET 'auto.offset.reset' = 'earliest';
 
 -- Create table with latest state of alarms
 CREATE TABLE alarms (
-  device_id STRING PRIMARY key,
+  device_id STRING PRIMARY KEY,
   alarm_name STRING,
   code INT
 ) WITH (
-  VALUE_FORMAT='json',
+  VALUE_FORMAT='JSON',
   KAFKA_TOPIC='alarms',
-  PARTITIONS = 6);
+  PARTITIONS = 6
+);
 
 -- Create stream of throughputs 
 CREATE STREAM throughputs (
-  device_id STRING key,
+  device_id STRING KEY,
   throughput DOUBLE
 ) WITH (
-  VALUE_FORMAT='json',
+  VALUE_FORMAT='JSON',
   KAFKA_TOPIC='throughputs',
-  PARTITIONS = 6);
+  PARTITIONS = 6
+);
 
 -- Create new stream of critial issues to investigate
 -- where throughputs are below threshold 1000.0 and alarm code is not 0

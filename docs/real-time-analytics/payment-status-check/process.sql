@@ -9,7 +9,7 @@ CREATE STREAM PAYMENTS (
   BANK VARCHAR
 ) WITH (
   KAFKA_TOPIC='payments',
-  VALUE_FORMAT='json',
+  VALUE_FORMAT='JSON',
   PARTITIONS=6
 );
 
@@ -19,7 +19,7 @@ CREATE STREAM aml_status (
   STATUS VARCHAR
 ) WITH (
   KAFKA_TOPIC='aml_status',
-  VALUE_FORMAT='json',
+  VALUE_FORMAT='JSON',
   PARTITIONS=6
 );
 
@@ -29,7 +29,7 @@ CREATE STREAM funds_status (
   STATUS VARCHAR
 ) WITH (
   KAFKA_TOPIC='funds_status',
-  VALUE_FORMAT='json',
+  VALUE_FORMAT='JSON',
   PARTITIONS=6
 );
 

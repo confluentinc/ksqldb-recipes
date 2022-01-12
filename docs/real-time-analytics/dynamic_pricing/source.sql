@@ -12,7 +12,8 @@ CREATE SOURCE CONNECTOR sales WITH (
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UTC',
-  'tasks.max'                = '1');
+  'tasks.max'                = '1'
+);
 
 CREATE SOURCE CONNECTOR items WITH (
   'connector.class'          = 'PostgresSource',
@@ -28,4 +29,5 @@ CREATE SOURCE CONNECTOR items WITH (
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UTC',
-  'tasks.max'                = '1');
+  'tasks.max'                = '1'
+);

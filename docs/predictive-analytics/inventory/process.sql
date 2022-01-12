@@ -6,7 +6,7 @@ CREATE STREAM inventory_stream (
   item STRING,
   quantity INTEGER
 ) WITH (
-  VALUE_FORMAT = 'json',
+  VALUE_FORMAT = 'JSON',
   KAFKA_TOPIC = 'inventory',
   PARTITIONS = 6
 );

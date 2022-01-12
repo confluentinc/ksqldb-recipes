@@ -12,7 +12,7 @@ CREATE STREAM clickstream (
   agent VARCHAR
 ) WITH (
   KAFKA_TOPIC = 'clickstream',
-  VALUE_FORMAT = 'json',
+  VALUE_FORMAT = 'JSON',
   PARTITIONS = 1
 );
 
@@ -27,7 +27,7 @@ CREATE TABLE web_users (
   level VARCHAR
 ) WITH (
   KAFKA_TOPIC = 'clickstream_users',
-  VALUE_FORMAT = 'json',
+  VALUE_FORMAT = 'JSON',
   PARTITIONS = 1
 );
 
@@ -85,7 +85,7 @@ CREATE TABLE errors_per_min_alert WITH (KAFKA_TOPIC='errors_per_min_alert') AS
 
 -- Enriched user details table:
 -- Aggregate (count&groupBy) using a TABLE-Window
-CREATE TABLE user_ip_activity WITH (KEY_FORMAT='json', KAFKA_TOPIC='user_ip_activity') AS
+CREATE TABLE user_ip_activity WITH (KEY_FORMAT='JSON', KAFKA_TOPIC='user_ip_activity') AS
   SELECT
     username AS k1,
     ip AS k2,

@@ -8,7 +8,8 @@ CREATE TABLE customers (ID             INT     PRIMARY KEY
                        , LOYALTY_STATUS VARCHAR)
               WITH (KAFKA_TOPIC='customers'
                    , FORMAT='AVRO'
-                   , PARTITIONS=6);
+                   , PARTITIONS=6
+);
 
 CREATE TABLE flights (ID               INT     PRIMARY KEY
                        , ORIGIN        VARCHAR
@@ -18,14 +19,16 @@ CREATE TABLE flights (ID               INT     PRIMARY KEY
                        , SCHEDULED_ARR TIMESTAMP)
               WITH (KAFKA_TOPIC='flights'
                    , FORMAT='AVRO'
-                   , PARTITIONS=6);
+                   , PARTITIONS=6
+);
 
 CREATE TABLE bookings (ID            INT     PRIMARY KEY
                        , CUSTOMER_ID INT
                        , FLIGHT_ID   INT)
               WITH (KAFKA_TOPIC='bookings'
                    , FORMAT='AVRO'
-                   , PARTITIONS=6);
+                   , PARTITIONS=6
+);
 
 CREATE TABLE customer_bookings AS 
   SELECT C.*, B.ID, B.FLIGHT_ID
@@ -69,7 +72,8 @@ CREATE STREAM flight_updates (ID          INT KEY
                              )
               WITH (KAFKA_TOPIC='flight_updates'
                    , FORMAT='AVRO'
-                   , PARTITIONS=6);
+                   , PARTITIONS=6
+);
 
 CREATE STREAM customer_flight_updates AS
   SELECT  CUSTOMER_NAME

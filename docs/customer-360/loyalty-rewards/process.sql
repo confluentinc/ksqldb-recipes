@@ -33,7 +33,7 @@ CREATE TABLE all_products AS
   SELECT
     product_id,
     LATEST_BY_OFFSET(category) AS category,
-    LATEST_BY_OFFSET(CAST(price AS DOUBLE)) as price
+    LATEST_BY_OFFSET(CAST(price AS DOUBLE)) AS price
   FROM products
   GROUP BY product_id;
 
@@ -63,7 +63,7 @@ CREATE TABLE sales_totals AS
 CREATE TABLE caffeine_index AS
   SELECT
     user_id,
-    COUNT(*) as total,
+    COUNT(*) AS total,
     (COUNT(*) % 6) AS sequence,
     (COUNT(*) % 6) = 5 AS next_one_free
   FROM purchases

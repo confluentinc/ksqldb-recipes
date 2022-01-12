@@ -2,22 +2,24 @@ SET 'auto.offset.reset' = 'earliest';
 
 -- Create stream of sales
 CREATE STREAM sales (
-  item_id INT key,
+  item_id INT KEY,
   seller_id STRING,
   price DOUBLE
 ) WITH (
-  VALUE_FORMAT='json',
+  VALUE_FORMAT='JSON',
   KAFKA_TOPIC='sales',
-  PARTITIONS = 6);
+  PARTITIONS = 6
+);
 
 -- Create table of items
 CREATE TABLE items (
-  item_id INT PRIMARY key,
+  item_id INT PRIMARY KEY,
   item_name STRING
 ) WITH (
-  VALUE_FORMAT='json',
+  VALUE_FORMAT='JSON',
   KAFKA_TOPIC='items',
-  PARTITIONS = 6);
+  PARTITIONS = 6
+);
 
 -- Calculate minimum, maximum, and average price, per item, and join with item name
 CREATE TABLE sales_stats WITH (KEY_FORMAT='JSON') AS

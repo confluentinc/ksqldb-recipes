@@ -9,7 +9,7 @@ CREATE STREAM fd_cust_raw_stream (
   AVG_CREDIT_SPEND DOUBLE
 ) WITH (
   KAFKA_TOPIC='FD_customers', 
-  VALUE_FORMAT='json', 
+  VALUE_FORMAT='JSON', 
   PARTITIONS=6
 );
 
@@ -28,7 +28,7 @@ CREATE TABLE fd_customers (
   AVG_CREDIT_SPEND DOUBLE
 ) WITH (
   KAFKA_TOPIC='fd_customer_rekeyed',
-  VALUE_FORMAT='json',
+  VALUE_FORMAT='JSON',
   PARTITIONS=6
 );
 
@@ -42,7 +42,7 @@ CREATE STREAM fd_transactions (
   TRANSACTION_ID VARCHAR
 ) WITH (
   KAFKA_TOPIC='FD_transactions',
-  VALUE_FORMAT='json',
+  VALUE_FORMAT='JSON',
   PARTITIONS=6
 );
 
@@ -61,7 +61,7 @@ CREATE STREAM fd_transactions_enriched WITH (KAFKA_TOPIC='transactions_enriched'
 -- Aggregate the stream of transactions for each account ID using a two-hour
 -- tumbling window, and filter for accounts in which the total spend in a
 -- two-hour period is greater than the customer’s average:
-CREATE TABLE fd_possible_stolen_card WITH (KAFKA_TOPIC='FD_possible_stolen_card',KEY_FORMAT='json') AS
+CREATE TABLE fd_possible_stolen_card WITH (KAFKA_TOPIC='FD_possible_stolen_card',KEY_FORMAT='JSON') AS
   SELECT
     TIMESTAMPTOSTRING(WINDOWSTART, 'yyyy-MM-dd HH:mm:ss Z') AS WINDOW_START, 
     T.ACCOUNT_ID,

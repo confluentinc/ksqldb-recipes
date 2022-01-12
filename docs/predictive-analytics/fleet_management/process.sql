@@ -8,7 +8,7 @@ CREATE STREAM locations (
   timestamp VARCHAR
 ) WITH (
   KAFKA_TOPIC = 'locations',
-  VALUE_FORMAT = 'json',
+  VALUE_FORMAT = 'JSON',
   PARTITIONS = 6
 );
 
@@ -19,7 +19,7 @@ CREATE TABLE fleet (
   license BIGINT
 ) WITH (
   KAFKA_TOPIC = 'descriptions',
-  VALUE_FORMAT = 'json',
+  VALUE_FORMAT = 'JSON',
   PARTITIONS = 6
 );
 

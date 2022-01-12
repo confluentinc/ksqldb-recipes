@@ -49,7 +49,7 @@ CREATE STREAM billable_power AS
   EMIT CHANGES;
 
 -- Create a table that can be queried for billing reports
-CREATE TABLE billable_power_report WITH (KEY_FORMAT='json') AS
+CREATE TABLE billable_power_report WITH (KEY_FORMAT='JSON') AS
   SELECT customer_id, tenant_id, billable_month, MAX(tenant_kwh_usage) as kwh
     FROM billable_power
     GROUP BY tenant_id, customer_id, billable_month;
