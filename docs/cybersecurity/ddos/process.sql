@@ -26,7 +26,7 @@ WITH (
   KAFKA_TOPIC='network-traffic', 
   TIMESTAMP='timestamp', 
   VALUE_FORMAT='JSON', 
-  PARTITIONS=3
+  PARTITIONS=6
 );
 
 
