@@ -6,11 +6,15 @@ seo:
 
 # Title
 
-TODO: Use case and graphic if available
+TODO: Describe use case and provide graphic if available
 
 ## Step-by-step
 
 ### Setup your Environment
+
+TODO: Update `new_recipe_name` in UTM in link below.
+
+Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=new_recipe_name).
 
 --8<-- "docs/shared/ccloud_setup.md"
 
