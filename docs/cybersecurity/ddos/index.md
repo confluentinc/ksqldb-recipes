@@ -83,37 +83,53 @@ This application takes the raw network traffic packet data and creates a structu
 
 ## Explanation
 
-This solution shows:
+This solution uses ksqlDB's ability to [model](https://www.confluent.io/blog/ksqldb-techniques-that-make-stream-processing-easier-than-ever/) and [query](https://docs.ksqldb.io/en/latest/how-to-guides/query-structured-data/) structured data. 
 
-ksqlDB processing JSON structured data with multi-layers of nesting
+### Streaming JSON
 
-Using a window and a grouping to aggregate a count of connections reset based on a filter
+The first step is to model the packet capture data using ksqlDB's `CREATE STREAM` statement, giving our new stream the name `network_traffic`:
 
 ```sql
-SET 'auto.offset.reset' = 'earliest';
-
 CREATE STREAM network_traffic
-(
+```
+
+We then define the schema for events in the topic by declaring field names and data types using standard SQL syntax. Looking at this snippet from the full statement:
+
+```sql
   timestamp BIGINT,
   layers STRUCT<
-   frame STRUCT< 
-      time VARCHAR, 
-      protocols VARCHAR >,
-   eth STRUCT< 
-      src VARCHAR, 
-      dst VARCHAR >,
+   ...
    ip STRUCT< 
       src VARCHAR, 
       src_host VARCHAR, 
       dst VARCHAR, 
       dst_host VARCHAR, 
       proto VARCHAR >,
-   tcp STRUCT< 
-      srcport VARCHAR, 
-      dstport VARCHAR, 
-      flags_ack VARCHAR, 
-      flags_reset VARCHAR >>
-)
+   ...
+```
+
+We are declaring an event structure that contains a timestamp field and then a child nested data structure named `layers`. Comparing the sample packet capture event with the declared structure, we see the relationships between the data and the field names and types:
+
+```json
+{
+  "timestamp": "1590682723239",
+  "layers": {
+    ...
+    "ip": {
+      "src": "192.168.33.11",
+      "src_host": "192.168.33.11",
+      "dst": "192.168.33.77",
+      "dst_host": "192.168.33.77"
+    },
+    ...
+  }
+}
+
+```
+
+The `CREATE STREAM ... WITH ...` [statement](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-stream/) marries together the schema for the events with the Kafka topic. The `WITH` clause in the statement allows you to specify details about the stream. 
+
+```sql
 WITH (
   KAFKA_TOPIC='network-traffic', 
   TIMESTAMP='timestamp', 
@@ -121,6 +137,14 @@ WITH (
   PARTITIONS=6
 );
 ```
+
+The `KAFKA_TOPIC` property is required, and indicates the topic that will back the stream. The topic must either exist in Kafka, or the `PARTITIONS` property must be provided as well. If you're creating a stream for a topic that already exists, like would be the case when using a connector to source event data, you should remove the `PARTITIONS` property from this command.
+
+We are also indicating the data format of the events on the topic with the `VALUE_FORMAT` property. Finally, the `TIMESTAMP` property allows us to indicate a field in the event that can be used as the rowtime of the event. This would allow us to perform time-based operations based on the actual event time as provided by the captured packet data.
+
+Now that we have a useful stream of packet capture data, we're going to to about trying to detect potential DDoS attacks from the data.
+
+Using a window and a grouping to aggregate a count of connections reset based on a filter
 
 ```sql
 CREATE TABLE potential_slowloris_attacks AS 
@@ -133,6 +157,8 @@ WHERE
 GROUP BY layers->ip->src
 HAVING count(*) > 10;
 ```
+
+https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-table-as-select/
 
 Final output query can be searched and monitored for connections which are 
 reseting an unusual amount times within the window
