@@ -3,7 +3,7 @@
   "name": "network-traffic-source",
   "kafka.api.key": "<my-kafka-api-key>",
   "kafka.api.secret": "<my-kafka-api-secret>",
-  "kafka.topic": "network-traffic-raw",
+  "kafka.topic": "network-traffic",
   "rabbitmq.host": "<my-rabbitmq-host>",
   "rabbitmq.username": "<my-rabbitmq-username>",
   "rabbitmq.password": "<my-rabbitmq-password>",
