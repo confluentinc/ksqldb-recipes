@@ -1,7 +1,7 @@
 ---
 seo:
   title: Modernize Mainframes for Real-Time
-  description: This ksqlDB recipe demonstrates how to do mainframe offload
+  description: This ksqlDB recipe demonstrates how to modernize mainframes to a more modern data-store in real-time
 ---
 
 # Modernize Mainframes for Real-Time
