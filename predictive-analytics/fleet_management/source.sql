@@ -13,7 +13,8 @@ CREATE SOURCE CONNECTOR fleet_description WITH (
   'poll.max.batch.size'      = '1000',
   'copy.existing'            = 'true',
   'output.data.format'       = 'JSON'
-  'tasks.max'                = '1');
+  'tasks.max'                = '1'
+);
 
 -- Stream of current location of each vehicle in the fleet
 CREATE SOURCE CONNECTOR fleet_location WITH (
@@ -30,4 +31,5 @@ CREATE SOURCE CONNECTOR fleet_location WITH (
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UTC',
-  'tasks.max'                = '1');
+  'tasks.max'                = '1'
+);

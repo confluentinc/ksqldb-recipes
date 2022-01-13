@@ -817,7 +817,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">agent</span> <span class="nb">VARCHAR</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
   <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;clickstream&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
   <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="p">);</span>
 
@@ -832,7 +832,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="k">level</span> <span class="nb">VARCHAR</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
   <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;clickstream_users&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
   <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="p">);</span>
 
@@ -877,7 +877,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
 
 <span class="c1">-- number of errors per min, using &#39;HAVING&#39; Filter to show ERROR codes &gt; 400</span>
 <span class="c1">-- where count &gt; 5</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">errors_per_min_alert</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;errors_per_min_alert&#39;</span><span class="p">)</span> <span class="k">AS</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">errors_per_min_alert</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;errors_per_min_alert&#39;</span><span class="p">)</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="n">status</span> <span class="k">AS</span> <span class="n">k1</span><span class="p">,</span>
     <span class="n">AS_VALUE</span><span class="p">(</span><span class="n">status</span><span class="p">)</span> <span class="k">AS</span> <span class="n">status</span><span class="p">,</span>
@@ -890,7 +890,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
 
 <span class="c1">-- Enriched user details table:</span>
 <span class="c1">-- Aggregate (count&amp;groupBy) using a TABLE-Window</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">user_ip_activity</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KEY_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;user_ip_activity&#39;</span><span class="p">)</span> <span class="k">AS</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">user_ip_activity</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KEY_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span> <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;user_ip_activity&#39;</span><span class="p">)</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="n">username</span> <span class="k">AS</span> <span class="n">k1</span><span class="p">,</span>
     <span class="n">ip</span> <span class="k">AS</span> <span class="n">k2</span><span class="p">,</span>

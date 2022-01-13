@@ -878,9 +878,9 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">AMOUNT</span> <span class="nb">INTEGER</span><span class="p">,</span>
   <span class="n">BANK</span> <span class="nb">VARCHAR</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;payments&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;payments&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">aml_status</span> <span class="p">(</span>
@@ -888,9 +888,9 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">BANK</span> <span class="nb">VARCHAR</span><span class="p">,</span>
   <span class="n">STATUS</span> <span class="nb">VARCHAR</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;aml_status&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;aml_status&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">funds_status</span> <span class="p">(</span>
@@ -898,9 +898,9 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">REASON_CODE</span> <span class="nb">VARCHAR</span><span class="p">,</span>
   <span class="n">STATUS</span> <span class="nb">VARCHAR</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;funds_status&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;funds_status&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customers</span> <span class="p">(</span>
@@ -911,9 +911,9 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">GENDER</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
   <span class="n">STATUS360</span> <span class="nb">VARCHAR</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;customers&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;customers&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
 <span class="c1">-- Enrich Payments stream with Customers table</span>

@@ -8,7 +8,7 @@ CREATE STREAM orders (
   order_total_usd DECIMAL(10,2)
 ) WITH (
   KAFKA_TOPIC = 'orders',
-  VALUE_FORMAT = 'json',
+  VALUE_FORMAT = 'JSON',
   PARTITIONS = 6
 );
 
@@ -20,7 +20,7 @@ CREATE TABLE customers (
   email VARCHAR
 ) WITH (
   KAFKA_TOPIC = 'CUST_RAW_STREAM',
-  VALUE_FORMAT = 'json',
+  VALUE_FORMAT = 'JSON',
   PARTITIONS = 6
 );
 

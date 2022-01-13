@@ -741,29 +741,33 @@ This creates a stream of events, upon which real-time stream processing can keep
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
-<span class="normal">32</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
 
 <span class="c1">-- Create stream of sales</span>
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">sales</span> <span class="p">(</span>
-  <span class="n">item_id</span> <span class="nb">INT</span> <span class="k">key</span><span class="p">,</span>
+  <span class="n">item_id</span> <span class="nb">INT</span> <span class="k">KEY</span><span class="p">,</span>
   <span class="n">seller_id</span> <span class="n">STRING</span><span class="p">,</span>
   <span class="n">price</span> <span class="n">DOUBLE</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;sales&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span><span class="p">);</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;sales&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">);</span>
 
 <span class="c1">-- Create table of items</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">items</span> <span class="p">(</span>
-  <span class="n">item_id</span> <span class="nb">INT</span> <span class="k">PRIMARY</span> <span class="k">key</span><span class="p">,</span>
+  <span class="n">item_id</span> <span class="nb">INT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
   <span class="n">item_name</span> <span class="n">STRING</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;items&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span><span class="p">);</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;items&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">);</span>
 
 <span class="c1">-- Calculate minimum, maximum, and average price, per item, and join with item name</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">sales_stats</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KEY_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">)</span> <span class="k">AS</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">sales_stats</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KEY_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">)</span> <span class="k">AS</span>
 <span class="k">SELECT</span> <span class="n">S</span><span class="p">.</span><span class="n">item_id</span><span class="p">,</span>
        <span class="n">I</span><span class="p">.</span><span class="n">item_name</span><span class="p">,</span>
        <span class="k">MIN</span><span class="p">(</span><span class="n">price</span><span class="p">)</span> <span class="k">AS</span> <span class="n">price_min</span><span class="p">,</span>

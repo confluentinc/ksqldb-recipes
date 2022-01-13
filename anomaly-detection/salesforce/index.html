@@ -694,9 +694,9 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="c1">-- Register the stream of SFDC CDC Opportunities</span>
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">stream_sfdc_cdc_opportunity_raw</span>
 <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;sfdc.cdc.raw&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;AVRO&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;sfdc.cdc.raw&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;AVRO&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
 <span class="c1">-- Create a new stream with Replay ID and Change Event Header for just Gap Events</span>

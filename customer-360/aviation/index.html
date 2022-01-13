@@ -843,7 +843,11 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="normal">83</span>
 <span class="normal">84</span>
 <span class="normal">85</span>
-<span class="normal">86</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
 
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customers</span> <span class="p">(</span><span class="n">ID</span>             <span class="nb">INT</span>     <span class="k">PRIMARY</span> <span class="k">KEY</span>
                        <span class="p">,</span> <span class="n">NAME</span>           <span class="nb">VARCHAR</span>
@@ -851,9 +855,10 @@ You can also substitute your own connectors to connect to any <a href="https://d
                        <span class="p">,</span> <span class="n">EMAIL</span>          <span class="nb">VARCHAR</span>
                        <span class="p">,</span> <span class="n">PHONE</span>          <span class="nb">VARCHAR</span>
                        <span class="p">,</span> <span class="n">LOYALTY_STATUS</span> <span class="nb">VARCHAR</span><span class="p">)</span>
-              <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;customers&#39;</span>
-                   <span class="p">,</span> <span class="n">FORMAT</span><span class="o">=</span><span class="s1">&#39;AVRO&#39;</span>
-                   <span class="p">,</span> <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span><span class="p">);</span>
+              <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;customers&#39;</span>
+                   <span class="p">,</span> <span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;AVRO&#39;</span>
+                   <span class="p">,</span> <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">);</span>
 
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">flights</span> <span class="p">(</span><span class="n">ID</span>               <span class="nb">INT</span>     <span class="k">PRIMARY</span> <span class="k">KEY</span>
                        <span class="p">,</span> <span class="n">ORIGIN</span>        <span class="nb">VARCHAR</span>
@@ -861,16 +866,18 @@ You can also substitute your own connectors to connect to any <a href="https://d
                        <span class="p">,</span> <span class="n">CODE</span>          <span class="nb">VARCHAR</span>
                        <span class="p">,</span> <span class="n">SCHEDULED_DEP</span> <span class="k">TIMESTAMP</span>
                        <span class="p">,</span> <span class="n">SCHEDULED_ARR</span> <span class="k">TIMESTAMP</span><span class="p">)</span>
-              <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;flights&#39;</span>
-                   <span class="p">,</span> <span class="n">FORMAT</span><span class="o">=</span><span class="s1">&#39;AVRO&#39;</span>
-                   <span class="p">,</span> <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span><span class="p">);</span>
+              <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;flights&#39;</span>
+                   <span class="p">,</span> <span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;AVRO&#39;</span>
+                   <span class="p">,</span> <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">);</span>
 
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">bookings</span> <span class="p">(</span><span class="n">ID</span>            <span class="nb">INT</span>     <span class="k">PRIMARY</span> <span class="k">KEY</span>
                        <span class="p">,</span> <span class="n">CUSTOMER_ID</span> <span class="nb">INT</span>
                        <span class="p">,</span> <span class="n">FLIGHT_ID</span>   <span class="nb">INT</span><span class="p">)</span>
-              <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;bookings&#39;</span>
-                   <span class="p">,</span> <span class="n">FORMAT</span><span class="o">=</span><span class="s1">&#39;AVRO&#39;</span>
-                   <span class="p">,</span> <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span><span class="p">);</span>
+              <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;bookings&#39;</span>
+                   <span class="p">,</span> <span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;AVRO&#39;</span>
+                   <span class="p">,</span> <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">);</span>
 
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customer_bookings</span> <span class="k">AS</span> 
   <span class="k">SELECT</span> <span class="k">C</span><span class="p">.</span><span class="o">*</span><span class="p">,</span> <span class="n">B</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">B</span><span class="p">.</span><span class="n">FLIGHT_ID</span>
@@ -879,15 +886,15 @@ You can also substitute your own connectors to connect to any <a href="https://d
               <span class="k">ON</span> <span class="n">B</span><span class="p">.</span><span class="n">CUSTOMER_ID</span> <span class="o">=</span> <span class="k">C</span><span class="p">.</span><span class="n">ID</span><span class="p">;</span>
 
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customer_flights</span> 
-  <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;customer_flights&#39;</span><span class="p">)</span> <span class="k">AS</span>
+  <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;customer_flights&#39;</span><span class="p">)</span> <span class="k">AS</span>
   <span class="k">SELECT</span> <span class="n">CB</span><span class="p">.</span><span class="o">*</span><span class="p">,</span> <span class="n">F</span><span class="p">.</span><span class="o">*</span>
   <span class="k">FROM</span>   <span class="n">customer_bookings</span> <span class="n">CB</span>
           <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">flights</span> <span class="n">F</span>
-              <span class="k">ON</span> <span class="n">CB</span><span class="p">.</span><span class="n">FLIGHT_ID</span><span class="o">=</span><span class="n">F</span><span class="p">.</span><span class="n">ID</span><span class="p">;</span>
+              <span class="k">ON</span> <span class="n">CB</span><span class="p">.</span><span class="n">FLIGHT_ID</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">ID</span><span class="p">;</span>
 
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">cf_stream</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;customer_flights&#39;</span><span class="p">,</span> <span class="n">FORMAT</span><span class="o">=</span><span class="s1">&#39;AVRO&#39;</span><span class="p">);</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">cf_stream</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;customer_flights&#39;</span><span class="p">,</span> <span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;AVRO&#39;</span><span class="p">);</span>
 
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">cf_rekey</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;cf_rekey&#39;</span><span class="p">)</span> <span class="k">AS</span> 
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">cf_rekey</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;cf_rekey&#39;</span><span class="p">)</span> <span class="k">AS</span> 
   <span class="k">SELECT</span> <span class="n">F_ID</span>                 <span class="k">AS</span> <span class="n">FLIGHT_ID</span>
         <span class="p">,</span> <span class="n">CB_C_ID</span>             <span class="k">AS</span> <span class="n">CUSTOMER_ID</span>
         <span class="p">,</span> <span class="n">CB_C_NAME</span>           <span class="k">AS</span> <span class="n">CUSTOMER_NAME</span>
@@ -905,16 +912,17 @@ You can also substitute your own connectors to connect to any <a href="https://d
 
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customer_flights_rekeyed</span> 
   <span class="p">(</span><span class="n">FLIGHT_ID</span> <span class="nb">INT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">)</span> 
-  <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;cf_rekey&#39;</span><span class="p">,</span> <span class="n">FORMAT</span><span class="o">=</span><span class="s1">&#39;AVRO&#39;</span><span class="p">);</span>
+  <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;cf_rekey&#39;</span><span class="p">,</span> <span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;AVRO&#39;</span><span class="p">);</span>
 
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">flight_updates</span> <span class="p">(</span><span class="n">ID</span>          <span class="nb">INT</span> <span class="k">KEY</span>
                             <span class="p">,</span> <span class="n">FLIGHT_ID</span>   <span class="nb">INT</span>
                             <span class="p">,</span> <span class="n">UPDATED_DEP</span> <span class="k">TIMESTAMP</span>
                             <span class="p">,</span> <span class="n">REASON</span>      <span class="nb">VARCHAR</span>
                              <span class="p">)</span>
-              <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;flight_updates&#39;</span>
-                   <span class="p">,</span> <span class="n">FORMAT</span><span class="o">=</span><span class="s1">&#39;AVRO&#39;</span>
-                   <span class="p">,</span> <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span><span class="p">);</span>
+              <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;flight_updates&#39;</span>
+                   <span class="p">,</span> <span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;AVRO&#39;</span>
+                   <span class="p">,</span> <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">);</span>
 
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">customer_flight_updates</span> <span class="k">AS</span>
   <span class="k">SELECT</span>  <span class="n">CUSTOMER_NAME</span>

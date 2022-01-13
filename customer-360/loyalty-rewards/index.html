@@ -851,7 +851,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="k">SELECT</span>
     <span class="n">product_id</span><span class="p">,</span>
     <span class="n">LATEST_BY_OFFSET</span><span class="p">(</span><span class="n">category</span><span class="p">)</span> <span class="k">AS</span> <span class="n">category</span><span class="p">,</span>
-    <span class="n">LATEST_BY_OFFSET</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">price</span> <span class="k">AS</span> <span class="n">DOUBLE</span><span class="p">))</span> <span class="k">as</span> <span class="n">price</span>
+    <span class="n">LATEST_BY_OFFSET</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">price</span> <span class="k">AS</span> <span class="n">DOUBLE</span><span class="p">))</span> <span class="k">AS</span> <span class="n">price</span>
   <span class="k">FROM</span> <span class="n">products</span>
   <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">product_id</span><span class="p">;</span>
 
@@ -881,7 +881,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">caffeine_index</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="n">user_id</span><span class="p">,</span>
-    <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">total</span><span class="p">,</span>
+    <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="n">total</span><span class="p">,</span>
     <span class="p">(</span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span><span class="p">)</span> <span class="k">AS</span> <span class="n">sequence</span><span class="p">,</span>
     <span class="p">(</span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span><span class="p">)</span> <span class="o">=</span> <span class="mi">5</span> <span class="k">AS</span> <span class="n">next_one_free</span>
   <span class="k">FROM</span> <span class="n">purchases</span>

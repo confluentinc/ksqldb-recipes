@@ -12,4 +12,5 @@ CREATE SOURCE CONNECTOR sfdc_cdc WITH (
   'salesforce.consumer.secret' = '<sfdc-consumer-secret>',
   'salesforce.cdc.name'        = 'AccountChangeEvent',
   'output.data.format'         = 'AVRO',
-  'tasks.max'                  = '1');
+  'tasks.max'                  = '1'
+);

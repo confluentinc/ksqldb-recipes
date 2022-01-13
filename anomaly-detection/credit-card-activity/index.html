@@ -796,13 +796,13 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">EMAIL</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
   <span class="n">AVG_CREDIT_SPEND</span> <span class="n">DOUBLE</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;FD_customers&#39;</span><span class="p">,</span> 
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span> 
-  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;FD_customers&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
 <span class="c1">-- Repartition the customer data stream by account_id to prepare for the join later</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">fd_customer_rekeyed</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;fd_customer_rekeyed&#39;</span><span class="p">)</span> <span class="k">AS</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">fd_customer_rekeyed</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;fd_customer_rekeyed&#39;</span><span class="p">)</span> <span class="k">AS</span>
   <span class="k">SELECT</span> <span class="o">*</span> 
   <span class="k">FROM</span> <span class="n">fd_cust_raw_stream</span> 
   <span class="n">PARTITION</span> <span class="k">BY</span> <span class="n">ID</span><span class="p">;</span>
@@ -815,9 +815,9 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">EMAIL</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
   <span class="n">AVG_CREDIT_SPEND</span> <span class="n">DOUBLE</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;fd_customer_rekeyed&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;fd_customer_rekeyed&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
 <span class="c1">-- Create the stream of transactions</span>
@@ -829,13 +829,13 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">IP_ADDRESS</span> <span class="nb">VARCHAR</span><span class="p">,</span>
   <span class="n">TRANSACTION_ID</span> <span class="nb">VARCHAR</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;FD_transactions&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;FD_transactions&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
 <span class="c1">-- Join the transactions to customer information</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">fd_transactions_enriched</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;transactions_enriched&#39;</span><span class="p">)</span> <span class="k">AS</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">fd_transactions_enriched</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;transactions_enriched&#39;</span><span class="p">)</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="n">T</span><span class="p">.</span><span class="n">ACCOUNT_ID</span><span class="p">,</span>
     <span class="n">T</span><span class="p">.</span><span class="n">CARD_TYPE</span><span class="p">,</span>
@@ -849,9 +849,9 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="c1">-- Aggregate the stream of transactions for each account ID using a two-hour</span>
 <span class="c1">-- tumbling window, and filter for accounts in which the total spend in a</span>
 <span class="c1">-- two-hour period is greater than the customer’s average:</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">fd_possible_stolen_card</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;FD_possible_stolen_card&#39;</span><span class="p">,</span><span class="n">KEY_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">)</span> <span class="k">AS</span>
-  <span class="k">SELECT</span>
-    <span class="n">TIMESTAMPTOSTRING</span><span class="p">(</span><span class="n">WINDOWSTART</span><span class="p">,</span> <span class="s1">&#39;yyyy-MM-dd HH:mm:ss Z&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">WINDOW_START</span><span class="p">,</span> 
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">fd_possible_stolen_card</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;FD_possible_stolen_card&#39;</span><span class="p">,</span> <span class="n">KEY_FORMAT</span> <span class="o">=</span> <span class="n">JSON</span><span class="s1">&#39;) AS</span>
+<span class="s1">  SELECT</span>
+<span class="s1">    TIMESTAMPTOSTRING(WINDOWSTART, &#39;</span><span class="n">yyyy</span><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span> <span class="n">Z</span><span class="err">&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">WINDOW_START</span><span class="p">,</span> 
     <span class="n">T</span><span class="p">.</span><span class="n">ACCOUNT_ID</span><span class="p">,</span>
     <span class="n">T</span><span class="p">.</span><span class="n">CARD_TYPE</span><span class="p">,</span>
     <span class="k">SUM</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">AMOUNT</span><span class="p">)</span> <span class="k">AS</span> <span class="n">TOTAL_CREDIT_SPEND</span><span class="p">,</span> 

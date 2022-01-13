@@ -13,7 +13,8 @@ CREATE SOURCE CONNECTOR customers WITH (
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UTC',
-  'tasks.max'                = '1');
+  'tasks.max'                = '1'
+);
 
 -- Stream of payments
 CREATE SOURCE CONNECTOR payments WITH (
@@ -30,7 +31,8 @@ CREATE SOURCE CONNECTOR payments WITH (
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UTC',
-  'tasks.max'                = '1');
+  'tasks.max'                = '1'
+);
 
 -- Stream of aml_status
 CREATE SOURCE CONNECTOR aml_status WITH (
@@ -47,7 +49,8 @@ CREATE SOURCE CONNECTOR aml_status WITH (
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UTC',
-  'tasks.max'                = '1');
+  'tasks.max'                = '1'
+);
 
 -- Stream of funds_status
 CREATE SOURCE CONNECTOR funds_status WITH (
@@ -64,4 +67,5 @@ CREATE SOURCE CONNECTOR funds_status WITH (
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UTC',
-  'tasks.max'                = '1');
+  'tasks.max'                = '1'
+);

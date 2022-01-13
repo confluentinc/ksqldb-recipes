@@ -708,30 +708,34 @@ The following stream processing app identifies which devices need to be investig
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
-<span class="normal">32</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
 
 <span class="c1">-- Create table with latest state of alarms</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">alarms</span> <span class="p">(</span>
-  <span class="n">device_id</span> <span class="n">STRING</span> <span class="k">PRIMARY</span> <span class="k">key</span><span class="p">,</span>
+  <span class="n">device_id</span> <span class="n">STRING</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
   <span class="n">alarm_name</span> <span class="n">STRING</span><span class="p">,</span>
   <span class="n">code</span> <span class="nb">INT</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;alarms&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span><span class="p">);</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;alarms&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">);</span>
 
 <span class="c1">-- Create stream of throughputs </span>
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">throughputs</span> <span class="p">(</span>
-  <span class="n">device_id</span> <span class="n">STRING</span> <span class="k">key</span><span class="p">,</span>
+  <span class="n">device_id</span> <span class="n">STRING</span> <span class="k">KEY</span><span class="p">,</span>
   <span class="n">throughput</span> <span class="n">DOUBLE</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;throughputs&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span><span class="p">);</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;throughputs&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">);</span>
 
 <span class="c1">-- Create new stream of critial issues to investigate</span>
 <span class="c1">-- where throughputs are below threshold 1000.0 and alarm code is not 0</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">critical_issues</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;critical_issues&#39;</span><span class="p">)</span> <span class="k">AS</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">critical_issues</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;critical_issues&#39;</span><span class="p">)</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="n">t</span><span class="p">.</span><span class="n">device_id</span><span class="p">,</span>
     <span class="n">t</span><span class="p">.</span><span class="n">throughput</span><span class="p">,</span>

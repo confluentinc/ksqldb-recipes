@@ -8,9 +8,9 @@ CREATE STREAM PAYMENTS (
   AMOUNT INTEGER,
   BANK VARCHAR
 ) WITH (
-  KAFKA_TOPIC='payments',
-  VALUE_FORMAT='json',
-  PARTITIONS=6
+  KAFKA_TOPIC = 'payments',
+  VALUE_FORMAT = 'JSON',
+  PARTITIONS = 6
 );
 
 CREATE STREAM aml_status (
@@ -18,9 +18,9 @@ CREATE STREAM aml_status (
   BANK VARCHAR,
   STATUS VARCHAR
 ) WITH (
-  KAFKA_TOPIC='aml_status',
-  VALUE_FORMAT='json',
-  PARTITIONS=6
+  KAFKA_TOPIC = 'aml_status',
+  VALUE_FORMAT = 'JSON',
+  PARTITIONS = 6
 );
 
 CREATE STREAM funds_status (
@@ -28,9 +28,9 @@ CREATE STREAM funds_status (
   REASON_CODE VARCHAR,
   STATUS VARCHAR
 ) WITH (
-  KAFKA_TOPIC='funds_status',
-  VALUE_FORMAT='json',
-  PARTITIONS=6
+  KAFKA_TOPIC = 'funds_status',
+  VALUE_FORMAT = 'JSON',
+  PARTITIONS = 6
 );
 
 CREATE TABLE customers (
@@ -41,9 +41,9 @@ CREATE TABLE customers (
   GENDER VARCHAR, 
   STATUS360 VARCHAR
 ) WITH (
-  KAFKA_TOPIC='customers',
-  VALUE_FORMAT='JSON',
-  PARTITIONS=6
+  KAFKA_TOPIC = 'customers',
+  VALUE_FORMAT = 'JSON',
+  PARTITIONS = 6
 );
 
 -- Enrich Payments stream with Customers table

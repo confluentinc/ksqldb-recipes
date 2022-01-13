@@ -772,10 +772,10 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">tenant_id</span> <span class="nb">VARCHAR</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
   <span class="n">customer_id</span> <span class="nb">BIGINT</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;tenant-occupancy&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
-  <span class="n">KEY_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;tenant-occupancy&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="n">KEY_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span>
 <span class="p">);</span>
 
 <span class="c1">-- Create a Stream for the power control panel telemetry data.</span>
@@ -786,10 +786,10 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">panel_current_utilization</span> <span class="n">DOUBLE</span><span class="p">,</span>
   <span class="n">tenant_kwh_usage</span> <span class="nb">BIGINT</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;panel-readings&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
-  <span class="n">KEY_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;panel-readings&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="n">KEY_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span>
 <span class="p">);</span>
 
 <span class="c1">-- Create a filtered Stream of panel readings registering power usage &gt;= 85%</span>
@@ -816,7 +816,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
 
 <span class="c1">-- Create a table that can be queried for billing reports</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">billable_power_report</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KEY_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">)</span> <span class="k">AS</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">billable_power_report</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KEY_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">)</span> <span class="k">AS</span>
   <span class="k">SELECT</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">tenant_id</span><span class="p">,</span> <span class="n">billable_month</span><span class="p">,</span> <span class="k">MAX</span><span class="p">(</span><span class="n">tenant_kwh_usage</span><span class="p">)</span> <span class="k">as</span> <span class="n">kwh</span>
     <span class="k">FROM</span> <span class="n">billable_power</span>
     <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">tenant_id</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">billable_month</span><span class="p">;</span>
@@ -885,10 +885,10 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
   <span class="n">tenant_id</span> <span class="nb">VARCHAR</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
   <span class="n">customer_id</span> <span class="nb">BIGINT</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">kafka_topic</span><span class="o">=</span><span class="s1">&#39;tenant-occupancy&#39;</span><span class="p">,</span>
-  <span class="n">partitions</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
-  <span class="n">key_format</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
-  <span class="n">value_format</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;tenant-occupancy&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="n">KEY_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span>
 <span class="p">);</span>
 </code></pre></div>
 </td></tr></table>
@@ -914,10 +914,10 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
   <span class="n">panel_current_utilization</span> <span class="n">DOUBLE</span><span class="p">,</span>
   <span class="n">tenant_kwh_usage</span> <span class="nb">BIGINT</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">kafka_topic</span><span class="o">=</span><span class="s1">&#39;panel-readings&#39;</span><span class="p">,</span>
-  <span class="n">partitions</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
-  <span class="n">key_format</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
-  <span class="n">value_format</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;panel-readings&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="n">KEY_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span>
 <span class="p">);</span>
 </code></pre></div>
 </td></tr></table>
@@ -966,7 +966,7 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">billable_power_report</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">key_format</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">)</span> <span class="k">AS</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">billable_power_report</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KEY_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">)</span> <span class="k">AS</span>
   <span class="k">SELECT</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">tenant_id</span><span class="p">,</span> <span class="n">billable_month</span><span class="p">,</span> <span class="k">MAX</span><span class="p">(</span><span class="n">tenant_kwh_usage</span><span class="p">)</span> <span class="k">as</span> <span class="n">kwh</span>
     <span class="k">FROM</span> <span class="n">billable_power</span>
     <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">tenant_id</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">billable_month</span><span class="p">;</span>

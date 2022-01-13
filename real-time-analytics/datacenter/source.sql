@@ -12,7 +12,8 @@ CREATE SOURCE CONNECTOR customer WITH (
   'table.includelist'     = 'customer.tenant',
   'snapshot.mode'         = 'initial',
   'output.data.format'    = 'AVRO',
-  'tasks.max'             = '1');
+  'tasks.max'             = '1'
+);
 
 CREATE SOURCE CONNECTOR readings WITH (
   'connector.class'       = 'MqttSource',
@@ -22,4 +23,5 @@ CREATE SOURCE CONNECTOR readings WITH (
   'kafka.topic'           = 'panel-readings',
   'mqtt.server.uri'       = 'tcp=//<mqtt-server-hostname>=1881',
   'mqtt.topics'           = '<mqtt-topic>',
-  'tasks.max'             = '1');
+  'tasks.max'             = '1'
+);
