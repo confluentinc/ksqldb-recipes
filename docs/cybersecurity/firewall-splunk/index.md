@@ -11,7 +11,7 @@ But with each source having its own set of collectors generating different data 
 If you start by intercepting those data flows as they arrive from their sources, you can analyze or filter the data in any way you wish before the data is sent to an aggregator.
 
 This recipe demonstrates how to optimize Splunk data ingestion by using the [Splunk S2S Source connector](https://docs.confluent.io/kafka-connect-splunk-s2s/current/overview.html), which can receive data from a Splunk Universal Forwarder (UF) with the Splunk 2 Splunk protocol, to intercept data that would normally be sent to a Splunk HTTP Event Collector (HEC).
-The stream processing application identifies and includes only `deny` events, removes unnecessary fields to reduce message size, and then sends the new, targeted set of events to Splunk for indexing.
+The stream processing application filters for `deny` events, removes unnecessary fields to reduce message size, and then sends the new, targeted set of events to Splunk for indexing.
 You can also extend this solution to intercept data from a variety of SIEM vendors and create a vendor-independent solution that leverages multiple tools and analytic destinations.
 
 ## Step by step
