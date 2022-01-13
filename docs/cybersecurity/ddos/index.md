@@ -64,7 +64,7 @@ This connector will source that data into a Kafka topic and can be stream proces
 
 ### ksqlDB code
 
-This application takes the raw network traffic packet data and creates a structured stream of events that can be processed using SQL. Using Windows and Filters the application detects a high level of connection `RESET` events from the server and isolates the potentially offending source.
+This application takes the raw network packet data and creates a structured stream of events that can be processed using SQL. Using [Windows](https://docs.ksqldb.io/en/latest/concepts/time-and-windows-in-ksqldb-queries/#windows-in-sql-queries) and filters, the application detects a high number of connection `RESET` events from the server and isolates the potentially offending source.
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
@@ -86,6 +86,8 @@ This application takes the raw network traffic packet data and creates a structu
 This solution uses ksqlDB's ability to [model](https://www.confluent.io/blog/ksqldb-techniques-that-make-stream-processing-easier-than-ever/) and [query](https://docs.ksqldb.io/en/latest/how-to-guides/query-structured-data/) structured data. 
 
 ### Streaming JSON
+
+Let's break down commands in this application and explain the individual parts.
 
 The first step is to model the packet capture data using ksqlDB's `CREATE STREAM` statement, giving our new stream the name `network_traffic`:
 
@@ -142,27 +144,74 @@ The `KAFKA_TOPIC` property is required, and indicates the topic that will back t
 
 We are also indicating the data format of the events on the topic with the `VALUE_FORMAT` property. Finally, the `TIMESTAMP` property allows us to indicate a field in the event that can be used as the rowtime of the event. This would allow us to perform time-based operations based on the actual event time as provided by the captured packet data.
 
-Now that we have a useful stream of packet capture data, we're going to to about trying to detect potential DDoS attacks from the data.
+### Materialized view
 
-Using a window and a grouping to aggregate a count of connections reset based on a filter
+Now that we have a useful stream of packet capture data, we're going to go about trying to detect potential DDoS attacks from the events.
+
+We're going to use the ksqlDB `CREATE TABLE` statement which will create a new [materialized view](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-table-as-select/) of the packet data.
+
+Let's tell ksqlDB to create the TABLE with a name of `potential_slowloris_attacks`:
 
 ```sql
 CREATE TABLE potential_slowloris_attacks AS 
+```
+
+Next, we are going to define the values we want to materialize into the table. We are capturing two values:
+
+* The source IP address read from the `layers->ip->src` netsted value in the JSON event
+* Using the `count` function, a value that contains a count of rows that satisfy conditions defined later in the command. 
+
+```sql
 SELECT 
   layers->ip->src, count(*) as count_connection_reset
+```
+
+Next we tell ksqlDB where to source the events from to build the table, in this case, the `network_traffic` stream we defiend above.
+
+```sql
 FROM network_traffic 
+```
+
+Because the stream of packet capture events is continunous, we need a way to aggregate them into a bucket that is both meaningful to our business case and useful enough to perform calculations on. Here, we want to know if within a given period of time, there are a large number of connection reset events, so let's tell ksqlDB we want to create a window of events based on time.
+
+```sql
 WINDOW TUMBLING (SIZE 60 SECONDS)
+```
+
+A [tumbling window](https://docs.ksqldb.io/en/latest/concepts/time-and-windows-in-ksqldb-queries/#tumbling-window) specifies a bucket of events in a fixed time, non-overlapping, gap-less window. Here we've specified 60 second windows.
+
+Now we have our events aggregated into time buckets with the fields we are interested in, how do we specifiy that a connection has been reset? We use the ksqlDB `WHERE` clause to extract the events we are interested in. Here, we define a connection as reset if the tcp `flags_ack` and `flag_reset` fields are set to "true".
+
+```
 WHERE 
   layers->tcp->flags_ack = '1' AND layers->tcp->flags_reset = '1'
+```
+
+We are going to define a potential Slowloris attack as connection reset events coming from the _same_ source IP address. In order to properly aggregate (via the `count` function above), we need to group the qualifying events by the source IP.
+
+```sql
 GROUP BY layers->ip->src
+```
+
+And finally we want to count the number of matching events within our window. In this example we are using `10` events to signify a potential attack, but this variable should be adjusted for more real world scenarios.
+```sql
 HAVING count(*) > 10;
 ```
 
-https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-table-as-select/
+The end result is a `TABLE` that can be queried for information useful in alerting administrators of a potential attack. Executing a [push query](https://docs.ksqldb.io/en/latest/concepts/queries/#push) against the table could be used as part of a monitoring and alerting pipleine. For example:
 
-Final output query can be searched and monitored for connections which are 
-reseting an unusual amount times within the window
+First, for this example, we need to set the `auto.offset.reset` flag to `earliest`, which will ensure that our query runs from the beginning of the topic to produce an expected result. In a production query, you may choose to use `latest` and only capture events going forward from the time you execute the push query.
 
 ```sql
+SET 'auto.offset.reset' = 'earliest';
+```
+
+This query will select all the records from our materialized view including the source IP address and count which we can use to investigate the issue.
+
+```
 select * from POTENTIAL_SLOWLORIS_ATTACKS EMIT CHANGES;
++----------------------------+----------------------------+----------------------------+----------------------------+
+|SRC                         |WINDOWSTART                 |WINDOWEND                   |COUNT_CONNECTION_RESET      |
++----------------------------+----------------------------+----------------------------+----------------------------+
+|192.168.33.11               |1642017660000               |1642017720000               |14                          |
 ```
