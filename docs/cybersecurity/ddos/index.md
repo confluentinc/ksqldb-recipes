@@ -14,7 +14,7 @@ Distributed denial-of-service (DDoS) attacks are specific type of cyber-attack i
 
 ### Set up your environment
 
-Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=online_dating).
+Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=slowloris_ddos).
 
 --8<-- "docs/shared/ccloud_setup.md"
 
