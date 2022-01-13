@@ -30,7 +30,7 @@ _Contributing a full recipe to be published?_
 - [manual.sql](template/manual.sql): SQL commands to insert mock data into Kafka topics, if a user does not have a real end system
 - [process.sql](template/process.sql): this is the core code of the recipe, the SQL commands that correspond to the event stream processing
 - [sink.json](template/sink.json): (optional) JSON configuration to create Confluent Cloud sink connectors to push results to a real end system
-- [sink.sql](template/sink.sql): SQL-equivalent of `sink.json` (this file is not referenced today in `index.md`, but getting ready for ksqlDB-connect integration)
+- [sink.sql](template/sink.sql): (optional unless `sink.json` is provided) SQL-equivalent of `sink.json` (this file is not referenced today in `index.md`, but getting ready for ksqlDB-connect integration)
 
 5. Submit a [GitHub Pull Request](https://github.com/confluentinc/ksqldb-recipes/pulls). Ensure the new recipe adheres to the [checklist](https://github.com/confluentinc/ksqldb-recipes/blob/main/.github/pull_request_template.md) and then tag [confluentinc/devx](https://github.com/orgs/confluentinc/teams/devx) for review.
 
