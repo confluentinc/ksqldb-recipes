@@ -1,6 +1,6 @@
 ---
 seo:
-  title: Detecking a Slowloris DDoS attack 
+  title: Detecting a Slowloris DDoS attack 
   description: A ksqlDB recipe that detects network disruption attacks by processing packet data
 ---
 
@@ -158,7 +158,7 @@ CREATE TABLE potential_slowloris_attacks AS
 
 Next, we are going to define the values we want to materialize into the table. We are capturing two values:
 
-* The source IP address read from the `layers->ip->src` netsted value in the JSON event
+* The source IP address read from the `layers->ip->src` nested value in the JSON event
 * Using the `count` function, a value that contains a count of rows that satisfy conditions defined later in the command. 
 
 ```sql
@@ -166,13 +166,13 @@ SELECT
   layers->ip->src, count(*) as count_connection_reset
 ```
 
-Next we tell ksqlDB where to source the events from to build the table, in this case, the `network_traffic` stream we defiend above.
+Next we tell ksqlDB where to source the events from to build the table, in this case, the `network_traffic` stream we defined above.
 
 ```sql
 FROM network_traffic 
 ```
 
-Because the stream of packet capture events is continunous, we need a way to aggregate them into a bucket that is both meaningful to our business case and useful enough to perform calculations on. Here, we want to know if within a given period of time, there are a large number of connection reset events, so let's tell ksqlDB we want to create a window of events based on time.
+Because the stream of packet capture events is continuous, we need a way to aggregate them into a bucket that is both meaningful to our business case and useful enough to perform calculations on. Here, we want to know if within a given period of time, there are a large number of connection reset events, so let's tell ksqlDB we want to create a window of events based on time.
 
 ```sql
 WINDOW TUMBLING (SIZE 60 SECONDS)
@@ -180,7 +180,7 @@ WINDOW TUMBLING (SIZE 60 SECONDS)
 
 A [tumbling window](https://docs.ksqldb.io/en/latest/concepts/time-and-windows-in-ksqldb-queries/#tumbling-window) specifies a bucket of events in a fixed time, non-overlapping, gap-less window. Here we've specified 60 second windows.
 
-Now we have our events aggregated into time buckets with the fields we are interested in, how do we specifiy that a connection has been reset? We use the ksqlDB `WHERE` clause to extract the events we are interested in. Here, we define a connection as reset if the tcp `flags_ack` and `flag_reset` fields are set to "true".
+Now we have our events aggregated into time buckets with the fields we are interested in, how do we specify that a connection has been reset? We use the ksqlDB `WHERE` clause to extract the events we are interested in. Here, we define a connection as reset if the tcp `flags_ack` and `flag_reset` fields are set to "true".
 
 ```
 WHERE 
@@ -198,7 +198,7 @@ And finally we want to count the number of matching events within our window. In
 HAVING count(*) > 10;
 ```
 
-The end result is a `TABLE` that can be queried for information useful in alerting administrators of a potential attack. Executing a [push query](https://docs.ksqldb.io/en/latest/concepts/queries/#push) against the table could be used as part of a monitoring and alerting pipleine. For example:
+The end result is a `TABLE` that can be queried for information useful in alerting administrators of a potential attack. Executing a [push query](https://docs.ksqldb.io/en/latest/concepts/queries/#push) against the table could be used as part of a monitoring and alerting pipeline. For example:
 
 First, for this example, we need to set the `auto.offset.reset` flag to `earliest`, which will ensure that our query runs from the beginning of the topic to produce an expected result. In a production query, you may choose to use `latest` and only capture events going forward from the time you execute the push query.
 
