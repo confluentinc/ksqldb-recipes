@@ -3,9 +3,9 @@ SET 'auto.offset.reset' = 'earliest';
 -- Register the stream of SFDC CDC Opportunities
 CREATE STREAM stream_sfdc_cdc_opportunity_raw
 WITH (
-  KAFKA_TOPIC='sfdc.cdc.raw',
-  VALUE_FORMAT='AVRO',
-  PARTITIONS=6
+  KAFKA_TOPIC = 'sfdc.cdc.raw',
+  VALUE_FORMAT = 'AVRO',
+  PARTITIONS = 6
 );
 
 -- Create a new stream with Replay ID and Change Event Header for just Gap Events

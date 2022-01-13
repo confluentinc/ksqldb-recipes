@@ -13,7 +13,8 @@ CREATE SOURCE CONNECTOR orders WITH (
   'table.include.list'       ='<table_name>',
   'snapshot.mode'            = 'initial',
   'output.data.format'       = 'JSON',
-  'tasks.max'                = '1');
+  'tasks.max'                = '1'
+);
 
 -- Stream of customers
 CREATE SOURCE CONNECTOR customers WITH (
@@ -32,4 +33,5 @@ CREATE SOURCE CONNECTOR customers WITH (
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UCT',
-  'tasks.max'                = '1');
+  'tasks.max'                = '1'
+);
