@@ -3,7 +3,7 @@ CREATE SOURCE CONNECTOR transactions WITH (
   'name'                     = 'recipe-mainframe-offload',
   'kafka.api.key'            = '<my-kafka-api-key>',
   'kafka.api.secret'         = '<my-kafka-api-secret>',
-  'kafka.topic'              = 'transactions',
+  'kafka.topic'              = 'mq_transactions',
   'output.data.format'       = 'JSON',
   'jms.destination.name'     = '<destination-name>',
   'mq.username'              = '<authorized-user>',
