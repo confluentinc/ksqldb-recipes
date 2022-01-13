@@ -1,17 +1,18 @@
 ---
 seo:
   title: Identify Firewall Deny Events from Splunk
-  description: This recipe demonstrates how to use ksqlDB to identify and filter firewall deny events from Splunk
+  description: This recipe demonstrates how to use ksqlDB to identify and filter firewall deny events from Splunk.
 ---
 
 # Identify Firewall Deny Events from Splunk
 
-In the Security Information Event Management (SIEM) world, it's important to have a scalable cyber intelligence platform so you can swiftly identify potential security threats and vulnerabilities.
-However, with each source having its own set of collectors generating different dataflows, there may be too much aggregate information to analyze and take action in a timely manner.
-If you first intercept those data flows from the sources, you can analyze or filter the data in any way before they are sent to an aggregator.
-This recipe demonstrates how to optimize Splunk data ingestion, by using the [Splunk S2S Source connector](https://docs.confluent.io/kafka-connect-splunk-s2s/current/overview.html), which supports receiving data from a Splunk Universal Forwarder (UF) with the Splunk-2-Splunk protocol, to intercept data that would normally be sent to a Splunk HTTP Event Collector (HEC).
-The stream processing application identifies and includes only `deny` events, removes unnecessary fields to reduce message size, and then sends the more targeted set of events to Splunk for indexing.
-You can also extend this solution to intercept data from a variety of SIEM vendors to create a more vendor-independent solution that leverages multiple tools and analytic destinations.
+In the Security Information and Event Management (SIEM) world, it's important to have a scalable cyber intelligence platform so that you can swiftly identify potential security threats and vulnerabilities.
+But with each source having its own set of collectors generating different data flows, there may be too much aggregate information for you to analyze it and take action in a timely manner.
+If you start by intercepting those data flows as they arrive from their sources, you can analyze or filter the data in any way you wish before the data is sent to an aggregator.
+
+This recipe demonstrates how to optimize Splunk data ingestion by using the [Splunk S2S Source connector](https://docs.confluent.io/kafka-connect-splunk-s2s/current/overview.html), which can receive data from a Splunk Universal Forwarder (UF) with the Splunk 2 Splunk protocol, to intercept data that would normally be sent to a Splunk HTTP Event Collector (HEC).
+The stream processing application filters for `deny` events, removes unnecessary fields to reduce message size, and then sends the new, targeted set of events to Splunk for indexing.
+You can also extend this solution to intercept data from a variety of SIEM vendors and create a vendor-independent solution that leverages multiple tools and analytic destinations.
 
 ## Step by step
 
@@ -25,14 +26,15 @@ Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluen
 
 --8<-- "docs/shared/self_managed_connector.md"
 
-This recipe shows the source as Cisco Adaptive Security Appliance (ASA) and the Splunk S2S Source connector should be run on the same host with the Splunk UF, but the same logic can be applied to any type of device.
-To stream ASA data into a Kafka topic called `splunk`, create the `Dockerfile` below to bundle a connect worker with the `kafka-connect-splunk-s2s` connector:
+This recipe shows the source as Cisco Adaptive Security Appliance (ASA) and the Splunk S2S Source connector should be run on the same host as the Splunk UF, but the same logic can be applied to any type of device.
+
+To stream ASA data into a Kafka topic called `splunk`, create the `Dockerfile` below to bundle a Kafka Connect worker with the `kafka-connect-splunk-s2s` connector:
 
 ```text
 --8<-- "docs/cybersecurity/firewall-splunk/Dockerfile"
 ```
 
-Build the custom Docker image with this command:
+Build the custom Docker image using the following `docker` command:
 
 ```
 docker build \
@@ -46,25 +48,25 @@ Next, create a `docker-compose.yml` file with the following content, substitutin
 --8<-- "docs/cybersecurity/firewall-splunk/docker-compose.yml"
 ```
 
-Run the container with the connect worker:
+Run the container with the Connect worker:
 
 ```
 docker-compose up -d
 ```
 
-Create a Splunk S2S Source connector configuration file called `connector-splunk-s2s.config`, specifying the port it should listen to:
+Create a configuration file, `connector-splunk-s2s.config`, for the Splunk S2S Source connector, specifying the port that the connector will use:
 
 ```json
 --8<-- "docs/cybersecurity/firewall-splunk/source.json"
 ```
 
-Submit that connector to the connect worker:
+Submit that connector to the Connect worker:
 
 ```
 curl -X POST -H "Content-Type: application/json" --data @connector-splunk-s2s.config http://localhost:8083/connectors
 ```
 
-Now you should have ASA events being written to the `splunk` topic in Confluent Cloud.
+You now should have ASA events being written to the `splunk` topic in Confluent Cloud.
 
 --8<-- "docs/shared/manual_insert.md"
 
@@ -84,7 +86,7 @@ Now you should have ASA events being written to the `splunk` topic in Confluent 
 
 ### Write the data out
 
-After processing the data, send the more targeted set of events to Splunk for indexing.
+After processing the data, send the targeted set of events to Splunk for indexing:
 
 ```json
 --8<-- "docs/cybersecurity/firewall-splunk/sink.json"
