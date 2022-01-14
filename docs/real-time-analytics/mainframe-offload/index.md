@@ -6,7 +6,7 @@ seo:
 
 # Modernize Mainframes for Real-Time
 
-From order processing to financial transactions, inventory control to payroll, mainframes continue to support many mission-critical applications, still performing the majority of batch processing for many enterprises.
+From order processing to financial transactions, inventory control to payroll, mainframes continue to support many mission-critical applications by continuing to perform the majority of batch processing for many enterprises.
 Data-driven enterprises need real-time access to mainframe data to feed distributed applications, microservices and other business operations, and to enable organizations to use all their data for competitive advantage.
 Confluent enables you to combine data from mainframes with real-time data across the rest of your organization to increase the benefits of both.
 
