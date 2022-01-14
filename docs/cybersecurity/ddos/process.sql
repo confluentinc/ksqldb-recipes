@@ -33,8 +33,7 @@ SELECT
   layers->ip->src, count(*) as count_connection_reset
 FROM network_traffic 
   WINDOW TUMBLING (SIZE 60 SECONDS)
-WHERE 
-  layers->tcp->flags_ack = '1' AND layers->tcp->flags_reset = '1'
+WHERE layers->tcp->flags_ack = '1' AND layers->tcp->flags_reset = '1'
 GROUP BY
   layers->ip->src
 HAVING 
