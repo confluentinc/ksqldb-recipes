@@ -16,7 +16,7 @@ CREATE STREAM mq_transactions (
 CREATE STREAM mq_transactions_normalized WITH (KAFKA_TOPIC = 'mq_transactions_normalized')
   AS SELECT
     dep_account_no,
-    CAST(CONCAT(CAST(dep_balance_dollars AS STRING),'.',CAST(dep_balance_cents AS STRING)) AS DOUBLE) AS BALANCE,
+    CAST(dep_balance_dollars AS DECIMAL(10,2)) + CAST(dep_balance_cents AS DECIMAL(10,2))/CAST(100 as DECIMAL(10,2)) as balance,
     timestamp AS ts_stream,
     UNIX_TIMESTAMP() AS ts_cache,
     (UNIX_TIMESTAMP() - timestamp) AS ts_delta
