@@ -8,7 +8,7 @@
 - [ ] SQL style/syntax consistent to existing recipes
 - [ ] Validate presentation with `python3 -m mkdocs serve`
 - [ ] File structure and content follow [template](https://github.com/confluentinc/ksqldb-recipes/tree/main/template)
-- [ ] Added recipe to [navigation](https://github.com/confluentinc/ksqldb-recipes/blob/main/mkdocs.yml)
+- [ ] Recipe added to [navigation](https://github.com/confluentinc/ksqldb-recipes/blob/main/mkdocs.yml): comment out until phase release
 - [ ] SQL style consistent to existing recipes
 - [ ] Spell check, e.g. using `aspell`
 - [ ] Source connector's auto topic naming convention works with the ksqlDB app values for `KAFKA_TOPIC`
