@@ -140,7 +140,7 @@ WITH (
 );
 ```
 
-The `KAFKA_TOPIC` property is required, and indicates the topic that will back the stream. The topic must either exist in Kafka, or the `PARTITIONS` property must be provided as well. If you're creating a stream for a topic that already exists, like would be the case when using a connector to source event data, you should remove the `PARTITIONS` property from this command.
+--8<-- "docs/shared/ksqldb_with_partitions_info.md"
 
 We are also indicating the data format of the events on the topic with the `VALUE_FORMAT` property. Finally, the `TIMESTAMP` property allows us to indicate a field in the event that can be used as the rowtime of the event. This would allow us to perform time-based operations based on the actual event time as provided by the captured packet data.
 
