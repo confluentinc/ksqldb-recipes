@@ -763,7 +763,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
-<p>Optional: If you do not have a real data source to connect to with properly formatted data, or you just want to execute this recipe without external dependencies, no worries!  In the next section, we'll show you how to insert data into the streams for testing using ksqlDB <code>INSERT INTO</code>.</p>
+<p>Optional: If you cannot connect to a real datasource with properly formatted data, or if you just want to execute this recipe without external dependencies, no worries! In the next section, you'll see how to test the recipe by inserting mock data into the streams, using the ksqlDB command <code>INSERT INTO</code>.</p>
 <h3 id="ksqldb-code">ksqlDB code<a class="headerlink" href="#ksqldb-code" title="Permanent link">&para;</a></h3>
 <p>The application breaks up the stream of messages into individual conversations and puts each of those conversations in time order, keeping track of the sender as we go.
 Then it builds up the function <code>(old_state, element) =&gt; ...</code>, which considers different states.</p>
@@ -809,8 +809,7 @@ Then it builds up the function <code>(old_state, element) =&gt; ...</code>, whic
 <span class="normal">35</span>
 <span class="normal">36</span>
 <span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
 
 <span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">messages</span> <span class="p">(</span>
   <span class="n">send_id</span> <span class="nb">BIGINT</span><span class="p">,</span>
@@ -826,8 +825,7 @@ Then it builds up the function <code>(old_state, element) =&gt; ...</code>, whic
 <span class="k">SELECT</span>
   <span class="n">ARRAY_JOIN</span><span class="p">(</span><span class="n">ARRAY_SORT</span><span class="p">(</span><span class="nb">ARRAY</span> <span class="p">[</span><span class="n">send_id</span><span class="p">,</span> <span class="n">recv_id</span><span class="p">]),</span> <span class="s1">&#39;&lt;&gt;&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">conversation_id</span>
 <span class="k">FROM</span> <span class="n">messages</span>
-<span class="k">GROUP</span> <span class="k">BY</span>
-  <span class="n">ARRAY_JOIN</span><span class="p">(</span><span class="n">ARRAY_SORT</span><span class="p">(</span><span class="nb">ARRAY</span> <span class="p">[</span><span class="n">send_id</span><span class="p">,</span> <span class="n">recv_id</span><span class="p">]),</span> <span class="s1">&#39;&lt;&gt;&#39;</span><span class="p">)</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">ARRAY_JOIN</span><span class="p">(</span><span class="n">ARRAY_SORT</span><span class="p">(</span><span class="nb">ARRAY</span> <span class="p">[</span><span class="n">send_id</span><span class="p">,</span> <span class="n">recv_id</span><span class="p">]),</span> <span class="s1">&#39;&lt;&gt;&#39;</span><span class="p">)</span>
 <span class="k">HAVING</span>
   <span class="n">REDUCE</span><span class="p">(</span>
     <span class="n">ENTRIES</span><span class="p">(</span>
@@ -875,7 +873,7 @@ Then it builds up the function <code>(old_state, element) =&gt; ...</code>, whic
 </td></tr></table>
 <h2 id="cleanup">Cleanup<a class="headerlink" href="#cleanup" title="Permanent link">&para;</a></h2>
 <p>To clean up the ksqlDB resources created by this recipe, use the ksqlDB commands shown below (substitute stream or topic name, as appropriate).
-By including the <code>DELETE TOPIC</code> clause, the stream or table's source topic is also deleted, asynchronously.</p>
+By including the <code>DELETE TOPIC</code> clause, the topic backing the stream or table is also deleted, asynchronously.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>DROP STREAM IF EXISTS &lt;stream_name&gt; DELETE TOPIC;
 DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
@@ -906,14 +904,12 @@ chatting), and use that to group all the events:</p>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">conversations_split</span> <span class="k">AS</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">conversations_split</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="n">ARRAY_JOIN</span><span class="p">(</span><span class="n">ARRAY_SORT</span><span class="p">(</span><span class="nb">ARRAY</span> <span class="p">[</span><span class="n">send_id</span><span class="p">,</span> <span class="n">recv_id</span><span class="p">]),</span> <span class="s1">&#39;&lt;&gt;&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">conversation_id</span><span class="p">,</span>
     <span class="n">COLLECT_LIST</span><span class="p">(</span><span class="n">rowtime</span><span class="p">)</span> <span class="k">AS</span> <span class="n">message_times</span>
   <span class="k">FROM</span> <span class="n">messages</span>
-  <span class="k">GROUP</span> <span class="k">BY</span> 
-    <span class="n">ARRAY_JOIN</span><span class="p">(</span><span class="n">ARRAY_SORT</span><span class="p">(</span><span class="nb">ARRAY</span> <span class="p">[</span><span class="n">send_id</span><span class="p">,</span> <span class="n">recv_id</span><span class="p">]),</span> <span class="s1">&#39;&lt;&gt;&#39;</span><span class="p">);</span>
+  <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">ARRAY_JOIN</span><span class="p">(</span><span class="n">ARRAY_SORT</span><span class="p">(</span><span class="nb">ARRAY</span> <span class="p">[</span><span class="n">send_id</span><span class="p">,</span> <span class="n">recv_id</span><span class="p">]),</span> <span class="s1">&#39;&lt;&gt;&#39;</span><span class="p">);</span>
 </code></pre></div>
 </td></tr></table>
 <p>Querying that looks like this:</p>
@@ -945,16 +941,15 @@ directions.</p>
 <p>We do this in two steps. First, we'll enhance our <code>message_times</code> column to
 build up a map with the <code>rowtime</code> as the key and the <code>send_id</code> as the
 value:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">conversations_mapped</span> <span class="k">AS</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">conversations_mapped</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="n">ARRAY_JOIN</span><span class="p">(</span><span class="n">ARRAY_SORT</span><span class="p">(</span><span class="nb">ARRAY</span> <span class="p">[</span><span class="n">send_id</span><span class="p">,</span> <span class="n">recv_id</span><span class="p">]),</span> <span class="s1">&#39;&lt;&gt;&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">conversation_id</span><span class="p">,</span>
     <span class="n">AS_MAP</span><span class="p">(</span>
@@ -962,8 +957,7 @@ value:</p>
       <span class="n">COLLECT_LIST</span><span class="p">(</span><span class="n">send_id</span><span class="p">)</span>
     <span class="p">)</span> <span class="k">AS</span> <span class="n">message_times</span>
   <span class="k">FROM</span> <span class="n">messages</span>
-  <span class="k">GROUP</span> <span class="k">BY</span> 
-    <span class="n">ARRAY_JOIN</span><span class="p">(</span><span class="n">ARRAY_SORT</span><span class="p">(</span><span class="nb">ARRAY</span> <span class="p">[</span><span class="n">send_id</span><span class="p">,</span> <span class="n">recv_id</span><span class="p">]),</span> <span class="s1">&#39;&lt;&gt;&#39;</span><span class="p">);</span>
+  <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">ARRAY_JOIN</span><span class="p">(</span><span class="n">ARRAY_SORT</span><span class="p">(</span><span class="nb">ARRAY</span> <span class="p">[</span><span class="n">send_id</span><span class="p">,</span> <span class="n">recv_id</span><span class="p">]),</span> <span class="s1">&#39;&lt;&gt;&#39;</span><span class="p">);</span>
 </code></pre></div>
 </td></tr></table>
 <p>Querying that looks like this:</p>
@@ -999,8 +993,7 @@ order. Let's turn the <code>message_times</code> map back into a sorted list wit
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">conversations_sequenced</span> <span class="k">AS</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">conversations_sequenced</span> <span class="k">AS</span>
   <span class="k">SELECT</span>
     <span class="n">ARRAY_JOIN</span><span class="p">(</span><span class="n">ARRAY_SORT</span><span class="p">(</span><span class="nb">ARRAY</span> <span class="p">[</span><span class="n">send_id</span><span class="p">,</span> <span class="n">recv_id</span><span class="p">]),</span> <span class="s1">&#39;&lt;&gt;&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">conversation_id</span><span class="p">,</span>
     <span class="n">ENTRIES</span><span class="p">(</span>
@@ -1011,8 +1004,7 @@ order. Let's turn the <code>message_times</code> map back into a sorted list wit
         <span class="k">true</span>
     <span class="p">)</span> <span class="k">AS</span> <span class="n">message_times</span>
   <span class="k">FROM</span> <span class="n">messages</span>
-  <span class="k">GROUP</span> <span class="k">BY</span> 
-    <span class="n">ARRAY_JOIN</span><span class="p">(</span><span class="n">ARRAY_SORT</span><span class="p">(</span><span class="nb">ARRAY</span> <span class="p">[</span><span class="n">send_id</span><span class="p">,</span> <span class="n">recv_id</span><span class="p">]),</span> <span class="s1">&#39;&lt;&gt;&#39;</span><span class="p">);</span>
+  <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">ARRAY_JOIN</span><span class="p">(</span><span class="n">ARRAY_SORT</span><span class="p">(</span><span class="nb">ARRAY</span> <span class="p">[</span><span class="n">send_id</span><span class="p">,</span> <span class="n">recv_id</span><span class="p">]),</span> <span class="s1">&#39;&lt;&gt;&#39;</span><span class="p">);</span>
 </code></pre></div>
 </td></tr></table>
 <p>Querying that looks like this:</p>

@@ -16,7 +16,7 @@
     
     
       
-        <title>Optimize omni-channel inventory - Stream Processing Use Cases</title>
+        <title>Modernize Messaging Workloads - Stream Processing Use Cases</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#optimize-omni-channel-inventory" class="md-skip">
+        <a href="#modernize-messaging-workloads" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Optimize omni-channel inventory
+              Modernize Messaging Workloads
             
           </span>
         </div>
@@ -245,7 +245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../customer-360/online-dating/" class="md-nav__link">
+      <a href="../online-dating/" class="md-nav__link">
         Match users for online dating
       </a>
     </li>
@@ -257,7 +257,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../customer-360/clickstream/" class="md-nav__link">
+      <a href="../clickstream/" class="md-nav__link">
         Understand user behavior with clickstream data
       </a>
     </li>
@@ -269,7 +269,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../customer-360/aviation/" class="md-nav__link">
+      <a href="../aviation/" class="md-nav__link">
         Notify passengers of flight updates
       </a>
     </li>
@@ -281,7 +281,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../customer-360/loyalty-rewards/" class="md-nav__link">
+      <a href="../loyalty-rewards/" class="md-nav__link">
         Build customer loyalty programs
       </a>
     </li>
@@ -342,14 +342,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
       
       <label class="md-nav__link" for="__nav_5">
         Predictive Analytics
@@ -367,7 +365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fleet_management/" class="md-nav__link">
+      <a href="../../predictive-analytics/fleet_management/" class="md-nav__link">
         Optimize fleet management
       </a>
     </li>
@@ -377,85 +375,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Optimize omni-channel inventory
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../predictive-analytics/inventory/" class="md-nav__link">
         Optimize omni-channel inventory
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#step-by-step" class="md-nav__link">
-    Step by step
-  </a>
-  
-    <nav class="md-nav" aria-label="Step by step">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-up-your-environment" class="md-nav__link">
-    Set up your environment
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#read-the-data-in" class="md-nav__link">
-    Read the data in
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ksqldb-code" class="md-nav__link">
-    ksqlDB code
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cleanup" class="md-nav__link">
-    Cleanup
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -623,19 +547,20 @@
               
                 
                 
-                <h1 id="optimize-omni-channel-inventory">Optimize Omni-channel Inventory<a class="headerlink" href="#optimize-omni-channel-inventory" title="Permanent link">&para;</a></h1>
-<p>Having an up-to-date, real-time view of inventory on every item is essential in today's online marketplaces. This helps businesses maintain the optimum level of inventory—not too much and not too little—so that they can meet customer demand while minimizing inventory holding costs. This recipe demonstrates how to track and update inventory in real time, so you always have an up-to-date snapshot of your stock for both your customers and merchandising teams.</p>
-<p><img alt="inventory" src="../../img/inventory.jpg" /></p>
+                <h1 id="modernize-messaging-workloads">Modernize Messaging Workloads<a class="headerlink" href="#modernize-messaging-workloads" title="Permanent link">&para;</a></h1>
+<p>Traditional messaging systems like Message Queues (MQs), Enterprise Service Buses (ESBs), and Extract, Transform and Load (ETL) tools have been widely used for decades to handle message distribution and inter-service communication across distributed applications.
+However, they can no longer keep up with the needs of modern applications across hybrid and multi cloud environments for asynchronicity, heterogeneous datasets and high volume throughput.
+Designed as monolithic systems, they are riddled with many challenges: they lack persistence or the ability to efficiently handle highly scalable, efficient and reliable message delivery.
+If you instead want to do real-time interactions and in-flight stream processing that modern applications demand, you can use a connector to read critical data from legacy messaging systems into Kafka and then do the processing there.</p>
 <h2 id="step-by-step">Step by step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h2>
 <h3 id="set-up-your-environment">Set up your environment<a class="headerlink" href="#set-up-your-environment" title="Permanent link">&para;</a></h3>
-<p>Provision a Kafka cluster in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes&amp;utm_campaign=inventory">Confluent Cloud</a>.</p>
+<p>Provision a Kafka cluster in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes&amp;utm_campaign=messaging_modernization">Confluent Cloud</a>.</p>
 <p>Once your Confluent Cloud cluster is available, create a <a href="https://ksqldb.io/">ksqlDB</a> application. ksqlDB supports a <code>SQL</code> language for processing the data in real time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
 <h3 id="read-the-data-in">Read the data in<a class="headerlink" href="#read-the-data-in" title="Permanent link">&para;</a></h3>
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to quickly connect to popular data sources and end systems in the cloud.
 This recipe shows sample connector configuration(s) below, each of which should be created separately.
 You can also substitute your own connectors to connect to any <a href="https://docs.confluent.io/cloud/current/connectors/index.html">supported data source</a>.</p>
-<p>For this recipe, we are interested in knowing each event for an item that affects its quantity.
-This creates a stream of events, where each event results in the addition or removal of inventory.</p>
+<p>The concept in this recipe can be applicable to any of the traditional message systems (RabbitMQ, Tibco, IBM MQ, ActiveMQ, etc.), and this specific recipe uses the <a href="https://docs.confluent.io/cloud/current/connectors/cc-rabbitmq-source.html">RabbitMQ Source Connector for Confluent Cloud</a> which uses the AMQP protocol to communicate with RabbitMQ servers and persists the data in a Kafka topic.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -647,31 +572,23 @@ This creates a stream of events, where each event results in the addition or rem
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
-  <span class="nt">&quot;connector.class&quot;</span>          <span class="p">:</span> <span class="s2">&quot;PostgresSource&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;recipe-postgres-inventory&quot;</span><span class="p">,</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;connector.class&quot;</span>          <span class="p">:</span> <span class="s2">&quot;RabbitMQSource&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;RabbitMQSource_0&quot;</span><span class="p">,</span>
   <span class="nt">&quot;kafka.api.key&quot;</span>            <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-key&gt;&quot;</span><span class="p">,</span>
   <span class="nt">&quot;kafka.api.secret&quot;</span>         <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-secret&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.host&quot;</span>          <span class="p">:</span> <span class="s2">&quot;&lt;my-database-endpoint&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.port&quot;</span>          <span class="p">:</span> <span class="s2">&quot;5432&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.user&quot;</span>          <span class="p">:</span> <span class="s2">&quot;postgres&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.password&quot;</span>      <span class="p">:</span> <span class="s2">&quot;&lt;my-database-password&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;db.name&quot;</span>                  <span class="p">:</span> <span class="s2">&quot;&lt;db-name&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;table.whitelist&quot;</span>          <span class="p">:</span> <span class="s2">&quot;inventory&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;timestamp.column.name&quot;</span>    <span class="p">:</span> <span class="s2">&quot;created_at&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;output.data.format&quot;</span>       <span class="p">:</span> <span class="s2">&quot;JSON&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;db.timezone&quot;</span>              <span class="p">:</span> <span class="s2">&quot;UTC&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.topic&quot;</span>              <span class="p">:</span> <span class="nt">&quot;from-rabbit&quot;</span>
+  <span class="nt">&quot;rabbitmq.host&quot;</span>            <span class="p">:</span> <span class="s2">&quot;&lt;host&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;rabbitmq.username&quot;</span>        <span class="p">:</span> <span class="s2">&quot;&lt;username&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;rabbitmq.password&quot;</span>        <span class="p">:</span> <span class="s2">&quot;&lt;password&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;rabbitmq.queue&quot;</span>           <span class="p">:</span> <span class="s2">&quot;transactions&quot;</span><span class="p">,</span>
   <span class="nt">&quot;tasks.max&quot;</span>                <span class="p">:</span> <span class="s2">&quot;1&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
 <p>Optional: If you cannot connect to a real datasource with properly formatted data, or if you just want to execute this recipe without external dependencies, no worries! In the next section, you'll see how to test the recipe by inserting mock data into the streams, using the ksqlDB command <code>INSERT INTO</code>.</p>
 <h3 id="ksqldb-code">ksqlDB code<a class="headerlink" href="#ksqldb-code" title="Permanent link">&para;</a></h3>
-<p>Create a ksqlDB <code>TABLE</code>, which is a mutable, partitioned collection that models change over time and represents what is true as of now.</p>
+<p>Now you can process the data in a variety of ways.</p>
 <hr />
 <p><strong>NOTE:</strong>
 <em>The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.</em>
@@ -698,27 +615,49 @@ This creates a stream of events, where each event results in the addition or rem
 <span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
-<span class="normal">22</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
 
-<span class="c1">-- Create stream of inventory</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">inventory_stream</span> <span class="p">(</span>
-  <span class="n">id</span> <span class="n">STRING</span> <span class="k">KEY</span><span class="p">,</span>
-  <span class="n">item</span> <span class="n">STRING</span><span class="p">,</span>
-  <span class="n">quantity</span> <span class="nb">INTEGER</span>
+<span class="c1">-- Register the initial stream</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+                      <span class="k">timestamp</span> <span class="nb">BIGINT</span><span class="p">,</span>
+                      <span class="k">transaction</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+                      <span class="n">amount</span> <span class="nb">VARCHAR</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
-  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;inventory&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;from-rabbit&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
 <span class="p">);</span>
 
-<span class="c1">-- Create stateful table with up-to-date information of inventory availability</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">inventory_stream_table</span>
-    <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;inventory_table&#39;</span><span class="p">)</span> <span class="k">AS</span>
-  <span class="k">SELECT</span>
-    <span class="n">item</span><span class="p">,</span>
-    <span class="k">SUM</span><span class="p">(</span><span class="n">quantity</span><span class="p">)</span> <span class="k">AS</span> <span class="n">item_quantity</span>
-  <span class="k">FROM</span> <span class="n">inventory_stream</span>
-  <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">item</span>
+<span class="c1">-- Convert the stream to typed fields</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">rabbit_transactions</span> 
+  <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;rabbit_transactions&#39;</span><span class="p">)</span> <span class="k">AS</span>
+  <span class="k">SELECT</span> <span class="k">TRANSACTION</span> <span class="k">AS</span> <span class="n">TX_TYPE</span><span class="p">,</span>
+         <span class="k">TIMESTAMP</span> <span class="k">AS</span> <span class="n">TX_TIMESTAMP</span><span class="p">,</span>
+         <span class="k">SUBSTRING</span><span class="p">(</span><span class="n">AMOUNT</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">CURRENCY</span><span class="p">,</span>
+         <span class="k">CAST</span><span class="p">(</span><span class="k">SUBSTRING</span><span class="p">(</span><span class="n">AMOUNT</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">LEN</span><span class="p">(</span><span class="n">AMOUNT</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">AS</span> <span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="k">AS</span> <span class="n">TX_AMOUNT</span><span class="p">,</span>
+         <span class="k">CAST</span><span class="p">(</span><span class="n">USERID</span> <span class="k">AS</span> <span class="nb">INT</span><span class="p">)</span> <span class="k">AS</span> <span class="n">USERID</span>
+  <span class="k">FROM</span> <span class="n">rabbit</span>
+  <span class="k">WHERE</span> <span class="k">TIMESTAMP</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
+  <span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
+
+<span class="c1">-- Count the number of transactions</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">number_transactions</span>
+  <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;number_transactions&#39;</span><span class="p">)</span> <span class="k">AS</span>
+  <span class="k">SELECT</span> <span class="n">USERID</span><span class="p">,</span>
+         <span class="k">COUNT</span><span class="p">(</span><span class="n">USERID</span><span class="p">)</span>
+  <span class="k">FROM</span> <span class="n">rabbit_transactions</span>
+  <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">USERID</span>
   <span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
 </code></pre></div>
 </td></tr></table>
@@ -729,17 +668,13 @@ This creates a stream of events, where each event results in the addition or rem
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">inventory_stream</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">quantity</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;Apple Magic Mouse 2&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">inventory_stream</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">quantity</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;iPhoneX&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">inventory_stream</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">quantity</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;MacBookPro13&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">inventory_stream</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">quantity</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;iPad4&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">inventory_stream</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">quantity</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;Apple Pencil&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">inventory_stream</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">quantity</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;PhoneX&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">inventory_stream</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">quantity</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;iPad4&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">inventory_stream</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">quantity</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;MacBookPro13&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">inventory_stream</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">quantity</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;iPad4&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="k">transaction</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;33&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;CREDIT&#39;</span><span class="p">,</span> <span class="s1">&#39;$141.73&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="k">transaction</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;89&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;CREDIT&#39;</span><span class="p">,</span> <span class="s1">&#39;$99.28&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="k">transaction</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;61&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;CREDIT&#39;</span><span class="p">,</span> <span class="s1">&#39;$31.29&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="k">transaction</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;33&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;DEBIT&#39;</span><span class="p">,</span> <span class="s1">&#39;$121.50&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="k">transaction</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;61&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;CREDIT&#39;</span><span class="p">,</span> <span class="s1">&#39;$105.00&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="k">transaction</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;89&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;CREDIT&#39;</span><span class="p">,</span> <span class="s1">&#39;$55.13&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="k">transaction</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;33&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;DEBIT&#39;</span><span class="p">,</span> <span class="s1">&#39;$67.14&#39;</span><span class="p">);</span>
 </code></pre></div>
 </td></tr></table>
 <h3 id="cleanup">Cleanup<a class="headerlink" href="#cleanup" title="Permanent link">&para;</a></h3>
@@ -768,41 +703,6 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
       
         
 <footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-        
-        <a href="../fleet_management/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Optimize fleet management" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Optimize fleet management
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../../real-time-analytics/datacenter/" class="md-footer__link md-footer__link--next" aria-label="Next: Analyze datacenter power usage" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Analyze datacenter power usage
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

@@ -940,7 +940,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
 </td></tr></table>
 <h3 id="cleanup">Cleanup<a class="headerlink" href="#cleanup" title="Permanent link">&para;</a></h3>
 <p>To clean up the ksqlDB resources created by this recipe, use the ksqlDB commands shown below (substitute stream or topic name, as appropriate).
-By including the <code>DELETE TOPIC</code> clause, the stream or table's source topic is also deleted, asynchronously.</p>
+By including the <code>DELETE TOPIC</code> clause, the topic backing the stream or table is also deleted, asynchronously.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>DROP STREAM IF EXISTS &lt;stream_name&gt; DELETE TOPIC;
 DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;

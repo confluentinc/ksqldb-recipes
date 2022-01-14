@@ -16,7 +16,7 @@
     
     
       
-        <title>Detect and analyze SSH attacks - Stream Processing Use Cases</title>
+        <title>Identify Firewall Deny Events from Splunk - Stream Processing Use Cases</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#detect-and-analyze-ssh-attacks" class="md-skip">
+        <a href="#identify-firewall-deny-events-from-splunk" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Detect and analyze SSH attacks
+              Identify Firewall Deny Events from Splunk
             
           </span>
         </div>
@@ -300,14 +300,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
       
       <label class="md-nav__link" for="__nav_4">
         Cybersecurity
@@ -323,85 +321,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Detect and analyze SSH attacks
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../SSH-attack/" class="md-nav__link">
         Detect and analyze SSH attacks
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#step-by-step" class="md-nav__link">
-    Step by step
-  </a>
-  
-    <nav class="md-nav" aria-label="Step by step">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-up-your-environment" class="md-nav__link">
-    Set up your environment
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#read-the-data-in" class="md-nav__link">
-    Read the data in
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ksqldb-code" class="md-nav__link">
-    ksqlDB code
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cleanup" class="md-nav__link">
-    Cleanup
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -599,6 +523,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#write-the-data-out" class="md-nav__link">
+    Write the data out
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cleanup" class="md-nav__link">
     Cleanup
   </a>
@@ -623,18 +554,23 @@
               
                 
                 
-                <h1 id="detect-and-analyze-ssh-attacks">Detect and analyze SSH attacks<a class="headerlink" href="#detect-and-analyze-ssh-attacks" title="Permanent link">&para;</a></h1>
-<p>There are lots of ways SSH can be abused, but one of the most straightforward ways to detect suspicious activity is to monitor for rejected logins. This recipe processes Syslog data to detect failed logins, while streaming out those pairs of usernames and IP addresses. With ksqlDB, you can filter and react to unwanted events in real time to minimize damage rather than performing historical analysis of Syslog data from cold storage.</p>
-<p><img alt="SSH-attack" src="../../img/ssh-attack.jpg" /></p>
+                <h1 id="identify-firewall-deny-events-from-splunk">Identify Firewall Deny Events from Splunk<a class="headerlink" href="#identify-firewall-deny-events-from-splunk" title="Permanent link">&para;</a></h1>
+<p>In the Security Information and Event Management (SIEM) world, it's important to have a scalable cyber intelligence platform so that you can swiftly identify potential security threats and vulnerabilities.
+But with each source having its own set of collectors generating different data flows, there may be too much aggregate information for you to analyze it and take action in a timely manner.
+If you start by intercepting those data flows as they arrive from their sources, you can analyze or filter the data in any way you wish before the data is sent to an aggregator.</p>
+<p>This recipe demonstrates how to optimize Splunk data ingestion by using the <a href="https://docs.confluent.io/kafka-connect-splunk-s2s/current/overview.html">Splunk S2S Source connector</a>, which can receive data from a Splunk Universal Forwarder (UF) with the Splunk 2 Splunk protocol, to intercept data that would normally be sent to a Splunk HTTP Event Collector (HEC).
+The stream processing application filters for <code>deny</code> events, removes unnecessary fields to reduce message size, and then sends the new, targeted set of events to Splunk for indexing.
+You can also extend this solution to intercept data from a variety of SIEM vendors and create a vendor-independent solution that leverages multiple tools and analytic destinations.</p>
 <h2 id="step-by-step">Step by step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h2>
 <h3 id="set-up-your-environment">Set up your environment<a class="headerlink" href="#set-up-your-environment" title="Permanent link">&para;</a></h3>
-<p>Provision a Kafka cluster in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes&amp;utm_campaign=ssh_attack">Confluent Cloud</a>.</p>
+<p>Provision a Kafka cluster in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes&amp;utm_campaign=firewall">Confluent Cloud</a>.</p>
 <p>Once your Confluent Cloud cluster is available, create a <a href="https://ksqldb.io/">ksqlDB</a> application. ksqlDB supports a <code>SQL</code> language for processing the data in real time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
 <h3 id="read-the-data-in">Read the data in<a class="headerlink" href="#read-the-data-in" title="Permanent link">&para;</a></h3>
 <p>Confluent Cloud offers pre-built, fully managed <a href="https://docs.confluent.io/cloud/current/connectors/index.html">connectors</a> that make it easy to quickly connect to popular datasources and end systems in the cloud.
 However, if you want to stream specific events that don't have an available connector in Confluent Cloud, you can run your own connector and send the data to your Kafka cluster.
 This recipe shows how you can run your own connector locally.</p>
-<p>To stream syslog data into a Kafka topic called <code>syslog</code>, create the <code>Dockerfile</code> below to bundle a Kafka Connect worker with the <code>kafka-connect-syslog</code> connector:</p>
+<p>This recipe shows the source as Cisco Adaptive Security Appliance (ASA) and the Splunk S2S Source connector should be run on the same host as the Splunk UF, but the same logic can be applied to any type of device.</p>
+<p>To stream ASA data into a Kafka topic called <code>splunk</code>, create the <code>Dockerfile</code> below to bundle a Kafka Connect worker with the <code>kafka-connect-splunk-s2s</code> connector:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -643,14 +579,14 @@ This recipe shows how you can run your own connector locally.</p>
 
 ENV CONNECT_PLUGIN_PATH=&quot;/usr/share/java,/usr/share/confluent-hub-components&quot;
 
-RUN confluent-hub install --no-prompt confluentinc/kafka-connect-syslog:1.3.4
+RUN confluent-hub install --no-prompt confluentinc/kafka-connect-splunk-s2s:1.0.5
 </code></pre></div>
 </td></tr></table>
-<p>Build the custom Docker image with this command:</p>
+<p>Build the custom Docker image using the following <code>docker</code> command:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker build \
-   -t localbuild/connect_distributed_with_syslog:1.3.4 \
+   -t localbuild/connect_distributed_with_splunk-s2s:1.0.5 \
    -f Dockerfile .
 </code></pre></div>
 </td></tr></table>
@@ -698,7 +634,7 @@ version: &#39;2&#39;
 services:
 
   connect:
-    image: localbuild/connect_distributed_with_syslog:1.3.4
+    image: localbuild/connect_distributed_with_splunk-s2s:1.0.5
     hostname: connect
     container_name: connect
     ports:
@@ -734,36 +670,33 @@ services:
       CONNECT_CONSUMER_SASL_MECHANISM: PLAIN
 </code></pre></div>
 </td></tr></table>
-<p>Run the container with this:</p>
+<p>Run the container with the Connect worker:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>docker-compose up -d
 </code></pre></div>
 </td></tr></table>
-<p>Create a Syslog Source connector configuration file called <code>connector-syslog.config</code>:</p>
+<p>Create a configuration file, <code>connector-splunk-s2s.config</code>, for the Splunk S2S Source connector, specifying the port that the connector will use:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
-  <span class="nt">&quot;connector.class&quot;</span>          <span class="p">:</span> <span class="s2">&quot;io.confluent.connect.syslog.SyslogSourceConnector&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;recipe-syslog-source&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;syslog.port&quot;</span>              <span class="p">:</span> <span class="s2">&quot;&lt;port&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;syslog.listener&quot;</span>          <span class="p">:</span> <span class="s2">&quot;TCP&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;kafka.topic&quot;</span>              <span class="p">:</span> <span class="s2">&quot;syslog&quot;</span><span class="p">,</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;connector.class&quot;</span>          <span class="p">:</span> <span class="s2">&quot;io.confluent.connect.splunk.s2s.SplunkS2SSourceConnector&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;recipe-splunk-s2s-source&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;splunk.s2s.port&quot;</span>          <span class="p">:</span> <span class="s2">&quot;&lt;port&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.topic&quot;</span>              <span class="p">:</span> <span class="s2">&quot;splunk&quot;</span><span class="p">,</span>
   <span class="nt">&quot;tasks.max&quot;</span>                <span class="p">:</span> <span class="s2">&quot;1&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
-<p>Submit that connector to the connect worker:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -X POST -H &quot;Content-Type: application/json&quot; --data @connector-syslog.config http://localhost:8083/connectors
+<p>Submit that connector to the Connect worker:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>curl -X POST -H &quot;Content-Type: application/json&quot; --data @connector-splunk-s2s.config http://localhost:8083/connectors
 </code></pre></div>
 </td></tr></table>
-<p>Now you should have Syslog messages being written to the <code>syslog</code> topic in Confluent Cloud.</p>
+<p>You now should have ASA events being written to the <code>splunk</code> topic in Confluent Cloud.</p>
 <p>Optional: If you cannot connect to a real datasource with properly formatted data, or if you just want to execute this recipe without external dependencies, no worries! In the next section, you'll see how to test the recipe by inserting mock data into the streams, using the ksqlDB command <code>INSERT INTO</code>.</p>
 <h3 id="ksqldb-code">ksqlDB code<a class="headerlink" href="#ksqldb-code" title="Permanent link">&para;</a></h3>
-<p>Process the syslog events by flagging events with invalid users, stripping out all the other unnecessary fields, and creating just a stream of relevant information. There are many ways to customize the resulting stream to fit the business needs: this example also demonstrates how to enrich the stream with a new field <code>FACILITY_DESCRIPTION</code> with human-readable content.</p>
 <hr />
 <p><strong>NOTE:</strong>
 <em>The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.</em>
@@ -804,42 +737,48 @@ services:
 <span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
-<span class="normal">36</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
 
-<span class="c1">-- Extract relevant fields from log messages</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">syslog</span> <span class="p">(</span>
-  <span class="n">ts</span> <span class="nb">varchar</span><span class="p">,</span> 
-  <span class="k">host</span> <span class="nb">varchar</span><span class="p">,</span>
-  <span class="n">facility</span> <span class="nb">int</span><span class="p">,</span>
-  <span class="n">message</span> <span class="nb">varchar</span><span class="p">,</span>
-  <span class="n">remote_address</span> <span class="nb">varchar</span> 
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">splunk</span> <span class="p">(</span>
+  <span class="n">event</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+  <span class="k">time</span> <span class="nb">BIGINT</span><span class="p">,</span>
+  <span class="k">host</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+  <span class="k">source</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+  <span class="k">index</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+  <span class="n">sourcetype</span> <span class="nb">VARCHAR</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;syslog&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;splunk-s2s-events&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span>
   <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
-<span class="c1">-- Create actionable stream of SSH attacks, filtering syslog messages where user is invalid,</span>
-<span class="c1">-- and enriched with user and IP</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">ssh_attacks</span> <span class="k">AS</span>
-  <span class="k">SELECT</span>
-    <span class="n">FORMAT_TIMESTAMP</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="s1">&#39;yyyy-MM-dd HH:mm:ss&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">syslog_timestamp</span><span class="p">,</span>
-    <span class="k">host</span><span class="p">,</span>
-    <span class="n">facility</span><span class="p">,</span>
-    <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">facility</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="s1">&#39;kernel messages&#39;</span>
-         <span class="k">WHEN</span> <span class="n">facility</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">THEN</span> <span class="s1">&#39;user-level messages&#39;</span>
-         <span class="k">WHEN</span> <span class="n">facility</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">THEN</span> <span class="s1">&#39;mail system&#39;</span>
-         <span class="k">WHEN</span> <span class="n">facility</span> <span class="o">=</span> <span class="mi">3</span> <span class="k">THEN</span> <span class="s1">&#39;system daemons&#39;</span>
-         <span class="k">WHEN</span> <span class="n">facility</span> <span class="o">=</span> <span class="mi">4</span> <span class="k">THEN</span> <span class="s1">&#39;security/authorization messages&#39;</span>
-         <span class="k">WHEN</span> <span class="n">facility</span> <span class="o">=</span> <span class="mi">5</span> <span class="k">THEN</span> <span class="s1">&#39;messages generated internally by syslogd&#39;</span>
-         <span class="k">WHEN</span> <span class="n">facility</span> <span class="o">=</span> <span class="mi">6</span> <span class="k">THEN</span> <span class="s1">&#39;line printer subsystem&#39;</span>
-         <span class="k">ELSE</span> <span class="s1">&#39;&lt;unknown&gt;&#39;</span>
-       <span class="k">END</span> <span class="k">AS</span> <span class="n">facility_description</span><span class="p">,</span>
-    <span class="n">SPLIT</span><span class="p">(</span><span class="k">REPLACE</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s1">&#39;Invalid user &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39; from &#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="k">AS</span> <span class="n">attack_user</span><span class="p">,</span>
-    <span class="n">remote_address</span> <span class="k">AS</span> <span class="n">attack_ip</span>
-  <span class="k">FROM</span> <span class="n">syslog</span>
-  <span class="k">WHERE</span> <span class="n">message</span> <span class="k">LIKE</span> <span class="s1">&#39;Invalid user%&#39;</span>
-  <span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
+<span class="c1">-- Split message into array</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">splunk_parsed</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;splunk_parsed&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="k">SELECT</span>
+  <span class="k">time</span><span class="p">,</span>
+  <span class="k">host</span><span class="p">,</span>
+  <span class="n">sourcetype</span><span class="p">,</span>
+  <span class="n">REGEXP_SPLIT_TO_ARRAY</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">splunk</span>
+<span class="k">WHERE</span> <span class="n">sourcetype</span> <span class="o">=</span> <span class="s1">&#39;cisco:asa&#39;</span>
+<span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
+
+<span class="c1">-- Filter messages for Cisco ASA and where action is Deny</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">splunk_filtered</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;splunk_filtered&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="k">SELECT</span>
+  <span class="k">time</span><span class="p">,</span>
+  <span class="k">host</span><span class="p">,</span>
+  <span class="n">sourcetype</span><span class="p">,</span>
+  <span class="n">KSQL_COL_0</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">AS</span> <span class="n">action</span><span class="p">,</span>
+  <span class="n">KSQL_COL_0</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">AS</span> <span class="n">protocol</span><span class="p">,</span>
+  <span class="n">SPLIT</span><span class="p">(</span><span class="n">REGEXP_SPLIT_TO_ARRAY</span><span class="p">(</span><span class="n">KSQL_COL_0</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="s1">&#39;inside:&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="k">as</span> <span class="n">inside_ip</span><span class="p">,</span>
+  <span class="n">SPLIT</span><span class="p">(</span><span class="n">REGEXP_SPLIT_TO_ARRAY</span><span class="p">(</span><span class="n">KSQL_COL_0</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="s1">&#39;inside:&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="k">as</span> <span class="n">inside_port</span><span class="p">,</span>
+  <span class="n">SPLIT</span><span class="p">(</span><span class="n">REGEXP_SPLIT_TO_ARRAY</span><span class="p">(</span><span class="n">KSQL_COL_0</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="s1">&#39;outside:&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="k">as</span> <span class="n">outside_ip</span><span class="p">,</span>
+  <span class="n">SPLIT</span><span class="p">(</span><span class="n">REGEXP_SPLIT_TO_ARRAY</span><span class="p">(</span><span class="n">KSQL_COL_0</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="s1">&#39;outside:&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="k">as</span> <span class="n">outside_port</span>
+<span class="k">FROM</span> <span class="n">splunk_parsed</span>
+<span class="k">WHERE</span> <span class="n">KSQL_COL_0</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Deny&#39;</span>
+<span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
 </code></pre></div>
 </td></tr></table>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert example events into the source topics with the following statements:</p>
@@ -847,19 +786,36 @@ services:
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">syslog</span> <span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="k">host</span><span class="p">,</span> <span class="n">facility</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">remote_address</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;2021-07-14T00:10:10.300Z&#39;</span><span class="p">,</span> <span class="s1">&#39;asgard.example.com&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Line protocol on Interface GigabitEthernet0/1, changed state to up&#39;</span><span class="p">,</span> <span class="k">NULL</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">syslog</span> <span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="k">host</span><span class="p">,</span> <span class="n">facility</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">remote_address</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;2021-08-05T20:11:13.138Z&#39;</span><span class="p">,</span> <span class="s1">&#39;asgard.example.com&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;partition health measures for /var did not suffice - still using 96% of partition space&#39;</span><span class="p">,</span> <span class="k">NULL</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">syslog</span> <span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="k">host</span><span class="p">,</span> <span class="n">facility</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">remote_address</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;2021-08-08T02:11:11.333Z&#39;</span><span class="p">,</span> <span class="s1">&#39;asgard.example.com&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Invalid user asmith&#39;</span><span class="p">,</span> <span class="s1">&#39;192.168.10.83&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">syslog</span> <span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="k">host</span><span class="p">,</span> <span class="n">facility</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">remote_address</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;2021-08-08T02:11:12.333Z&#39;</span><span class="p">,</span> <span class="s1">&#39;asgard.example.com&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Invalid user bsmith&#39;</span><span class="p">,</span> <span class="s1">&#39;192.168.10.83&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">syslog</span> <span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="k">host</span><span class="p">,</span> <span class="n">facility</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">remote_address</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;2021-08-08T02:11:13.333Z&#39;</span><span class="p">,</span> <span class="s1">&#39;asgard.example.com&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Invalid user csmith&#39;</span><span class="p">,</span> <span class="s1">&#39;192.168.10.83&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">syslog</span> <span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="k">host</span><span class="p">,</span> <span class="n">facility</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">remote_address</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;2021-08-08T02:11:14.333Z&#39;</span><span class="p">,</span> <span class="s1">&#39;asgard.example.com&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Invalid user dsmith&#39;</span><span class="p">,</span> <span class="s1">&#39;192.168.10.83&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">syslog</span> <span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="k">host</span><span class="p">,</span> <span class="n">facility</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">remote_address</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;2021-08-08T02:11:15.333Z&#39;</span><span class="p">,</span> <span class="s1">&#39;asgard.example.com&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Invalid user esmith&#39;</span><span class="p">,</span> <span class="s1">&#39;192.168.10.83&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">syslog</span> <span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="k">host</span><span class="p">,</span> <span class="n">facility</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">remote_address</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;2021-08-08T02:11:16.333Z&#39;</span><span class="p">,</span> <span class="s1">&#39;asgard.example.com&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Invalid user fsmith&#39;</span><span class="p">,</span> <span class="s1">&#39;192.168.10.83&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">syslog</span> <span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="k">host</span><span class="p">,</span> <span class="n">facility</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">remote_address</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;2021-08-05T20:13:13.138Z&#39;</span><span class="p">,</span> <span class="s1">&#39;asgard.example.com&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;partition health measures for /var did not suffice - still using 96% of partition space&#39;</span><span class="p">,</span> <span class="k">NULL</span><span class="p">);</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">splunk</span> <span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="k">host</span><span class="p">,</span> <span class="k">source</span><span class="p">,</span> <span class="k">index</span><span class="p">,</span> <span class="n">sourcetype</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;%ASA-6-302016: Teardown UDP connection 841023 for outside:75.75.75.75/53 to inside:192.168.9.50/60995 duration 0:00:00 bytes 104&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;firewall-1&#39;</span><span class="p">,</span> <span class="s1">&#39;/opt/splunkforwarder/splunk-s2s-test.log&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;cisco:asa&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">splunk</span> <span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="k">host</span><span class="p">,</span> <span class="k">source</span><span class="p">,</span> <span class="k">index</span><span class="p">,</span> <span class="n">sourcetype</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;%ASA-2-106001: Inbound TCP connection denied from 34.215.24.225/443 to 192.168.10.18/34312 flags FIN PSH ACK  on interface outside&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;firewall-1&#39;</span><span class="p">,</span> <span class="s1">&#39;/opt/splunkforwarder/splunk-s2s-test.log&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;cisco:asa&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">splunk</span> <span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="k">host</span><span class="p">,</span> <span class="k">source</span><span class="p">,</span> <span class="k">index</span><span class="p">,</span> <span class="n">sourcetype</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;%ASA-4-106023: Deny tcp src inside:192.168.9.50/52596 dst outside:204.107.141.110/8443 by access-group &quot;inside_access_in&quot; [0x0, 0x0]&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;firewall-1&#39;</span><span class="p">,</span> <span class="s1">&#39;/opt/splunkforwarder/splunk-s2s-test.log&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;cisco:asa&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">splunk</span> <span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="k">host</span><span class="p">,</span> <span class="k">source</span><span class="p">,</span> <span class="k">index</span><span class="p">,</span> <span class="n">sourcetype</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;%ASA-4-106023: Deny tcp src inside:192.168.9.50/52597 dst outside:204.107.141.110/8443 by access-group &quot;inside_access_in&quot; [0x0, 0x0]&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;firewall-1&#39;</span><span class="p">,</span> <span class="s1">&#39;/opt/splunkforwarder/splunk-s2s-test.log&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;cisco:asa&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">splunk</span> <span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="k">host</span><span class="p">,</span> <span class="k">source</span><span class="p">,</span> <span class="k">index</span><span class="p">,</span> <span class="n">sourcetype</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;%ASA-6-302013: Built outbound TCP connection 841025 for outside:34.215.24.225/443 (34.215.24.225/443) to inside:192.168.9.30/50398 (192.168.10.18/4550)&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;firewall-1&#39;</span><span class="p">,</span> <span class="s1">&#39;/opt/splunkforwarder/splunk-s2s-test.log&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;cisco:asa&#39;</span><span class="p">);</span>
+</code></pre></div>
+</td></tr></table>
+<h3 id="write-the-data-out">Write the data out<a class="headerlink" href="#write-the-data-out" title="Permanent link">&para;</a></h3>
+<p>After processing the data, send the targeted set of events to Splunk for indexing:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;connector.class&quot;</span>    <span class="p">:</span> <span class="s2">&quot;SplunkSink&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span>               <span class="p">:</span> <span class="s2">&quot;recipe-cybersecurity-splunk&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;input.data.format&quot;</span>  <span class="p">:</span> <span class="s2">&quot;JSON&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.api.key&quot;</span>      <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-key&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.api.secret&quot;</span>   <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-secret&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;topics&quot;</span>             <span class="p">:</span> <span class="s2">&quot;splunk_filtered&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;splunk.hec.uri&quot;</span>     <span class="p">:</span> <span class="s2">&quot;&lt;splunk-indexers&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;splunk.hec.token&quot;</span>   <span class="p">:</span> <span class="s2">&quot;&lt;Splunk HTTP Event Collector token&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;tasks.max&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span>
+<span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
 <h3 id="cleanup">Cleanup<a class="headerlink" href="#cleanup" title="Permanent link">&para;</a></h3>
@@ -888,41 +844,6 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
       
         
 <footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-        
-        <a href="../../customer-360/loyalty-rewards/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Build customer loyalty programs" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Build customer loyalty programs
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../../predictive-analytics/fleet_management/" class="md-footer__link md-footer__link--next" aria-label="Next: Optimize fleet management" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Optimize fleet management
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
