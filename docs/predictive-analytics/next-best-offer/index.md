@@ -1,10 +1,10 @@
 ---
 seo:
-  title: Next Best Offer — Anticipating Your Customer's Needs 
+  title: Next Best Offer for Banking
   description: This recipe demonstrates how to use ksqlDB to present relevant offers to banking customers.
 ---
 
-# Next Best Offer — Anticipating Your Customer's Needs
+# Next Best Offer for Banking
 
 Customers today are faced with never ending marketing messages from a variety of sources.  Often these messages are generic and don't have any consideration for the individual needs of the customer.  This one-size-fits-all approach leads to poor conversion rates.  A better approach is to tailor offerings that take into consideration the interests of the customer based on previous purchases or behavior.   This recipe demonstrates how to take existing customer information and provide a "Next Best Offer" to encourage sales and retain customers.
 
@@ -12,7 +12,7 @@ Customers today are faced with never ending marketing messages from a variety of
 
 ### Set up your environment
 
-Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=next_best_effort).
+Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=next_best_offer).
 
 
 --8<-- "docs/shared/ccloud_setup.md"
