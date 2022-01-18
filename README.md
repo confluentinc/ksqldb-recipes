@@ -21,7 +21,7 @@ _Contributing a full recipe to be published?_
 
 1. Self-assign a recipe idea from the list in [GitHub issues](https://github.com/confluentinc/ksqldb-recipes/issues?q=is%3Aissue+is%3Aopen+label%3A%22new+recipe%22).
 2. Create a new branch (based off `main`) for the new recipe
-3. Create a new subfolder for the new recipe, e.g. `docs/<industry>/<new-recipe-name>`
+3. Create a new subfolder for the new recipe, e.g. `docs/<industry>/<new-recipe-name>`. Note: `<new-recipe-name>` is the slug in Confluent Cloud. Use hyphens, not underscores.
 4. The recipe should follow the structure of [existing recipes](https://github.com/confluentinc/ksqldb-recipes/tree/main/docs). Copy the contents of an existing recipe (e.g. [aviation](https://github.com/confluentinc/ksqldb-recipes/tree/main/docs/customer-360/aviation)) or the [template](template) directory as the basis for your new recipe.
 
 - [index.md](template/index.md): explain the use case, why it matters, add a graphic if available

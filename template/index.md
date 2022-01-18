@@ -12,7 +12,7 @@ TODO: Describe use case and provide graphic if available
 
 ### Setup your Environment
 
-TODO: Update `new_recipe_name` in UTM in link below.
+TODO: Update `new_recipe_name` in UTM in link below. Use underscores, not hyphens.
 
 Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=new_recipe_name).
 
