@@ -531,7 +531,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../real-time-analytics/dynamic_pricing/" class="md-nav__link">
+      <a href="../../real-time-analytics/dynamic-pricing/" class="md-nav__link">
         Build a dynamic pricing strategy
       </a>
     </li>
@@ -634,71 +634,7 @@
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to quickly connect to popular data sources and end systems in the cloud.
 This recipe shows sample connector configuration(s) below, each of which should be created separately.
 You can also substitute your own connectors to connect to any <a href="https://docs.confluent.io/cloud/current/connectors/index.html">supported data source</a>.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
-  <span class="nt">&quot;connector.class&quot;</span>          <span class="p">:</span> <span class="s2">&quot;MongoDbAtlasSource&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;recipe-mongodb-fleet_description&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;kafka.api.key&quot;</span>            <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-key&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;kafka.api.secret&quot;</span>         <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-secret&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.host&quot;</span>          <span class="p">:</span> <span class="s2">&quot;&lt;database-host-address&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.user&quot;</span>          <span class="p">:</span> <span class="s2">&quot;&lt;database-username&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.password&quot;</span>      <span class="p">:</span> <span class="s2">&quot;&lt;database-password&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;database&quot;</span>                 <span class="p">:</span> <span class="s2">&quot;&lt;database-name&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;collection&quot;</span>               <span class="p">:</span> <span class="s2">&quot;&lt;database-collection-name&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;poll.await.time.ms&quot;</span>       <span class="p">:</span> <span class="s2">&quot;5000&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;poll.max.batch.size&quot;</span>      <span class="p">:</span> <span class="s2">&quot;1000&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;copy.existing&quot;</span>            <span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;output.data.format&quot;</span>       <span class="p">:</span> <span class="nt">&quot;JSON&quot;</span>
-  <span class="nt">&quot;tasks.max&quot;</span>                <span class="p">:</span> <span class="s2">&quot;1&quot;</span>
-<span class="p">}</span>
-
-<span class="p">{</span>
-  <span class="nt">&quot;connector.class&quot;</span>          <span class="p">:</span> <span class="s2">&quot;PostgresSource&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;recipe-postgres-fleet_location&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;kafka.api.key&quot;</span>            <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-key&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;kafka.api.secret&quot;</span>         <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-secret&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.host&quot;</span>          <span class="p">:</span> <span class="s2">&quot;&lt;my-database-endpoint&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.port&quot;</span>          <span class="p">:</span> <span class="s2">&quot;5432&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.user&quot;</span>          <span class="p">:</span> <span class="s2">&quot;postgres&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.password&quot;</span>      <span class="p">:</span> <span class="s2">&quot;&lt;my-database-password&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;db.name&quot;</span>                  <span class="p">:</span> <span class="s2">&quot;&lt;db-name&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;table.whitelist&quot;</span>          <span class="p">:</span> <span class="s2">&quot;fleet_location&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;timestamp.column.name&quot;</span>    <span class="p">:</span> <span class="s2">&quot;created_at&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;output.data.format&quot;</span>       <span class="p">:</span> <span class="s2">&quot;JSON&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;db.timezone&quot;</span>              <span class="p">:</span> <span class="s2">&quot;UTC&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;tasks.max&quot;</span>                <span class="p">:</span> <span class="s2">&quot;1&quot;</span>
-<span class="p">}</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>
 </code></pre></div>
 </td></tr></table>
 <p>Optional: If you cannot connect to a real datasource with properly formatted data, or if you just want to execute this recipe without external dependencies, no worries! In the next section, you'll see how to test the recipe by inserting mock data into the streams, using the ksqlDB command <code>INSERT INTO</code>.</p>
@@ -709,93 +645,11 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <em>The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.</em>
 <em>This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</em></p>
 <hr />
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
-
-<span class="c1">-- create stream of locations</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">locations</span> <span class="p">(</span>
-  <span class="n">vehicle_id</span> <span class="nb">INT</span><span class="p">,</span>
-  <span class="n">latitude</span> <span class="n">DOUBLE</span><span class="p">,</span>
-  <span class="n">longitude</span> <span class="n">DOUBLE</span><span class="p">,</span>
-  <span class="k">timestamp</span> <span class="nb">VARCHAR</span>
-<span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;locations&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
-<span class="p">);</span>
-
-<span class="c1">-- fleet lookup table</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">fleet</span> <span class="p">(</span>
-  <span class="n">vehicle_id</span> <span class="nb">INT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
-  <span class="n">driver_id</span> <span class="nb">INT</span><span class="p">,</span>
-  <span class="n">license</span> <span class="nb">BIGINT</span>
-<span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;descriptions&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
-<span class="p">);</span>
-
-<span class="c1">-- enrich fleet location stream with more fleet information</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">fleet_location_enhanced</span> <span class="k">AS</span>
-  <span class="k">SELECT</span>
-    <span class="n">l</span><span class="p">.</span><span class="n">vehicle_id</span><span class="p">,</span>
-    <span class="n">latitude</span><span class="p">,</span>
-    <span class="n">longitude</span><span class="p">,</span>
-    <span class="k">timestamp</span><span class="p">,</span>
-    <span class="n">f</span><span class="p">.</span><span class="n">driver_id</span><span class="p">,</span>
-    <span class="n">f</span><span class="p">.</span><span class="n">license</span>
-  <span class="k">FROM</span> <span class="n">locations</span> <span class="n">l</span>
-  <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">fleet</span> <span class="n">f</span> <span class="k">ON</span> <span class="n">l</span><span class="p">.</span><span class="n">vehicle_id</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">vehicle_id</span><span class="p">;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>
 </code></pre></div>
 </td></tr></table>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert example events into the source topics with the following statements:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">locations</span> <span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">5401</span><span class="p">,</span> <span class="mi">16</span><span class="p">.</span><span class="mi">7587537</span><span class="p">,</span> <span class="mi">96</span><span class="p">.</span><span class="mi">2482149</span><span class="p">,</span> <span class="s1">&#39;2021-09-23T10:50:00.000Z&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">locations</span> <span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">5401</span><span class="p">,</span> <span class="mi">16</span><span class="p">.</span><span class="mi">004175</span><span class="p">,</span> <span class="mi">120</span><span class="p">.</span><span class="mi">7806412</span><span class="p">,</span> <span class="s1">&#39;2021-09-27T06:39:00.000Z&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">locations</span> <span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">5402</span><span class="p">,</span> <span class="mi">32</span><span class="p">.</span><span class="mi">755613</span><span class="p">,</span> <span class="mi">22</span><span class="p">.</span><span class="mi">6377432</span><span class="p">,</span> <span class="s1">&#39;2021-09-25T20:22:00.000Z&#39;</span><span class="p">);</span>
-
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">fleet</span> <span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="n">driver_id</span><span class="p">,</span> <span class="n">license</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">5401</span><span class="p">,</span> <span class="mi">847383</span><span class="p">,</span> <span class="mi">8852693196</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">fleet</span> <span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="n">driver_id</span><span class="p">,</span> <span class="n">license</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">5402</span><span class="p">,</span> <span class="mi">922947</span><span class="p">,</span> <span class="mi">1255144201</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">fleet</span> <span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="n">driver_id</span><span class="p">,</span> <span class="n">license</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">5403</span><span class="p">,</span> <span class="mi">435309</span><span class="p">,</span> <span class="mi">2132311746</span><span class="p">);</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>
 </code></pre></div>
 </td></tr></table>
 <h3 id="cleanup">Cleanup<a class="headerlink" href="#cleanup" title="Permanent link">&para;</a></h3>

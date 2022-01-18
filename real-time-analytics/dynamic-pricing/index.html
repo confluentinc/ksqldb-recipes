@@ -365,7 +365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../predictive-analytics/fleet_management/" class="md-nav__link">
+      <a href="../../predictive-analytics/fleet-management/" class="md-nav__link">
         Optimize fleet management
       </a>
     </li>
@@ -636,71 +636,7 @@ This recipe shows sample connector configuration(s) below, each of which should 
 You can also substitute your own connectors to connect to any <a href="https://docs.confluent.io/cloud/current/connectors/index.html">supported data source</a>.</p>
 <p>For this recipe, we are interested in knowing each marketplace event for an item, specifically its pricing. 
 This creates a stream of events, upon which real-time stream processing can keep state and calculate pricing statistics.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
-  <span class="nt">&quot;connector.class&quot;</span>          <span class="p">:</span> <span class="s2">&quot;PostgresSource&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;recipe-postgres-pricing&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;kafka.api.key&quot;</span>            <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-key&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;kafka.api.secret&quot;</span>         <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-secret&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.host&quot;</span>          <span class="p">:</span> <span class="s2">&quot;&lt;my-database-endpoint&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.port&quot;</span>          <span class="p">:</span> <span class="s2">&quot;5432&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.user&quot;</span>          <span class="p">:</span> <span class="s2">&quot;postgres&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.password&quot;</span>      <span class="p">:</span> <span class="s2">&quot;&lt;my-database-password&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;db.name&quot;</span>                  <span class="p">:</span> <span class="s2">&quot;&lt;db-name&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;table.whitelist&quot;</span>          <span class="p">:</span> <span class="s2">&quot;sales&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;timestamp.column.name&quot;</span>    <span class="p">:</span> <span class="s2">&quot;created_at&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;output.data.format&quot;</span>       <span class="p">:</span> <span class="s2">&quot;JSON&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;db.timezone&quot;</span>              <span class="p">:</span> <span class="s2">&quot;UTC&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;tasks.max&quot;</span>                <span class="p">:</span> <span class="s2">&quot;1&quot;</span>
-<span class="p">}</span>
-
-<span class="p">{</span>
-  <span class="nt">&quot;connector.class&quot;</span>          <span class="p">:</span> <span class="s2">&quot;PostgresSource&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;recipe-postgres-items&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;kafka.api.key&quot;</span>            <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-key&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;kafka.api.secret&quot;</span>         <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-secret&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.host&quot;</span>          <span class="p">:</span> <span class="s2">&quot;&lt;my-database-endpoint&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.port&quot;</span>          <span class="p">:</span> <span class="s2">&quot;5432&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.user&quot;</span>          <span class="p">:</span> <span class="s2">&quot;postgres&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.password&quot;</span>      <span class="p">:</span> <span class="s2">&quot;&lt;my-database-password&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;db.name&quot;</span>                  <span class="p">:</span> <span class="s2">&quot;&lt;db-name&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;table.whitelist&quot;</span>          <span class="p">:</span> <span class="s2">&quot;items&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;timestamp.column.name&quot;</span>    <span class="p">:</span> <span class="s2">&quot;created_at&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;output.data.format&quot;</span>       <span class="p">:</span> <span class="s2">&quot;JSON&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;db.timezone&quot;</span>              <span class="p">:</span> <span class="s2">&quot;UTC&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;tasks.max&quot;</span>                <span class="p">:</span> <span class="s2">&quot;1&quot;</span>
-<span class="p">}</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>
 </code></pre></div>
 </td></tr></table>
 <p>Optional: If you cannot connect to a real datasource with properly formatted data, or if you just want to execute this recipe without external dependencies, no worries! In the next section, you'll see how to test the recipe by inserting mock data into the streams, using the ksqlDB command <code>INSERT INTO</code>.</p>
@@ -710,95 +646,11 @@ This creates a stream of events, upon which real-time stream processing can keep
 <em>The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.</em>
 <em>This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</em></p>
 <hr />
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
-
-<span class="c1">-- Create stream of sales</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">sales</span> <span class="p">(</span>
-  <span class="n">item_id</span> <span class="nb">INT</span> <span class="k">KEY</span><span class="p">,</span>
-  <span class="n">seller_id</span> <span class="n">STRING</span><span class="p">,</span>
-  <span class="n">price</span> <span class="n">DOUBLE</span>
-<span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
-  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;sales&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
-<span class="p">);</span>
-
-<span class="c1">-- Create table of items</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">items</span> <span class="p">(</span>
-  <span class="n">item_id</span> <span class="nb">INT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
-  <span class="n">item_name</span> <span class="n">STRING</span>
-<span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
-  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;items&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
-<span class="p">);</span>
-
-<span class="c1">-- Calculate minimum, maximum, and average price, per item, and join with item name</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">sales_stats</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KEY_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">)</span> <span class="k">AS</span>
-<span class="k">SELECT</span> <span class="n">S</span><span class="p">.</span><span class="n">item_id</span><span class="p">,</span>
-       <span class="n">I</span><span class="p">.</span><span class="n">item_name</span><span class="p">,</span>
-       <span class="k">MIN</span><span class="p">(</span><span class="n">price</span><span class="p">)</span> <span class="k">AS</span> <span class="n">price_min</span><span class="p">,</span>
-       <span class="k">MAX</span><span class="p">(</span><span class="n">price</span><span class="p">)</span> <span class="k">AS</span> <span class="n">price_max</span><span class="p">,</span>
-       <span class="k">AVG</span><span class="p">(</span><span class="n">price</span><span class="p">)</span> <span class="k">AS</span> <span class="n">price_avg</span>
-<span class="k">FROM</span> <span class="n">sales</span> <span class="n">S</span>
-<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">items</span> <span class="n">I</span> <span class="k">ON</span> <span class="n">S</span><span class="p">.</span><span class="n">item_id</span> <span class="o">=</span> <span class="n">I</span><span class="p">.</span><span class="n">item_id</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">S</span><span class="p">.</span><span class="n">item_id</span><span class="p">,</span> <span class="n">I</span><span class="p">.</span><span class="n">item_name</span>
-<span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>
 </code></pre></div>
 </td></tr></table>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert example events into the source topics with the following statements:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">items</span> <span class="p">(</span><span class="n">item_id</span><span class="p">,</span> <span class="n">item_name</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Pikachu card&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">items</span> <span class="p">(</span><span class="n">item_id</span><span class="p">,</span> <span class="n">item_name</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Charizard card&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">items</span> <span class="p">(</span><span class="n">item_id</span><span class="p">,</span> <span class="n">item_name</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Mew card&#39;</span><span class="p">);</span>
-
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">sales</span> <span class="p">(</span><span class="n">item_id</span><span class="p">,</span> <span class="n">price</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">.</span><span class="mi">00</span><span class="p">);</span> 
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">sales</span> <span class="p">(</span><span class="n">item_id</span><span class="p">,</span> <span class="n">price</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">.</span><span class="mi">00</span><span class="p">);</span> 
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">sales</span> <span class="p">(</span><span class="n">item_id</span><span class="p">,</span> <span class="n">price</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">30</span><span class="p">.</span><span class="mi">00</span><span class="p">);</span> 
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">sales</span> <span class="p">(</span><span class="n">item_id</span><span class="p">,</span> <span class="n">price</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">.</span><span class="mi">00</span><span class="p">);</span> 
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">sales</span> <span class="p">(</span><span class="n">item_id</span><span class="p">,</span> <span class="n">price</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">17</span><span class="p">.</span><span class="mi">00</span><span class="p">);</span> 
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">sales</span> <span class="p">(</span><span class="n">item_id</span><span class="p">,</span> <span class="n">price</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">26</span><span class="p">.</span><span class="mi">00</span><span class="p">);</span> 
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>
 </code></pre></div>
 </td></tr></table>
 <h3 id="cleanup">Cleanup<a class="headerlink" href="#cleanup" title="Permanent link">&para;</a></h3>
