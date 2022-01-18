@@ -6,7 +6,7 @@ seo:
 
 # Next Best Offer - Anticipating Your Customer's Needs
 
-Consumers today are faced with never ending marketing messages from a variety of sources.  Often these messages are generic and don't have any consideration for the individual needs of the consumer.  This one-size-fits-all approach leads to poor conversion rates.  A better approach is to tailor offerings that take into consideration the interests of the consumer based on previous purchases or behavior.   This recipe demonstrates how to take existing customer information and provide a "Next Best Offer" to encourage sales and retain customers.
+Customers today are faced with never ending marketing messages from a variety of sources.  Often these messages are generic and don't have any consideration for the individual needs of the customer.  This one-size-fits-all approach leads to poor conversion rates.  A better approach is to tailor offerings that take into consideration the interests of the customer based on previous purchases or behavior.   This recipe demonstrates how to take existing customer information and provide a "Next Best Offer" to encourage sales and retain customers.
 
 ## Step-by-step
 
@@ -29,7 +29,7 @@ Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluen
 
 ### Run stream processing app
 
-This application will perform a series of joins between event streams and tables to calculate the next best offer for a banking consumer based on their activity which should yield higher customer activity and satisfaction.
+This application will perform a series of joins between event streams and tables to calculate the next best offer for a banking customer based on their activity which should yield higher customer activity and satisfaction.
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
@@ -70,7 +70,7 @@ CREATE STREAM customer_activity_stream (
 
 You should take note that the `CUSTOMER_ID` field is the key in the stream's key-value pairs and you'll see why this is important in the next section.
 
-In a production setting you'll populate the stream's underlying topic either with `KafkaProducer` application or from an external system using a [managed connector on Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/index.html) But for the purpose of running this example you'll manually insert records into the stream with [INSERT VALUES](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/insert-values/#insert-values) statements:
+In a production setting you'll populate the stream's underlying topic either with `KafkaProducer` application or from an external system using a [managed connector on Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/index.html).  In case you don't have a connector set up, you can manually insert records into the stream with [INSERT VALUES](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/insert-values/#insert-values) statements:
 
 ```sql
 INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (1,'121.219.110.170',1,'branch_visit',0.4);
@@ -175,7 +175,7 @@ CASE
     ELSE 5
 END AS OFFER_ID 
 FROM customer_activity_stream cask
-INNER JOIN customers ct ON cask.CUSTOMER_ID = ct.CUSTOMER_ID
+INNER JOIN customers ct ON cask.CUSTOMER_ID = ct.CUSTOMER_ID;
 ```
 The `CASE` statement is the workhorse for the query and provides the next offer for the customer based on information resulting from the join.  Note that you're using an `INNER JOIN` here because if the customer id isn't found in the `CUSTOMERS` table there's no calculation to make.  You'll notice that the result of the `CASE` statement is a single integer with the code for the offer to make, so you'll have one final step to take.
 
@@ -204,10 +204,3 @@ FROM next_best_offer nbo
 INNER JOIN OFFERS ot
 ON nbo.OFFER_ID = ot.OFFER_ID;
 ```
-
-
-
-
-
-
-

@@ -1,4 +1,3 @@
--- Setup initial stream/table from Kafka topics
 SET 'auto.offset.reset'='earliest';
 
 CREATE STREAM customer_activity_stream (
@@ -45,21 +44,21 @@ WITH (
     PARTITIONS = 6
 ) AS
 SELECT 
-cask.ACTIVITY_ID,
-cask.CUSTOMER_ID as CUSTOMER_ID,
-cask.PROPENSITY_TO_BUY,
-cask.ACTIVITY_TYPE,
-ct.INCOME,
-ct.FICO,
-CASE
-    WHEN ct.INCOME > 100000 AND ct.FICO < 700 AND cask.PROPENSITY_TO_BUY < 0.9 THEN 1
-    WHEN ct.INCOME < 50000 AND cask.PROPENSITY_TO_BUY < 0.9 THEN 2
-    WHEN ct.INCOME >= 50000 AND ct.FICO >= 600 AND cask.PROPENSITY_TO_BUY < 0.9 THEN 3
-    WHEN ct.INCOME > 100000 AND ct.FICO >= 700 AND cask.PROPENSITY_TO_BUY < 0.9 THEN 4
-    ELSE 5
-END AS OFFER_ID 
+    cask.ACTIVITY_ID,
+    cask.CUSTOMER_ID as CUSTOMER_ID,
+    cask.PROPENSITY_TO_BUY,
+    cask.ACTIVITY_TYPE,
+    ct.INCOME,
+    ct.FICO,
+    CASE
+        WHEN ct.INCOME > 100000 AND ct.FICO < 700 AND cask.PROPENSITY_TO_BUY < 0.9 THEN 1
+        WHEN ct.INCOME < 50000 AND cask.PROPENSITY_TO_BUY < 0.9 THEN 2
+        WHEN ct.INCOME >= 50000 AND ct.FICO >= 600 AND cask.PROPENSITY_TO_BUY < 0.9 THEN 3
+        WHEN ct.INCOME > 100000 AND ct.FICO >= 700 AND cask.PROPENSITY_TO_BUY < 0.9 THEN 4
+        ELSE 5
+    END AS OFFER_ID 
 FROM customer_activity_stream cask
-INNER JOIN customers ct ON cask.CUSTOMER_ID = ct.CUSTOMER_ID
+INNER JOIN customers ct ON cask.CUSTOMER_ID = ct.CUSTOMER_ID;
 
 CREATE STREAM next_best_offer_lookup
 WITH (
