@@ -561,7 +561,29 @@ If you instead want to do real-time interactions and in-flight stream processing
 This recipe shows sample connector configuration(s) below, each of which should be created separately.
 You can also substitute your own connectors to connect to any <a href="https://docs.confluent.io/cloud/current/connectors/index.html">supported data source</a>.</p>
 <p>The concept in this recipe can be applicable to any of the traditional message systems (RabbitMQ, Tibco, IBM MQ, ActiveMQ, etc.), and this specific recipe uses the <a href="https://docs.confluent.io/cloud/current/connectors/cc-rabbitmq-source.html">RabbitMQ Source Connector for Confluent Cloud</a> which uses the AMQP protocol to communicate with RabbitMQ servers and persists the data in a Kafka topic.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;connector.class&quot;</span>          <span class="p">:</span> <span class="s2">&quot;RabbitMQSource&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;RabbitMQSource_0&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.api.key&quot;</span>            <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-key&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.api.secret&quot;</span>         <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-secret&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.topic&quot;</span>              <span class="p">:</span> <span class="nt">&quot;from-rabbit&quot;</span>
+  <span class="nt">&quot;rabbitmq.host&quot;</span>            <span class="p">:</span> <span class="s2">&quot;&lt;host&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;rabbitmq.username&quot;</span>        <span class="p">:</span> <span class="s2">&quot;&lt;username&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;rabbitmq.password&quot;</span>        <span class="p">:</span> <span class="s2">&quot;&lt;password&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;rabbitmq.queue&quot;</span>           <span class="p">:</span> <span class="s2">&quot;transactions&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;tasks.max&quot;</span>                <span class="p">:</span> <span class="s2">&quot;1&quot;</span>
+<span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
 <p>Optional: If you cannot connect to a real datasource with properly formatted data, or if you just want to execute this recipe without external dependencies, no worries! In the next section, you'll see how to test the recipe by inserting mock data into the streams, using the ksqlDB command <code>INSERT INTO</code>.</p>
@@ -572,11 +594,87 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <em>The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.</em>
 <em>This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</em></p>
 <hr />
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Register the initial stream</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+                      <span class="k">timestamp</span> <span class="nb">BIGINT</span><span class="p">,</span>
+                      <span class="k">transaction</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+                      <span class="n">amount</span> <span class="nb">VARCHAR</span>
+<span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
+  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;from-rabbit&#39;</span><span class="p">,</span>
+  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
+<span class="p">);</span>
+
+<span class="c1">-- Convert the stream to typed fields</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">rabbit_transactions</span> 
+  <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;rabbit_transactions&#39;</span><span class="p">)</span> <span class="k">AS</span>
+  <span class="k">SELECT</span> <span class="k">TRANSACTION</span> <span class="k">AS</span> <span class="n">TX_TYPE</span><span class="p">,</span>
+         <span class="k">TIMESTAMP</span> <span class="k">AS</span> <span class="n">TX_TIMESTAMP</span><span class="p">,</span>
+         <span class="k">SUBSTRING</span><span class="p">(</span><span class="n">AMOUNT</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">CURRENCY</span><span class="p">,</span>
+         <span class="k">CAST</span><span class="p">(</span><span class="k">SUBSTRING</span><span class="p">(</span><span class="n">AMOUNT</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">LEN</span><span class="p">(</span><span class="n">AMOUNT</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">AS</span> <span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="k">AS</span> <span class="n">TX_AMOUNT</span><span class="p">,</span>
+         <span class="k">CAST</span><span class="p">(</span><span class="n">USERID</span> <span class="k">AS</span> <span class="nb">INT</span><span class="p">)</span> <span class="k">AS</span> <span class="n">USERID</span>
+  <span class="k">FROM</span> <span class="n">rabbit</span>
+  <span class="k">WHERE</span> <span class="k">TIMESTAMP</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
+  <span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
+
+<span class="c1">-- Count the number of transactions</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">number_transactions</span>
+  <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;number_transactions&#39;</span><span class="p">)</span> <span class="k">AS</span>
+  <span class="k">SELECT</span> <span class="n">USERID</span><span class="p">,</span>
+         <span class="k">COUNT</span><span class="p">(</span><span class="n">USERID</span><span class="p">)</span>
+  <span class="k">FROM</span> <span class="n">rabbit_transactions</span>
+  <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">USERID</span>
+  <span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
 </code></pre></div>
 </td></tr></table>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert example events into the source topics with the following statements:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="k">transaction</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;33&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;CREDIT&#39;</span><span class="p">,</span> <span class="s1">&#39;$141.73&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="k">transaction</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;89&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;CREDIT&#39;</span><span class="p">,</span> <span class="s1">&#39;$99.28&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="k">transaction</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;61&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;CREDIT&#39;</span><span class="p">,</span> <span class="s1">&#39;$31.29&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="k">transaction</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;33&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;DEBIT&#39;</span><span class="p">,</span> <span class="s1">&#39;$121.50&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="k">transaction</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;61&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;CREDIT&#39;</span><span class="p">,</span> <span class="s1">&#39;$105.00&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="k">transaction</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;89&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;CREDIT&#39;</span><span class="p">,</span> <span class="s1">&#39;$55.13&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">rabbit</span> <span class="p">(</span><span class="n">userid</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="k">transaction</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;33&#39;</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;DEBIT&#39;</span><span class="p">,</span> <span class="s1">&#39;$67.14&#39;</span><span class="p">);</span>
 </code></pre></div>
 </td></tr></table>
 <h3 id="cleanup">Cleanup<a class="headerlink" href="#cleanup" title="Permanent link">&para;</a></h3>
