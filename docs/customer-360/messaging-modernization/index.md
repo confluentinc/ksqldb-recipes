@@ -26,7 +26,7 @@ Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluen
 The concept in this recipe can be applicable to any of the traditional message systems (RabbitMQ, Tibco, IBM MQ, ActiveMQ, etc.), and this specific recipe uses the [RabbitMQ Source Connector for Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-rabbitmq-source.html) which uses the AMQP protocol to communicate with RabbitMQ servers and persists the data in a Kafka topic.
 
 ```json
---8<-- "docs/customer-360/messaging_modernization/source.json"
+--8<-- "docs/customer-360/messaging-modernization/source.json"
 ```
 
 --8<-- "docs/shared/manual_insert.md"
@@ -38,13 +38,13 @@ Now you can process the data in a variety of ways.
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ```sql
---8<-- "docs/customer-360/messaging_modernization/process.sql"
+--8<-- "docs/customer-360/messaging-modernization/process.sql"
 ```
 
 --8<-- "docs/shared/manual_cue.md"
 
 ```sql
---8<-- "docs/customer-360/messaging_modernization/manual.sql"
+--8<-- "docs/customer-360/messaging-modernization/manual.sql"
 ```
 
 ### Cleanup
