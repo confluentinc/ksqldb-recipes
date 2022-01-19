@@ -26,7 +26,7 @@ For this recipe, we are interested in knowing each marketplace event for an item
 This creates a stream of events, upon which real-time stream processing can keep state and calculate pricing statistics.
 
 ```json
---8<-- "docs/real-time-analytics/dynamic_pricing/source.json"
+--8<-- "docs/real-time-analytics/dynamic-pricing/source.json"
 ```
 
 --8<-- "docs/shared/manual_insert.md"
@@ -36,13 +36,13 @@ This creates a stream of events, upon which real-time stream processing can keep
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ```sql
---8<-- "docs/real-time-analytics/dynamic_pricing/process.sql"
+--8<-- "docs/real-time-analytics/dynamic-pricing/process.sql"
 ```
 
 --8<-- "docs/shared/manual_cue.md"
 
 ```sql
---8<-- "docs/real-time-analytics/dynamic_pricing/manual.sql"
+--8<-- "docs/real-time-analytics/dynamic-pricing/manual.sql"
 ```
 
 ### Cleanup
