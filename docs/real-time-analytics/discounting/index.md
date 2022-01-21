@@ -28,7 +28,7 @@ In the case of this recipe, we're interested in capturing data that reflects inc
 
 ### Run stream processing app
 
-Through a series of ksqlDB statements, we'll enrich our order data and compute some simple statistics based on that stream of enriched order data. By the end, we'll have more insights as to just how well our discount code promotion is doing. Specifically, we'll know the average order value per discount percentage as well as how the average number of items purchased.
+Through a series of ksqlDB statements, we'll enrich our order data and compute some simple statistics based on that stream of enriched order data. By the end, we'll have more insights as to just how well our discount code promotion is doing. Specifically, we'll know the average order value per discount percentage as well as the average number of items purchased.
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
