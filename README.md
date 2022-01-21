@@ -21,7 +21,7 @@ _Contributing a full recipe to be published?_
 
 1. Self-assign a recipe idea from the list in [GitHub issues](https://github.com/confluentinc/ksqldb-recipes/issues?q=is%3Aissue+is%3Aopen+label%3A%22new+recipe%22).
 2. Create a new branch (based off `main`) for the new recipe
-3. Create a new subfolder for the new recipe, e.g. `docs/<industry>/<new-recipe-name>`
+3. Create a new subfolder for the new recipe, e.g. `docs/<industry>/<new-recipe-name>`. Note: `<new-recipe-name>` is the slug in Confluent Cloud. Use hyphens, not underscores.
 4. The recipe should follow the structure of [existing recipes](https://github.com/confluentinc/ksqldb-recipes/tree/main/docs). Copy the contents of an existing recipe (e.g. [aviation](https://github.com/confluentinc/ksqldb-recipes/tree/main/docs/customer-360/aviation)) or the [template](template) directory as the basis for your new recipe.
 
 - [index.md](template/index.md): explain the use case, why it matters, add a graphic if available
@@ -30,9 +30,11 @@ _Contributing a full recipe to be published?_
 - [manual.sql](template/manual.sql): SQL commands to insert mock data into Kafka topics, if a user does not have a real end system
 - [process.sql](template/process.sql): this is the core code of the recipe, the SQL commands that correspond to the event stream processing
 - [sink.json](template/sink.json): (optional) JSON configuration to create Confluent Cloud sink connectors to push results to a real end system
-- [sink.sql](template/sink.sql): SQL-equivalent of `sink.json` (this file is not referenced today in `index.md`, but getting ready for ksqlDB-connect integration)
+- [sink.sql](template/sink.sql): (optional unless `sink.json` is provided) SQL-equivalent of `sink.json` (this file is not referenced today in `index.md`, but getting ready for ksqlDB-connect integration)
 
-5. Submit a [GitHub Pull Request](https://github.com/confluentinc/ksqldb-recipes/pulls). Ensure the new recipe adheres to the [checklist](https://github.com/confluentinc/ksqldb-recipes/blob/main/.github/pull_request_template.md) and then tag [confluentinc/devx](https://github.com/orgs/confluentinc/teams/devx) for review.
+5. Validation: you do not need to create a real end system, real data, and a real source connector, but you should ensure the connector configuration is syntactically correct. Do validate that the core ksqlDB stream processing code works with the manual `INSERT INTO` statements, and that the last ksqlDB query returns the expected records.
+
+6. Submit a [GitHub Pull Request](https://github.com/confluentinc/ksqldb-recipes/pulls). Ensure the new recipe adheres to the [checklist](https://github.com/confluentinc/ksqldb-recipes/blob/main/.github/pull_request_template.md) and then tag [confluentinc/devx](https://github.com/orgs/confluentinc/teams/devx) for review.
 
 ### Handling connectors
 
