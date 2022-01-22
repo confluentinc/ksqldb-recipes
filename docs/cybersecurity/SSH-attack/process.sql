@@ -9,7 +9,7 @@ CREATE STREAM syslog (
   remote_address varchar 
 ) WITH (
   KAFKA_TOPIC = 'syslog',
-  VALUE_FORMAT = 'json',
+  VALUE_FORMAT = 'JSON',
   PARTITIONS = 6
 );
 

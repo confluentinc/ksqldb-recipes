@@ -61,10 +61,10 @@ CREATE TABLE tenant_occupancy (
   tenant_id VARCHAR PRIMARY KEY,
   customer_id BIGINT
 ) WITH (
-  kafka_topic='tenant-occupancy',
-  partitions=3,
-  key_format='JSON',
-  value_format='JSON'
+  KAFKA_TOPIC = 'tenant-occupancy',
+  PARTITIONS = 6,
+  KEY_FORMAT = 'JSON',
+  VALUE_FORMAT = 'JSON'
 );
 ```
 
@@ -85,15 +85,27 @@ CREATE STREAM panel_power_readings (
   panel_current_utilization DOUBLE,
   tenant_kwh_usage BIGINT
 ) WITH (
-  kafka_topic='panel-readings',
-  partitions=3,
-  key_format='JSON',
-  value_format='JSON'
+  KAFKA_TOPIC = 'panel-readings',
+  PARTITIONS = 6,
+  KEY_FORMAT = 'JSON',
+  VALUE_FORMAT = 'JSON'
 );
 ```
 
 * `panel_current_utilization` represents the percentage of total capacity of the panel and is useful for business continuation monitoring
 * `tenant_kwh_usage` provides the total amount of energy consumed by the tenant in the current month 
+
+A simple example for determining when a panel is overloaded is provided by:
+
+```sql
+CREATE STREAM overloaded_panels AS 
+  SELECT panel_id, tenant_id, panel_current_utilization 
+    FROM panel_power_readings 
+    WHERE panel_current_utilization >= 0.85
+  EMIT CHANGES;
+```
+
+This command filters the panel power readings for instances where utilization is 85% or higher. This stream could be used in a monitoring or alerting context to notify on-call personnel of a potential issue with the power supplies to the datacenter.
 
 To provide billing reports, a `STREAM` is created that joins the panel sensor readings with the customer tenant information. Functions are used to create a billable month indicator along with the necessary fields from the joined stream and table. 
 
@@ -114,7 +126,7 @@ CREATE STREAM billable_power AS
 Finally, the `billable_power_report` aggregates the `billable_power` stream into a `TABLE` that can be queried to create reports by month, customer, and tenant.
 
 ```sql
-CREATE TABLE billable_power_report WITH (key_format='json') AS
+CREATE TABLE billable_power_report WITH (KEY_FORMAT = 'JSON') AS
   SELECT customer_id, tenant_id, billable_month, MAX(tenant_kwh_usage) as kwh
     FROM billable_power
     GROUP BY tenant_id, customer_id, billable_month;

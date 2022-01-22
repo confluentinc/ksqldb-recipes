@@ -14,7 +14,8 @@ CREATE SOURCE CONNECTOR FD_transactions WITH (
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UCT',
-  'tasks.max'                = '1');
+  'tasks.max'                = '1'
+);
 
 -- Stream of customers
 CREATE SOURCE CONNECTOR FD_customers WITH (
@@ -32,4 +33,5 @@ CREATE SOURCE CONNECTOR FD_customers WITH (
   'timestamp.column.name'    = 'created_at',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UCT',
-  'tasks.max'                = '1');
+  'tasks.max'                = '1'
+);

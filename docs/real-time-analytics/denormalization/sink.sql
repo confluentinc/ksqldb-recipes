@@ -11,4 +11,5 @@ CREATE SINK CONNECTOR orders_enriched WITH (
   'snowflake.private.key'    = '<private-key>',
   'snowflake.database.name'  = '<database-name>',
   'snowflake.schema.name'    = '<schema-name>',
-  'tasks.max'                = '1');
+  'tasks.max'                = '1'
+);

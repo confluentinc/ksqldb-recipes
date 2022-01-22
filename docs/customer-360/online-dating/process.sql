@@ -7,15 +7,14 @@ CREATE STREAM messages (
 ) WITH (
   KAFKA_TOPIC = 'MESSAGES',
   VALUE_FORMAT = 'AVRO',
-  PARTITIONS = 3
+  PARTITIONS = 6
 );
 
 CREATE STREAM conversations AS
 SELECT
   ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>') AS conversation_id
 FROM messages
-GROUP BY
-  ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>')
+GROUP BY ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>')
 HAVING
   REDUCE(
     ENTRIES(

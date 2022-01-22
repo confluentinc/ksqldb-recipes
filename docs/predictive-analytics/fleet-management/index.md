@@ -23,7 +23,7 @@ Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluen
 --8<-- "docs/shared/connect.md"
 
 ```json
---8<-- "docs/predictive-analytics/fleet_management/source.json"
+--8<-- "docs/predictive-analytics/fleet-management/source.json"
 ```
 
 --8<-- "docs/shared/manual_insert.md"
@@ -35,13 +35,13 @@ This application will enrich the fleet telemetry events with details about the a
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ```sql
---8<-- "docs/predictive-analytics/fleet_management/process.sql"
+--8<-- "docs/predictive-analytics/fleet-management/process.sql"
 ```
 
 --8<-- "docs/shared/manual_cue.md"
 
 ```sql
---8<-- "docs/predictive-analytics/fleet_management/manual.sql"
+--8<-- "docs/predictive-analytics/fleet-management/manual.sql"
 ```
 
 ### Cleanup
