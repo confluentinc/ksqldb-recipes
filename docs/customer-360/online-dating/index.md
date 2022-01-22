@@ -79,8 +79,7 @@ CREATE TABLE conversations_split AS
     ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>') AS conversation_id,
     COLLECT_LIST(rowtime) AS message_times
   FROM messages
-  GROUP BY 
-    ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>');
+  GROUP BY ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>');
 ```
 
 Querying that looks like this:
@@ -124,8 +123,7 @@ CREATE TABLE conversations_mapped AS
       COLLECT_LIST(send_id)
     ) AS message_times
   FROM messages
-  GROUP BY 
-    ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>');
+  GROUP BY ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>');
 ```
 
 Querying that looks like this:
@@ -162,8 +160,7 @@ CREATE TABLE conversations_sequenced AS
         true
     ) AS message_times
   FROM messages
-  GROUP BY 
-    ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>');
+  GROUP BY ARRAY_JOIN(ARRAY_SORT(ARRAY [send_id, recv_id]), '<>');
 ```
 
 Querying that looks like this:
