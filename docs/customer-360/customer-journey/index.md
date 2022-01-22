@@ -32,6 +32,9 @@ For this recipe, we are interested in knowing the set of webpages visited by a g
 
 ### ksqlDB code
 
+Given a stream of pageview statistics, count the number of visits to individual pages, grouped by customer.
+This uses the ksqlDB function [COUNT DISTINCT](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/aggregate-functions/#count_distinct).
+
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ```sql
