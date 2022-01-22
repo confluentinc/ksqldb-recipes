@@ -34,6 +34,7 @@ nav:
     #- Modernize mainframes for real-time: real-time-analytics/mainframe-offload/index.md
     #- Assess the success of a discount promotion: real-time-analytics/discounting/index.md
     #- Real-time logistics for a delivery fleet: real-time-analytics/logistics/index.md
+    #- Filter Confluent audit logs for Splunk: real-time-analytics/filter-logs-for-splunk
 
 markdown_extensions:
   - pymdownx.highlight:
