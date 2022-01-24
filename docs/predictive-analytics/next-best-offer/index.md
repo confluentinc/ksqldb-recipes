@@ -50,45 +50,10 @@ This application will perform a series of joins between event streams and tables
 
 ## Explanation
 
-### Creating an event stream
-
-To get started, you'll first need to create a stream that contains the customer activity:
-
-```sql
-CREATE STREAM customer_activity_stream (
-    ACTIVITY_ID INTEGER,
-    IP_ADDRESS STRING,
-    CUSTOMER_ID INTEGER KEY,
-    ACTIVITY_TYPE STRING,
-    PROPENSITY_TO_BUY DOUBLE
-   ) WITH (
-    KAFKA_TOPIC = 'CUSTOMER_ACTIVITY_STREAM',
-    VALUE_FORMAT = 'JSON',
-    PARTITIONS = 6
-);
-```
-
-Note that the `CUSTOMER_ID` field is the key in the stream's key-value pairs. You'll see why this is important in the next section.
-
-In a production setting you'll populate the stream's underlying topic either with `KafkaProducer` application or from an external system using a [managed connector on Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/index.html).  In case you don't have a connector set up, you can manually insert records into the stream with [INSERT VALUES](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/insert-values/#insert-values) statements:
-
-
-```sql
-INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (1,'121.219.110.170',1,'branch_visit',0.4);
-INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (2,'210.232.55.188',2,'deposit',0.56);
-INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (3,'84.197.123.173',3,'web_open',0.33);
-INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (4,'70.149.233.32',1,'deposit',0.41);
-INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (5,'221.234.209.67',2,'deposit',0.44);
-INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (6,'102.187.28.148',3,'web_open',0.33);
-INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (7,'135.37.250.250',1,'mobile_open',0.97);
-INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (8,'122.157.243.25',2,'deposit',0.83);
-INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (9,'114.215.212.181',3,'deposit',0.86);
-INSERT INTO customer_activity_stream (activity_id, ip_address, customer_id, activity_type, propensity_to_buy) VALUES (10,'248.248.0.78',1,'new_account',0.14);
-```
 
 ### Adding the lookup tables
 
-In the event stream you created above, each activity entry contains only the id for the customer. This is expected, as it's a common practice to have [normalized](https://en.wikipedia.org/wiki/Database_normalization) event streams.  But when it's time to analyze the data, it's important to have additional customer information to provide context for any analysts reviewing the results. You'll also need a table to use for the calculated offer.
+In the event stream you'll use for this recipe, each activity entry contains only the id for the customer. This is expected, as it's a common practice to have [normalized](https://en.wikipedia.org/wiki/Database_normalization) event streams.  But when it's time to analyze the data, it's important to have additional customer information to provide context for any analysts reviewing the results. You'll also need a table to use for the calculated offer.
 
 #### Creating the customer table and inserting records
 
@@ -120,7 +85,7 @@ INSERT INTO customers (customer_id, first_name, last_name, email, gender, income
 
 #### Creating the offer table
 
-The last lookup table you'll add is the `OFFERS` table:
+You'll also need a lookup table for the `OFFERS` data:
 
 ```sql
 CREATE TABLE offers (
@@ -144,6 +109,40 @@ INSERT INTO offers (offer_id, offer_name, offer_url) VALUES (2,'new_checking','h
 INSERT INTO offers (offer_id, offer_name, offer_url) VALUES (3,'new_home_loan','https://webs.com/in/ante.jpg');
 INSERT INTO offers (offer_id, offer_name, offer_url) VALUES (4,'new_auto_loan','http://squidoo.com/venenatis/non/sodales/sed/tincidunt/eu.js');
 INSERT INTO offers (offer_id, offer_name, offer_url) VALUES (5,'no_offer','https://ezinearticles.com/ipsum/primis/in/faucibus/orci/luctus.html');
+```
+
+### Creating the event stream
+
+Now you'll create the stream that contains the customer activity:
+
+```sql
+CREATE STREAM customer_activity_stream (
+    CUSTOMER_ID INTEGER KEY,
+    ACTIVITY_ID INTEGER,
+    IP_ADDRESS STRING,
+    ACTIVITY_TYPE STRING,
+    PROPENSITY_TO_BUY DOUBLE
+   ) WITH (
+    KAFKA_TOPIC = 'CUSTOMER_ACTIVITY_STREAM',
+    VALUE_FORMAT = 'JSON',
+    PARTITIONS = 6
+);
+```
+
+In a production setting you'll populate the stream's underlying topic either with `KafkaProducer` application or from an external system using a [managed connector on Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/index.html).  In case you don't have a connector set up, you can manually insert records into the stream with [INSERT VALUES](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/insert-values/#insert-values) statements:
+
+
+```sql
+INSERT INTO customer_activity_stream (customer_id, activity_id, ip_address, activity_type, propensity_to_buy) VALUES (1, 1,'121.219.110.170','branch_visit',0.4);
+INSERT INTO customer_activity_stream (customer_id, activity_id, ip_address, activity_type, propensity_to_buy) VALUES (2, 2,'210.232.55.188','deposit',0.56);
+INSERT INTO customer_activity_stream (customer_id, activity_id, ip_address, activity_type, propensity_to_buy) VALUES (3, 3,'84.197.123.173','web_open',0.33);
+INSERT INTO customer_activity_stream (customer_id, activity_id, ip_address, activity_type, propensity_to_buy) VALUES (1, 4,'70.149.233.32','deposit',0.41);
+INSERT INTO customer_activity_stream (customer_id, activity_id, ip_address, activity_type, propensity_to_buy) VALUES (2, 5,'221.234.209.67','deposit',0.44);
+INSERT INTO customer_activity_stream (customer_id, activity_id, ip_address, activity_type, propensity_to_buy) VALUES (3, 6,'102.187.28.148','web_open',0.33);
+INSERT INTO customer_activity_stream (customer_id, activity_id, ip_address, activity_type, propensity_to_buy) VALUES (1, 7,'135.37.250.250','mobile_open',0.97);
+INSERT INTO customer_activity_stream (customer_id, activity_id, ip_address, activity_type, propensity_to_buy) VALUES (2, 8,'122.157.243.25','deposit',0.83);
+INSERT INTO customer_activity_stream (customer_id, activity_id, ip_address, activity_type, propensity_to_buy) VALUES (3, 9,'114.215.212.181','deposit',0.86);
+INSERT INTO customer_activity_stream (customer_id, activity_id, ip_address, activity_type, propensity_to_buy) VALUES (1, 10,'248.248.0.78','new_account',0.14);
 ```
 
 ### Determining the next best offer

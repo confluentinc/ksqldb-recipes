@@ -1,17 +1,5 @@
 SET 'auto.offset.reset'='earliest';
 
-CREATE STREAM customer_activity_stream (
-    ACTIVITY_ID INTEGER,
-    IP_ADDRESS STRING,
-    CUSTOMER_ID INTEGER KEY,
-    ACTIVITY_TYPE STRING,
-    PROPENSITY_TO_BUY DOUBLE
-   ) WITH (
-    KAFKA_TOPIC = 'CUSTOMER_ACTIVITY_STREAM',
-    VALUE_FORMAT = 'JSON',
-    PARTITIONS = 6
-);
-
 CREATE TABLE customers (
     CUSTOMER_ID INTEGER PRIMARY KEY,
     FIRST_NAME STRING,
@@ -36,6 +24,18 @@ CREATE TABLE offers (
     PARTITIONS = 6
 );
 
+CREATE STREAM customer_activity_stream (
+    CUSTOMER_ID INTEGER KEY,
+    ACTIVITY_ID INTEGER,
+    IP_ADDRESS STRING,
+    ACTIVITY_TYPE STRING,
+    PROPENSITY_TO_BUY DOUBLE
+   ) WITH (
+    KAFKA_TOPIC = 'CUSTOMER_ACTIVITY_STREAM',
+    VALUE_FORMAT = 'JSON',
+    PARTITIONS = 6
+);
+
 -- Application logic
 CREATE STREAM next_best_offer
 WITH (
@@ -44,8 +44,8 @@ WITH (
     PARTITIONS = 6
 ) AS
 SELECT 
-    cask.ACTIVITY_ID,
     cask.CUSTOMER_ID as CUSTOMER_ID,
+    cask.ACTIVITY_ID,
     cask.PROPENSITY_TO_BUY,
     cask.ACTIVITY_TYPE,
     ct.INCOME,
@@ -67,9 +67,9 @@ WITH (
     PARTITIONS = 6
 ) AS
 SELECT
-    nbo.OFFER_ID,
-    nbo.ACTIVITY_ID,
     nbo.CUSTOMER_ID,
+    nbo.ACTIVITY_ID,
+    nbo.OFFER_ID,
     nbo.PROPENSITY_TO_BUY,
     nbo.ACTIVITY_TYPE,
     nbo.INCOME,
