@@ -62,10 +62,10 @@ Create the table for customer information:
 ```sql
 CREATE TABLE customers (
     CUSTOMER_ID INTEGER PRIMARY KEY,
-    FIRST_NAME STRING,
-    LAST_NAME STRING,
-    EMAIL STRING,
-    GENDER STRING,
+    FIRST_NAME VARCHAR,
+    LAST_NAME VARCHAR,
+    EMAIL VARCHAR,
+    GENDER VARCHAR,
     INCOME INTEGER,
     FICO INTEGER
 ) WITH (
@@ -90,8 +90,8 @@ You'll also need a lookup table for the `OFFERS` data:
 ```sql
 CREATE TABLE offers (
     OFFER_ID INTEGER PRIMARY KEY,
-    OFFER_NAME STRING,
-    OFFER_URL STRING
+    OFFER_NAME VARCHAR,
+    OFFER_URL VARCHAR
 ) WITH (
     KAFKA_TOPIC = 'OFFERS_STREAM',
     VALUE_FORMAT = 'JSON',
@@ -119,8 +119,8 @@ Now you'll create the stream that contains the customer activity:
 CREATE STREAM customer_activity_stream (
     CUSTOMER_ID INTEGER KEY,
     ACTIVITY_ID INTEGER,
-    IP_ADDRESS STRING,
-    ACTIVITY_TYPE STRING,
+    IP_ADDRESS VARCHAR,
+    ACTIVITY_TYPE VARCHAR,
     PROPENSITY_TO_BUY DOUBLE
    ) WITH (
     KAFKA_TOPIC = 'CUSTOMER_ACTIVITY_STREAM',
