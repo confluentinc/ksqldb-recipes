@@ -1,6 +1,6 @@
 CREATE SOURCE CONNECTOR fleet_updates WITH (
   'connector.class'          = 'PostgresSource',
-  'name'                     = 'recipe-postgres-fleet-updates',
+  'name'                     = 'recipe-postgres-logistics',
   'kafka.api.key'            = '<my-kafka-api-key>',
   'kafka.api.secret'         = '<my-kafka-api-secret>',
   'connection.host'          = '<my-database-endpoint>',
@@ -8,7 +8,7 @@ CREATE SOURCE CONNECTOR fleet_updates WITH (
   'connection.user'          = 'postgres',
   'connection.password'      = '<my-database-password>',
   'db.name'                  = '<db-name>',
-  'table.whitelist'          = 'fleet_updates',
+  'table.whitelist'          = 'fleet_updates, orders',
   'timestamp.column.name'    = 'timestamp',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UTC',
