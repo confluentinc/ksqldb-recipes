@@ -8,7 +8,7 @@ CREATE SOURCE CONNECTOR fleet_updates WITH (
   'connection.user'          = 'postgres',
   'connection.password'      = '<my-database-password>',
   'db.name'                  = '<db-name>',
-  'table.whitelist'          = 'fleet-updates',
+  'table.whitelist'          = 'fleet_updates',
   'timestamp.column.name'    = 'timestamp',
   'output.data.format'       = 'JSON',
   'db.timezone'              = 'UTC',
