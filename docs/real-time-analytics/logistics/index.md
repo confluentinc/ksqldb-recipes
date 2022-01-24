@@ -6,7 +6,7 @@ seo:
 
 # Real-Time Delivery Logistics
 
-In today's world, last-mile delivery services are crucial. These operations have to operate as smoothly as possible, ensuring that customers are receiving their orders on time and that they are, ideally, provided real-time updates as the process takes place. This recipe will show your delivery service how to compute real-time 
+In today's world, last-mile delivery services are crucial. These operations have to operate as smoothly as possible, ensuring that customers are receiving their orders on time and that they are, ideally, provided real-time updates as the process takes place. This recipe will show your delivery service how to compute delivery estimates and status updates in real-time.
 
 ![fleet delivery architecture](../../img/delivery-architecture.gif)
 
@@ -46,13 +46,6 @@ This application processes real-time vehicle information, showing the current st
 --8<-- "docs/real-time-analytics/logistics/manual.sql"
 ```
 
-### Write the data out
-
-This section is optional
-
-```json
---8<-- "docs/real-time-analytics/logistics/sink.json"
-```
 
 ### Cleanup
 
