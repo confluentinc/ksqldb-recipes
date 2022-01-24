@@ -1,12 +1,10 @@
 SET 'auto.offset.reset' = 'earliest';
 
 -- Create Discount Code Table
-CREATE STREAM DISCOUNT_CODES
-(
+CREATE TABLE DISCOUNT_CODES (
     CODE VARCHAR PRIMARY KEY, 
     PERCENTAGE DOUBLE
-)
-WITH (
+) WITH (
     KAFKA_TOPIC = 'discount_codes',
     VALUE_FORMAT = 'JSON',
     PARTITIONS = 6

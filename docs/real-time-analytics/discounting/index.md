@@ -12,13 +12,15 @@ Small, online retailers often run promotions in order to entice buyers and incre
 
 ### Setup your Environment
 
+Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=discounting).
+
 --8<-- "docs/shared/ccloud_setup.md"
 
 ### Read the data in
 
 --8<-- "docs/shared/connect.md"
 
-In the case of this recipe, we're interested in capturing data that reflects incoming orders as well as details on unique discount codes. Connect can easily stream in data from a database containing that information; you can use the following template as a guide to setting up a connector.
+In the case of this recipe, we're interested in capturing data that reflects incoming orders as well as details on unique discount codes. Kafka Connect can easily stream in data from a database containing that information; you can use the following template as a guide to setting up a connector.
 
 ```json
 --8<-- "docs/real-time-analytics/discounting/source.json"

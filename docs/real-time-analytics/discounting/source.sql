@@ -1,7 +1,7 @@
 -- Example
 CREATE SOURCE CONNECTOR orders WITH (
   'connector.class'          = 'PostgresSource',
-  'name'                     = 'recipe-postgres-orders',
+  'name'                     = 'recipe-postgres-discounting',
   'kafka.api.key'            = '<my-kafka-api-key>',
   'kafka.api.secret'         = '<my-kafka-api-secret>',
   'connection.host'          = '<my-database-endpoint>',
