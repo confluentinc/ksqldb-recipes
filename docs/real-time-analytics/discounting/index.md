@@ -47,3 +47,11 @@ Through a series of ksqlDB statements, we'll enrich our order data and compute s
 ### Cleanup
 
 --8<-- "docs/shared/cleanup.md"
+
+### Explanation
+
+You may have noticed that the application logic query in [Read the data in](#read-the-data-in) really consists of two stages wrapped into one: an enrichment stage and an aggregation stage. This was done for efficiency and convenience. But, as an added exercise, let's break these down into separate stages and see what's happening.
+
+```sql
+--8<-- "docs/real-time-analytics/discounting/process_step_by_step.sql"
+```
