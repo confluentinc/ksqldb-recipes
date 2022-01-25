@@ -3,7 +3,7 @@
 -- 1. Enrich the orders stream with discount details.
 --    Compute the discount amount as well as order total.
 CREATE STREAM ORDERS_ENRICHED WITH (
-	KAFKA_TOPIC = 'orders_enriched',
+    KAFKA_TOPIC = 'orders_enriched',
     VALUE_FORMAT = 'JSON',
     PARTITIONS = 6
 ) AS 
