@@ -1,5 +1,5 @@
 -- Example
-CREATE SOURCE CONNECTOR orders WITH (
+CREATE SOURCE CONNECTOR discounting WITH (
   'connector.class'          = 'PostgresSource',
   'name'                     = 'recipe-postgres-discounting',
   'kafka.api.key'            = '<my-kafka-api-key>',
