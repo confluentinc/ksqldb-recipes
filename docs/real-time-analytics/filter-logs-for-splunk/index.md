@@ -6,14 +6,14 @@ seo:
 
 # Filter Kafka Audit Logs for output to Splunk
 
-In the Security Information and Event Management (SIEM) world, it's just as important have insight into internal activities as it is to monitor for external security threats and vulnerabilities.  But viewing all internal audit logs would provide too much information, you need to narrow the scope to particular events.
+In the Security Information and Event Management (SIEM) world, it's just as important to have insight into internal activities as it is to monitor for external security threats and vulnerabilities. But viewing all internal audit logs would provide too much information; you need to narrow the scope to particular events.
 
-This recipe demonstrates how to filter [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=filter_logs_for_splunk) audit logs of your cluster for specific events and forward them Splunk for indexing via the [Splunk Sink connector](https://docs.confluent.io/cloud/current/connectors/cc-splunk-sink.html#cc-splunk-sink).
-The stream processing application filters for events involving operations on `topics`, but you can review the [structure of Confluent audit logs](https://docs.confluent.io/platform/current/security/audit-logs/audit-logs-concepts.html#audit-log-content) and extend this solution to filter for any [auditable event](https://docs.confluent.io/platform/current/security/audit-logs/audit-logs-concepts.html#auditable-events), 
+This recipe demonstrates how to filter audit logs from your [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=filter_logs_for_splunk) cluster for specific events and forward them to Splunk for indexing via the [Splunk Sink connector](https://docs.confluent.io/cloud/current/connectors/cc-splunk-sink.html#cc-splunk-sink).
+The stream processing application filters for events involving operations on `topics`, but you can review the [structure of Confluent audit logs](https://docs.confluent.io/platform/current/security/audit-logs/audit-logs-concepts.html#audit-log-content) and extend this solution to filter for any [auditable event](https://docs.confluent.io/platform/current/security/audit-logs/audit-logs-concepts.html#auditable-events).
 
 ## Step-by-step
 
-### Setup your Environment
+### Set up your environment
 
 Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=filter_logs_for_splunk).
 
@@ -21,13 +21,13 @@ Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluen
 
 ### Read the data in
 
-For this recipe you'll create a stream to read in your cluster's audit contained in a topic, then create an additional stream where you will filter out unwanted events and only select the data you need to analyze. 
+For this recipe, you'll create a stream to read in your cluster's audit logs from a topic. Then you'll create an additional stream that filters out unwanted events and selects only the data that you need to analyze. 
 
 --8<-- "docs/shared/manual_insert.md"
 
-### Run stream processing app
+### Run the stream processing application
 
-The first stream you create sets a schema for the audit log data which will enable you to selectively pull out only the parts you need to analyze.  We'll discuss this more in the [Explanation section](index.md#explaination)
+The first stream will set a schema for the audit log data, which will enable you to selectively pull out only the parts that you need to analyze. We'll discuss this more in the [Explanation](index.md#explanation) section.
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
@@ -55,9 +55,9 @@ The first stream you create sets a schema for the audit log data which will enab
 
 ## Explanation
 
-The first step of this recipe was to [create a stream](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-stream/) from the audit log topic.  By creating a stream, we can assign a schema or [model the JSON](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-stream/).  By applying a model or schema, you can now directly query nested sections of the data, which allows you to apply filters so you only pull back the log entries you're interested in.  Additionally you can cherry-pick selected fields from the nested structure, so you can limit the amount of data you retrieve with the query.  The second part of the recipe leverages the applied schema to specify you only want log entries pertaining to events on Kafka `topics`. 
+The first step of this recipe was to [create a stream](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-stream/) from the audit log topic. When creating a stream, you can assign a schema or [model the JSON](https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-stream/). After applying a model or schema, you can directly query nested sections of the data, which allows you to apply filters and only pull back the log entries that interest you. Additionally, you can cherry-pick selected fields from the nested structure, so you can limit the amount of data you retrieve with the query. The second part of the recipe leverages the applied schema to specify that you want only log entries pertaining to events on Kafka topics. 
 
-The [JSON structure of the Confluent log entries](https://docs.confluent.io/platform/current/security/audit-logs/audit-logs-concepts.html#audit-log-content) contain several fields:
+The [JSON structure of the Confluent log entries](https://docs.confluent.io/platform/current/security/audit-logs/audit-logs-concepts.html#audit-log-content) contains several fields:
 
 ```json
 {   "id": "889bdcd9-a378-4bfe-8860-180ef8efd208",
@@ -85,7 +85,8 @@ The [JSON structure of the Confluent log entries](https://docs.confluent.io/plat
 }
 
 ```
-Of these fields in the JSON structure you're only interested in the `time` of the event and the `data` field which contains the specifics the log event, which in this case is any operations where the `resourceType` is `Topic`.  So the first step is to apply a schema to this JSON:
+
+Of these fields, you're only interested in the `time` of the event and the `data` field. The `data` field contains the specifics of the log event, which in this case is any operation where the `resourceType` is `Topic`. So the first step is to apply a schema to this JSON:
 
 ```sql
 
@@ -114,9 +115,10 @@ log_events STRUCT<
                     superUserAuthorization BOOLEAN>
   ...
 ```  
-By supplying a schema to the ksqlDB `STREAM`, you are describing the structure of the data to ksqlDB.  The top-level `log_events` `STRUCT` corresponds to the outermost `{` of the JSON structure and gives a name to the entire JSON entry. The name you supply here is arbitrary but it should be meaningful. You'll notice that there are additional nested `STRUCT` fields representing nested JSON objects within the structure.
 
-Now that you've described the structure of the data (applied a schema), you can now create another `STREAM` that will only contain the data of interest. Let's review the query used to create the `STREAM` in two parts, the `CREATE` and the `SELECT` statements.
+By supplying a schema to the ksqlDB `STREAM`, you are describing the structure of the data to ksqlDB. The top-level `log_events` `STRUCT` corresponds to the outermost `{` of the JSON structure and gives a name to the entire JSON entry. The name you supply here is arbitrary, but it should be meaningful. You'll notice that there are additional nested `STRUCT` fields representing nested JSON objects within the structure.
+
+Now that you've described the structure of the data (by applying a schema), you can create another `STREAM` that will contain only the data of interest. Let's review this query in two parts—the `CREATE` statement and the `SELECT` statement.
 
 ```sql
 CREATE STREAM audit_log_topics
@@ -127,26 +129,26 @@ WITH (
   PARTITIONS=6
 ) 
 ```
-This `CREATE STREAM` statement specifies to use (or create if it doesn't exist yet) a Kafka topic to store the results of the stream.  The `TIMESTAMP` field tells ksqlDB the field to use for the timestamp for each entry in the stream and `TIMESTAMP_FORMAT` indicates the format of the timestamp field.
 
-The `SELECT` part of the query is where you can drill down to pull out only the records you have an interest in from the original stream, let's take a look at each line:
+This `CREATE STREAM` statement specifies to use (or create, if it doesn't exist yet) a Kafka topic to store the results of the stream. The `TIMESTAMP` field tells ksqlDB which field to use for the entry timestamps, and `TIMESTAMP_FORMAT` indicates the format of the timestamp field.
+
+The `SELECT` part of the query is where you can drill down in the original stream and pull out only the records that interest you. Let's take a look at each line:
 
 ```sql
 SELECT LOG_EVENTS->time as time, LOG_EVENTS->DATA
 ```
-Here you specify that you only want the `time` field and the nested `data` entry from the original JSON. In ksqlDB you can access nested JSON objects using the `->` operator.
+
+This specifies that you want only the `time` field and the nested `data` entry from the original JSON. In ksqlDB, you can access nested JSON objects using the `->` operator.
 
 ```sql
 FROM  audit_log_events
 ```
-The `FROM` clause simply tells ksqlDB to pull the records from the original stream you created to model the Confluent log data.
+
+The `FROM` clause simply tells ksqlDB to pull the records from the original stream that you created to model the Confluent log data.
 
 ```sql
 WHERE (LOG_EVENTS->DATA->AUTHORIZATIONINFO->RESOURCETYPE = 'Topic') 
 ```
-In this `WHERE` statement you drill down several layers of nested JSON using the `->` operator to specify that the records of the new stream are only those entries involving topic operations.
 
-
-
-
+In this `WHERE` statement, you use the `->` operator to drill down through several layers of nested JSON. This statement specifies that the new stream will contain only entries involving topic operations.
 
