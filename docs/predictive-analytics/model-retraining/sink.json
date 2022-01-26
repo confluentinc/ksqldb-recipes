@@ -1,0 +1,39 @@
+{
+    "name": "WeightData",
+    "config": {
+      "name": "WeightData",
+      "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+      "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+      "key.converter.schemas.enable": "false",
+      "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "value.converter.schemas.enable": "false",
+      "topics": "weight-diff",
+      "consumer.override.auto.offset.reset": "earliest",
+      "connection.uri": "mongodb://user:password@mongo:27017/admin",
+      "database": "Weight",
+      "collection": "TrainingData"
+    }
+}
+
+{
+    "name": "RetrainTrigger",
+    "config": {
+      "name": "RetrainTrigger",
+      "connector.class": "io.confluent.connect.http.HttpSinkConnector",
+      "confluent.topic.bootstrap.servers": "broker:29092",
+      "confluent.topic.replication.factor": "1",
+      "reporter.bootstrap.servers": "broker:29092",
+      "reporter.result.topic.name": "success-responses",
+      "reporter.result.topic.replication.factor": "1",
+      "reporter.error.topic.name":"error-responses",
+      "reporter.error.topic.replication.factor":"1",
+      "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+      "key.converter.schemas.enable": "false",
+      "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "value.converter.schemas.enable": "false",
+      "topics": "weight-retrain",
+      "tasks.max": "1",
+      "http.api.url": "http://rstudio:8000/train",
+      "request.method": "POST"
+    }
+}
