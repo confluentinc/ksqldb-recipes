@@ -1,15 +1,15 @@
 {
-  "connector.class": "MySqlCdcSource",
-  "name": "user-data-cdc",
-  "kafka.api.key": "<my-kakfa-api-key>",
-  "kafka.api.secret": "<my-kafka-api-secret>",
-  "database.hostname": "<my-database-endpoint>",
-  "database.port": "3306",
-  "database.user": "<my-database-user>",
-  "database.password": "<my-database-password>",
-  "database.server.name": "user-data-db",
-  "database.ssl.mode": "preferred",
-  "output.data.format": "JSON",
-  "tasks.max": "1"
+  "connector.class"       : "MySqlCdcSource",
+  "name"                  : "merchant-data-cdc",
+  "kafka.api.key"         : "<my-kakfa-api-key>",
+  "kafka.api.secret"      : "<my-kafka-api-secret>",
+  "database.hostname"     : "<my-database-endpoint>",
+  "database.port"         : "3306",
+  "database.user"         : "<my-database-user>",
+  "database.password"     : "<my-database-password>",
+  "database.server.name"  : "merchant-data-db",
+  "database.ssl.mode"     : "preferred",
+  "output.data.format"    : "JSON",
+  "tasks.max"             : "1"
 }
 
