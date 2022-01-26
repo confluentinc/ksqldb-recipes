@@ -1,15 +1,16 @@
 {
-  "connector.class"       : "MySqlCdcSource",
-  "name"                  : "merchant-data-cdc",
-  "kafka.api.key"         : "<my-kakfa-api-key>",
-  "kafka.api.secret"      : "<my-kafka-api-secret>",
-  "database.hostname"     : "<my-database-endpoint>",
-  "database.port"         : "3306",
-  "database.user"         : "<my-database-user>",
-  "database.password"     : "<my-database-password>",
-  "database.server.name"  : "merchant-data-db",
-  "database.ssl.mode"     : "preferred",
-  "output.data.format"    : "JSON",
-  "tasks.max"             : "1"
+  "connector.class"          : "PostgresSource",
+  "name"                     : "merchant-data-source",
+  "kafka.api.key"            : "<my-kafka-api-key>",
+  "kafka.api.secret"         : "<my-kafka-api-secret>",
+  "connection.host"          : "<my-database-endpoint>",
+  "connection.port"          : "5432",
+  "connection.user"          : "postgres",
+  "connection.password"      : "<my-database-password>",
+  "db.name"                  : "<db-name>",
+  "table.whitelist"          : "merchant-locations",
+  "timestamp.column.name"    : "created_at",
+  "output.data.format"       : "JSON",
+  "db.timezone"              : "UTC",
+  "tasks.max"                : "1"
 }
-
