@@ -36,6 +36,7 @@ nav:
     #- Assess the success of a discount promotion: real-time-analytics/discounting/index.md
     #- Real-time logistics for a delivery fleet: real-time-analytics/logistics/index.md
     #- Filter audit logs for Splunk: real-time-analytics/filter-logs-for-splunk
+    #- Gelocation based alerting: real-time-analytics/location-based-alerting/index.md
 
 markdown_extensions:
   - admonition
