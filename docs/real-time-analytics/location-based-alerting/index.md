@@ -4,7 +4,7 @@ seo:
   description: This ksqlDB recipe shows real-time, personalized location based alerts. Merchant data is sourced from a database, and user location events from a mobile device. The event streams are joined to generate alerts when a user passes close to a participating merchant.
 ---
 
-# Gelocation Based Alerting 
+# Geolocation Based Alerting 
 
 Customers are no longer satisfied with boring static websites to purchase your product or consume your service. Users demand interactive and contextualized real-time mobile applications. Providing customers with rich, real-time experiences is fundamental, and this recipe shows how ksqlDB can help build personalized location based alerts in real-time from user provided mobile geolocation data.
 
@@ -48,7 +48,7 @@ This application compares merchant and mobile user geolocation data to produce u
 
 ## Write the data out
 
-Sinking the promotion alerts out to Elasticsearch could faciliate further search processing:
+Sinking the promotion alerts out to Elasticsearch could facilitate further search processing:
 
 ```json
 --8<-- "docs/real-time-analytics/location-based-alerting/sink.json"
