@@ -8,8 +8,6 @@ seo:
 
 Customers are no longer satisfied with boring static websites to purchase your product or consume your service. Users demand interactive and contextualized real-time mobile applications. Providing customers with rich, real-time experiences is fundamental, and this recipe shows how ksqlDB can help build personalized location based alerts in real-time from user provided mobile geolocation data.
 
-![alerting](../../img/loyalty.png)
-
 ## Step by step
 
 ### Set up your environment
