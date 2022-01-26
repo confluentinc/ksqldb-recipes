@@ -8,7 +8,7 @@ CREATE STREAM PREDICTED_WEIGHT(
   "Length" DOUBLE,
   "Prediction" DOUBLE
   )
-WITH(KAFKA_TOPIC = 'weight-prediction', VALUE_FORMAT = 'JSON');
+WITH(KAFKA_TOPIC = 'kt.mdb.weight-prediction', VALUE_FORMAT = 'JSON');
 
 -- Create stream of actual weights
 CREATE STREAM ACTUAL_WEIGHT(
@@ -16,7 +16,7 @@ CREATE STREAM ACTUAL_WEIGHT(
   "Species" VARCHAR,
   "Weight" DOUBLE
   )
-WITH(KAFKA_TOPIC = 'machine-weight', VALUE_FORMAT = 'JSON');
+WITH(KAFKA_TOPIC = 'kt.mdb.machine-weight', VALUE_FORMAT = 'JSON');
 
 -- Create stream joining predictions with actual weights
 CREATE STREAM DIFF_WEIGHT
@@ -29,7 +29,7 @@ AS SELECT
    PREDICTED_WEIGHT."Height" AS "Height",
    PREDICTED_WEIGHT."Prediction" AS "PredictedWeight",
    ACTUAL_WEIGHT."Weight" AS "ActualWeight",
-   ROUND(ABS(PREDICTED_WEIGHT."Prediction" - ACTUAL_WEIGHT."Weight") / ACTUAL_WEIGHT."Weight", 3) AS "Error",
+   ROUND(ABS(PREDICTED_WEIGHT."Prediction" - ACTUAL_WEIGHT."Weight") / ACTUAL_WEIGHT."Weight", 3) AS "Error"
 FROM PREDICTED_WEIGHT
 INNER JOIN ACTUAL_WEIGHT
 WITHIN 1 MINUTE
