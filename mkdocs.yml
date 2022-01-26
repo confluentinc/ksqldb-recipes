@@ -16,19 +16,23 @@ nav:
     - Understand user behavior with clickstream data: customer-360/clickstream/index.md
     - Notify passengers of flight updates: customer-360/aviation/index.md
     - Build customer loyalty programs: customer-360/loyalty-rewards/index.md
+    #- Track customer journey: customer-360/customer-journey/index.md
     #- Modernize Messaging Workloads: customer-360/messaging-modernization/index.md
   - Cybersecurity:
     - Detect and analyze SSH attacks: cybersecurity/SSH-attack/index.md
     #- Identify firewall deny events from Splunk: cybersecurity/firewall-splunk/index.md
+    #- Detect Slowloris DDoS attacks: cybersecurity/ddos/index.md
   - Predictive Analytics:
     - Optimize fleet management: predictive-analytics/fleet-management/index.md
     - Optimize omni-channel inventory: predictive-analytics/inventory/index.md
+    #- Next best offer for banking: predictive-analytics/next-best-offer/index.md
   - Real-time Analytics:
     - Analyze datacenter power usage: real-time-analytics/datacenter/index.md
     - Automate instant payment verifications: real-time-analytics/payment-status-check/index.md
     - Enrich orders with change data capture (CDC): real-time-analytics/denormalization/index.md
     - Build a dynamic pricing strategy: real-time-analytics/dynamic-pricing/index.md
     #- Assess the success of a discount promotion: real-time-analytics/discounting/index.md
+    #- Real-time logistics for a delivery fleet: real-time-analytics/logistics/index.md
 
 markdown_extensions:
   - pymdownx.highlight:
