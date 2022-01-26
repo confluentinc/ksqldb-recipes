@@ -9,17 +9,17 @@ CREATE TABLE merchant_locations (
   geohash VARCHAR
 )
 WITH (
-    KAFKA_TOPIC='merchant-locations', 
-    VALUE_FORMAT='JSON',
-    PARTITIONS = 6
+  KAFKA_TOPIC='merchant-locations', 
+  VALUE_FORMAT='JSON',
+  PARTITIONS = 6
 );
 
 -- A table to lookup merchants based on the a substring (precision) of the geohash
 CREATE TABLE merchants_by_geohash
 WITH (
-    KAFKA_TOPIC='merchant-geohash', 
-    FORMAT='JSON', 
-    PARTITIONS=6
+  KAFKA_TOPIC='merchant-geohash', 
+  FORMAT='JSON', 
+  PARTITIONS=6
 ) AS 
 SELECT 
   SUBSTRING(geohash, 1, 6) AS geohash, 
@@ -34,9 +34,9 @@ CREATE STREAM user_locations (
   longitude DECIMAL(10,7),
   geohash VARCHAR
 ) WITH (
-    KAFKA_TOPIC='user-locations', 
-    VALUE_FORMAT='JSON',
-    PARTITIONS=6
+  KAFKA_TOPIC='user-locations', 
+  VALUE_FORMAT='JSON',
+  PARTITIONS=6
 );
 
 -- Stream of alerts when a user's geohash based location roughly 
