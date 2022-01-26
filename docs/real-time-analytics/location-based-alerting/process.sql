@@ -7,8 +7,7 @@ CREATE TABLE merchant_locations (
   latitude DECIMAL(10,7),
   longitude DECIMAL(10,7),
   geohash VARCHAR
-)
-WITH (
+) WITH (
   KAFKA_TOPIC='merchant-locations', 
   VALUE_FORMAT='JSON',
   PARTITIONS = 6
