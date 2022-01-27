@@ -69,11 +69,11 @@ SELECT
   alerts_raw.user_id,
   alerts_raw.user_geohash,
   merchant_locations.description AS merchant_description,
-  CAST(GEO_DISTANCE(
-    alerts_raw.user_latitude, alerts_raw.user_longitude, 
-    merchant_locations.latitude, merchant_locations.longitude, 
-    'KM') * 1000 AS INT) as distance_meters,
-  STRUCT("lat" := CAST(alerts_raw.user_latitude AS DOUBLE),"lon" := CAST(alerts_raw.user_longitude AS DOUBLE)) AS geopoint
+  CAST(
+    GEO_DISTANCE(alerts_raw.user_latitude, alerts_raw.user_longitude, 
+                 merchant_locations.latitude, merchant_locations.longitude, 
+        'KM') * 1000 AS INT) as distance_meters,
+  STRUCT(lat := CAST(alerts_raw.user_latitude AS DOUBLE), lon := CAST(alerts_raw.user_longitude AS DOUBLE)) AS geopoint
 FROM alerts_raw 
 LEFT JOIN merchant_locations on alerts_raw.merchant_id = merchant_locations.id
 WHERE GEO_DISTANCE(
