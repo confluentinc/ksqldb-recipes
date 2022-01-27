@@ -94,27 +94,27 @@ Of these fields, you're only interested in the `time` of the event and the `data
 
 ```sql
 CREATE STREAM audit_log_events (
-        id VARCHAR, 
-        source VARCHAR, 
-        specversion VARCHAR, 
-        type VARCHAR, 
-        time VARCHAR,  
-        datacontenttype VARCHAR, 
-        subject VARCHAR, 
-        confluentRouting STRUCT<route VARCHAR >,  
-        data STRUCT<
-            serviceName VARCHAR, 
-            methodName VARCHAR, 
-            resourceName VARCHAR, 
-            authenticationInfo STRUCT<principal VARCHAR>, 
-        ....
+  id VARCHAR, 
+  source VARCHAR, 
+  specversion VARCHAR, 
+  type VARCHAR, 
+  time VARCHAR,  
+  datacontenttype VARCHAR, 
+  subject VARCHAR, 
+  confluentRouting STRUCT<route VARCHAR >,  
+  data STRUCT<
+    serviceName VARCHAR, 
+    methodName VARCHAR, 
+    resourceName VARCHAR, 
+    authenticationInfo STRUCT<principal VARCHAR>, 
+....
 
 ) WITH (
-     KAFKA_TOPIC = 'confluent-audit-log-events', 
-     VALUE_FORMAT='JSON', 
-     TIMESTAMP='time', 
-     TIMESTAMP_FORMAT='yyyy-MM-dd''T''HH:mm:ss.SSSX',
-     PARTITIONS = 6
+  KAFKA_TOPIC = 'confluent-audit-log-events', 
+  VALUE_FORMAT='JSON', 
+  TIMESTAMP='time', 
+  TIMESTAMP_FORMAT='yyyy-MM-dd''T''HH:mm:ss.SSSX',
+  PARTITIONS = 6
 );
 
 ```  
@@ -124,9 +124,9 @@ Now that you've described the structure of the data (by applying a schema), you 
 
 ```sql
 CREATE STREAM audit_log_topics
-WITH (
-    KAFKA_TOPIC='topic-operations-audit-log', 
-    PARTITIONS=6
+  WITH (
+  KAFKA_TOPIC='topic-operations-audit-log', 
+  PARTITIONS=6
 ) 
 ```
 
