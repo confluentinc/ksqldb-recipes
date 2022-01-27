@@ -1,5 +1,5 @@
 ---
-sew:
+seo:
   title: Machine Learning Model Retraining
   description: This recipe demonstrates how to use ksqlDB to evaluate the predictions of a machine learning model and send data to retrain the model when needed.
 ---

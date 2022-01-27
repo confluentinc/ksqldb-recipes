@@ -1,16 +1,38 @@
-CREATE SOURCE CONNECTOR inventory WITH (
-  'connector.class'          = 'PostgresSource',
-  'name'                     = 'recipe-postgres-inventory',
+-- Stream of fish weight predictions
+CREATE SOURCE CONNECTOR weight-predictions WITH (
+  'connector.class'          = 'MongoDbAtlasSource',
+  'name'                     = 'model-retrain-weight-predictions',
   'kafka.api.key'            = '<my-kafka-api-key>',
   'kafka.api.secret'         = '<my-kafka-api-secret>',
-  'connection.host'          = '<my-database-endpoint>',
-  'connection.port'          = '5432',
-  'connection.user'          = 'postgres',
-  'connection.password'      = '<my-database-password>',
-  'db.name'                  = '<db-name>',
-  'table.whitelist'          = 'inventory',
-  'timestamp.column.name'    = 'created_at',
-  'output.data.format'       = 'JSON',
-  'db.timezone'              = 'UTC',
+  'connection.host'          = '<database-host-address>',
+  'connection.user'          = '<database-username>',
+  'connection.password'      = '<database-password>',
+  'topic.prefix'             = 'kt',
+  'database'                 = 'mdb',
+  'collection'               = 'weight-prediction',
+  'poll.await.time.ms'       = '5000',
+  'poll.max.batch.size'      = '1000',
+  'copy.existing'            = 'true',
+  'output.data.format'       = 'JSON'
   'tasks.max'                = '1'
 );
+
+-- Stream of actual fish weights
+CREATE SOURCE CONNECTOR actual-weights WITH (
+  'connector.class'          = 'MongoDbAtlasSource',
+  'name'                     = 'model-retrain-actual-weights',
+  'kafka.api.key'            = '<my-kafka-api-key>',
+  'kafka.api.secret'         = '<my-kafka-api-secret>',
+  'connection.host'          = '<database-host-address>',
+  'connection.user'          = '<database-username>',
+  'connection.password'      = '<database-password>',
+  'topic.prefix'             = 'kt',
+  'database'                 = 'mdb',
+  'collection'               = 'machine-weight',
+  'poll.await.time.ms'       = '5000',
+  'poll.max.batch.size'      = '1000',
+  'copy.existing'            = 'true',
+  'output.data.format'       = 'JSON'
+  'tasks.max'                = '1'
+);
+
