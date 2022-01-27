@@ -13,7 +13,7 @@ CREATE TABLE merchant_locations (
   PARTITIONS = 6
 );
 
--- A table to lookup merchants based on the a substring (precision) of the geohash
+-- A table to lookup merchants based on a substring (precision) of the geohash
 CREATE TABLE merchants_by_geohash
 WITH (
   KAFKA_TOPIC='merchant-geohash', 
