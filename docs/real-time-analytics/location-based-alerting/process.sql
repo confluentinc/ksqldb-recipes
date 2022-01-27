@@ -77,8 +77,8 @@ SELECT
 FROM alerts_raw 
 LEFT JOIN merchant_locations on alerts_raw.merchant_id = merchant_locations.id
 WHERE GEO_DISTANCE(
-  alerts_raw.user_latitude, alerts_raw.user_longitude, 
-  merchant_locations.latitude, merchant_locations.longitude, 'KM') < 0.2
+        alerts_raw.user_latitude, alerts_raw.user_longitude, 
+        merchant_locations.latitude, merchant_locations.longitude, 'KM') < 0.2
 PARTITION BY null
 EMIT CHANGES;
 
