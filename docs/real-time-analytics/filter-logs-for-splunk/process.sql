@@ -43,7 +43,7 @@ WITH (
 	KAFKA_TOPIC='topic-operations-audit-log', 
 	PARTITIONS=6
 ) 
-AS SELECT time, DATA
+AS SELECT time, data
 	FROM  audit_log_events
-	WHERE DATA->AUTHORIZATIONINFO->RESOURCETYPE = 'Topic'
+	WHERE data->authorizationinfo->resourcetype = 'Topic'
 EMIT CHANGES;
