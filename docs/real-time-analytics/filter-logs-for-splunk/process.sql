@@ -8,7 +8,7 @@ CREATE STREAM audit_log_events (
             time VARCHAR,  
             datacontenttype VARCHAR, 
             subject VARCHAR, 
-            confluentRouting STRUCT<route VARCHAR >,	
+            confluentRouting STRUCT<route VARCHAR>,	
 			data STRUCT<
 			    serviceName VARCHAR, 
 			    methodName VARCHAR, 
@@ -20,11 +20,14 @@ CREATE STREAM audit_log_events (
 			        resourceType VARCHAR,
 			        resourceName VARCHAR,
 			        patternType VARCHAR,
-			        superUserAuthorization BOOLEAN>,
+			        superUserAuthorization BOOLEAN
+			        >,
 			    request STRUCT<
 			        correlation_id VARCHAR,
-			        client_id VARCHAR>,
-			    requestMetadata STRUCT<client_address VARCHAR>>
+			        client_id VARCHAR
+			        >,
+			    requestMetadata STRUCT<client_address VARCHAR>
+			    >
 ) WITH (
 	 KAFKA_TOPIC = 'confluent-audit-log-events', 
 	 VALUE_FORMAT='JSON', 
