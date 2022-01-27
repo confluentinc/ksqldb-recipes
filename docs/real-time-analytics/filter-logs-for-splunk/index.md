@@ -89,53 +89,49 @@ The [JSON structure of the Confluent log entries](https://docs.confluent.io/plat
 Of these fields, you're only interested in the `time` of the event and the `data` field. The `data` field contains the specifics of the log event, which in this case is any operation where the `resourceType` is `Topic`. So the first step is to apply a schema to this JSON:
 
 ```sql
+CREATE STREAM audit_log_events (
+        id VARCHAR, 
+        source VARCHAR, 
+        specversion VARCHAR, 
+        type VARCHAR, 
+        time VARCHAR,  
+        datacontenttype VARCHAR, 
+        subject VARCHAR, 
+        confluentRouting STRUCT<route VARCHAR >,  
+        data STRUCT<
+            serviceName VARCHAR, 
+            methodName VARCHAR, 
+            resourceName VARCHAR, 
+            authenticationInfo STRUCT<principal VARCHAR>, 
+        ....
 
-log_events STRUCT< 
-            id VARCHAR, 
-            source VARCHAR, 
-            specversion VARCHAR, 
-            type VARCHAR, 
-            time VARCHAR,  
-            datacontenttype VARCHAR, 
-            subject VARCHAR, 
-            confluentRouting STRUCT<
-                route VARCHAR >,  
-            data STRUCT<
-                serviceName VARCHAR, 
-                methodName VARCHAR, 
-                resourceName VARCHAR, 
-                authenticationInfo STRUCT<
-                    principal VARCHAR>, 
-                authorizationInfo STRUCT<
-                    granted BOOLEAN,
-                    operation VARCHAR,
-                    resourceType VARCHAR,
-                    resourceName VARCHAR,
-                    patternType VARCHAR,
-                    superUserAuthorization BOOLEAN>
-  ...
+) WITH (
+     KAFKA_TOPIC = 'confluent-audit-log-events', 
+     VALUE_FORMAT='JSON', 
+     TIMESTAMP='time', 
+     TIMESTAMP_FORMAT='yyyy-MM-dd''T''HH:mm:ss.SSSX',
+     PARTITIONS = 6
+);
+
 ```  
-
-By supplying a schema to the ksqlDB `STREAM`, you are describing the structure of the data to ksqlDB. The top-level `log_events` `STRUCT` corresponds to the outermost `{` of the JSON structure and gives a name to the entire JSON entry. The name you supply here is arbitrary, but it should be meaningful. You'll notice that there are additional nested `STRUCT` fields representing nested JSON objects within the structure.
+By supplying a schema to the ksqlDB `STREAM`, you are describing the structure of the data to ksqlDB. The top-level fields (`id` to `data`) correspond to column names. You'll notice that there are nested `STRUCT` fields representing nested JSON objects within the structure.  In the `WITH` statement you specify that ksqlDB should use the `time` field for the record timestamp and the format to parse it-`TIMESTAMP_FORMAT`.
 
 Now that you've described the structure of the data (by applying a schema), you can create another `STREAM` that will contain only the data of interest. Let's review this query in two parts—the `CREATE` statement and the `SELECT` statement.
 
 ```sql
 CREATE STREAM audit_log_topics
 WITH (
-  KAFKA_TOPIC='topic-operations-audit-log', 
-  TIMESTAMP='time', 
-  TIMESTAMP_FORMAT='yyyy-MM-dd''T''HH:mm:ss.SSSX',
-  PARTITIONS=6
+    KAFKA_TOPIC='topic-operations-audit-log', 
+    PARTITIONS=6
 ) 
 ```
 
-This `CREATE STREAM` statement specifies to use (or create, if it doesn't exist yet) a Kafka topic to store the results of the stream. The `TIMESTAMP` field tells ksqlDB which field to use for the entry timestamps, and `TIMESTAMP_FORMAT` indicates the format of the timestamp field.
+This `CREATE STREAM` statement specifies to use (or create, if it doesn't exist yet) a Kafka topic to store the results of the stream.
 
 The `SELECT` part of the query is where you can drill down in the original stream and pull out only the records that interest you. Let's take a look at each line:
 
 ```sql
-SELECT LOG_EVENTS->time as time, LOG_EVENTS->DATA
+SELECT time, DATA
 ```
 
 This specifies that you want only the `time` field and the nested `data` entry from the original JSON. In ksqlDB, you can access nested JSON objects using the `->` operator.
@@ -147,7 +143,7 @@ FROM  audit_log_events
 The `FROM` clause simply tells ksqlDB to pull the records from the original stream that you created to model the Confluent log data.
 
 ```sql
-WHERE (LOG_EVENTS->DATA->AUTHORIZATIONINFO->RESOURCETYPE = 'Topic') 
+WHERE DATA->AUTHORIZATIONINFO->RESOURCETYPE = 'Topic'
 ```
 
 In this `WHERE` statement, you use the `->` operator to drill down through several layers of nested JSON. This statement specifies that the new stream will contain only entries involving topic operations.
