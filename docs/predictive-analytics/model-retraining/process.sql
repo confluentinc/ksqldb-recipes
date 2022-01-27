@@ -8,7 +8,10 @@ CREATE STREAM PREDICTED_WEIGHT(
   "Length" DOUBLE,
   "Prediction" DOUBLE
   )
-WITH(KAFKA_TOPIC = 'kt.mdb.weight-prediction', VALUE_FORMAT = 'JSON');
+WITH(
+  KAFKA_TOPIC = 'kt.mdb.weight-prediction', 
+  VALUE_FORMAT = 'JSON'
+);
 
 -- Create stream of actual weights
 CREATE STREAM ACTUAL_WEIGHT(
@@ -16,11 +19,17 @@ CREATE STREAM ACTUAL_WEIGHT(
   "Species" VARCHAR,
   "Weight" DOUBLE
   )
-WITH(KAFKA_TOPIC = 'kt.mdb.machine-weight', VALUE_FORMAT = 'JSON');
+WITH(
+  KAFKA_TOPIC = 'kt.mdb.machine-weight', 
+  VALUE_FORMAT = 'JSON'
+);
 
 -- Create stream joining predictions with actual weights
 CREATE STREAM DIFF_WEIGHT
-WITH(KAFKA_TOPIC = 'weight-diff', VALUE_FORMAT = 'JSON')
+WITH(
+  KAFKA_TOPIC = 'weight-diff', 
+  VALUE_FORMAT = 'JSON'
+)
 AS SELECT
    'Key' AS "Key",
    PREDICTED_WEIGHT."Fish_Id" AS "Fish_Id",
@@ -38,7 +47,10 @@ ON PREDICTED_WEIGHT."Fish_Id" = ACTUAL_WEIGHT."Fish_Id";
 -- Create table of one minute aggregates with over 15% error rate
 set 'ksql.suppress.enabled'='true';
 CREATE TABLE RETRAIN_WEIGHT
-WITH(KAFKA_TOPIC = 'weight-retrain', VALUE_FORMAT = 'JSON')
+WITH(
+  KAFKA_TOPIC = 'weight-retrain', 
+  VALUE_FORMAT = 'JSON'
+)
 AS SELECT
    "Key",
    COLLECT_SET("Species") AS "Species",

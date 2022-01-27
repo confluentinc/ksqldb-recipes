@@ -1,5 +1,5 @@
 ---
-seo:
+sew:
   title: Machine Learning Model Retraining
   description: This recipe demonstrates how to use ksqlDB to evaluate the predictions of a machine learning model and send data to retrain the model when needed.
 ---
@@ -22,7 +22,7 @@ Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluen
 
 --8<-- "docs/shared/connect.md"
 
-The existing pipeline, which is predicting the weight of fish based on size and species, stores its results in two MongoDB collections, which are used by other processes downstream. One collection contains the data fed to the model, along with the prediction. The other contains the actual weight determined from a later step in the process. For this recipe, we'll use Connect to make this data availble to our ksqlDB application.
+The existing pipeline, which is predicting the weight of fish based on size and species, stores its results in two MongoDB collections, which are used by other processes downstream. One collection contains the data fed to the model, along with the prediction. The other contains the actual weight determined from a later step in the process. For this recipe, we'll use Connect to make this data available to our ksqlDB application.
 
 ```json
 --8<-- "docs/predictive-analytics/model-retraining/source.json"

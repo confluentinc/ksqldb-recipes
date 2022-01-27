@@ -24,6 +24,7 @@ nav:
   - Predictive Analytics:
     - Optimize fleet management: predictive-analytics/fleet-management/index.md
     - Optimize omni-channel inventory: predictive-analytics/inventory/index.md
+    #- Machine Learning Model Retraining: predictive-analytics/model-retraining/index.md
   - Real-time Analytics:
     - Analyze datacenter power usage: real-time-analytics/datacenter/index.md
     - Automate instant payment verifications: real-time-analytics/payment-status-check/index.md
