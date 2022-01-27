@@ -37,6 +37,7 @@ nav:
     #- Filter Confluent audit logs for Splunk: real-time-analytics/filter-logs-for-splunk
 
 markdown_extensions:
+  - admonition
   - pymdownx.highlight:
       linenums: true
   - pymdownx.snippets

@@ -8,8 +8,12 @@ seo:
 
 In the Security Information and Event Management (SIEM) world, it's just as important to have insight into internal activities as it is to monitor for external security threats and vulnerabilities. But viewing all internal audit logs would provide too much information; you need to narrow the scope to particular events.
 
-This recipe demonstrates how to filter audit logs from your [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=filter_logs_for_splunk) cluster for specific events and forward them to Splunk for indexing via the [Splunk Sink connector](https://docs.confluent.io/cloud/current/connectors/cc-splunk-sink.html#cc-splunk-sink).
+This recipe demonstrates how to filter audit logs in a Kafka topic and filter them for specific events and forward them to Splunk for indexing via the [Splunk Sink connector](https://docs.confluent.io/cloud/current/connectors/cc-splunk-sink.html#cc-splunk-sink).  The example data used is from [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=filter_logs_for_splunk) audit logs.
 The stream processing application filters for events involving operations on `topics`, but you can review the [structure of Confluent audit logs](https://docs.confluent.io/platform/current/security/audit-logs/audit-logs-concepts.html#audit-log-content) and extend this solution to filter for any [auditable event](https://docs.confluent.io/platform/current/security/audit-logs/audit-logs-concepts.html#auditable-events).
+
+!!! note "Recipe Considerations" 
+
+    This recipe assumes that the audit log records are already located in a Confluent Cloud cluster directly controlled by the end user.  If not, then the user will need to copy the audit logs from the original cluster to the one where they have their ksqlDB cluster running.  If you have a [dedicated cluster](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#dedicated-clusters) one option would be to use [cluster linking](https://docs.confluent.io/cloud/current/multi-cloud/cluster-linking/index.html#cluster-linking-on-ccloud).
 
 ## Step-by-step
 
@@ -131,7 +135,7 @@ This `CREATE STREAM` statement specifies to use (or create, if it doesn't exist 
 The `SELECT` part of the query is where you can drill down in the original stream and pull out only the records that interest you. Let's take a look at each line:
 
 ```sql
-SELECT time, DATA
+SELECT time, data
 ```
 
 This specifies that you want only the `time` field and the nested `data` entry from the original JSON. In ksqlDB, you can access nested JSON objects using the `->` operator.
@@ -143,7 +147,7 @@ FROM  audit_log_events
 The `FROM` clause simply tells ksqlDB to pull the records from the original stream that you created to model the Confluent log data.
 
 ```sql
-WHERE DATA->AUTHORIZATIONINFO->RESOURCETYPE = 'Topic'
+WHERE data->authorizationinfo->resourcetype = 'Topic'
 ```
 
 In this `WHERE` statement, you use the `->` operator to drill down through several layers of nested JSON. This statement specifies that the new stream will contain only entries involving topic operations.
