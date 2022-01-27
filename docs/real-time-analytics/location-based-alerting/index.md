@@ -30,7 +30,7 @@ This recipe assumes that you have merchant data stored in a SQL database. The me
 
 ### ksqlDB code
 
-This application compares merchant and mobile user geolocation data to produce user proximity alerts. Initially, merchant data is sourced from a database and contains a [Geohash](https://en.wikipedia.org/wiki/Geohash) value per merchant. This data is streamed from a source database and loaded into a ksqlDB Table keyed by the Geohash to a defined precision (length of the hash). User data is streamed from mobile devices and and also includes a Geohash. As the users location changes, their Geohash is joined to the merchant table and matches result in a stream of "raw" alerts which are further refined using the ksqlDB scalar function `GEO_LOCATION` producing a final result of a `promo_alerts` containing user and merchant data with geolocation information.
+This application compares merchant and mobile user geolocation data to produce user proximity alerts. Initially, merchant data is sourced from a database and contains a [Geohash](https://en.wikipedia.org/wiki/Geohash) value per merchant. This data is streamed from a source database and loaded into a ksqlDB table keyed by the Geohash to a defined precision (length of the hash). User location data is streamed from mobile devices and joined to the merchant table by the Geohash. Locations events that match are published into a "raw" alerts stream, which are further refined using the ksqlDB scalar function `GEO_LOCATION`. This produces a final result of  `promo_alerts` containing user and merchant data with geolocation information.
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
