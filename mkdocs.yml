@@ -21,15 +21,20 @@ nav:
   - Cybersecurity:
     - Detect and analyze SSH attacks: cybersecurity/SSH-attack/index.md
     #- Identify firewall deny events from Splunk: cybersecurity/firewall-splunk/index.md
+    #- Detect Slowloris DDoS attacks: cybersecurity/ddos/index.md
   - Predictive Analytics:
     - Optimize fleet management: predictive-analytics/fleet-management/index.md
     - Optimize omni-channel inventory: predictive-analytics/inventory/index.md
+    #- Next best offer for banking: predictive-analytics/next-best-offer/index.md
     #- Machine Learning Model Retraining: predictive-analytics/model-retraining/index.md
   - Real-time Analytics:
     - Analyze datacenter power usage: real-time-analytics/datacenter/index.md
     - Automate instant payment verifications: real-time-analytics/payment-status-check/index.md
     - Enrich orders with change data capture (CDC): real-time-analytics/denormalization/index.md
     - Build a dynamic pricing strategy: real-time-analytics/dynamic-pricing/index.md
+    #- Modernize mainframes for real-time: real-time-analytics/mainframe-offload/index.md
+    #- Assess the success of a discount promotion: real-time-analytics/discounting/index.md
+    #- Real-time logistics for a delivery fleet: real-time-analytics/logistics/index.md
 
 markdown_extensions:
   - pymdownx.highlight:
