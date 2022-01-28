@@ -8,13 +8,13 @@ seo:
 
 Machine learning provides valuable insights to an organization and tools like Apache Kafka, Kafka Connect, and kslqDB allow us to build powerful machine learning pipelines. We can also use these tools to extend an existing machine learning pipeline. In this recipe we'll use Connect and ksqlDB to read the results of an existing pipeline, determine the accuracy of said results, and send data to retrain our model.
 
-![inventory](../../img/atlantic-salmon.jpg)
+![model retraining](../../img/atlantic-salmon.jpg)
 
 ## Step by step
 
 ### Set up your environment
 
-Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=inventory).
+Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=model_retraining).
 
 --8<-- "docs/shared/ccloud_setup.md"
 
@@ -33,6 +33,7 @@ The existing pipeline, which is predicting the weight of fish based on size and 
 ### ksqlDB code
 
 Create ksqlDB Streams for our two input topics coming from Connect, then create another stream which joins those two streams on `Fish_Id`. Finally, create a ksqlDB Table with a windowed aggregation of our joined stream where the average error rate is over 15%. This table will be used to trigger our model retraining process.
+
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
 ```sql
