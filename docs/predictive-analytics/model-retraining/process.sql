@@ -10,7 +10,8 @@ CREATE STREAM PREDICTED_WEIGHT(
   )
 WITH(
   KAFKA_TOPIC = 'kt.mdb.weight-prediction', 
-  VALUE_FORMAT = 'JSON'
+  VALUE_FORMAT = 'JSON',
+  PARTITIONS = 6
 );
 
 -- Create stream of actual weights
@@ -21,13 +22,14 @@ CREATE STREAM ACTUAL_WEIGHT(
   )
 WITH(
   KAFKA_TOPIC = 'kt.mdb.machine-weight', 
-  VALUE_FORMAT = 'JSON'
+  VALUE_FORMAT = 'JSON',
+  PARTITIONS = 6
 );
 
 -- Create stream joining predictions with actual weights
 CREATE STREAM DIFF_WEIGHT
 WITH(
-  KAFKA_TOPIC = 'weight-diff', 
+  KAFKA_TOPIC = 'diff_weight', 
   VALUE_FORMAT = 'JSON'
 )
 AS SELECT
@@ -48,7 +50,7 @@ ON PREDICTED_WEIGHT."Fish_Id" = ACTUAL_WEIGHT."Fish_Id";
 set 'ksql.suppress.enabled'='true';
 CREATE TABLE RETRAIN_WEIGHT
 WITH(
-  KAFKA_TOPIC = 'weight-retrain', 
+  KAFKA_TOPIC = 'retrain_weight', 
   VALUE_FORMAT = 'JSON'
 )
 AS SELECT

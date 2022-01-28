@@ -8,6 +8,9 @@ seo:
 
 Machine learning provides valuable insights to an organization and tools like Apache Kafka, Kafka Connect, and kslqDB allow us to build powerful machine learning pipelines. We can also use these tools to extend an existing machine learning pipeline. In this recipe we'll use Connect and ksqlDB to read the results of an existing pipeline, determine the accuracy of said results, and send data to retrain our model.
 
+This recipe is based on the excellent blog post, [Apache Kafka and R: Real-Time Prediction and Model (Re)training](https://www.confluent.io/blog/how-baader-built-a-predictive-analytics-machine-learning-system-with-kafka-and-rstudio/?utm_source=github&utm_medium=ksqldb_recipes&utm_campaign=model_retraining), by Patrick Neff.
+
+
 ![model retraining](../../img/atlantic-salmon.jpg)
 
 ## Step by step

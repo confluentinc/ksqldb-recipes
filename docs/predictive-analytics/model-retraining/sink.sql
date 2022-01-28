@@ -18,14 +18,14 @@ CREATE SINK CONNECTOR training-data WITH (
 );     
 
 CREATE SINK CONNECTOR retraining-trigger WITH (
-    'connector.class'      = 'HttpSink',
-    'input.data.format'    = 'JSON',
-    'name'                 = 'retrain-trigger',
-    'kafka.auth.mode'      = 'KAFKA_API_KEY',
-    'kafka.api.key'        = '<my-kafka-api-key>',
-    'kafka.api.secret'     = '<my-kafka-api-secret>',
-    'topics'               = 'weight-retrain',
-    'tasks.max'            = '1',
-    'http.api.url'         = '<training-endpoint-url>',
-    'request.method'       = 'POST'
+    'connector.class'          = 'HttpSink',
+    'input.data.format'        = 'JSON',
+    'name'                     = 'retrain-trigger',
+    'kafka.auth.mode'          = 'KAFKA_API_KEY',
+    'kafka.api.key'            = '<my-kafka-api-key>',
+    'kafka.api.secret'         = '<my-kafka-api-secret>',
+    'topics'                   = 'weight-retrain',
+    'tasks.max'                = '1',
+    'http.api.url'             = '<training-endpoint-url>',
+    'request.method'           = 'POST'
 );
