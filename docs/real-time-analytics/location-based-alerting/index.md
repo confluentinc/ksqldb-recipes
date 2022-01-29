@@ -1,12 +1,12 @@
 ---
 seo:
-  title: Real-time geolocation based alerting
-  description: This ksqlDB recipe shows real-time, personalized location based alerts. Merchant data is sourced from a database, and user location events from a mobile device. The event streams are joined to generate alerts when a user passes close to a participating merchant.
+  title: Real-Time Geolocation-Based Alerting
+  description: This ksqlDB recipe demonstrates how to create real-time, personalized, location-based alerts. Merchant data is sourced from a database, and user location events are sourced from a mobile device. The event streams are joined to generate alerts when a user passes close to a participating merchant.
 ---
 
-# Geolocation Based Alerting 
+# Geolocation-Based Alerting 
 
-Customers are no longer satisfied with boring static websites to purchase your product or consume your service. Users demand interactive and contextualized real-time mobile applications. Providing customers with rich, real-time experiences is fundamental, and this recipe shows how ksqlDB can help build personalized location based alerts in real-time from user provided mobile geolocation data.
+Customers are no longer satisfied with using boring static websites to purchase your product or consume your service. Users demand interactive and contextualized real-time mobile applications. Providing customers with rich, real-time experiences is fundamental, and this recipe shows how ksqlDB can help to build personalized, location-based alerts in real time with user-provided mobile geolocation data.
 
 ## Step by step
 
@@ -20,7 +20,7 @@ Provision a Kafka cluster in [Confluent Cloud](https://www.confluent.io/confluen
 
 --8<-- "docs/shared/connect.md"
 
-This recipe assumes that you have merchant data stored in a SQL database. The merchant data includes geolocation information which will be used to match with the stream of location data from a users device. First, deploy a source connector that will read the merchant data into a Kafka topic and can be stream processed in ksqlDB.
+This recipe assumes that you have merchant data stored in an SQL database. The merchant data includes geolocation information, which will be matched with the stream of location data from a user's device. First, deploy a source connector that will read the merchant data into a Kafka topic for stream processing in ksqlDB.
 
 ```json
 --8<-- "docs/real-time-analytics/location-based-alerting/source.json"
@@ -30,7 +30,7 @@ This recipe assumes that you have merchant data stored in a SQL database. The me
 
 ### ksqlDB code
 
-This application compares merchant and mobile user geolocation data to produce user proximity alerts. Initially, merchant data is sourced from a database and contains a [Geohash](https://en.wikipedia.org/wiki/Geohash) value per merchant. This data is streamed from a source database and loaded into a ksqlDB table keyed by the Geohash to a defined precision (length of the hash). User location data is streamed from mobile devices and joined to the merchant table by the Geohash. Locations events that match are published into a "raw" alerts stream, which are further refined using the ksqlDB scalar function `GEO_LOCATION`. This produces a final result of  `promo_alerts` containing user and merchant data with geolocation information.
+This application compares merchant and mobile user geolocation data to produce user proximity alerts. Initially, merchant data is sourced from a database and contains a [Geohash](https://en.wikipedia.org/wiki/Geohash) value per merchant. This data is streamed from a source database and loaded into a ksqlDB table, keyed by the Geohash to a defined precision (the length of the hash). User location data is streamed from mobile devices and is joined to the merchant table by the Geohash. Location events that match are published to a "raw" alerts stream, which is further refined using the ksqlDB scalar function `GEO_LOCATION`. This produces a final result of `promo_alerts`, which contains user and merchant data with geolocation information.
 
 --8<-- "docs/shared/ksqlb_processing_intro.md"
 
