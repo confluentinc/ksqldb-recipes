@@ -34,17 +34,18 @@ WITH(
 )
 AS SELECT
    'Key' AS "Key",
-   PREDICTED_WEIGHT."Fish_Id" AS "Fish_Id",
-   PREDICTED_WEIGHT."Species" AS "Species",
-   PREDICTED_WEIGHT."Length" AS "Length",
-   PREDICTED_WEIGHT."Height" AS "Height",
-   PREDICTED_WEIGHT."Prediction" AS "PredictedWeight",
-   ACTUAL_WEIGHT."Weight" AS "ActualWeight",
-   ROUND(ABS(PREDICTED_WEIGHT."Prediction" - ACTUAL_WEIGHT."Weight") / ACTUAL_WEIGHT."Weight", 3) AS "Error"
-FROM PREDICTED_WEIGHT
-INNER JOIN ACTUAL_WEIGHT
+   predicted_weight."Fish_Id" AS "Fish_Id",
+   predicted_weight."Species" AS "Species",
+   predicted_weight."Length" AS "Length",
+   predicted_weight."Height" AS "Height",
+   predicted_weight."Prediction" AS "PredictedWeight",
+   actual_weight."Weight" AS "ActualWeight",
+   ROUND(ABS(predicted_weight."Prediction" - actual_weight."Weight") / actual_weight."Weight", 3) AS "Error"
+FROM predicted_weight
+INNER JOIN actual_weight
 WITHIN 1 MINUTE
-ON PREDICTED_WEIGHT."Fish_Id" = ACTUAL_WEIGHT."Fish_Id";
+GRACE PERIOD 1 MINUTE
+ON predicted_weight."Fish_Id" = actual_weight."Fish_Id";
 
 -- Create table of one minute aggregates with over 15% error rate
 set 'ksql.suppress.enabled'='true';
