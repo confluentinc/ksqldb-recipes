@@ -1,7 +1,7 @@
 SET 'auto.offset.reset' = 'earliest';
 
 -- Create stream of predictions
-CREATE STREAM PREDICTED_WEIGHT(
+CREATE STREAM predicted_weight(
   "Fish_Id" VARCHAR KEY,
   "Species" VARCHAR,
   "Height" DOUBLE,
@@ -15,7 +15,7 @@ WITH(
 );
 
 -- Create stream of actual weights
-CREATE STREAM ACTUAL_WEIGHT(
+CREATE STREAM actual_weight(
   "Fish_Id" VARCHAR KEY,
   "Species" VARCHAR,
   "Weight" DOUBLE
@@ -27,7 +27,7 @@ WITH(
 );
 
 -- Create stream joining predictions with actual weights
-CREATE STREAM DIFF_WEIGHT
+CREATE STREAM diff_weight
 WITH(
   KAFKA_TOPIC = 'diff_weight', 
   VALUE_FORMAT = 'JSON'
@@ -48,7 +48,7 @@ ON PREDICTED_WEIGHT."Fish_Id" = ACTUAL_WEIGHT."Fish_Id";
 
 -- Create table of one minute aggregates with over 15% error rate
 set 'ksql.suppress.enabled'='true';
-CREATE TABLE RETRAIN_WEIGHT
+CREATE TABLE retrain_weight
 WITH(
   KAFKA_TOPIC = 'retrain_weight', 
   VALUE_FORMAT = 'JSON'
@@ -60,7 +60,7 @@ AS SELECT
    LATEST_BY_OFFSET("Fish_Id") AS "Fish_Id_End",
    AVG("Error") AS "ErrorAvg"
    FROM DIFF_WEIGHT
-   WINDOW TUMBLING (SIZE 1 MINUTE)
+   WINDOW TUMBLING (SIZE 1 MINUTE, GRACE PERIOD 1 MINUTE)
    GROUP BY "Key"
    HAVING ROUND(AVG(DIFF_WEIGHT.`Error`), 2) > 0.15
    EMIT FINAL;

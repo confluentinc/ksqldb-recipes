@@ -8,6 +8,7 @@ INSERT INTO predicted_weight VALUES ('107', 'Trout', 13.34, 64.05, 1.47);
 INSERT INTO predicted_weight VALUES ('108', 'Trout', 14.71, 70.61, 1.62);
 INSERT INTO predicted_weight VALUES ('109', 'Trout', 16.22, 77.85, 1.79);
 INSERT INTO predicted_weight VALUES ('110', 'Trout', 17.03, 81.74, 1.88);
+
 INSERT INTO actual_weight VALUES ('101', 'Salmon', 4.38);
 INSERT INTO actual_weight VALUES ('102', 'Salmon', 3.17);
 INSERT INTO actual_weight VALUES ('103', 'Salmon', 5.6);
