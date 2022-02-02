@@ -33,7 +33,8 @@ WITH(
   VALUE_FORMAT = 'JSON'
 )
 AS SELECT
-   'Key' AS "Key",
+   -- This fake Key field will give us something to group by in the next step
+   'Key' AS "Key", 
    predicted_weight."Fish_Id" AS "Fish_Id",
    predicted_weight."Species" AS "Species",
    predicted_weight."Length" AS "Length",
@@ -48,7 +49,6 @@ GRACE PERIOD 1 MINUTE
 ON predicted_weight."Fish_Id" = actual_weight."Fish_Id";
 
 -- Create table of one minute aggregates with over 15% error rate
-set 'ksql.suppress.enabled'='true';
 CREATE TABLE retrain_weight
 WITH(
   KAFKA_TOPIC = 'retrain_weight', 
@@ -63,5 +63,4 @@ AS SELECT
 FROM DIFF_WEIGHT
 WINDOW TUMBLING (SIZE 1 MINUTE, GRACE PERIOD 1 MINUTE)
 GROUP BY "Key"
-HAVING ROUND(AVG(DIFF_WEIGHT.`Error`), 2) > 0.15
-EMIT FINAL;
+HAVING ROUND(AVG(DIFF_WEIGHT.`Error`), 2) > 0.15;
