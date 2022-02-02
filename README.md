@@ -2,9 +2,7 @@
 
 This repository contains the source for the collection of Stream Processing Use Cases with ksqlDB.
 
-Landing page: https://developer.confluent.io/ksqldb-recipes/
-
-Recipes: https://confluentinc.github.io/ksqldb-recipes/
+https://developer.confluent.io/tutorials/use-cases.html
 
 Goals of the project:
 
@@ -58,6 +56,7 @@ To view your new recipes locally, you can build a local version of the recipes s
     pip3 install mkdocs pymdown-extensions
     pip3 install mkdocs-material
     pip3 install mkdocs-exclude
+    pip3 install mkdocs-redirects
     ```
 
 - Build and serve a local version of the site. In this step, `mkdocs` will give you information if you have any errors in your new recipe file.
