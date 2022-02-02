@@ -1,0 +1,912 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Stream Processing Use Cases highlight some of our most popular stream processing use cases with ksqlDB">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
+    
+    
+      
+        <title>Filter Kafka Audit Logs for output to Splunk - Stream Processing Use Cases</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#filter-kafka-audit-logs-for-output-to-splunk" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Stream Processing Use Cases" class="md-header__button md-logo" aria-label="Stream Processing Use Cases" data-md-component="logo">
+      
+  <img src="../../icon-symbol-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Stream Processing Use Cases
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Filter Kafka Audit Logs for output to Splunk
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Stream Processing Use Cases" class="md-nav__button md-logo" aria-label="Stream Processing Use Cases" data-md-component="logo">
+      
+  <img src="../../icon-symbol-white.svg" alt="logo">
+
+    </a>
+    Stream Processing Use Cases
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        Anomaly and Pattern Detection
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Anomaly and Pattern Detection" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Anomaly and Pattern Detection
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../anomaly-detection/credit-card-activity/" class="md-nav__link">
+        Detect unusual credit card activity
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../anomaly-detection/internet-of-things/" class="md-nav__link">
+        Flag unhealthy IoT devices
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../anomaly-detection/salesforce/" class="md-nav__link">
+        Handle corrupted data from Salesforce
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Customer 360
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Customer 360" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Customer 360
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer-360/online-dating/" class="md-nav__link">
+        Match users for online dating
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer-360/clickstream/" class="md-nav__link">
+        Understand user behavior with clickstream data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer-360/aviation/" class="md-nav__link">
+        Notify passengers of flight updates
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer-360/loyalty-rewards/" class="md-nav__link">
+        Build customer loyalty programs
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Cybersecurity
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Cybersecurity" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Cybersecurity
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cybersecurity/SSH-attack/" class="md-nav__link">
+        Detect and analyze SSH attacks
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Predictive Analytics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Predictive Analytics" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Predictive Analytics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../predictive-analytics/fleet-management/" class="md-nav__link">
+        Optimize fleet management
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../predictive-analytics/inventory/" class="md-nav__link">
+        Optimize omni-channel inventory
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        Real-time Analytics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Real-time Analytics" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Real-time Analytics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datacenter/" class="md-nav__link">
+        Analyze datacenter power usage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-status-check/" class="md-nav__link">
+        Automate instant payment verifications
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../denormalization/" class="md-nav__link">
+        Enrich orders with change data capture (CDC)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dynamic-pricing/" class="md-nav__link">
+        Build a dynamic pricing strategy
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    Step-by-step
+  </a>
+  
+    <nav class="md-nav" aria-label="Step-by-step">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-up-your-environment" class="md-nav__link">
+    Set up your environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-the-data-in" class="md-nav__link">
+    Read the data in
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-the-stream-processing-application" class="md-nav__link">
+    Run the stream processing application
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write-the-data-out" class="md-nav__link">
+    Write the data out
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cleanup" class="md-nav__link">
+    Cleanup
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explanation" class="md-nav__link">
+    Explanation
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="filter-kafka-audit-logs-for-output-to-splunk">Filter Kafka Audit Logs for output to Splunk<a class="headerlink" href="#filter-kafka-audit-logs-for-output-to-splunk" title="Permanent link">&para;</a></h1>
+<p>In the Security Information and Event Management (SIEM) world, it's just as important to have insight into internal activities as it is to monitor for external security threats and vulnerabilities. But viewing all internal audit logs would provide too much information; you need to narrow the scope to particular events.</p>
+<p>This recipe demonstrates how to filter audit logs in a Kafka topic and filter them for specific events and forward them to Splunk for indexing via the <a href="https://docs.confluent.io/cloud/current/connectors/cc-splunk-sink.html#cc-splunk-sink">Splunk Sink connector</a>.  The example data used is from <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes&amp;utm_campaign=filter_logs_for_splunk">Confluent Cloud</a> audit logs.
+The stream processing application filters for events involving operations on <code>topics</code>, but you can review the <a href="https://docs.confluent.io/platform/current/security/audit-logs/audit-logs-concepts.html#audit-log-content">structure of Confluent audit logs</a> and extend this solution to filter for any <a href="https://docs.confluent.io/platform/current/security/audit-logs/audit-logs-concepts.html#auditable-events">auditable event</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Recipe Considerations</p>
+<p>This recipe assumes that the audit log records are already located in a Confluent Cloud cluster directly controlled by the end user.  If not, then the user will need to copy the audit logs from the original cluster to the one where they have their ksqlDB cluster running.  If you have a <a href="https://docs.confluent.io/cloud/current/clusters/cluster-types.html#dedicated-clusters">dedicated cluster</a> one option would be to use <a href="https://docs.confluent.io/cloud/current/multi-cloud/cluster-linking/index.html#cluster-linking-on-ccloud">cluster linking</a>.</p>
+</div>
+<h2 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h2>
+<h3 id="set-up-your-environment">Set up your environment<a class="headerlink" href="#set-up-your-environment" title="Permanent link">&para;</a></h3>
+<p>Provision a Kafka cluster in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes&amp;utm_campaign=filter_logs_for_splunk">Confluent Cloud</a>.</p>
+<p>Once your Confluent Cloud cluster is available, create a <a href="https://ksqldb.io/">ksqlDB</a> application. ksqlDB supports a <code>SQL</code> language for processing the data in real time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
+<h3 id="read-the-data-in">Read the data in<a class="headerlink" href="#read-the-data-in" title="Permanent link">&para;</a></h3>
+<p>For this recipe, you'll create a stream to read in your cluster's audit logs from a topic. Then you'll create an additional stream that filters out unwanted events and selects only the data that you need to analyze. </p>
+<p>Optional: If you cannot connect to a real datasource with properly formatted data, or if you just want to execute this recipe without external dependencies, no worries! In the next section, you'll see how to test the recipe by inserting mock data into the streams, using the ksqlDB command <code>INSERT INTO</code>.</p>
+<h3 id="run-the-stream-processing-application">Run the stream processing application<a class="headerlink" href="#run-the-stream-processing-application" title="Permanent link">&para;</a></h3>
+<p>The first stream will set a schema for the audit log data, which will enable you to selectively pull out only the parts that you need to analyze. We'll discuss this more in the <a href="./#explanation">Explanation</a> section.</p>
+<hr />
+<p><strong>NOTE:</strong>
+<em>The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.</em>
+<em>This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</em></p>
+<hr />
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">audit_log_events</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+  <span class="k">source</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+  <span class="n">specversion</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+  <span class="k">type</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+  <span class="k">time</span> <span class="nb">VARCHAR</span><span class="p">,</span>  
+  <span class="n">datacontenttype</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+  <span class="n">subject</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+  <span class="n">confluentRouting</span> <span class="n">STRUCT</span><span class="o">&lt;</span><span class="n">route</span> <span class="nb">VARCHAR</span><span class="o">&gt;</span><span class="p">,</span>   
+  <span class="k">data</span> <span class="n">STRUCT</span><span class="o">&lt;</span>
+    <span class="n">serviceName</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+    <span class="n">methodName</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+    <span class="n">resourceName</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+    <span class="n">authenticationInfo</span> <span class="n">STRUCT</span><span class="o">&lt;</span><span class="n">principal</span> <span class="nb">VARCHAR</span><span class="o">&gt;</span><span class="p">,</span> 
+    <span class="n">authorizationInfo</span> <span class="n">STRUCT</span><span class="o">&lt;</span>
+        <span class="k">granted</span> <span class="nb">BOOLEAN</span><span class="p">,</span>
+        <span class="k">operation</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+        <span class="n">resourceType</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+        <span class="n">resourceName</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+        <span class="n">patternType</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+        <span class="n">superUserAuthorization</span> <span class="nb">BOOLEAN</span>
+        <span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">request</span> <span class="n">STRUCT</span><span class="o">&lt;</span>
+        <span class="n">correlation_id</span> <span class="nb">VARCHAR</span><span class="p">,</span>
+        <span class="n">client_id</span> <span class="nb">VARCHAR</span>
+        <span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">requestMetadata</span> <span class="n">STRUCT</span><span class="o">&lt;</span><span class="n">client_address</span> <span class="nb">VARCHAR</span><span class="o">&gt;</span>
+    <span class="o">&gt;</span>
+<span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;confluent-audit-log-events&#39;</span><span class="p">,</span> 
+  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">,</span> 
+  <span class="k">TIMESTAMP</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> 
+  <span class="n">TIMESTAMP_FORMAT</span><span class="o">=</span><span class="s1">&#39;yyyy-MM-dd&#39;&#39;T&#39;&#39;HH:mm:ss.SSSX&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">);</span>
+
+
+<span class="c1">-- Application logic</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">audit_log_topics</span>
+  <span class="k">WITH</span> <span class="p">(</span>
+  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;topic-operations-audit-log&#39;</span><span class="p">,</span> 
+  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
+<span class="p">)</span> 
+<span class="k">AS</span> <span class="k">SELECT</span> <span class="k">time</span><span class="p">,</span> <span class="k">data</span>
+    <span class="k">FROM</span>  <span class="n">audit_log_events</span>
+    <span class="k">WHERE</span> <span class="k">data</span><span class="o">-&gt;</span><span class="n">authorizationinfo</span><span class="o">-&gt;</span><span class="n">resourcetype</span> <span class="o">=</span> <span class="s1">&#39;Topic&#39;</span>
+<span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
+</code></pre></div>
+</td></tr></table>
+<p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert example events into the source topics with the following statements:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">audit_log_events</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="k">source</span><span class="p">,</span> <span class="n">specversion</span><span class="p">,</span> <span class="k">type</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">datacontenttype</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">confluentrouting</span><span class="p">,</span> <span class="k">data</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;889bdcd9-a378-4bfe-8860-180ef8efd208&#39;</span><span class="p">,</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;io.confluent.kafka.server/authorization&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-10-24T16:15:48.355Z&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>  <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">route</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;confluent-audit-log-events&#39;</span><span class="p">),</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">serviceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="n">methodName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;kafka.CreateTopics&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span> <span class="n">authenticationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">principal</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;User:admin&#39;</span><span class="p">),</span> <span class="n">authorizationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">granted</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">,</span> <span class="k">operation</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Create&#39;</span><span class="p">,</span> <span class="n">resourceType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Topic&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;app3-topic&#39;</span><span class="p">,</span> <span class="n">patternType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;LITERAL&#39;</span><span class="p">,</span> <span class="n">superUserAuthorization</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">),</span> <span class="n">request</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">correlation_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="n">client_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;adminclient-6&#39;</span><span class="p">),</span> <span class="n">requestMetadata</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">client_address</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;/127.0.0.1&#39;</span><span class="p">)));</span> 
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">audit_log_events</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="k">source</span><span class="p">,</span> <span class="n">specversion</span><span class="p">,</span> <span class="k">type</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">datacontenttype</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">confluentrouting</span><span class="p">,</span> <span class="k">data</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;889bdcd9-a378-4bfe-8860-180ef8efd209&#39;</span><span class="p">,</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;io.confluent.kafka.server/authorization&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-10-24T17:16:43.355Z&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>  <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">route</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;confluent-audit-log-events&#39;</span><span class="p">),</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">serviceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="n">methodName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;kafka.CreateTopics&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span> <span class="n">authenticationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">principal</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;User:admin&#39;</span><span class="p">),</span> <span class="n">authorizationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">granted</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">,</span> <span class="k">operation</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Create&#39;</span><span class="p">,</span> <span class="n">resourceType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Broker&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;app3-topic&#39;</span><span class="p">,</span> <span class="n">patternType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;LITERAL&#39;</span><span class="p">,</span> <span class="n">superUserAuthorization</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">),</span> <span class="n">request</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">correlation_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="n">client_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;adminclient-6&#39;</span><span class="p">),</span> <span class="n">requestMetadata</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">client_address</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;/127.0.0.1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">audit_log_events</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="k">source</span><span class="p">,</span> <span class="n">specversion</span><span class="p">,</span> <span class="k">type</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">datacontenttype</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">confluentrouting</span><span class="p">,</span> <span class="k">data</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;889bdcd9-a378-4bfe-8860-180ef8efd206&#39;</span><span class="p">,</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;io.confluent.kafka.server/authorization&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-10-25T18:17:32.355Z&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>  <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">route</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;confluent-audit-log-events&#39;</span><span class="p">),</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">serviceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="n">methodName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;kafka.CreateTopics&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span> <span class="n">authenticationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">principal</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;User:admin&#39;</span><span class="p">),</span> <span class="n">authorizationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">granted</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">,</span> <span class="k">operation</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Delete&#39;</span><span class="p">,</span> <span class="n">resourceType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Topic&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;app4-topic&#39;</span><span class="p">,</span> <span class="n">patternType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;LITERAL&#39;</span><span class="p">,</span> <span class="n">superUserAuthorization</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">),</span> <span class="n">request</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">correlation_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="n">client_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;adminclient-8&#39;</span><span class="p">),</span> <span class="n">requestMetadata</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">client_address</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;/127.0.0.1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">audit_log_events</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="k">source</span><span class="p">,</span> <span class="n">specversion</span><span class="p">,</span> <span class="k">type</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">datacontenttype</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">confluentrouting</span><span class="p">,</span> <span class="k">data</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;889bdcd9-a378-4bfe-8860-180ef8efd205&#39;</span><span class="p">,</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;io.confluent.kafka.server/authorization&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-10-25T19:18:21.355Z&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>  <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">route</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;confluent-audit-log-events&#39;</span><span class="p">),</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">serviceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="n">methodName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;kafka.CreateTopics&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span> <span class="n">authenticationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">principal</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;User:admin&#39;</span><span class="p">),</span> <span class="n">authorizationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">granted</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">,</span> <span class="k">operation</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Create&#39;</span><span class="p">,</span> <span class="n">resourceType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Topic&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;app5-topic&#39;</span><span class="p">,</span> <span class="n">patternType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;LITERAL&#39;</span><span class="p">,</span> <span class="n">superUserAuthorization</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">),</span> <span class="n">request</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">correlation_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="n">client_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;adminclient-6&#39;</span><span class="p">),</span> <span class="n">requestMetadata</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">client_address</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;/127.0.0.1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">audit_log_events</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="k">source</span><span class="p">,</span> <span class="n">specversion</span><span class="p">,</span> <span class="k">type</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">datacontenttype</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">confluentrouting</span><span class="p">,</span> <span class="k">data</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;889bdcd9-a378-4bfe-8860-180ef8efd204&#39;</span><span class="p">,</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;io.confluent.kafka.server/authorization&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-10-26T20:19:33.355Z&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>  <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">route</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;confluent-audit-log-events&#39;</span><span class="p">),</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">serviceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="n">methodName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;kafka.CreateTopics&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span> <span class="n">authenticationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">principal</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;User:admin&#39;</span><span class="p">),</span> <span class="n">authorizationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">granted</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">,</span> <span class="k">operation</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Delete&#39;</span><span class="p">,</span> <span class="n">resourceType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Topic&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;app9-topic&#39;</span><span class="p">,</span> <span class="n">patternType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;LITERAL&#39;</span><span class="p">,</span> <span class="n">superUserAuthorization</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">),</span> <span class="n">request</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">correlation_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="n">client_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;adminclient-5&#39;</span><span class="p">),</span> <span class="n">requestMetadata</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">client_address</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;/127.0.0.1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">audit_log_events</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="k">source</span><span class="p">,</span> <span class="n">specversion</span><span class="p">,</span> <span class="k">type</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">datacontenttype</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">confluentrouting</span><span class="p">,</span> <span class="k">data</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;889bdcd9-a378-4bfe-8860-180ef8efd203&#39;</span><span class="p">,</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;io.confluent.kafka.server/authorization&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-10-26T21:20:34.355Z&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>  <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">route</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;confluent-audit-log-events&#39;</span><span class="p">),</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">serviceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="n">methodName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;kafka.CreateTopics&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span> <span class="n">authenticationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">principal</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;User:admin&#39;</span><span class="p">),</span> <span class="n">authorizationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">granted</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">,</span> <span class="k">operation</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Modify&#39;</span><span class="p">,</span> <span class="n">resourceType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Topic&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;app5-topic&#39;</span><span class="p">,</span> <span class="n">patternType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;LITERAL&#39;</span><span class="p">,</span> <span class="n">superUserAuthorization</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">),</span> <span class="n">request</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">correlation_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="n">client_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;adminclient-6&#39;</span><span class="p">),</span> <span class="n">requestMetadata</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">client_address</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;/127.0.0.1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">audit_log_events</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="k">source</span><span class="p">,</span> <span class="n">specversion</span><span class="p">,</span> <span class="k">type</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">datacontenttype</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">confluentrouting</span><span class="p">,</span> <span class="k">data</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;889bdcd9-a378-4bfe-8860-180ef8efd202&#39;</span><span class="p">,</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;io.confluent.kafka.server/authorization&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-10-24T16:15:12.355Z&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>  <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">route</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;confluent-audit-log-events&#39;</span><span class="p">),</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">serviceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="n">methodName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;kafka.CreateTopics&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span> <span class="n">authenticationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">principal</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;User:admin&#39;</span><span class="p">),</span> <span class="n">authorizationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">granted</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">,</span> <span class="k">operation</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Create&#39;</span><span class="p">,</span> <span class="n">resourceType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Broker&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;app3-topic&#39;</span><span class="p">,</span> <span class="n">patternType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;LITERAL&#39;</span><span class="p">,</span> <span class="n">superUserAuthorization</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">),</span> <span class="n">request</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">correlation_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="n">client_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;adminclient-6&#39;</span><span class="p">),</span> <span class="n">requestMetadata</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">client_address</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;/127.0.0.1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">audit_log_events</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="k">source</span><span class="p">,</span> <span class="n">specversion</span><span class="p">,</span> <span class="k">type</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">datacontenttype</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">confluentrouting</span><span class="p">,</span> <span class="k">data</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;889bdcd9-a378-4bfe-8860-180ef8efd201&#39;</span><span class="p">,</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;io.confluent.kafka.server/authorization&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-10-24T16:15:16.355Z&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>  <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">route</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;confluent-audit-log-events&#39;</span><span class="p">),</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">serviceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="n">methodName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;kafka.CreateTopics&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span> <span class="n">authenticationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">principal</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;User:admin&#39;</span><span class="p">),</span> <span class="n">authorizationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">granted</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">,</span> <span class="k">operation</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Create&#39;</span><span class="p">,</span> <span class="n">resourceType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Broker&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;app3-topic&#39;</span><span class="p">,</span> <span class="n">patternType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;LITERAL&#39;</span><span class="p">,</span> <span class="n">superUserAuthorization</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">),</span> <span class="n">request</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">correlation_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="n">client_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;adminclient-6&#39;</span><span class="p">),</span> <span class="n">requestMetadata</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">client_address</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;/127.0.0.1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">audit_log_events</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="k">source</span><span class="p">,</span> <span class="n">specversion</span><span class="p">,</span> <span class="k">type</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">datacontenttype</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">confluentrouting</span><span class="p">,</span> <span class="k">data</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;889bdcd9-a378-4bfe-8860-180ef8efd200&#39;</span><span class="p">,</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;io.confluent.kafka.server/authorization&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-10-24T16:15:17.355Z&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>  <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">route</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;confluent-audit-log-events&#39;</span><span class="p">),</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">serviceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="n">methodName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;kafka.CreateTopics&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span> <span class="n">authenticationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">principal</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;User:admin&#39;</span><span class="p">),</span> <span class="n">authorizationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">granted</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">,</span> <span class="k">operation</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Create&#39;</span><span class="p">,</span> <span class="n">resourceType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Broker&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;app3-topic&#39;</span><span class="p">,</span> <span class="n">patternType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;LITERAL&#39;</span><span class="p">,</span> <span class="n">superUserAuthorization</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">),</span> <span class="n">request</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">correlation_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="n">client_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;adminclient-6&#39;</span><span class="p">),</span> <span class="n">requestMetadata</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">client_address</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;/127.0.0.1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">audit_log_events</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="k">source</span><span class="p">,</span> <span class="n">specversion</span><span class="p">,</span> <span class="k">type</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">datacontenttype</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">confluentrouting</span><span class="p">,</span> <span class="k">data</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;889bdcd9-a378-4bfe-8860-180ef8efd218&#39;</span><span class="p">,</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;io.confluent.kafka.server/authorization&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-10-24T16:15:48.355Z&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>  <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">route</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;confluent-audit-log-events&#39;</span><span class="p">),</span>  <span class="n">STRUCT</span><span class="p">(</span><span class="n">serviceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&#39;</span><span class="p">,</span> <span class="n">methodName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;kafka.CreateTopics&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&#39;</span><span class="p">,</span> <span class="n">authenticationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">principal</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;User:admin&#39;</span><span class="p">),</span> <span class="n">authorizationInfo</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">granted</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">,</span> <span class="k">operation</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Create&#39;</span><span class="p">,</span> <span class="n">resourceType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;Broker&#39;</span><span class="p">,</span> <span class="n">resourceName</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;app3-topic&#39;</span><span class="p">,</span> <span class="n">patternType</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;LITERAL&#39;</span><span class="p">,</span> <span class="n">superUserAuthorization</span> <span class="p">:</span><span class="o">=</span> <span class="k">true</span><span class="p">),</span> <span class="n">request</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">correlation_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="n">client_id</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;adminclient-6&#39;</span><span class="p">),</span> <span class="n">requestMetadata</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">client_address</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;/127.0.0.1&#39;</span><span class="p">)));</span>
+</code></pre></div>
+</td></tr></table>
+<h3 id="write-the-data-out">Write the data out<a class="headerlink" href="#write-the-data-out" title="Permanent link">&para;</a></h3>
+<p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to quickly connect to popular data sources and end systems in the cloud.
+This recipe shows sample connector configuration(s) below, each of which should be created separately.
+You can also substitute your own connectors to connect to any <a href="https://docs.confluent.io/cloud/current/connectors/index.html">supported data source</a>.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;connector.class&quot;</span>          <span class="p">:</span> <span class="s2">&quot;SplunkSink&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;recipe-splunk-filter-logs&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;input.data.format&quot;</span>        <span class="p">:</span> <span class="s2">&quot;JSON&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.api.key&quot;</span>            <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-key&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.api.secret&quot;</span>         <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-secret&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;topics&quot;</span>                   <span class="p">:</span> <span class="s2">&quot;TOPIC-OPERATIONS-AUDIT-LOG&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;splunk.hec.uri&quot;</span>           <span class="p">:</span> <span class="s2">&quot;&lt;splunk-indexers&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;splunk.hec.token&quot;</span>         <span class="p">:</span> <span class="s2">&quot;&lt;Splunk HTTP Event Collector token&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;tasks.max&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<h3 id="cleanup">Cleanup<a class="headerlink" href="#cleanup" title="Permanent link">&para;</a></h3>
+<p>To clean up the ksqlDB resources created by this recipe, use the ksqlDB commands shown below (substitute stream or topic name, as appropriate).
+By including the <code>DELETE TOPIC</code> clause, the topic backing the stream or table is also deleted, asynchronously.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>DROP STREAM IF EXISTS &lt;stream_name&gt; DELETE TOPIC;
+DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
+</code></pre></div>
+</td></tr></table>
+<p>If you also created connectors, you'll need to remove those as well.</p>
+<h2 id="explanation">Explanation<a class="headerlink" href="#explanation" title="Permanent link">&para;</a></h2>
+<p>The first step of this recipe was to <a href="https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-stream/">create a stream</a> from the audit log topic. When creating a stream, you can assign a schema or <a href="https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-stream/">model the JSON</a>. After applying a model or schema, you can directly query nested sections of the data, which allows you to apply filters and only pull back the log entries that interest you. Additionally, you can cherry-pick selected fields from the nested structure, so you can limit the amount of data you retrieve with the query. The second part of the recipe leverages the applied schema to specify that you want only log entries pertaining to events on Kafka topics. </p>
+<p>The <a href="https://docs.confluent.io/platform/current/security/audit-logs/audit-logs-concepts.html#audit-log-content">JSON structure of the Confluent log entries</a> contains several fields:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>   <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;889bdcd9-a378-4bfe-8860-180ef8efd208&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;specversion&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;io.confluent.kafka.server/authorization&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-10-24T16:15:48.355Z&quot;</span><span class="p">,</span>  <span class="err">&lt;</span><span class="mi">---</span><span class="err">Time</span> <span class="err">o</span><span class="kc">f</span> <span class="kc">t</span><span class="err">he</span> <span class="err">eve</span><span class="kc">nt</span>
+    <span class="nt">&quot;datacontenttype&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;subject&quot;</span><span class="p">:</span> <span class="s2">&quot;crn:///kafka=8caBa-0_Tu-2k3rKSxY64Q/topic=app3-topic&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;confluentRouting&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;route&quot;</span><span class="p">:</span> <span class="s2">&quot;confluent-audit-log-events&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="err">&lt;</span><span class="mi">---</span> <span class="err">Releva</span><span class="kc">nt</span> <span class="err">da</span><span class="kc">ta</span> <span class="err">o</span><span class="kc">f</span> <span class="kc">t</span><span class="err">he</span> <span class="err">eve</span><span class="kc">nt</span>
+      <span class="err">...</span>
+    <span class="nt">&quot;authorizationInfo&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;granted&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;operation&quot;</span><span class="p">:</span> <span class="s2">&quot;Create&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;resourceType&quot;</span><span class="p">:</span> <span class="s2">&quot;Topic&quot;</span><span class="p">,</span>  <span class="err">&lt;</span><span class="mi">---</span> <span class="err">You</span> <span class="err">o</span><span class="kc">nl</span><span class="err">y</span> <span class="err">wa</span><span class="kc">nt</span> <span class="err">eve</span><span class="kc">nts</span> <span class="err">i</span><span class="kc">n</span><span class="err">volvi</span><span class="kc">n</span><span class="err">g</span> <span class="kc">t</span><span class="err">opics</span>
+        <span class="nt">&quot;resourceName&quot;</span><span class="p">:</span> <span class="s2">&quot;app3-topic&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;patternType&quot;</span><span class="p">:</span> <span class="s2">&quot;LITERAL&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;superUserAuthorization&quot;</span><span class="p">:</span> <span class="kc">true</span>
+      <span class="p">}</span>
+     <span class="err">...</span> 
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>Of these fields, you're only interested in the <code>time</code> of the event and the <code>data</code> field. The <code>data</code> field contains the specifics of the log event, which in this case is any operation where the <code>resourceType</code> is <code>Topic</code>. So the first step is to apply a schema to this JSON:</p>
+<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">audit_log_events</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+  <span class="k">source</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+  <span class="n">specversion</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+  <span class="k">type</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+  <span class="k">time</span> <span class="nb">VARCHAR</span><span class="p">,</span>  
+  <span class="n">datacontenttype</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+  <span class="n">subject</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+  <span class="n">confluentRouting</span> <span class="n">STRUCT</span><span class="o">&lt;</span><span class="n">route</span> <span class="nb">VARCHAR</span> <span class="o">&gt;</span><span class="p">,</span>  
+  <span class="k">data</span> <span class="n">STRUCT</span><span class="o">&lt;</span>
+    <span class="n">serviceName</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+    <span class="n">methodName</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+    <span class="n">resourceName</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+    <span class="n">authenticationInfo</span> <span class="n">STRUCT</span><span class="o">&lt;</span><span class="n">principal</span> <span class="nb">VARCHAR</span><span class="o">&gt;</span><span class="p">,</span> 
+<span class="p">....</span>
+
+<span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;confluent-audit-log-events&#39;</span><span class="p">,</span> 
+  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">,</span> 
+  <span class="k">TIMESTAMP</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> 
+  <span class="n">TIMESTAMP_FORMAT</span><span class="o">=</span><span class="s1">&#39;yyyy-MM-dd&#39;&#39;T&#39;&#39;HH:mm:ss.SSSX&#39;</span><span class="p">,</span>
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">);</span>
+</code></pre></div>
+</td></tr></table>
+By supplying a schema to the ksqlDB <code>STREAM</code>, you are describing the structure of the data to ksqlDB. The top-level fields (<code>id</code> to <code>data</code>) correspond to column names. You'll notice that there are nested <code>STRUCT</code> fields representing nested JSON objects within the structure.  In the <code>WITH</code> statement you specify that ksqlDB should use the <code>time</code> field for the record timestamp and the format to parse it-<code>TIMESTAMP_FORMAT</code>.</p>
+<p>Now that you've described the structure of the data (by applying a schema), you can create another <code>STREAM</code> that will contain only the data of interest. Let's review this query in two parts—the <code>CREATE</code> statement and the <code>SELECT</code> statement.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">audit_log_topics</span>
+  <span class="k">WITH</span> <span class="p">(</span>
+  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;topic-operations-audit-log&#39;</span><span class="p">,</span> 
+  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
+<span class="p">)</span> 
+</code></pre></div>
+</td></tr></table>
+<p>This <code>CREATE STREAM</code> statement specifies to use (or create, if it doesn't exist yet) a Kafka topic to store the results of the stream.</p>
+<p>The <code>SELECT</code> part of the query is where you can drill down in the original stream and pull out only the records that interest you. Let's take a look at each line:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SELECT</span> <span class="k">time</span><span class="p">,</span> <span class="k">data</span>
+</code></pre></div>
+</td></tr></table>
+<p>This specifies that you want only the <code>time</code> field and the nested <code>data</code> entry from the original JSON. In ksqlDB, you can access nested JSON objects using the <code>-&gt;</code> operator.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">FROM</span>  <span class="n">audit_log_events</span>
+</code></pre></div>
+</td></tr></table>
+<p>The <code>FROM</code> clause simply tells ksqlDB to pull the records from the original stream that you created to model the Confluent log data.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">WHERE</span> <span class="k">data</span><span class="o">-&gt;</span><span class="n">authorizationinfo</span><span class="o">-&gt;</span><span class="n">resourcetype</span> <span class="o">=</span> <span class="s1">&#39;Topic&#39;</span>
+</code></pre></div>
+</td></tr></table>
+<p>In this <code>WHERE</code> statement, you use the <code>-&gt;</code> operator to drill down through several layers of nested JSON. This statement specifies that the new stream will contain only entries involving topic operations.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
+      
+    
+  </body>
+</html>

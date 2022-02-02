@@ -1,0 +1,930 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Stream Processing Use Cases highlight some of our most popular stream processing use cases with ksqlDB">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
+    
+    
+      
+        <title>Real-Time Discounting - Stream Processing Use Cases</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#real-time-discounting" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Stream Processing Use Cases" class="md-header__button md-logo" aria-label="Stream Processing Use Cases" data-md-component="logo">
+      
+  <img src="../../icon-symbol-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Stream Processing Use Cases
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Real-Time Discounting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Stream Processing Use Cases" class="md-nav__button md-logo" aria-label="Stream Processing Use Cases" data-md-component="logo">
+      
+  <img src="../../icon-symbol-white.svg" alt="logo">
+
+    </a>
+    Stream Processing Use Cases
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        Anomaly and Pattern Detection
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Anomaly and Pattern Detection" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Anomaly and Pattern Detection
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../anomaly-detection/credit-card-activity/" class="md-nav__link">
+        Detect unusual credit card activity
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../anomaly-detection/internet-of-things/" class="md-nav__link">
+        Flag unhealthy IoT devices
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../anomaly-detection/salesforce/" class="md-nav__link">
+        Handle corrupted data from Salesforce
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Customer 360
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Customer 360" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Customer 360
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer-360/online-dating/" class="md-nav__link">
+        Match users for online dating
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer-360/clickstream/" class="md-nav__link">
+        Understand user behavior with clickstream data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer-360/aviation/" class="md-nav__link">
+        Notify passengers of flight updates
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer-360/loyalty-rewards/" class="md-nav__link">
+        Build customer loyalty programs
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Cybersecurity
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Cybersecurity" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Cybersecurity
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cybersecurity/SSH-attack/" class="md-nav__link">
+        Detect and analyze SSH attacks
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Predictive Analytics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Predictive Analytics" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Predictive Analytics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../predictive-analytics/fleet-management/" class="md-nav__link">
+        Optimize fleet management
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../predictive-analytics/inventory/" class="md-nav__link">
+        Optimize omni-channel inventory
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        Real-time Analytics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Real-time Analytics" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Real-time Analytics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datacenter/" class="md-nav__link">
+        Analyze datacenter power usage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-status-check/" class="md-nav__link">
+        Automate instant payment verifications
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../denormalization/" class="md-nav__link">
+        Enrich orders with change data capture (CDC)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dynamic-pricing/" class="md-nav__link">
+        Build a dynamic pricing strategy
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    Step-by-step
+  </a>
+  
+    <nav class="md-nav" aria-label="Step-by-step">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-your-environment" class="md-nav__link">
+    Setup your Environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-the-data-in" class="md-nav__link">
+    Read the data in
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-stream-processing-app" class="md-nav__link">
+    Run stream processing app
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cleanup" class="md-nav__link">
+    Cleanup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explanation" class="md-nav__link">
+    Explanation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="real-time-discounting">Real-Time Discounting<a class="headerlink" href="#real-time-discounting" title="Permanent link">&para;</a></h1>
+<p>Small, online retailers often run promotions in order to entice buyers and increase sales. Suppose the retailer implements a "scratch-off" promotion where customers are provided a scratch card where they will receive discount code for a random percentage (up to 50%) off of their order. How well do these promotions work? And how much does the discount percentage affect the total amount purchased in a given order? Let's find out!</p>
+<h2 id="step-by-step">Step-by-step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h2>
+<h3 id="setup-your-environment">Setup your Environment<a class="headerlink" href="#setup-your-environment" title="Permanent link">&para;</a></h3>
+<p>Provision a Kafka cluster in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes&amp;utm_campaign=discounting">Confluent Cloud</a>.</p>
+<p>Once your Confluent Cloud cluster is available, create a <a href="https://ksqldb.io/">ksqlDB</a> application. ksqlDB supports a <code>SQL</code> language for processing the data in real time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
+<h3 id="read-the-data-in">Read the data in<a class="headerlink" href="#read-the-data-in" title="Permanent link">&para;</a></h3>
+<p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to quickly connect to popular data sources and end systems in the cloud.
+This recipe shows sample connector configuration(s) below, each of which should be created separately.
+You can also substitute your own connectors to connect to any <a href="https://docs.confluent.io/cloud/current/connectors/index.html">supported data source</a>.</p>
+<p>In the case of this recipe, we're interested in capturing data that reflects incoming orders as well as details on unique discount codes. Kafka Connect can easily stream in data from a database containing that information; you can use the following template as a guide to setting up a connector.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;connector.class&quot;</span>          <span class="p">:</span> <span class="s2">&quot;PostgresSource&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;recipe-postgres-discounting-codes&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.api.key&quot;</span>            <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-key&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.api.secret&quot;</span>         <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-secret&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;connection.host&quot;</span>          <span class="p">:</span> <span class="s2">&quot;&lt;my-database-endpoint&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;connection.port&quot;</span>          <span class="p">:</span> <span class="s2">&quot;5432&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;connection.user&quot;</span>          <span class="p">:</span> <span class="s2">&quot;postgres&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;connection.password&quot;</span>      <span class="p">:</span> <span class="s2">&quot;&lt;my-database-password&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;db.name&quot;</span>                  <span class="p">:</span> <span class="s2">&quot;&lt;db-name&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;table.whitelist&quot;</span>          <span class="p">:</span> <span class="s2">&quot;discount_codes&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;timestamp.column.name&quot;</span>    <span class="p">:</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;output.data.format&quot;</span>       <span class="p">:</span> <span class="s2">&quot;JSON&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;db.timezone&quot;</span>              <span class="p">:</span> <span class="s2">&quot;UTC&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;tasks.max&quot;</span>                <span class="p">:</span> <span class="s2">&quot;1&quot;</span>
+<span class="p">}</span>
+
+<span class="p">{</span>
+  <span class="nt">&quot;connector.class&quot;</span>          <span class="p">:</span> <span class="s2">&quot;PostgresSource&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;recipe-postgres-discounting-orders&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.api.key&quot;</span>            <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-key&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.api.secret&quot;</span>         <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-secret&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;connection.host&quot;</span>          <span class="p">:</span> <span class="s2">&quot;&lt;my-database-endpoint&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;connection.port&quot;</span>          <span class="p">:</span> <span class="s2">&quot;5432&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;connection.user&quot;</span>          <span class="p">:</span> <span class="s2">&quot;postgres&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;connection.password&quot;</span>      <span class="p">:</span> <span class="s2">&quot;&lt;my-database-password&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;db.name&quot;</span>                  <span class="p">:</span> <span class="s2">&quot;&lt;db-name&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;table.whitelist&quot;</span>          <span class="p">:</span> <span class="s2">&quot;orders&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;timestamp.column.name&quot;</span>    <span class="p">:</span> <span class="s2">&quot;order_time&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;output.data.format&quot;</span>       <span class="p">:</span> <span class="s2">&quot;JSON&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;db.timezone&quot;</span>              <span class="p">:</span> <span class="s2">&quot;UTC&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;tasks.max&quot;</span>                <span class="p">:</span> <span class="s2">&quot;1&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>Optional: If you cannot connect to a real datasource with properly formatted data, or if you just want to execute this recipe without external dependencies, no worries! In the next section, you'll see how to test the recipe by inserting mock data into the streams, using the ksqlDB command <code>INSERT INTO</code>.</p>
+<h3 id="run-stream-processing-app">Run stream processing app<a class="headerlink" href="#run-stream-processing-app" title="Permanent link">&para;</a></h3>
+<p>Through a series of ksqlDB statements, we'll enrich our order data and compute some simple statistics based on that stream of enriched order data. By the end, we'll have more insights as to just how well our discount code promotion is doing. Specifically, we'll know the average order value per discount percentage as well as the average number of items purchased.</p>
+<hr />
+<p><strong>NOTE:</strong>
+<em>The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.</em>
+<em>This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</em></p>
+<hr />
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Create Discount Code Table</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">DISCOUNT_CODES</span> <span class="p">(</span>
+    <span class="n">CODE</span> <span class="nb">VARCHAR</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> 
+    <span class="n">PERCENTAGE</span> <span class="n">DOUBLE</span>
+<span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
+    <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;discount_codes&#39;</span><span class="p">,</span>
+    <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+    <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">);</span>
+
+<span class="c1">-- Create Order Stream</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">ORDER_STREAM</span> <span class="p">(</span>
+    <span class="n">ID</span> <span class="nb">BIGINT</span><span class="p">,</span> 
+    <span class="n">ORDER_TIME</span> <span class="k">TIMESTAMP</span><span class="p">,</span> 
+    <span class="n">CUSTOMER_ID</span> <span class="nb">BIGINT</span><span class="p">,</span> 
+    <span class="n">ITEM_CT</span> <span class="nb">INT</span><span class="p">,</span> 
+    <span class="n">ORDER_SUBTOTAL</span> <span class="n">DOUBLE</span><span class="p">,</span> 
+    <span class="n">DISCOUNT_CODE</span> <span class="nb">VARCHAR</span>
+<span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
+    <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;orders&#39;</span><span class="p">,</span>
+    <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+    <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">);</span>
+
+
+<span class="c1">-- Application logic</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">DISCOUNT_ANALYSIS</span> <span class="k">WITH</span> <span class="p">(</span>
+    <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;discount_analysis&#39;</span><span class="p">,</span>
+    <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+    <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">)</span> <span class="k">AS</span> 
+<span class="k">SELECT</span>
+    <span class="n">DC</span><span class="p">.</span><span class="n">PERCENTAGE</span><span class="p">,</span>
+    <span class="n">ROUND</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">OS</span><span class="p">.</span><span class="n">ITEM_CT</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span> <span class="k">AS</span> <span class="n">AVG_ITEM_CT</span><span class="p">,</span>
+    <span class="n">ROUND</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">OS</span><span class="p">.</span><span class="n">ORDER_SUBTOTAL</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">AVG_ORDER_SUBTOTAL</span><span class="p">,</span>
+    <span class="n">ROUND</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">OS</span><span class="p">.</span><span class="n">ORDER_SUBTOTAL</span> <span class="o">*</span> <span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="n">DC</span><span class="p">.</span><span class="n">PERCENTAGE</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span><span class="p">.</span><span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">AVG_ORDER_TOTAL</span><span class="p">,</span>
+    <span class="n">ROUND</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">OS</span><span class="p">.</span><span class="n">ORDER_SUBTOTAL</span> <span class="o">*</span> <span class="p">(</span><span class="n">DC</span><span class="p">.</span><span class="n">PERCENTAGE</span> <span class="o">/</span> <span class="mi">100</span><span class="p">.</span><span class="mi">0</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">AVG_DISCOUNT_TOTAL</span>
+<span class="k">FROM</span> <span class="n">ORDER_STREAM</span> <span class="k">AS</span> <span class="n">OS</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">DISCOUNT_CODES</span> <span class="k">AS</span> <span class="n">DC</span>
+<span class="k">ON</span> <span class="n">OS</span><span class="p">.</span><span class="n">DISCOUNT_CODE</span> <span class="o">=</span> <span class="n">DC</span><span class="p">.</span><span class="n">CODE</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">DC</span><span class="p">.</span><span class="n">PERCENTAGE</span>
+<span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
+</code></pre></div>
+</td></tr></table>
+<p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert example events into the source topics with the following statements:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Discount Codes</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">discount_codes</span> <span class="p">(</span><span class="n">CODE</span><span class="p">,</span> <span class="n">PERCENTAGE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;ALDNE15&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">discount_codes</span> <span class="p">(</span><span class="n">CODE</span><span class="p">,</span> <span class="n">PERCENTAGE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;LWNDB15&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">discount_codes</span> <span class="p">(</span><span class="n">CODE</span><span class="p">,</span> <span class="n">PERCENTAGE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;QQNSH15&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">discount_codes</span> <span class="p">(</span><span class="n">CODE</span><span class="p">,</span> <span class="n">PERCENTAGE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;ENDJW15&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">discount_codes</span> <span class="p">(</span><span class="n">CODE</span><span class="p">,</span> <span class="n">PERCENTAGE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;MWJDS15&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">discount_codes</span> <span class="p">(</span><span class="n">CODE</span><span class="p">,</span> <span class="n">PERCENTAGE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;WVESJ20&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">discount_codes</span> <span class="p">(</span><span class="n">CODE</span><span class="p">,</span> <span class="n">PERCENTAGE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;VNNSW20&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">discount_codes</span> <span class="p">(</span><span class="n">CODE</span><span class="p">,</span> <span class="n">PERCENTAGE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;XSNPT20&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">discount_codes</span> <span class="p">(</span><span class="n">CODE</span><span class="p">,</span> <span class="n">PERCENTAGE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;JDNTY25&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">discount_codes</span> <span class="p">(</span><span class="n">CODE</span><span class="p">,</span> <span class="n">PERCENTAGE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;KIDNT25&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">discount_codes</span> <span class="p">(</span><span class="n">CODE</span><span class="p">,</span> <span class="n">PERCENTAGE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;PEHTN25&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">discount_codes</span> <span class="p">(</span><span class="n">CODE</span><span class="p">,</span> <span class="n">PERCENTAGE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;BSLWU30&#39;</span><span class="p">,</span> <span class="mi">30</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">discount_codes</span> <span class="p">(</span><span class="n">CODE</span><span class="p">,</span> <span class="n">PERCENTAGE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;URITN40&#39;</span><span class="p">,</span> <span class="mi">40</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">discount_codes</span> <span class="p">(</span><span class="n">CODE</span><span class="p">,</span> <span class="n">PERCENTAGE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;LSEMJ50&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">discount_codes</span> <span class="p">(</span><span class="n">CODE</span><span class="p">,</span> <span class="n">PERCENTAGE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;FKENT50&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">-- Orders</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">order_stream</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">ORDER_TIME</span><span class="p">,</span> <span class="n">CUSTOMER_ID</span><span class="p">,</span> <span class="n">ITEM_CT</span><span class="p">,</span> <span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> <span class="n">DISCOUNT_CODE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">()),</span> <span class="mi">101</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span> <span class="mi">201</span><span class="p">.</span><span class="mi">17</span><span class="p">,</span> <span class="s1">&#39;LSEMJ50&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">order_stream</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">ORDER_TIME</span><span class="p">,</span> <span class="n">CUSTOMER_ID</span><span class="p">,</span> <span class="n">ITEM_CT</span><span class="p">,</span> <span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> <span class="n">DISCOUNT_CODE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1001</span><span class="p">,</span> <span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">()),</span> <span class="mi">107</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span> <span class="mi">121</span><span class="p">.</span><span class="mi">82</span><span class="p">,</span> <span class="s1">&#39;KIDNT25&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">order_stream</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">ORDER_TIME</span><span class="p">,</span> <span class="n">CUSTOMER_ID</span><span class="p">,</span> <span class="n">ITEM_CT</span><span class="p">,</span> <span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> <span class="n">DISCOUNT_CODE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1002</span><span class="p">,</span> <span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">()),</span> <span class="mi">111</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">65</span><span class="p">.</span><span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;LWNDB15&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">order_stream</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">ORDER_TIME</span><span class="p">,</span> <span class="n">CUSTOMER_ID</span><span class="p">,</span> <span class="n">ITEM_CT</span><span class="p">,</span> <span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> <span class="n">DISCOUNT_CODE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1003</span><span class="p">,</span> <span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">()),</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">163</span><span class="p">.</span><span class="mi">99</span><span class="p">,</span> <span class="s1">&#39;URITN40&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">order_stream</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">ORDER_TIME</span><span class="p">,</span> <span class="n">CUSTOMER_ID</span><span class="p">,</span> <span class="n">ITEM_CT</span><span class="p">,</span> <span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> <span class="n">DISCOUNT_CODE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1004</span><span class="p">,</span> <span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">()),</span> <span class="mi">102</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">47</span><span class="p">.</span><span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;ALDNE15&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">order_stream</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">ORDER_TIME</span><span class="p">,</span> <span class="n">CUSTOMER_ID</span><span class="p">,</span> <span class="n">ITEM_CT</span><span class="p">,</span> <span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> <span class="n">DISCOUNT_CODE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1005</span><span class="p">,</span> <span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">()),</span> <span class="mi">106</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">75</span><span class="p">.</span><span class="mi">78</span><span class="p">,</span> <span class="s1">&#39;WVESJ20&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">order_stream</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">ORDER_TIME</span><span class="p">,</span> <span class="n">CUSTOMER_ID</span><span class="p">,</span> <span class="n">ITEM_CT</span><span class="p">,</span> <span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> <span class="n">DISCOUNT_CODE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1006</span><span class="p">,</span> <span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">()),</span> <span class="mi">105</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">118</span><span class="p">.</span><span class="mi">27</span><span class="p">,</span> <span class="s1">&#39;PEHTN25&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">order_stream</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">ORDER_TIME</span><span class="p">,</span> <span class="n">CUSTOMER_ID</span><span class="p">,</span> <span class="n">ITEM_CT</span><span class="p">,</span> <span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> <span class="n">DISCOUNT_CODE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1007</span><span class="p">,</span> <span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">()),</span> <span class="mi">110</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">70</span><span class="p">.</span><span class="mi">19</span><span class="p">,</span> <span class="s1">&#39;QQNSH15&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">order_stream</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">ORDER_TIME</span><span class="p">,</span> <span class="n">CUSTOMER_ID</span><span class="p">,</span> <span class="n">ITEM_CT</span><span class="p">,</span> <span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> <span class="n">DISCOUNT_CODE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1008</span><span class="p">,</span> <span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">()),</span> <span class="mi">108</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">83</span><span class="p">.</span><span class="mi">45</span><span class="p">,</span> <span class="s1">&#39;MWJDS15&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">order_stream</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">ORDER_TIME</span><span class="p">,</span> <span class="n">CUSTOMER_ID</span><span class="p">,</span> <span class="n">ITEM_CT</span><span class="p">,</span> <span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> <span class="n">DISCOUNT_CODE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1009</span><span class="p">,</span> <span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">()),</span> <span class="mi">109</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span> <span class="mi">130</span><span class="p">.</span><span class="mi">64</span><span class="p">,</span> <span class="s1">&#39;BSLWU30&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">order_stream</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">ORDER_TIME</span><span class="p">,</span> <span class="n">CUSTOMER_ID</span><span class="p">,</span> <span class="n">ITEM_CT</span><span class="p">,</span> <span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> <span class="n">DISCOUNT_CODE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1010</span><span class="p">,</span> <span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">()),</span> <span class="mi">103</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span> <span class="mi">105</span><span class="p">.</span><span class="mi">71</span><span class="p">,</span> <span class="s1">&#39;VNNSW20&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">order_stream</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">ORDER_TIME</span><span class="p">,</span> <span class="n">CUSTOMER_ID</span><span class="p">,</span> <span class="n">ITEM_CT</span><span class="p">,</span> <span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> <span class="n">DISCOUNT_CODE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1011</span><span class="p">,</span> <span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">()),</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">199</span><span class="p">.</span><span class="mi">85</span><span class="p">,</span> <span class="s1">&#39;FKENT50&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">order_stream</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">ORDER_TIME</span><span class="p">,</span> <span class="n">CUSTOMER_ID</span><span class="p">,</span> <span class="n">ITEM_CT</span><span class="p">,</span> <span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> <span class="n">DISCOUNT_CODE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1012</span><span class="p">,</span> <span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">()),</span> <span class="mi">112</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">99</span><span class="p">.</span><span class="mi">13</span><span class="p">,</span> <span class="s1">&#39;ENDJW15&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">order_stream</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">ORDER_TIME</span><span class="p">,</span> <span class="n">CUSTOMER_ID</span><span class="p">,</span> <span class="n">ITEM_CT</span><span class="p">,</span> <span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> <span class="n">DISCOUNT_CODE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1013</span><span class="p">,</span> <span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">()),</span> <span class="mi">117</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">85</span><span class="p">.</span><span class="mi">80</span><span class="p">,</span> <span class="s1">&#39;XSNPT20&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">order_stream</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span> <span class="n">ORDER_TIME</span><span class="p">,</span> <span class="n">CUSTOMER_ID</span><span class="p">,</span> <span class="n">ITEM_CT</span><span class="p">,</span> <span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> <span class="n">DISCOUNT_CODE</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1014</span><span class="p">,</span> <span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">()),</span> <span class="mi">120</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">120</span><span class="p">.</span><span class="mi">91</span><span class="p">,</span> <span class="s1">&#39;JDNTY25&#39;</span><span class="p">);</span>
+</code></pre></div>
+</td></tr></table>
+<h3 id="cleanup">Cleanup<a class="headerlink" href="#cleanup" title="Permanent link">&para;</a></h3>
+<p>To clean up the ksqlDB resources created by this recipe, use the ksqlDB commands shown below (substitute stream or topic name, as appropriate).
+By including the <code>DELETE TOPIC</code> clause, the topic backing the stream or table is also deleted, asynchronously.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>DROP STREAM IF EXISTS &lt;stream_name&gt; DELETE TOPIC;
+DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
+</code></pre></div>
+</td></tr></table>
+<p>If you also created connectors, you'll need to remove those as well.</p>
+<h3 id="explanation">Explanation<a class="headerlink" href="#explanation" title="Permanent link">&para;</a></h3>
+<p>You may have noticed that the application logic query in <a href="#read-the-data-in">Read the data in</a> really consists of two stages wrapped into one: an enrichment stage and an aggregation stage. This was done for efficiency and convenience. But, as an added exercise, let's break these down into separate stages and see what's happening.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Application logic, step by step</span>
+
+<span class="c1">-- 1. Enrich the orders stream with discount details.</span>
+<span class="c1">--    Compute the discount amount as well as order total.</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">ORDERS_ENRICHED</span> <span class="k">WITH</span> <span class="p">(</span>
+    <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;orders_enriched&#39;</span><span class="p">,</span>
+    <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+    <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">)</span> <span class="k">AS</span> 
+<span class="k">SELECT</span> 
+    <span class="n">OS</span><span class="p">.</span><span class="n">ID</span> <span class="k">AS</span> <span class="n">ORDER_ID</span><span class="p">,</span>
+    <span class="n">OS</span><span class="p">.</span><span class="n">DISCOUNT_CODE</span><span class="p">,</span>
+    <span class="n">DISCOUNT_CODES</span><span class="p">.</span><span class="n">PERCENTAGE</span><span class="p">,</span>
+    <span class="n">OS</span><span class="p">.</span><span class="n">ITEM_CT</span><span class="p">,</span>
+    <span class="n">OS</span><span class="p">.</span><span class="n">ORDER_SUBTOTAL</span><span class="p">,</span> 
+    <span class="n">OS</span><span class="p">.</span><span class="n">ORDER_SUBTOTAL</span> <span class="o">*</span> <span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="n">DISCOUNT_CODES</span><span class="p">.</span><span class="n">PERCENTAGE</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span><span class="p">.</span><span class="mi">0</span> <span class="k">AS</span> <span class="n">ORDER_TOTAL</span><span class="p">,</span>
+    <span class="n">OS</span><span class="p">.</span><span class="n">ORDER_SUBTOTAL</span> <span class="o">*</span> <span class="p">(</span><span class="n">DISCOUNT_CODES</span><span class="p">.</span><span class="n">PERCENTAGE</span> <span class="o">/</span> <span class="mi">100</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span> <span class="k">AS</span> <span class="n">DISCOUNT_TOTAL</span>
+<span class="k">FROM</span> <span class="n">ORDER_STREAM</span> <span class="k">AS</span> <span class="n">OS</span> 
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">DISCOUNT_CODES</span>
+<span class="k">ON</span> <span class="n">OS</span><span class="p">.</span><span class="n">DISCOUNT_CODE</span> <span class="o">=</span> <span class="n">DISCOUNT_CODES</span><span class="p">.</span><span class="n">CODE</span>
+<span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
+
+<span class="c1">-- 2. Compute aggregates based on discount percentage.</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">DISCOUNT_ANALYSIS</span> <span class="k">WITH</span> <span class="p">(</span>
+    <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;discount_analysis&#39;</span><span class="p">,</span>
+    <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+    <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">)</span> <span class="k">AS</span> 
+<span class="k">SELECT</span>
+    <span class="n">PERCENTAGE</span><span class="p">,</span>
+    <span class="n">ROUND</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">ITEM_CT</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span> <span class="k">AS</span> <span class="n">AVG_ITEM_CT</span><span class="p">,</span>
+    <span class="n">ROUND</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">ORDER_SUBTOTAL</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">AVG_ORDER_SUBTOTAL</span><span class="p">,</span>
+    <span class="n">ROUND</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">ORDER_TOTAL</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">AVG_ORDER_TOTAL</span><span class="p">,</span>
+    <span class="n">ROUND</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">DISCOUNT_TOTAL</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">AVG_DISCOUNT_TOTAL</span>
+<span class="k">FROM</span> <span class="n">ORDERS_ENRICHED</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">PERCENTAGE</span>
+<span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
+</code></pre></div>
+</td></tr></table>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
+      
+    
+  </body>
+</html>

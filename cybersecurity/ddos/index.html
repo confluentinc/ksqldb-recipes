@@ -1,0 +1,1005 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Stream Processing Use Cases highlight some of our most popular stream processing use cases with ksqlDB">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
+    
+    
+      
+        <title>Detect a Slowloris DDoS network attack - Stream Processing Use Cases</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#detect-a-slowloris-ddos-network-attack" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Stream Processing Use Cases" class="md-header__button md-logo" aria-label="Stream Processing Use Cases" data-md-component="logo">
+      
+  <img src="../../icon-symbol-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Stream Processing Use Cases
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Detect a Slowloris DDoS network attack
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Stream Processing Use Cases" class="md-nav__button md-logo" aria-label="Stream Processing Use Cases" data-md-component="logo">
+      
+  <img src="../../icon-symbol-white.svg" alt="logo">
+
+    </a>
+    Stream Processing Use Cases
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        Anomaly and Pattern Detection
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Anomaly and Pattern Detection" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Anomaly and Pattern Detection
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../anomaly-detection/credit-card-activity/" class="md-nav__link">
+        Detect unusual credit card activity
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../anomaly-detection/internet-of-things/" class="md-nav__link">
+        Flag unhealthy IoT devices
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../anomaly-detection/salesforce/" class="md-nav__link">
+        Handle corrupted data from Salesforce
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Customer 360
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Customer 360" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Customer 360
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer-360/online-dating/" class="md-nav__link">
+        Match users for online dating
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer-360/clickstream/" class="md-nav__link">
+        Understand user behavior with clickstream data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer-360/aviation/" class="md-nav__link">
+        Notify passengers of flight updates
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer-360/loyalty-rewards/" class="md-nav__link">
+        Build customer loyalty programs
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Cybersecurity
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Cybersecurity" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Cybersecurity
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SSH-attack/" class="md-nav__link">
+        Detect and analyze SSH attacks
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Predictive Analytics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Predictive Analytics" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Predictive Analytics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../predictive-analytics/fleet-management/" class="md-nav__link">
+        Optimize fleet management
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../predictive-analytics/inventory/" class="md-nav__link">
+        Optimize omni-channel inventory
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        Real-time Analytics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Real-time Analytics" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Real-time Analytics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../real-time-analytics/datacenter/" class="md-nav__link">
+        Analyze datacenter power usage
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../real-time-analytics/payment-status-check/" class="md-nav__link">
+        Automate instant payment verifications
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../real-time-analytics/denormalization/" class="md-nav__link">
+        Enrich orders with change data capture (CDC)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../real-time-analytics/dynamic-pricing/" class="md-nav__link">
+        Build a dynamic pricing strategy
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    Step by step
+  </a>
+  
+    <nav class="md-nav" aria-label="Step by step">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-up-your-environment" class="md-nav__link">
+    Set up your environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-the-data-in" class="md-nav__link">
+    Read the data in
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ksqldb-code" class="md-nav__link">
+    ksqlDB code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleanup" class="md-nav__link">
+    Cleanup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explanation" class="md-nav__link">
+    Explanation
+  </a>
+  
+    <nav class="md-nav" aria-label="Explanation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#streaming-json" class="md-nav__link">
+    Streaming JSON
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#materialized-view" class="md-nav__link">
+    Materialized view
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="detect-a-slowloris-ddos-network-attack">Detect a Slowloris DDoS network attack<a class="headerlink" href="#detect-a-slowloris-ddos-network-attack" title="Permanent link">&para;</a></h1>
+<p>A distributed denial-of-service (DDoS) attack is a specific type of cyber attack in which a targeted system is flooded with spurious network requests using multiple hosts and IP addresses. The distributed nature of these attacks makes them more effective and difficult to mitigate. This recipe shows a strategy for ingesting and processing network packet data in an effort to detect a specific DDoS attack known as Slowloris.</p>
+<p><img alt="slowloris_attack" src="../../img/ssh-attack.jpg" /></p>
+<h2 id="step-by-step">Step by step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h2>
+<h3 id="set-up-your-environment">Set up your environment<a class="headerlink" href="#set-up-your-environment" title="Permanent link">&para;</a></h3>
+<p>Provision a Kafka cluster in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes&amp;utm_campaign=slowloris_ddos">Confluent Cloud</a>.</p>
+<p>Once your Confluent Cloud cluster is available, create a <a href="https://ksqldb.io/">ksqlDB</a> application. ksqlDB supports a <code>SQL</code> language for processing the data in real time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
+<h3 id="read-the-data-in">Read the data in<a class="headerlink" href="#read-the-data-in" title="Permanent link">&para;</a></h3>
+<p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to quickly connect to popular data sources and end systems in the cloud.
+This recipe shows sample connector configuration(s) below, each of which should be created separately.
+You can also substitute your own connectors to connect to any <a href="https://docs.confluent.io/cloud/current/connectors/index.html">supported data source</a>.</p>
+<p>This recipe assumes that you have captured your network packet data and published it to a RabbitMQ queue in JSON format. An example packet may look like the following:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1590682723239&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;layers&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;frame&quot;</span><span class="p">:</span> <span class="p">{</span> 
+      <span class="nt">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;May 28, 2020 11:48:43.239564000 CST&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;protocols&quot;</span><span class="p">:</span> <span class="s2">&quot;eth:ethertype:ip:tcp&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;eth&quot;</span><span class="p">:</span> <span class="p">{</span> 
+      <span class="nt">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;FF:AA:C9:83:C0:21&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;dst&quot;</span><span class="p">:</span> <span class="s2">&quot;DF:ED:E3:91:D4:13&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;ip&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.33.11&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;src_host&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.33.11&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;dst&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.33.77&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;dst_host&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.33.77&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;tcp&quot;</span><span class="p">:</span> <span class="p">{</span> 
+      <span class="nt">&quot;srcport&quot;</span><span class="p">:</span> <span class="s2">&quot;59202&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;dstport&quot;</span><span class="p">:</span> <span class="s2">&quot;443&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;flags_ack&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;flags_reset&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p><strong>Note</strong>: For brevity, some fields have been removed and some names have been simplified from a typical packet capture event.</p>
+<p>This connector will source the data into a Kafka topic for stream processing in ksqlDB.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;connector.class&quot;</span>   <span class="p">:</span> <span class="s2">&quot;RabbitMQSource&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span>              <span class="p">:</span> <span class="s2">&quot;network-traffic-source&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.api.key&quot;</span>     <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-key&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.api.secret&quot;</span>  <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-secret&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.topic&quot;</span>       <span class="p">:</span> <span class="s2">&quot;network-traffic&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;rabbitmq.host&quot;</span>     <span class="p">:</span> <span class="s2">&quot;&lt;my-rabbitmq-host&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;rabbitmq.username&quot;</span> <span class="p">:</span> <span class="s2">&quot;&lt;my-rabbitmq-username&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;rabbitmq.password&quot;</span> <span class="p">:</span> <span class="s2">&quot;&lt;my-rabbitmq-password&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;rabbitmq.queue&quot;</span>    <span class="p">:</span> <span class="s2">&quot;&lt;my-rabbitmq-queue&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;tasks.max&quot;</span>         <span class="p">:</span> <span class="s2">&quot;1&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>Optional: If you cannot connect to a real datasource with properly formatted data, or if you just want to execute this recipe without external dependencies, no worries! In the next section, you'll see how to test the recipe by inserting mock data into the streams, using the ksqlDB command <code>INSERT INTO</code>.</p>
+<h3 id="ksqldb-code">ksqlDB code<a class="headerlink" href="#ksqldb-code" title="Permanent link">&para;</a></h3>
+<p>This application takes the raw network packet data and creates a structured stream of events that can be processed using SQL. Using <a href="https://docs.ksqldb.io/en/latest/concepts/time-and-windows-in-ksqldb-queries/#windows-in-sql-queries">windows</a> and filters, the application detects a high number of connection <code>RESET</code> events from the server and isolates the potentially offending source.</p>
+<hr />
+<p><strong>NOTE:</strong>
+<em>The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.</em>
+<em>This limitation will be removed in the next release, but until then, copy and paste each statement into the editor and execute them one at a time.</em></p>
+<hr />
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">network_traffic</span> <span class="p">(</span>
+  <span class="k">timestamp</span> <span class="nb">BIGINT</span><span class="p">,</span>
+  <span class="n">layers</span> <span class="n">STRUCT</span><span class="o">&lt;</span>
+   <span class="n">frame</span> <span class="n">STRUCT</span><span class="o">&lt;</span> 
+      <span class="k">time</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+      <span class="n">protocols</span> <span class="nb">VARCHAR</span> <span class="o">&gt;</span><span class="p">,</span>
+   <span class="n">eth</span> <span class="n">STRUCT</span><span class="o">&lt;</span> 
+      <span class="n">src</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+      <span class="n">dst</span> <span class="nb">VARCHAR</span> <span class="o">&gt;</span><span class="p">,</span>
+   <span class="n">ip</span> <span class="n">STRUCT</span><span class="o">&lt;</span> 
+      <span class="n">src</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+      <span class="n">src_host</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+      <span class="n">dst</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+      <span class="n">dst_host</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+      <span class="n">proto</span> <span class="nb">VARCHAR</span> <span class="o">&gt;</span><span class="p">,</span>
+   <span class="n">tcp</span> <span class="n">STRUCT</span><span class="o">&lt;</span> 
+      <span class="n">srcport</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+      <span class="n">dstport</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+      <span class="n">flags_ack</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+      <span class="n">flags_reset</span> <span class="nb">VARCHAR</span> <span class="o">&gt;&gt;</span>
+<span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;network-traffic&#39;</span><span class="p">,</span> 
+  <span class="k">TIMESTAMP</span> <span class="o">=</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">,</span> 
+  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span> 
+  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="p">);</span>
+
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">potential_slowloris_attacks</span> <span class="k">AS</span> 
+<span class="k">SELECT</span> 
+  <span class="n">layers</span><span class="o">-&gt;</span><span class="n">ip</span><span class="o">-&gt;</span><span class="n">src</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">count_connection_reset</span>
+<span class="k">FROM</span> <span class="n">network_traffic</span> 
+  <span class="n">WINDOW</span> <span class="n">TUMBLING</span> <span class="p">(</span><span class="k">SIZE</span> <span class="mi">60</span> <span class="n">SECONDS</span><span class="p">)</span>
+<span class="k">WHERE</span> <span class="n">layers</span><span class="o">-&gt;</span><span class="n">tcp</span><span class="o">-&gt;</span><span class="n">flags_ack</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span> <span class="k">AND</span> <span class="n">layers</span><span class="o">-&gt;</span><span class="n">tcp</span><span class="o">-&gt;</span><span class="n">flags_reset</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+<span class="k">GROUP</span> <span class="k">BY</span>
+  <span class="n">layers</span><span class="o">-&gt;</span><span class="n">ip</span><span class="o">-&gt;</span><span class="n">src</span>
+<span class="k">HAVING</span> 
+  <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">;</span>
+</code></pre></div>
+</td></tr></table>
+<p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert example events into the source topics with the following statements:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642016000&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642016100&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642016200&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642016205&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642016300&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642016184&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642016400&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642016500&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642016600&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642016700&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642016800&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642016900&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017000&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017100&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017200&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017300&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017400&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017500&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017600&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017700&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017700&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017700&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017700&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017700&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017700&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017700&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017700&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017700&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017700&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.12&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">network_traffic</span> <span class="p">(</span><span class="k">TIMESTAMP</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">frame</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="k">time</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1642017700&#39;</span><span class="p">,</span> <span class="n">protocols</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;eth:ethertype:ip:tcp&#39;</span><span class="p">),</span> <span class="n">eth</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;FF:AA:C9:83:C0:21&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DF:ED:E3:91:D4:13&#39;</span><span class="p">),</span> <span class="n">ip</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">src</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">srch_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.11&#39;</span><span class="p">,</span> <span class="n">dst</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">dst_host</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;192.168.33.77&#39;</span><span class="p">,</span> <span class="n">proto</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="n">tcp</span> <span class="p">:</span><span class="o">=</span> <span class="n">STRUCT</span><span class="p">(</span><span class="n">srcport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;59202&#39;</span><span class="p">,</span> <span class="n">dstport</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;443&#39;</span><span class="p">,</span> <span class="n">flags_ack</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">flags_reset</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)));</span>
+</code></pre></div>
+</td></tr></table>
+<h2 id="cleanup">Cleanup<a class="headerlink" href="#cleanup" title="Permanent link">&para;</a></h2>
+<p>To clean up the ksqlDB resources created by this recipe, use the ksqlDB commands shown below (substitute stream or topic name, as appropriate).
+By including the <code>DELETE TOPIC</code> clause, the topic backing the stream or table is also deleted, asynchronously.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>DROP STREAM IF EXISTS &lt;stream_name&gt; DELETE TOPIC;
+DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
+</code></pre></div>
+</td></tr></table>
+<p>If you also created connectors, you'll need to remove those as well.</p>
+<h2 id="explanation">Explanation<a class="headerlink" href="#explanation" title="Permanent link">&para;</a></h2>
+<p>This solution uses ksqlDB's ability to <a href="https://www.confluent.io/blog/ksqldb-techniques-that-make-stream-processing-easier-than-ever/">model</a> and <a href="https://docs.ksqldb.io/en/latest/how-to-guides/query-structured-data/">query</a> structured data. </p>
+<h3 id="streaming-json">Streaming JSON<a class="headerlink" href="#streaming-json" title="Permanent link">&para;</a></h3>
+<p>Let's break down the commands in this application and explain the individual parts.</p>
+<p>The first step is to model the packet capture data using the ksqlDB <code>CREATE STREAM</code> command, giving our new stream the name <code>network_traffic</code>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">network_traffic</span>
+</code></pre></div>
+</td></tr></table>
+<p>We then define the schema for events in the topic by declaring field names and data types using standard SQL syntax. In this snippet from the full statement:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="k">timestamp</span> <span class="nb">BIGINT</span><span class="p">,</span>
+  <span class="n">layers</span> <span class="n">STRUCT</span><span class="o">&lt;</span>
+   <span class="p">...</span>
+   <span class="n">ip</span> <span class="n">STRUCT</span><span class="o">&lt;</span> 
+      <span class="n">src</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+      <span class="n">src_host</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+      <span class="n">dst</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+      <span class="n">dst_host</span> <span class="nb">VARCHAR</span><span class="p">,</span> 
+      <span class="n">proto</span> <span class="nb">VARCHAR</span> <span class="o">&gt;</span><span class="p">,</span>
+   <span class="p">...</span>
+</code></pre></div>
+</td></tr></table>
+<p>We declare an event structure that contains a timestamp field, and then a child nested data structure named <code>layers</code>. Comparing the sample packet capture event with the declared structure, we see the relationships between the data and the field names and types:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1590682723239&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;layers&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="err">...</span>
+    <span class="nt">&quot;ip&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.33.11&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;src_host&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.33.11&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;dst&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.33.77&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;dst_host&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.33.77&quot;</span>
+    <span class="p">},</span>
+    <span class="err">...</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>The <code>CREATE STREAM ... WITH ...</code> <a href="https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-stream/">command</a> marries the event schema with the Kafka topic. The <code>WITH</code> clause in the statement allows us to specify details about the stream. </p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">WITH</span> <span class="p">(</span>
+  <span class="n">KAFKA_TOPIC</span><span class="o">=</span><span class="s1">&#39;network-traffic&#39;</span><span class="p">,</span> 
+  <span class="k">TIMESTAMP</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span> 
+  <span class="n">VALUE_FORMAT</span><span class="o">=</span><span class="s1">&#39;JSON&#39;</span><span class="p">,</span> 
+  <span class="n">PARTITIONS</span><span class="o">=</span><span class="mi">6</span>
+<span class="p">);</span>
+</code></pre></div>
+</td></tr></table>
+<hr />
+<p><strong>NOTE:</strong>
+The <code>KAFKA_TOPIC</code> property is required, and indicates the topic that will back the stream. If that topic does not exist in Kafka, you must provide the <code>PARTITIONS</code> property as well. If you're creating a stream for a topic that already exists (for example, if you're using a connector to source event data), remove the <code>PARTITIONS</code> property from this command.</p>
+<hr />
+<p>We also indicate the data format of the events on the topic, using the <code>VALUE_FORMAT</code> property. Finally, we use the <code>TIMESTAMP</code> property to indicate an event field that can be used as the rowtime of the event. This would allow us to perform time-based operations based on the actual event time as provided by the captured packet data.</p>
+<h3 id="materialized-view">Materialized view<a class="headerlink" href="#materialized-view" title="Permanent link">&para;</a></h3>
+<p>Now that we have a useful stream of packet capture data, we're ready to try to detect potential DDoS attacks from the events.</p>
+<p>We're going to use the ksqlDB <code>CREATE TABLE</code> command, which will create a new <a href="https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/create-table-as-select/">materialized view</a> of the packet data.</p>
+<p>Let's tell ksqlDB to create the table with a name of <code>potential_slowloris_attacks</code>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">potential_slowloris_attacks</span> <span class="k">AS</span> 
+</code></pre></div>
+</td></tr></table>
+<p>Next, we'll define the values that we want to materialize into the table. We are capturing two values:</p>
+<ul>
+<li>The source IP address, read from the <code>layers-&gt;ip-&gt;src</code> nested value in the JSON event</li>
+<li>The count of rows that satisfy conditions defined later in the command (obtained Using the <code>count</code> function)</li>
+</ul>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SELECT</span> 
+  <span class="n">layers</span><span class="o">-&gt;</span><span class="n">ip</span><span class="o">-&gt;</span><span class="n">src</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">count_connection_reset</span>
+</code></pre></div>
+</td></tr></table>
+<p>Next, we tell ksqlDB about the event source from which to build the table: the <code>network_traffic</code> stream we defined above.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">FROM</span> <span class="n">network_traffic</span> 
+</code></pre></div>
+</td></tr></table>
+<p>Because the stream of packet capture events is continuous, we need a way to aggregate them into a bucket that is both meaningful to our business case and useful enough that we can perform calculations with it. Here, we want to know if there are a large number of connection reset events within a given period of time. So let's tell ksqlDB that we want to create a window of events based on time:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">WINDOW</span> <span class="n">TUMBLING</span> <span class="p">(</span><span class="k">SIZE</span> <span class="mi">60</span> <span class="n">SECONDS</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>A <a href="https://docs.ksqldb.io/en/latest/concepts/time-and-windows-in-ksqldb-queries/#tumbling-window">tumbling window</a> specifies a bucket of events in a fixed time, non-overlapping, gap-less window. Here, we've specified 60-second windows.</p>
+<p>Now that we have our events aggregated into time buckets with the fields that interest us, how do we specify that a connection has been reset? We use the ksqlDB <code>WHERE</code> clause to extract the relevant events. In this case, we define a connection as reset if the <code>tcp</code> <code>flags_ack</code> and <code>flag_reset</code> fields are set to "true".</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>WHERE 
+  layers-&gt;tcp-&gt;flags_ack = &#39;1&#39; AND layers-&gt;tcp-&gt;flags_reset = &#39;1&#39;
+</code></pre></div>
+</td></tr></table>
+<p>We will define a potential Slowloris attack as multiple connection reset events coming from the <em>same</em> source IP address. In order to properly aggregate (via the <code>count</code> function above), we need to group the qualifying events by the source IP:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">GROUP</span> <span class="k">BY</span> <span class="n">layers</span><span class="o">-&gt;</span><span class="n">ip</span><span class="o">-&gt;</span><span class="n">src</span>
+</code></pre></div>
+</td></tr></table>
+<p>And finally, we want to count the number of matching events within our window. In this example, we consider <code>10</code> events to signify a potential attack, but for real-world scenarios, you should adjust this variable.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">HAVING</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">;</span>
+</code></pre></div>
+</td></tr></table>
+<p>The end result is a <code>TABLE</code> that can be queried for information useful in alerting administrators of a potential attack. For example, you could execute a <a href="https://docs.ksqldb.io/en/latest/concepts/queries/#push">push query</a> against the table as part of a monitoring and alerting pipeline.</p>
+<p>First, for this example, we need to set the <code>auto.offset.reset</code> flag to <code>earliest</code>, which will ensure that our query runs from the beginning of the topic to produce an expected result. In a production query, you may choose to use <code>latest</code> and only capture events going forward from the time you execute the push query.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+</code></pre></div>
+</td></tr></table>
+<p>This query will select all records from our materialized view, including the source IP address and count. We can use these to investigate the issue.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>select * from POTENTIAL_SLOWLORIS_ATTACKS EMIT CHANGES;
++----------------------------+----------------------------+----------------------------+----------------------------+
+|SRC                         |WINDOWSTART                 |WINDOWEND                   |COUNT_CONNECTION_RESET      |
++----------------------------+----------------------------+----------------------------+----------------------------+
+|192.168.33.11               |1642017660000               |1642017720000               |14                          |
+</code></pre></div>
+</td></tr></table>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
+      
+    
+  </body>
+</html>

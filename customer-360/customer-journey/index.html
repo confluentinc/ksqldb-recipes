@@ -16,7 +16,7 @@
     
     
       
-        <title>Optimize fleet management - Stream Processing Use Cases</title>
+        <title>Track a Customer Journey - Stream Processing Use Cases</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#optimize-fleet-management" class="md-skip">
+        <a href="#track-a-customer-journey" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Optimize fleet management
+              Track a Customer Journey
             
           </span>
         </div>
@@ -245,7 +245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../customer-360/online-dating/" class="md-nav__link">
+      <a href="../online-dating/" class="md-nav__link">
         Match users for online dating
       </a>
     </li>
@@ -257,7 +257,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../customer-360/clickstream/" class="md-nav__link">
+      <a href="../clickstream/" class="md-nav__link">
         Understand user behavior with clickstream data
       </a>
     </li>
@@ -269,7 +269,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../customer-360/aviation/" class="md-nav__link">
+      <a href="../aviation/" class="md-nav__link">
         Notify passengers of flight updates
       </a>
     </li>
@@ -281,7 +281,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../customer-360/loyalty-rewards/" class="md-nav__link">
+      <a href="../loyalty-rewards/" class="md-nav__link">
         Build customer loyalty programs
       </a>
     </li>
@@ -342,14 +342,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
       
       <label class="md-nav__link" for="__nav_5">
         Predictive Analytics
@@ -365,85 +363,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Optimize fleet management
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../predictive-analytics/fleet-management/" class="md-nav__link">
         Optimize fleet management
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#step-by-step" class="md-nav__link">
-    Step by step
-  </a>
-  
-    <nav class="md-nav" aria-label="Step by step">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-up-your-environment" class="md-nav__link">
-    Set up your environment
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#read-the-data-in" class="md-nav__link">
-    Read the data in
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ksqldb-code" class="md-nav__link">
-    ksqlDB code
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cleanup" class="md-nav__link">
-    Cleanup
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -453,7 +377,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../inventory/" class="md-nav__link">
+      <a href="../../predictive-analytics/inventory/" class="md-nav__link">
         Optimize omni-channel inventory
       </a>
     </li>
@@ -599,6 +523,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#write-the-data-out" class="md-nav__link">
+    Write the data out
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cleanup" class="md-nav__link">
     Cleanup
   </a>
@@ -623,17 +554,19 @@
               
                 
                 
-                <h1 id="optimize-fleet-management">Optimize Fleet Management<a class="headerlink" href="#optimize-fleet-management" title="Permanent link">&para;</a></h1>
-<p>More and more, fleet management relies on knowing real-time information on vehicle availability, their locations, and integrating that with data from vehicle telematics. This enables businesses to improve operational efficiency by optimizing travel routes, lowering fuel consumption, and automating service schedules. This recipe combines fleet locations with individual vehicle information, so organizations can have a real-time consolidated view of their entire fleet.</p>
-<p><img alt="fleet management" src="../../img/fleet.png" /></p>
+                <h1 id="track-a-customer-journey">Track a Customer Journey<a class="headerlink" href="#track-a-customer-journey" title="Permanent link">&para;</a></h1>
+<p>Companies with online websites, and customers that browse those websites, want to know which web pages their customers have visited.
+Knowing an online customer's behavior—which pages the customer visits—can be useful for analytics, or, in case the customer calls for support, to understand exactly what the customer did beforehand.
+For real-time analysis of the customer journey, you can use ksqlDB to collect the pages that a customer visited, and then send the list out for analytics in another application.</p>
 <h2 id="step-by-step">Step by step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h2>
 <h3 id="set-up-your-environment">Set up your environment<a class="headerlink" href="#set-up-your-environment" title="Permanent link">&para;</a></h3>
-<p>Provision a Kafka cluster in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes&amp;utm_campaign=fleet_management">Confluent Cloud</a>.</p>
+<p>Provision a Kafka cluster in <a href="https://www.confluent.io/confluent-cloud/tryfree/?utm_source=github&amp;utm_medium=ksqldb_recipes&amp;utm_campaign=customer_journey">Confluent Cloud</a>.</p>
 <p>Once your Confluent Cloud cluster is available, create a <a href="https://ksqldb.io/">ksqlDB</a> application. ksqlDB supports a <code>SQL</code> language for processing the data in real time (and will soon support connector integration for reading and writing data to other data sources and sinks). Execute the recipe with the provided <code>SQL</code> commands using the Confluent Cloud ksqlDB editor. </p>
 <h3 id="read-the-data-in">Read the data in<a class="headerlink" href="#read-the-data-in" title="Permanent link">&para;</a></h3>
 <p>Confluent Cloud offers pre-built, fully managed connectors that make it easy to quickly connect to popular data sources and end systems in the cloud.
 This recipe shows sample connector configuration(s) below, each of which should be created separately.
 You can also substitute your own connectors to connect to any <a href="https://docs.confluent.io/cloud/current/connectors/index.html">supported data source</a>.</p>
+<p>For this recipe, we are interested in knowing the set of web pages visited by a given customer.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -649,43 +582,9 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
-  <span class="nt">&quot;connector.class&quot;</span>          <span class="p">:</span> <span class="s2">&quot;MongoDbAtlasSource&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;recipe-mongodb-fleet_description&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;kafka.api.key&quot;</span>            <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-key&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;kafka.api.secret&quot;</span>         <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-secret&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.host&quot;</span>          <span class="p">:</span> <span class="s2">&quot;&lt;database-host-address&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.user&quot;</span>          <span class="p">:</span> <span class="s2">&quot;&lt;database-username&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;connection.password&quot;</span>      <span class="p">:</span> <span class="s2">&quot;&lt;database-password&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;database&quot;</span>                 <span class="p">:</span> <span class="s2">&quot;&lt;database-name&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;collection&quot;</span>               <span class="p">:</span> <span class="s2">&quot;&lt;database-collection-name&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;poll.await.time.ms&quot;</span>       <span class="p">:</span> <span class="s2">&quot;5000&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;poll.max.batch.size&quot;</span>      <span class="p">:</span> <span class="s2">&quot;1000&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;copy.existing&quot;</span>            <span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;output.data.format&quot;</span>       <span class="p">:</span> <span class="s2">&quot;JSON&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;tasks.max&quot;</span>                <span class="p">:</span> <span class="s2">&quot;1&quot;</span>
-<span class="p">}</span>
-
-<span class="p">{</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
   <span class="nt">&quot;connector.class&quot;</span>          <span class="p">:</span> <span class="s2">&quot;PostgresSource&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;recipe-postgres-fleet_location&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span>                     <span class="p">:</span> <span class="s2">&quot;recipe-postgres-customer_journey&quot;</span><span class="p">,</span>
   <span class="nt">&quot;kafka.api.key&quot;</span>            <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-key&gt;&quot;</span><span class="p">,</span>
   <span class="nt">&quot;kafka.api.secret&quot;</span>         <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-secret&gt;&quot;</span><span class="p">,</span>
   <span class="nt">&quot;connection.host&quot;</span>          <span class="p">:</span> <span class="s2">&quot;&lt;my-database-endpoint&gt;&quot;</span><span class="p">,</span>
@@ -693,7 +592,7 @@ You can also substitute your own connectors to connect to any <a href="https://d
   <span class="nt">&quot;connection.user&quot;</span>          <span class="p">:</span> <span class="s2">&quot;postgres&quot;</span><span class="p">,</span>
   <span class="nt">&quot;connection.password&quot;</span>      <span class="p">:</span> <span class="s2">&quot;&lt;my-database-password&gt;&quot;</span><span class="p">,</span>
   <span class="nt">&quot;db.name&quot;</span>                  <span class="p">:</span> <span class="s2">&quot;&lt;db-name&gt;&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;table.whitelist&quot;</span>          <span class="p">:</span> <span class="s2">&quot;fleet_location&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;table.whitelist&quot;</span>          <span class="p">:</span> <span class="s2">&quot;pages&quot;</span><span class="p">,</span>
   <span class="nt">&quot;timestamp.column.name&quot;</span>    <span class="p">:</span> <span class="s2">&quot;created_at&quot;</span><span class="p">,</span>
   <span class="nt">&quot;output.data.format&quot;</span>       <span class="p">:</span> <span class="s2">&quot;JSON&quot;</span><span class="p">,</span>
   <span class="nt">&quot;db.timezone&quot;</span>              <span class="p">:</span> <span class="s2">&quot;UTC&quot;</span><span class="p">,</span>
@@ -703,7 +602,8 @@ You can also substitute your own connectors to connect to any <a href="https://d
 </td></tr></table>
 <p>Optional: If you cannot connect to a real datasource with properly formatted data, or if you just want to execute this recipe without external dependencies, no worries! In the next section, you'll see how to test the recipe by inserting mock data into the streams, using the ksqlDB command <code>INSERT INTO</code>.</p>
 <h3 id="ksqldb-code">ksqlDB code<a class="headerlink" href="#ksqldb-code" title="Permanent link">&para;</a></h3>
-<p>This application will enrich the fleet telemetry events with details about the associated vehicle.</p>
+<p>Given a stream of pageview statistics, count the number of visits to individual pages, grouped by customer.
+This uses the ksqlDB function <a href="https://docs.ksqldb.io/en/latest/developer-guide/ksqldb-reference/aggregate-functions/#count_distinct">COUNT DISTINCT</a>.</p>
 <hr />
 <p><strong>NOTE:</strong>
 <em>The Confluent Cloud Console does not allow you to execute this code in the ksqlDB editor as a single block.</em>
@@ -732,54 +632,30 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">SET</span> <span class="s1">&#39;auto.offset.reset&#39;</span> <span class="o">=</span> <span class="s1">&#39;earliest&#39;</span><span class="p">;</span>
 
-<span class="c1">-- create stream of locations</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">locations</span> <span class="p">(</span>
-  <span class="n">vehicle_id</span> <span class="nb">INT</span><span class="p">,</span>
-  <span class="n">latitude</span> <span class="n">DOUBLE</span><span class="p">,</span>
-  <span class="n">longitude</span> <span class="n">DOUBLE</span><span class="p">,</span>
-  <span class="k">timestamp</span> <span class="nb">VARCHAR</span>
+<span class="c1">-- Create stream of pages</span>
+<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">pages</span> <span class="p">(</span>
+  <span class="n">customer</span> <span class="nb">INTEGER</span><span class="p">,</span>
+  <span class="k">time</span> <span class="nb">BIGINT</span><span class="p">,</span>
+  <span class="n">page_id</span> <span class="n">STRING</span><span class="p">,</span>
+  <span class="n">page</span> <span class="n">STRING</span>
 <span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;locations&#39;</span><span class="p">,</span>
   <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
+  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;pages&#39;</span><span class="p">,</span>
   <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">);</span>
 
-<span class="c1">-- fleet lookup table</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">fleet</span> <span class="p">(</span>
-  <span class="n">vehicle_id</span> <span class="nb">INT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
-  <span class="n">driver_id</span> <span class="nb">INT</span><span class="p">,</span>
-  <span class="n">license</span> <span class="nb">BIGINT</span>
-<span class="p">)</span> <span class="k">WITH</span> <span class="p">(</span>
-  <span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;descriptions&#39;</span><span class="p">,</span>
-  <span class="n">VALUE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;JSON&#39;</span><span class="p">,</span>
-  <span class="n">PARTITIONS</span> <span class="o">=</span> <span class="mi">6</span>
-<span class="p">);</span>
-
-<span class="c1">-- enrich fleet location stream with more fleet information</span>
-<span class="k">CREATE</span> <span class="n">STREAM</span> <span class="n">fleet_location_enhanced</span> <span class="k">AS</span>
-  <span class="k">SELECT</span>
-    <span class="n">l</span><span class="p">.</span><span class="n">vehicle_id</span><span class="p">,</span>
-    <span class="n">latitude</span><span class="p">,</span>
-    <span class="n">longitude</span><span class="p">,</span>
-    <span class="k">timestamp</span><span class="p">,</span>
-    <span class="n">f</span><span class="p">.</span><span class="n">driver_id</span><span class="p">,</span>
-    <span class="n">f</span><span class="p">.</span><span class="n">license</span>
-  <span class="k">FROM</span> <span class="n">locations</span> <span class="n">l</span>
-  <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">fleet</span> <span class="n">f</span> <span class="k">ON</span> <span class="n">l</span><span class="p">.</span><span class="n">vehicle_id</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">vehicle_id</span><span class="p">;</span>
+<span class="c1">-- Create stateful table with Array of pages visited by each customer, using the `COLLECT_LIST` function</span>
+<span class="c1">-- Get `COUNT_DISTINCT` page IDs</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">pages_per_customer</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">KAFKA_TOPIC</span> <span class="o">=</span> <span class="s1">&#39;pages_per_customer&#39;</span><span class="p">)</span> <span class="k">AS</span>
+<span class="k">SELECT</span>
+  <span class="n">customer</span><span class="p">,</span>
+  <span class="n">COLLECT_LIST</span><span class="p">(</span><span class="n">page</span><span class="p">)</span> <span class="k">AS</span> <span class="n">page_list</span><span class="p">,</span>
+  <span class="n">COUNT_DISTINCT</span> <span class="p">(</span><span class="n">page_id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">count_distinct</span>
+<span class="k">FROM</span> <span class="n">pages</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">customer</span>
+<span class="n">EMIT</span> <span class="n">CHANGES</span><span class="p">;</span>
 </code></pre></div>
 </td></tr></table>
 <p>In the previous section <a href="#read-the-data-in">Read the data in</a>, if you did not have a real data source to connect to, you can now use ksqlDB to insert example events into the source topics with the following statements:</p>
@@ -789,13 +665,50 @@ You can also substitute your own connectors to connect to any <a href="https://d
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">locations</span> <span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">5401</span><span class="p">,</span> <span class="mi">16</span><span class="p">.</span><span class="mi">7587537</span><span class="p">,</span> <span class="mi">96</span><span class="p">.</span><span class="mi">2482149</span><span class="p">,</span> <span class="s1">&#39;2021-09-23T10:50:00.000Z&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">locations</span> <span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">5401</span><span class="p">,</span> <span class="mi">16</span><span class="p">.</span><span class="mi">004175</span><span class="p">,</span> <span class="mi">120</span><span class="p">.</span><span class="mi">7806412</span><span class="p">,</span> <span class="s1">&#39;2021-09-27T06:39:00.000Z&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">locations</span> <span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">5402</span><span class="p">,</span> <span class="mi">32</span><span class="p">.</span><span class="mi">755613</span><span class="p">,</span> <span class="mi">22</span><span class="p">.</span><span class="mi">6377432</span><span class="p">,</span> <span class="s1">&#39;2021-09-25T20:22:00.000Z&#39;</span><span class="p">);</span>
-
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">fleet</span> <span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="n">driver_id</span><span class="p">,</span> <span class="n">license</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">5401</span><span class="p">,</span> <span class="mi">847383</span><span class="p">,</span> <span class="mi">8852693196</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">fleet</span> <span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="n">driver_id</span><span class="p">,</span> <span class="n">license</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">5402</span><span class="p">,</span> <span class="mi">922947</span><span class="p">,</span> <span class="mi">1255144201</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">fleet</span> <span class="p">(</span><span class="n">vehicle_id</span><span class="p">,</span> <span class="n">driver_id</span><span class="p">,</span> <span class="n">license</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">5403</span><span class="p">,</span> <span class="mi">435309</span><span class="p">,</span> <span class="mi">2132311746</span><span class="p">);</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">pages</span> <span class="p">(</span><span class="n">customer</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">page_id</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">44</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;1001&#39;</span><span class="p">,</span> <span class="s1">&#39;/market/page1.html&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">pages</span> <span class="p">(</span><span class="n">customer</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">page_id</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">89</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;1001&#39;</span><span class="p">,</span> <span class="s1">&#39;/market/page1.html&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">pages</span> <span class="p">(</span><span class="n">customer</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">page_id</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">44</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;1020&#39;</span><span class="p">,</span> <span class="s1">&#39;/market/page20.html&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">pages</span> <span class="p">(</span><span class="n">customer</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">page_id</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">89</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;1002&#39;</span><span class="p">,</span> <span class="s1">&#39;/market/page2.html&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">pages</span> <span class="p">(</span><span class="n">customer</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">page_id</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">89</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;1037&#39;</span><span class="p">,</span> <span class="s1">&#39;/market/page37.html&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">pages</span> <span class="p">(</span><span class="n">customer</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">page_id</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">44</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;1600&#39;</span><span class="p">,</span> <span class="s1">&#39;/cart/checkout.html&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">pages</span> <span class="p">(</span><span class="n">customer</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">page_id</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">89</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;1600&#39;</span><span class="p">,</span> <span class="s1">&#39;/cart/checkout.html&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">pages</span> <span class="p">(</span><span class="n">customer</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">page_id</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">44</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;1020&#39;</span><span class="p">,</span> <span class="s1">&#39;/market/page20.html&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">pages</span> <span class="p">(</span><span class="n">customer</span><span class="p">,</span> <span class="k">time</span><span class="p">,</span> <span class="n">page_id</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">89</span><span class="p">,</span> <span class="n">UNIX_TIMESTAMP</span><span class="p">(),</span> <span class="s1">&#39;1002&#39;</span><span class="p">,</span> <span class="s1">&#39;/market/page2.html&#39;</span><span class="p">);</span>
+</code></pre></div>
+</td></tr></table>
+<h3 id="write-the-data-out">Write the data out<a class="headerlink" href="#write-the-data-out" title="Permanent link">&para;</a></h3>
+<p>After processing the data, send it to Elasticsearch:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;connector.class&quot;</span>    <span class="p">:</span> <span class="s2">&quot;ElasticsearchSink&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span>               <span class="p">:</span> <span class="s2">&quot;recipe-elasticsearch-customer_journey&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;input.data.format&quot;</span>  <span class="p">:</span> <span class="s2">&quot;JSON&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.api.key&quot;</span>      <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-key&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;kafka.api.secret&quot;</span>   <span class="p">:</span> <span class="s2">&quot;&lt;my-kafka-api-secret&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;topics&quot;</span>             <span class="p">:</span> <span class="s2">&quot;pages_per_customer&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;connection.url&quot;</span>     <span class="p">:</span> <span class="s2">&quot;&lt;elasticsearch-URI&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;connection.username&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;elasticsearch-username&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;connection.password&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;elasticsearch-password&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;type.name&quot;</span>          <span class="p">:</span> <span class="s2">&quot;type.name:kafkaconnect&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;key.ignore&quot;</span>         <span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;schema.ignore&quot;</span>      <span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;tasks.max&quot;</span>          <span class="p">:</span> <span class="s2">&quot;1&quot;</span>
+<span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
 <h3 id="cleanup">Cleanup<a class="headerlink" href="#cleanup" title="Permanent link">&para;</a></h3>
@@ -824,41 +737,6 @@ DROP TABLE IF EXISTS &lt;table_name&gt; DELETE TOPIC;
       
         
 <footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-        
-        <a href="../../cybersecurity/SSH-attack/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Detect and analyze SSH attacks" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Detect and analyze SSH attacks
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../inventory/" class="md-footer__link md-footer__link--next" aria-label="Next: Optimize omni-channel inventory" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Optimize omni-channel inventory
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
