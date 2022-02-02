@@ -52,3 +52,20 @@ plugins:
   - exclude:
       glob:
         - shared/*
+  - redirects:
+      redirect_maps:
+        'index.md': 'https://developer.confluent.io/tutorials/use-cases.html'
+        'anomaly-detection/credit-card-activity/index.md': 'https://developer.confluent.io/tutorials/credit-card-activity/confluent.html'
+        'anomaly-detection/internet-of-things/index.md': 'https://developer.confluent.io/tutorials/internet-of-things/confluent.html'
+        'anomaly-detection/salesforce/index.md': 'https://developer.confluent.io/tutorials/salesforce/confluent.html'
+        'customer-360/online-dating/index.md': 'https://developer.confluent.io/tutorials/online-dating/confluent.html'
+        'customer-360/clickstream/index.md': 'https://developer.confluent.io/tutorials/clickstream/confluent.html'
+        'customer-360/aviation/index.md': 'https://developer.confluent.io/tutorials/aviation/confluent.html'
+        'customer-360/loyalty-rewards/index.md': 'https://developer.confluent.io/tutorials/loyalty-rewards/confluent.html'
+        'cybersecurity/SSH-attack/index.md': 'https://developer.confluent.io/tutorials/SSH-attack/confluent.html'
+        'predictive-analytics/fleet-management/index.md': 'https://developer.confluent.io/tutorials/fleet-management/confluent.html'
+        'predictive-analytics/inventory/index.md': 'https://developer.confluent.io/tutorials/inventory/confluent.html'
+        'real-time-analytics/datacenter/index.md': 'https://developer.confluent.io/tutorials/datacenter/confluent.html'
+        'real-time-analytics/payment-status-check/index.md': 'https://developer.confluent.io/tutorials/payment-status-check/confluent.html'
+        'real-time-analytics/denormalization/index.md': 'https://developer.confluent.io/tutorials/denormalization/confluent.html'
+        'real-time-analytics/dynamic-pricing/index.md': 'https://developer.confluent.io/tutorials/dynamic-pricing/confluent.html'
