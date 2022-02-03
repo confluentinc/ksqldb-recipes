@@ -1,6 +1,6 @@
 SET 'auto.offset.reset' = 'earliest';
 
--- Table of merchant data including the calculated geohash
+-- Creates a table of merchant data including the calculated geohash
 CREATE TABLE merchant_locations (
   id INT PRIMARY KEY,
   description VARCHAR,
@@ -13,7 +13,8 @@ CREATE TABLE merchant_locations (
   PARTITIONS = 6
 );
 
--- A table to lookup merchants based on a substring (precision) of the geohash
+-- Creates a table to lookup merchants based on a 
+--    substring (precision) of the geohash
 CREATE TABLE merchants_by_geohash
 WITH (
   KAFKA_TOPIC='merchant-geohash', 
@@ -26,7 +27,7 @@ SELECT
 FROM merchant_locations
 GROUP BY SUBSTRING(geohash, 1, 6);
 
--- Stream of user location data including the calculated geohash
+-- Creates a stream of user location data including the calculated geohash
 CREATE STREAM user_locations (
   id INT,
   latitude DECIMAL(10,7),
@@ -38,8 +39,17 @@ CREATE STREAM user_locations (
   PARTITIONS=6
 );
 
--- Stream of alerts when a user's geohash based location roughly 
--- intersects a collection of merchants locations
+-- Prior to the executing the following CREATE STREAM, we set a couple properties 
+--    which help ensure the stream will work properly when using the manual `INSERT INTO` 
+--    method for this recipe. These properties may not be required in production 
+--    scenarios. By disabling the cache and increasing the task idle time, 
+--    we ensure that the merchants_by_geohash table recieves data prior to the 
+--    insertion of events in the user_locations stream.
+SET 'cache.max.bytes.buffering' = '0';
+SET 'max.task.idle.ms' = '5000'
+-- Creates a stream of alerts when a user's geohash based location roughly 
+--    intersects a collection of merchants locations from the 
+--    merchants_by_geohash table.
 CREATE STREAM alerts_raw
 WITH (
   KAFKA_TOPIC='alerts-raw', 
@@ -57,8 +67,8 @@ LEFT JOIN merchants_by_geohash ON SUBSTRING(user_locations.geohash, 1, 6) =
   merchants_by_geohash.geohash
 PARTITION BY null;
 
--- Stream of promotion alerts to send a user when their location
--- intersects with a merchant within a specified distance (0.2 KM)
+-- Creates a stream of promotion alerts to send a user when their location
+--    intersects with a merchant within a specified distance (0.2 KM)
 CREATE STREAM promo_alerts 
 WITH (
   KAFKA_TOPIC='promo-alerts', 
