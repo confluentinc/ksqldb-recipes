@@ -40,6 +40,9 @@ This application compares merchant and mobile user geolocation data to produce u
 
 --8<-- "docs/shared/manual_cue.md"
 
+**Note:**
+The below manual insert commands must be executed in two discrete steps, see the code comments for details.
+
 ```sql
 --8<-- "docs/real-time-analytics/location-based-alerting/manual.sql"
 ```
