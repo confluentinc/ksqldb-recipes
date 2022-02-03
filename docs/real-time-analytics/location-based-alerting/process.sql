@@ -46,7 +46,7 @@ CREATE STREAM user_locations (
 --    we ensure that the merchants_by_geohash table recieves data prior to the 
 --    insertion of events in the user_locations stream.
 SET 'cache.max.bytes.buffering' = '0';
-SET 'max.task.idle.ms' = '5000'
+SET 'max.task.idle.ms' = '5000';
 -- Creates a stream of alerts when a user's geohash based location roughly 
 --    intersects a collection of merchants locations from the 
 --    merchants_by_geohash table.
