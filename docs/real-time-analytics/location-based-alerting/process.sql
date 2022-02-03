@@ -43,7 +43,7 @@ CREATE STREAM user_locations (
 --    which help ensure the stream will work properly when using the manual `INSERT INTO` 
 --    method for this recipe. These properties may not be required in production 
 --    scenarios. By disabling the cache and increasing the task idle time, 
---    we ensure that the merchants_by_geohash table recieves data prior to the 
+--    we ensure that the merchants_by_geohash table receives data prior to the 
 --    insertion of events in the user_locations stream.
 SET 'cache.max.bytes.buffering' = '0';
 SET 'max.task.idle.ms' = '30000';
