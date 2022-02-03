@@ -6,7 +6,7 @@ INSERT INTO MERCHANT_LOCATIONS (id, latitude, longitude, description, geohash) V
 INSERT INTO MERCHANT_LOCATIONS (id, latitude, longitude, description, geohash) VALUES (2, 14.5473328, 121.0516176, 'Jordan Manila', 'wdw4f87075kt');
 INSERT INTO MERCHANT_LOCATIONS (id, latitude, longitude, description, geohash) VALUES (3, 14.5529666, 121.0516716, 'Lawson Eco Tower', 'wdw4f971hmsv');
 
--- Add a short pause (10 seconds) before inserting these records
+-- Wait 10 seconds before inserting the records below records
 
 INSERT INTO USER_LOCATIONS (id, latitude, longitude, geohash) VALUES (1, 14.5472791, 121.0475401, 'wdw4f820h17g');
 INSERT INTO USER_LOCATIONS (id, latitude, longitude, geohash) VALUES (2, 14.5486952, 121.0521851, 'wdw4f8e82376');
