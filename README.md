@@ -1,4 +1,4 @@
-# Stream Processing Use Cases with ksqlDB
+# Stream Processing Use Cases with ksqlDB [DEPRECATED]
 
 This repository contains the source for the collection of Stream Processing Use Cases with ksqlDB.
 
