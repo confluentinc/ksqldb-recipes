@@ -4,6 +4,8 @@ This repository contains the source for the collection of Stream Processing Use 
 
 https://developer.confluent.io/tutorials/use-cases.html
 
+Source moved to https://github.com/confluentinc/kafka-tutorials
+
 Goals of the project:
 
 - Provide short, concrete descriptions of how ksqlDB is used in the real world—including SQL code.
